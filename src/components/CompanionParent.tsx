@@ -29,7 +29,8 @@ export default function CompanionParent() {
       <div className="header">
         <div className="header-container">
           <h1>Onepoint Data Wellness Companion™</h1>
-          <div className="flex flex-col items-center">
+
+          <div className="flex flex-col items-center cursor-pointer">
             <StartButton />
             <ConnectionStatus />
           </div>
