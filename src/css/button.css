@@ -9,3 +9,7 @@
         text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 uppercase
         w-24 disabled:opacity-50 disabled:cursor-not-allowed;
 }
+
+.restart-button {
+    @apply fill-white h-6 w-6 cursor-pointer
+}

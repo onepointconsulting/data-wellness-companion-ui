@@ -20,6 +20,7 @@ interface AppState {
   chatText: string;
   setChatText: (chatText: string) => void;
   readonly isLast: boolean;
+  readonly isFinalMessage: boolean;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -45,6 +46,7 @@ function createAppState(): AppState {
     setExpectedNodes: (_) => {},
     setChatText: (_) => {},
     isLast: true,
+    isFinalMessage: false,
   };
 }
 
@@ -63,6 +65,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [chatText, setChatText] = useState("");
 
   const isLast = currentMessage === messages.length - 1;
+  const isFinalMessage = currentMessage === expectedNodes - 1;
 
   return (
     <AppContext.Provider
@@ -85,6 +88,7 @@ export const AppContextProvider = ({ children }: Props) => {
         chatText,
         setChatText,
         isLast,
+        isFinalMessage
       }}
     >
       {" "}

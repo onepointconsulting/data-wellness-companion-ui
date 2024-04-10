@@ -1,27 +1,43 @@
-import { ImSwitch } from "react-icons/im";
-import { RESTART_DIALOGUE_ID } from "./dialogue/RestartDialogue.tsx";
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { showDialogue } from "../lib/dialogFunctions.ts";
+import {ImSwitch} from "react-icons/im";
+import {RESTART_DIALOGUE_ID} from "./dialogue/RestartDialogue.tsx";
+import {useContext, useEffect, useState} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {showDialogue} from "../lib/dialogFunctions.ts";
+import {Popover, PopoverContent, PopoverTrigger} from "../../@/components/ui/popover.tsx";
+
 
 function showStartDialogue() {
   showDialogue(RESTART_DIALOGUE_ID);
 }
 
 export default function StartButton() {
-  const { connected } = useContext(AppContext);
+  const {connected, isFinalMessage} = useContext(AppContext);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(isFinalMessage);
+  }, [isFinalMessage])
+
   return (
-    <ImSwitch
-      className="fill-white h-6 w-6"
-      title="Restart"
-      onClick={
-        !connected
-          ? () =>
+    <>
+      <ImSwitch
+        className="restart-button"
+        title="Restart"
+        onClick={
+          !connected
+            ? () =>
               alert(
                 "You are disconnected. Please connect to restart the Data Wwllness Companion.",
               )
-          : showStartDialogue
-      }
-    />
+            : showStartDialogue
+        }
+      />
+      <Popover defaultOpen={false} open={open}>
+        <PopoverTrigger></PopoverTrigger>
+        <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4">
+          Click <ImSwitch className="inline relative -top-1"/> to restart the application.
+        </PopoverContent>
+      </Popover>
+    </>
   );
 }
