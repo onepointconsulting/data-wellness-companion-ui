@@ -75,14 +75,16 @@ export default function ChatInput() {
           disabled={sending || !connected}
           ref={textAreaRef}
         />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            sendMessage();
-          }}
-        >
-          <img src="send_button.svg" alt="Send" />
-        </button>
+        {connected && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              sendMessage();
+            }}
+          >
+            <img src="send_button.svg" alt="Send" />
+          </button>
+        )}
       </div>
     </div>
   );

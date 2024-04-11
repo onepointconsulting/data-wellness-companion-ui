@@ -24,7 +24,7 @@ export default function Suggestions({ message }: { message: Message }) {
   function handleSelectedSuggestion(
     e: React.MouseEvent,
     newSuggestion: string,
-    clicked: number,
+    clickedIndex: number,
     append: boolean = false,
   ) {
     e.preventDefault();
@@ -35,7 +35,11 @@ export default function Suggestions({ message }: { message: Message }) {
     } else {
       setSelectedSuggestion(newSuggestion);
     }
-    setClicked(clicked);
+    if (clickedIndex === clicked) {
+      setClicked(-1);
+    } else {
+      setClicked(clickedIndex);
+    }
   }
 
   if (!message.suggestions || message.suggestions.length === 0) return null;
@@ -76,7 +80,7 @@ export default function Suggestions({ message }: { message: Message }) {
                 )}
                 {suggestion.main_text}
               </div>
-              {isLast && (
+              {isLast && currentMessage > 0 && (
                 <div>
                   <IoMdAddCircleOutline
                     onClick={(e) =>

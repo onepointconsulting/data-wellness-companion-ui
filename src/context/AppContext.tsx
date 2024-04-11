@@ -88,7 +88,7 @@ export const AppContextProvider = ({ children }: Props) => {
         chatText,
         setChatText,
         isLast,
-        isFinalMessage
+        isFinalMessage,
       }}
     >
       {" "}

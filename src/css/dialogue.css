@@ -17,7 +17,7 @@ label[for="expectedInteviewSteps"] {
 }
 
 .companion-dialogue-config {
-  @apply flex flex-row align-middle px-6;
+  @apply flex flex-row align-middle mt-6 mb-3;
 }
 
 .companion-dialogue-config input {
