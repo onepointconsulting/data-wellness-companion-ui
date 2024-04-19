@@ -34,7 +34,7 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 lg:pt-20 px-8 lg:px-8 xl:px-6 mb-4;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 lg:pt-10 px-8 lg:px-8 xl:px-6 mb-4;
 }
 
 #root .suggestion {
@@ -74,7 +74,7 @@
 }
 
 #root .question-answer {
-  @apply text-xl lg:text-2xl py-5;
+  @apply text-lg lg:text-xl py-5;
 }
 
 #root .final-report {
@@ -117,4 +117,37 @@
 
 .final-report-message {
   @apply text-lg lg:text-xl w-full text-center;
+}
+
+#root .registration-alert-container {
+  @apply w-full max-w-[1280px] mx-auto mt-5 mb-10;
+}
+
+#root .registration-alert-container {
+  @apply px-5 lg:px-10;
+}
+
+#root .registration-alert-description {
+  @apply text-lg;
+}
+
+#root .registration-alert-title {
+  @apply text-xl font-bold;
+}
+
+#root .clarification {
+  @apply flex flex-row justify-start w-full max-w-[1280px] mx-auto pl-4 pt-4;
+}
+
+#root .clarification svg {
+  @apply min-w-7 h-7 fill-[#0084d7];
+}
+
+#root .clarification-main,
+#root .disclaimer {
+  @apply px-3;
+}
+
+#root .clarification-main {
+  @apply text-lg md:text-xl;
 }

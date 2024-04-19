@@ -17,6 +17,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
     question: message.question,
     answer: message.answer,
     final_report: message.final_report,
+    clarification: message.clarification,
     suggestions: message.suggestions.map((suggestion: any) => ({
       id: suggestion.id,
       img_alt: suggestion.img_alt,
@@ -49,6 +50,7 @@ function extractInterviewSteps(
 }
 
 export function useWebsocket() {
+  const { setDisplayRegistrationMessage } = useContext(AppContext);
   const { socket, websocketUrl } = useContext(ChatContext);
   const {
     setConnected,
@@ -65,7 +67,7 @@ export function useWebsocket() {
       console.info("connected");
       setConnected(true);
       // Handle session
-      sendStartSession(socket.current, null);
+      sendStartSession(socket.current, null, setDisplayRegistrationMessage);
     };
 
     const onDisconnect = () => {
@@ -101,6 +103,10 @@ export function useWebsocket() {
       );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.CONNECT, onConnect);
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE,
+        onServerMessage,
+      );
     };
   }, []);
 }

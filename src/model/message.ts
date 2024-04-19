@@ -11,6 +11,7 @@ export type Message = {
   answer: string;
   final_report: boolean;
   suggestions: Suggestion[];
+  clarification: string | undefined;
 };
 
 export type MessagePair = [Message, Message | null];

@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { FaFlagCheckered } from "react-icons/fa";
+import { VscDebugStart } from "react-icons/vsc";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
+  if (i === 0) {
+    return <VscDebugStart className="mx-auto w-8 h-8 md:w-10 md:h-10" />;
+  }
   if (i === totalNodes - 1) {
     return <FaFlagCheckered className="mx-auto" />;
   }

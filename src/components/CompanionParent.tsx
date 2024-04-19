@@ -9,6 +9,7 @@ import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import InfoButton from "./buttons/InfoButton.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
+import RegistrationMessage from "./RegistrationMessage.tsx";
 
 function ConnectionStatus() {
   const { connected } = useContext(AppContext);
@@ -20,7 +21,8 @@ function ConnectionStatus() {
   );
 }
 export default function CompanionParent() {
-  const { setStartSession } = useContext(AppContext);
+  const { setStartSession, displayRegistrationMessage } =
+    useContext(AppContext);
   useEffect(() => {
     setStartSession(true);
   }, []);
@@ -46,7 +48,8 @@ export default function CompanionParent() {
         </div>
       </div>
       <NodeNavigation />
-      <InteractionPanel />
+      {displayRegistrationMessage && <RegistrationMessage />}
+      {!displayRegistrationMessage && <InteractionPanel />}
       <Disclaimer />
     </>
   );

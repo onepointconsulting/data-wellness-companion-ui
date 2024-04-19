@@ -1,30 +1,48 @@
 import { Socket } from "socket.io-client";
 import { WEBSOCKET_COMMAND } from "../model/websocketCommands.ts";
-import { getSession } from "./sessionFunctions.ts";
+import { getSession, getSessionHistory } from "./sessionFunctions.ts";
+
+const ONEPOINT_ID_PARAM = "onepoint_id";
+
+function getSessionId() {
+  const session = getSession();
+  return session ? session.id : "";
+}
 
 export function sendStartSession(
   socket: Socket<any, any> | null,
   expectedInteviewSteps: number | null,
+  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
 ) {
-  const session = getSession();
-  safeEmit(
-    socket,
-    WEBSOCKET_COMMAND.START_SESSION,
-    session ? session.id : "",
-    expectedInteviewSteps,
-  );
+  const params = new URLSearchParams(window.location.search);
+  if (getSessionHistory().length > 0 && !params.get(ONEPOINT_ID_PARAM)) {
+    setDisplayRegistrationMessage(true);
+  } else {
+    safeEmit(
+      socket,
+      WEBSOCKET_COMMAND.START_SESSION,
+      getSessionId(),
+      expectedInteviewSteps,
+    );
+  }
 }
 
 export function sendClientMessage(
   socket: Socket<any, any> | null,
   answer: string,
 ) {
-  const session = getSession();
+  safeEmit(socket, WEBSOCKET_COMMAND.CLIENT_MESSAGE, getSessionId(), answer);
+}
+
+export function sendClarifyQuestion(
+  socket: Socket<any, any> | null,
+  question: string,
+) {
   safeEmit(
     socket,
-    WEBSOCKET_COMMAND.CLIENT_MESSAGE,
-    session ? session.id : "",
-    answer,
+    WEBSOCKET_COMMAND.CLARIFY_QUESTION,
+    getSessionId(),
+    question,
   );
 }
 

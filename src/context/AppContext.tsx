@@ -21,6 +21,8 @@ interface AppState {
   setChatText: (chatText: string) => void;
   readonly isLast: boolean;
   readonly isFinalMessage: boolean;
+  displayRegistrationMessage: boolean;
+  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -47,6 +49,8 @@ function createAppState(): AppState {
     setChatText: (_) => {},
     isLast: true,
     isFinalMessage: false,
+    displayRegistrationMessage: false,
+    setDisplayRegistrationMessage: (_) => {},
   };
 }
 
@@ -63,6 +67,8 @@ export const AppContextProvider = ({ children }: Props) => {
   const [sending, setSending] = useState(false);
   const [expectedNodes, setExpectedNodes] = useState(DEFAULT_EXPECTED_NODES);
   const [chatText, setChatText] = useState("");
+  const [displayRegistrationMessage, setDisplayRegistrationMessage] =
+    useState(false);
 
   const isLast = currentMessage === messages.length - 1;
   const isFinalMessage = currentMessage === expectedNodes - 1;
@@ -89,6 +95,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setChatText,
         isLast,
         isFinalMessage,
+        displayRegistrationMessage,
+        setDisplayRegistrationMessage,
       }}
     >
       {" "}

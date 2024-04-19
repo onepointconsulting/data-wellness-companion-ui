@@ -1,11 +1,11 @@
-import {useContext, useState} from "react";
-import {clearSession} from "../../lib/sessionFunctions.ts";
-import {sendStartSession} from "../../lib/websocketFunctions.ts";
-import {ChatContext} from "../../context/ChatContext.tsx";
-import {AppContext} from "../../context/AppContext.tsx";
+import { useContext, useState } from "react";
+import { clearSession } from "../../lib/sessionFunctions.ts";
+import { sendStartSession } from "../../lib/websocketFunctions.ts";
+import { ChatContext } from "../../context/ChatContext.tsx";
+import { AppContext } from "../../context/AppContext.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
-import {ImSwitch} from "react-icons/im";
+import { ImSwitch } from "react-icons/im";
 
 export const RESTART_DIALOGUE_ID = "restart-dialogue";
 
@@ -19,13 +19,18 @@ function onClose() {
 
 export default function RestartDialogue() {
   const { socket } = useContext(ChatContext);
-  const { expectedNodes } = useContext(AppContext);
+  const { expectedNodes, messages, setDisplayRegistrationMessage } =
+    useContext(AppContext);
   const [expectedInteviewSteps, setExpectedInterviewSteps] =
     useState(expectedNodes);
 
   function onOk() {
-    clearSession();
-    sendStartSession(socket.current, expectedInteviewSteps);
+    clearSession(messages);
+    sendStartSession(
+      socket.current,
+      expectedInteviewSteps,
+      setDisplayRegistrationMessage,
+    );
     onClose();
   }
 
@@ -37,8 +42,7 @@ export default function RestartDialogue() {
     >
       <div className="companion-dialogue-content">
         <h2>
-          <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />{" "}
-          Restart
+          <ImSwitch className="inline relative -top-1 fill-[#0084d7]" /> Restart
         </h2>
         <section className="mx-3 mt-10">
           <p>Would you like to restart the companion?</p>
@@ -47,7 +51,9 @@ export default function RestartDialogue() {
             <select
               id="expectedInteviewSteps"
               value={expectedInteviewSteps}
-              onChange={(e) => setExpectedInterviewSteps(parseInt(e.target.value))}
+              onChange={(e) =>
+                setExpectedInterviewSteps(parseInt(e.target.value))
+              }
             >
               {Array.from({ length: MAX_STEPS - MIN_STEPS + 1 }, (_, i) => (
                 <option key={i} value={i + MIN_STEPS}>
