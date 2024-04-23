@@ -85,7 +85,7 @@ export default function ChatInput() {
               e.preventDefault();
               sendMessage();
             }}
-            disabled={!enoughText(chatText)}
+            disabled={!enoughText(chatText) || sending}
             className="disabled:opacity-10"
           >
             <img

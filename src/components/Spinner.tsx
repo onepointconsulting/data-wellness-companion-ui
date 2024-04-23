@@ -9,7 +9,7 @@ function SpinnerLayout({ children }: { children: React.ReactNode }) {
 export default function Spinner() {
   return (
     <SpinnerLayout>
-      <span className="text-sm text-gray-500 my-3 mx-auto">
+      <span className="text-sm text-gray-500 mt-3 -mb-4 mx-auto">
         <Circles
           visible={true}
           height={SPINNER_SIZE}
