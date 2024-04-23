@@ -55,7 +55,7 @@ export function useWebsocket() {
   const {
     setConnected,
     setMessages,
-    setCurrentMessage,
+    setCurrentMessageHistory,
     setSending,
     setExpectedNodes,
   } = useContext(AppContext);
@@ -79,7 +79,7 @@ export function useWebsocket() {
       if (!value) return;
       const serverMessages = JSON.parse(value);
       setMessages(adaptServerMessages(serverMessages));
-      setCurrentMessage(serverMessages.server_messages.length - 1);
+      setCurrentMessageHistory(serverMessages.server_messages.length - 1);
       extractInterviewSteps(serverMessages, setExpectedNodes);
       saveSession({ id: serverMessages.session_id, timestamp: new Date() });
     }
@@ -87,7 +87,7 @@ export function useWebsocket() {
     function onServerMessage(value: string) {
       const serverMessages = JSON.parse(value);
       setMessages(adaptServerMessages(serverMessages));
-      setCurrentMessage(serverMessages.server_messages.length - 1);
+      setCurrentMessageHistory(serverMessages.server_messages.length - 1);
       setSending(false);
     }
 

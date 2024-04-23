@@ -1,6 +1,7 @@
 import { Message } from "../model/message.ts";
 import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
+import { useNavigate } from "react-router-dom";
 
 interface AppState {
   expectedNodes: number;
@@ -23,6 +24,7 @@ interface AppState {
   readonly isFinalMessage: boolean;
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
+  setCurrentMessageHistory: (currentMessageHistory: number) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -51,6 +53,7 @@ function createAppState(): AppState {
     isFinalMessage: false,
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
+    setCurrentMessageHistory: (_) => {},
   };
 }
 
@@ -69,9 +72,15 @@ export const AppContextProvider = ({ children }: Props) => {
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
+  const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
   const isFinalMessage = currentMessage === expectedNodes - 1;
+
+  function setCurrentMessageHistory(currentMessage: number) {
+    setCurrentMessage(currentMessage);
+    navigate(`/${currentMessage}${location.search}`);
+  }
 
   return (
     <AppContext.Provider
@@ -97,6 +106,7 @@ export const AppContextProvider = ({ children }: Props) => {
         isFinalMessage,
         displayRegistrationMessage,
         setDisplayRegistrationMessage,
+        setCurrentMessageHistory,
       }}
     >
       {" "}

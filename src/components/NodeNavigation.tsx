@@ -20,7 +20,7 @@ function SingleNode({
   i: number;
   expectedNodes: number;
 }) {
-  const { messages, currentMessage, setCurrentMessage } =
+  const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
   const length = messages.length;
   const covered = length > i;
@@ -35,7 +35,7 @@ function SingleNode({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              setCurrentMessage(i);
+              setCurrentMessageHistory(i);
             }}
           >
             <OutputNode i={i} totalNodes={expectedNodes} />

@@ -8,6 +8,10 @@ function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `${el.scrollHeight}px`;
 }
 
+function enoughText(chatText: string) {
+  return chatText?.length > 2;
+}
+
 /**
  * Chat input field to be used in this application.
  * @constructor
@@ -81,8 +85,18 @@ export default function ChatInput() {
               e.preventDefault();
               sendMessage();
             }}
+            disabled={!enoughText(chatText)}
+            className="disabled:opacity-10"
           >
-            <img src="send_button.svg" alt="Send" />
+            <img
+              src="send_button.svg"
+              alt="Send"
+              title={
+                enoughText(chatText)
+                  ? "Send message"
+                  : "Please enter some text to send"
+              }
+            />
           </button>
         )}
       </div>

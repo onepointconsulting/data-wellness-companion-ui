@@ -10,6 +10,7 @@ import Disclaimer from "./Disclaimer.tsx";
 import InfoButton from "./buttons/InfoButton.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
+import useChatHistory from "../hooks/useChatHistory.ts";
 
 function ConnectionStatus() {
   const { connected } = useContext(AppContext);
@@ -23,6 +24,7 @@ function ConnectionStatus() {
 export default function CompanionParent() {
   const { setStartSession, displayRegistrationMessage } =
     useContext(AppContext);
+  useChatHistory();
   useEffect(() => {
     setStartSession(true);
   }, []);
