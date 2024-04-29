@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { FaInfoCircle } from "react-icons/fa";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 
@@ -8,6 +9,8 @@ export const INFO_DIALOGUE_ID = "info-dialogue";
  * @constructor
  */
 export default function InfoDialogue() {
+  const { t } = useTranslation();
+
   return (
     <dialog
       data-model={true}
@@ -17,11 +20,11 @@ export default function InfoDialogue() {
       <div className="companion-dialogue-content">
         <h2>
           <FaInfoCircle className="inline relative -top-0.5 fill-[#0084d7]" />{" "}
-          Info
+          {t("Info")}
         </h2>
         <section className="mx-3 mt-10">
           <p>
-            The{" "}
+            {t("The")}{" "}
             <a
               href="https://www.onepointltd.com/"
               target="_blank"
@@ -29,21 +32,25 @@ export default function InfoDialogue() {
             >
               Onepoint
             </a>{" "}
-            Data Wellness Companion™ is an assistant which will ask you
-            questions to help you reflect on your data.
+            {t(
+              "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data"
+            )}
+            .
             <br />
-            It will go through a series of questions and then will provide you
-            with a report at the end.
+            {t(
+              "It will go through a series of questions and then will provide you with a report at the end"
+            )}
+            .
           </p>
           <br />
           <p>
-            This application is powered by{" "}
+            {t("This application is powered by")}{" "}
             <a
               className="default-link"
               href="https://openai.com/gpt-4"
               target="_blank"
             >
-              ChatGPT 4.
+              {t("ChatGPT 4")}.
             </a>
           </p>
         </section>
@@ -54,7 +61,7 @@ export default function InfoDialogue() {
           onClick={() => onCloseDialogue(INFO_DIALOGUE_ID)}
           className="button-cancel"
         >
-          Close
+          {t("Close")}
         </button>
       </div>
     </dialog>

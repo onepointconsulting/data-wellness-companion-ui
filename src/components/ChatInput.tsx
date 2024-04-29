@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { sendClientMessage } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
+import { useTranslation } from "react-i18next";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -27,7 +28,7 @@ export default function ChatInput() {
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
+  const [t] = useTranslation();
   useEffect(() => {
     if (selectedSuggestion && textAreaRef.current) {
       setChatText(selectedSuggestion);
@@ -74,7 +75,7 @@ export default function ChatInput() {
           id="chat-input"
           value={chatText}
           onChange={(e) => setChatText(e.target.value)}
-          placeholder="Type your message here and press ENTER..."
+          placeholder={`${t("Type your message here and press ENTER")}...`}
           onKeyUp={sendEnterMessage}
           disabled={sending || !connected}
           ref={textAreaRef}

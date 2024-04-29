@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export default function ButtonPanel({
   onClose,
   onOk,
@@ -9,6 +11,8 @@ export default function ButtonPanel({
   okText: string;
   disabled: boolean;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="companion-dialogue-buttons">
       <button
@@ -16,7 +20,7 @@ export default function ButtonPanel({
         onClick={onClose}
         className="button-cancel"
       >
-        Close
+        {t("Close")}
       </button>
       <button
         data-close-modal={true}

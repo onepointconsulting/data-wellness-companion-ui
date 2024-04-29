@@ -25,7 +25,7 @@ export default function Suggestions({ message }: { message: Message }) {
     e: React.MouseEvent,
     newSuggestion: string,
     clickedIndex: number,
-    append: boolean = false,
+    append: boolean = false
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -45,17 +45,17 @@ export default function Suggestions({ message }: { message: Message }) {
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
   return (
-    <div className="suggestions container">
+    <div className="container suggestions">
       {message.suggestions.map((suggestion, i) => {
         return (
           <div
             key={`suggestion_${i}`}
-            className={`suggestion ${i === clicked ? "active" : ""}`}
+            className={`suggestion group items-center ${i === clicked ? "active" : ""}`}
             onClick={(e) => {
               return handleSelectedSuggestion(
                 e,
                 adaptSuggestion(suggestion),
-                i,
+                i
               );
             }}
           >
@@ -67,11 +67,15 @@ export default function Suggestions({ message }: { message: Message }) {
                     handleSelectedSuggestion(e, suggestion.title, i)
                   }
                 >
-                  <img src={suggestion.img_src} alt={suggestion.img_alt} />
+                  <img
+                    className="rounded-[8px]"
+                    src={suggestion.img_src}
+                    alt={suggestion.img_alt}
+                  />
                 </a>
               </div>
             )}
-            <div className="suggestion-text">
+            <div className="duration-200 suggestion-text group-hover:text-gray-200">
               <div>
                 {suggestion.title && (
                   <>
@@ -88,7 +92,7 @@ export default function Suggestions({ message }: { message: Message }) {
                         e,
                         adaptSuggestion(suggestion),
                         i,
-                        true,
+                        true
                       )
                     }
                     title="Append to message"
