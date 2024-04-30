@@ -13,19 +13,23 @@ function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: any }) {
   };
 
   return (
-    <div className="absolute w-max h-auto p-2 bg-gray-500 shadow-md rounded-[3px] top-16 flex flex-col gap-8 cursor-auto">
-      <span className="text-white">{t("Select language")}</span>
-      <div className="absolute w-8 h-8 bg-gray-100 top-12 left-[38%] rotate-[225deg] z-0"></div>
+    <div className="absolute w-max h-auto p-2 bg-white shadow-2xl rounded-[5px] top-16 flex flex-col gap-8 cursor-auto">
+      <span className="text-gray-600">{t("Select language")}</span>
+      <div className="absolute w-8 h-8 bg-[#0084d7] top-12 left-[38%] rotate-[225deg] z-0"></div>
       {/* select */}
       <select
-        className="p-2 bg-gray-100 rounded-[2px] border border-gray-400 z-50"
+        className="p-2 bg-[#0084d7] rounded-[2px] z-50 text-white"
         name="language"
         id="language"
         onChange={onClickLanguageChange}
         value={i18n.language}
       >
-        <option value="en">{t("English")}</option>
-        <option value="fa">{t("Farsi")}</option>
+        <option className="text-white" value="en">
+          {t("English")}
+        </option>
+        <option className="text-white" value="fa">
+          {t("Farsi")}
+        </option>
       </select>
     </div>
   );
