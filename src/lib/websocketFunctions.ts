@@ -1,6 +1,7 @@
 import { Socket } from "socket.io-client";
 import { WEBSOCKET_COMMAND } from "../model/websocketCommands.ts";
 import { getSession, getSessionHistory } from "./sessionFunctions.ts";
+import i18next from "i18next";
 
 const ONEPOINT_ID_PARAM = "onepoint_id";
 
@@ -12,9 +13,10 @@ function getSessionId() {
 export function sendStartSession(
   socket: Socket<any, any> | null,
   expectedInteviewSteps: number | null,
-  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
+  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void
 ) {
   const params = new URLSearchParams(window.location.search);
+  const language = i18next?.language;
   if (getSessionHistory().length > 0 && !params.get(ONEPOINT_ID_PARAM)) {
     setDisplayRegistrationMessage(true);
   } else {
@@ -23,26 +25,27 @@ export function sendStartSession(
       WEBSOCKET_COMMAND.START_SESSION,
       getSessionId(),
       expectedInteviewSteps,
+      language
     );
   }
 }
 
 export function sendClientMessage(
   socket: Socket<any, any> | null,
-  answer: string,
+  answer: string
 ) {
   safeEmit(socket, WEBSOCKET_COMMAND.CLIENT_MESSAGE, getSessionId(), answer);
 }
 
 export function sendClarifyQuestion(
   socket: Socket<any, any> | null,
-  question: string,
+  question: string
 ) {
   safeEmit(
     socket,
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
-    question,
+    question
   );
 }
 
