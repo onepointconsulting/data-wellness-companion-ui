@@ -1,21 +1,30 @@
-import { Message } from "../model/message.ts";
-import { FaRegLightbulb } from "react-icons/fa6";
-import { FaHourglassHalf } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { sendClarifyQuestion } from "../lib/websocketFunctions.ts";
+import {Message} from "../model/message.ts";
+import {FaRegLightbulb} from "react-icons/fa6";
+import {FaHourglassHalf} from "react-icons/fa";
+import {VscExtensions} from "react-icons/vsc";
+import {useContext, useEffect, useState} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {sendClarifyQuestion, sendExtendSession} from "../lib/websocketFunctions.ts";
 import MarkdownComponent from "./Markdown.tsx";
-import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
+import {WEBSOCKET_SERVER_COMMAND} from "../model/websocketCommands.ts";
 
 /**
  * Used to display the question clarification.
  * @constructor
  */
-export default function Clarification() {
+export default function ExtraFunctionButtons() {
   const [clarificationClicked, setClarificationClicked] = useState(false);
-  const { currentMessage, messages, setMessages } = useContext(AppContext);
-  const { socket } = useContext(ChatContext);
+  const {
+    currentMessage,
+    messages,
+    setMessages,
+    isLast,
+    expectedNodes,
+    updatingExpectedNodes,
+    setUpdatingExpectedNodes
+  } = useContext(AppContext);
+  const {socket} = useContext(ChatContext);
 
   const message: Message = messages[currentMessage];
 
@@ -56,19 +65,28 @@ export default function Clarification() {
     sendClarifyQuestion(socket.current, question);
   }
 
+  function onExtend(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    setUpdatingExpectedNodes(true);
+    sendExtendSession(socket.current, expectedNodes + 1);
+  }
+
   if (currentMessage === 0 || message.final_report) return null;
 
   return (
     <div className="clarification">
+      {isLast && !updatingExpectedNodes &&
+        <a href="#" onClick={onExtend} title="Add one more step to current session"><VscExtensions/></a>}
+      {updatingExpectedNodes && <FaHourglassHalf/>}
       {!message.clarification && (
         <a href="#" onClick={onClarify} title="Explain the current question">
-          <FaRegLightbulb />
+          <FaRegLightbulb/>
         </a>
       )}
-      {!message.clarification && clarificationClicked && <FaHourglassHalf />}
+      {!message.clarification && clarificationClicked && <FaHourglassHalf/>}
       {message.clarification && (
         <section className="clarification-main">
-          <MarkdownComponent content={message.clarification} />
+          <MarkdownComponent content={message.clarification}/>
         </section>
       )}
     </div>

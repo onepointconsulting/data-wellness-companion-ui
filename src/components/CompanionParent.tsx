@@ -11,6 +11,7 @@ import InfoButton from "./buttons/InfoButton.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
+import { Toaster } from "../../@/components/ui/toaster"
 
 function ConnectionStatus() {
   const { connected } = useContext(AppContext);
@@ -50,9 +51,12 @@ export default function CompanionParent() {
         </div>
       </div>
       <NodeNavigation />
-      {displayRegistrationMessage && <RegistrationMessage />}
-      {!displayRegistrationMessage && <InteractionPanel />}
-      <Disclaimer />
+      <div className="container">
+        {displayRegistrationMessage && <RegistrationMessage />}
+        {!displayRegistrationMessage && <InteractionPanel />}
+        <Disclaimer />
+      </div>
+      <Toaster/>
     </>
   );
 }

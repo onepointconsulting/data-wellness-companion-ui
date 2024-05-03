@@ -25,6 +25,8 @@ interface AppState {
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   setCurrentMessageHistory: (currentMessageHistory: number) => void;
+  updatingExpectedNodes: boolean,
+  setUpdatingExpectedNodes: (updatingExpectedNodes: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -54,6 +56,8 @@ function createAppState(): AppState {
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
     setCurrentMessageHistory: (_) => {},
+    updatingExpectedNodes: false,
+    setUpdatingExpectedNodes: (_) => {}
   };
 }
 
@@ -72,6 +76,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
+  const [updatingExpectedNodes, setUpdatingExpectedNodes] = useState(false);
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -107,6 +112,8 @@ export const AppContextProvider = ({ children }: Props) => {
         displayRegistrationMessage,
         setDisplayRegistrationMessage,
         setCurrentMessageHistory,
+        updatingExpectedNodes,
+        setUpdatingExpectedNodes
       }}
     >
       {" "}

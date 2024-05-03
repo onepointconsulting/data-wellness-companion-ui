@@ -23,6 +23,7 @@ export function sendStartSession(
       WEBSOCKET_COMMAND.START_SESSION,
       getSessionId(),
       expectedInteviewSteps,
+      // other params, like language
     );
   }
 }
@@ -43,6 +44,18 @@ export function sendClarifyQuestion(
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
     question,
+  );
+}
+
+export function sendExtendSession(
+  socket: Socket<any, any> | null,
+  sessionSteps: number,
+) {
+  safeEmit(
+    socket,
+    WEBSOCKET_COMMAND.EXTEND_SESSION,
+    getSessionId(),
+    sessionSteps,
   );
 }
 

@@ -6,6 +6,7 @@ import { sendStartSession } from "../lib/websocketFunctions.ts";
 import { saveSession } from "../lib/sessionFunctions.ts";
 import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
 import { Message } from "../model/message.ts";
+import {toast} from "../../@/components/ui/use-toast.ts";
 
 interface ServerMessage {
   session_id: string;
@@ -50,7 +51,7 @@ function extractInterviewSteps(
 }
 
 export function useWebsocket() {
-  const { setDisplayRegistrationMessage } = useContext(AppContext);
+  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } = useContext(AppContext);
   const { socket, websocketUrl } = useContext(ChatContext);
   const {
     setConnected,
@@ -91,10 +92,28 @@ export function useWebsocket() {
       setSending(false);
     }
 
+    function onExtendSession(sessionSteps: number) {
+      if(sessionSteps > 0) {
+        setExpectedNodes(sessionSteps);
+        toast({
+          title: "Interview Steps Updated",
+          description: `The interview has been extended to ${sessionSteps} steps.`
+        })
+      } else {
+        toast({
+          title: "Interview Steps Update Failed",
+          description: `The interview steps could not be extended to ${sessionSteps} steps.`,
+          variant: "destructive"
+        })
+      }
+      setUpdatingExpectedNodes(false);
+    }
+
     socket.current.on(WEBSOCKET_SERVER_COMMAND.START_SESSION, onStartSession);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.CONNECT, onConnect);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE, onServerMessage);
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION, onExtendSession);
 
     return () => {
       socket.current?.off(
@@ -107,6 +126,7 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE,
         onServerMessage,
       );
+      socket.current?.off(WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION, onExtendSession);
     };
   }, []);
 }

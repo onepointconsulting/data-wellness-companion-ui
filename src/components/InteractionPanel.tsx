@@ -6,7 +6,7 @@ import ChatInput from "./ChatInput.tsx";
 import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
-import Clarification from "./Clarification.tsx";
+import ExtraFunctionButtons from "./ExtraFunctionButtons.tsx";
 
 export default function InteractionPanel() {
   const { currentMessage, messages, sending, expectedNodes, isLast } =
@@ -22,7 +22,7 @@ export default function InteractionPanel() {
           currentMessage={currentMessage}
           messagesLength={messages.length}
         />
-        <Clarification />
+        <ExtraFunctionButtons />
         <Suggestions message={message} />
         {sending && (
           <div className="mt-6">

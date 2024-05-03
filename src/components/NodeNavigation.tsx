@@ -45,7 +45,7 @@ function SingleNode({
         )}
       </div>
       {i !== expectedNodes - 1 && (
-        <div className={`connector ${connectorCovered ? "active" : ""}`}></div>
+        <div className={`connector ${connectorCovered ? "active" : ""} ${i > 0 && i % 6 === 0 ? "node-break": ""}`}></div>
       )}
     </>
   );
