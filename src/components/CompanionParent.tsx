@@ -12,6 +12,7 @@ import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
 import { Toaster } from "../../@/components/ui/toaster"
+import IntroDialogue from "./dialogue/IntroDialogue.tsx";
 
 function ConnectionStatus() {
   const { connected } = useContext(AppContext);
@@ -35,6 +36,7 @@ export default function CompanionParent() {
       <RestartDialogue />
       <EmailDialogue />
       <InfoDialogue />
+      <IntroDialogue />
       <div className="header">
         <div className="header-container">
           <h1>

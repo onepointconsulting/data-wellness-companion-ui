@@ -6,6 +6,10 @@
   @apply text-xl md:text-2xl font-bold mt-1 ml-2;
 }
 
+#root h3 {
+  @apply text-lg md:text-xl font-bold mt-1;
+}
+
 #root .markdown-body strong {
   @apply bg-[#e6f3fb] px-2 rounded-lg font-normal;
 }
@@ -15,5 +19,5 @@
 }
 
 #root a.default-link {
-  @apply underline text-[#0084d7] hover:text-[#0084d7] visited:text-[#0084d7];
+  @apply underline text-[#0084d7] hover:text-[#0084d7] visited:text-[#0084d7] outline-0;
 }

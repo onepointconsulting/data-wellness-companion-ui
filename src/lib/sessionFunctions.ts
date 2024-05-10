@@ -5,6 +5,10 @@ export const SESSION_KEY = "session";
 
 export const SESSION_HISTORY_KEY = "history";
 
+export const SEEN_INTRO_KEY = "seenIntro";
+
+const SEEN_INTRO_VALUE = "true";
+
 export function saveSession(session: Session) {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
 }
@@ -77,4 +81,13 @@ function appendToSessionHistory(
   } else {
     saveSessionHistory([currentSession]);
   }
+}
+
+export function getSeenIntro(): boolean {
+  const seenIntro = localStorage.getItem(SEEN_INTRO_KEY);
+  return seenIntro === SEEN_INTRO_VALUE;
+}
+
+export function setSeenIntro() {
+  localStorage.setItem(SEEN_INTRO_KEY, SEEN_INTRO_VALUE);
 }
