@@ -6,10 +6,10 @@
  * @param buttons The buttons
  * @constructor
  */
-export default function GenericDialogue({dialogueId, clazz, content, buttons}: {
+export default function GenericDialogue({dialogueId, clazz, children, buttons}: {
   dialogueId: string,
   clazz: string,
-  content: React.ReactNode,
+  children: React.ReactNode,
   buttons: React.ReactNode
 }) {
   return (
@@ -19,7 +19,7 @@ export default function GenericDialogue({dialogueId, clazz, content, buttons}: {
       className={clazz}
     >
       <div className="companion-dialogue-content">
-        {content}
+        {children}
       </div>
       <div className="companion-dialogue-buttons">
         {buttons}
