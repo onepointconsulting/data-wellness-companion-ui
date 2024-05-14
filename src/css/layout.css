@@ -140,7 +140,11 @@
 }
 
 #root .clarification svg {
-  @apply min-w-7 h-7 fill-[#0084d7];
+  @apply min-w-7 h-7 fill-[#0084d7] text-[#0084d7] mr-1;
+}
+
+#root .deactivated-icon svg {
+  @apply !fill-gray-500 !text-gray-400
 }
 
 #root .clarification-main,
