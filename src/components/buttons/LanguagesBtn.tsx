@@ -1,15 +1,27 @@
 import "i18next";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdLanguage } from "react-icons/md";
+import restartCompanion from "../../lib/restartFunctions.ts";
+import { AppContext } from "../../context/AppContext.tsx";
+import { ChatContext } from "../../context/ChatContext.tsx";
 
 function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: any }) {
   const { i18n, t } = useTranslation();
+  const { socket } = useContext(ChatContext);
+  const { messages, setDisplayRegistrationMessage, expectedNodes } =
+    useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
     const language = e.target.value;
     i18n.changeLanguage(language);
     setToggleLanguage(false);
+    restartCompanion(
+      messages,
+      socket,
+      expectedNodes,
+      setDisplayRegistrationMessage,
+    );
   };
 
   return (
@@ -27,8 +39,8 @@ function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: any }) {
         <option className="text-white" value="en">
           {t("English")}
         </option>
-        <option className="text-white" value="fa">
-          {t("Farsi")}
+        <option className="text-white" value="de">
+          {t("German")}
         </option>
       </select>
     </div>

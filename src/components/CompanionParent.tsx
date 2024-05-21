@@ -14,15 +14,22 @@ import InfoButton from "./buttons/InfoButton.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
-import { Toaster } from "../../@/components/ui/toaster"
+import { Toaster } from "../../@/components/ui/toaster";
 import IntroDialogue from "./dialogue/IntroDialogue.tsx";
+import { PiPlugsConnected } from "react-icons/pi";
+import { TbPlugConnected } from "react-icons/tb";
 
 function ConnectionStatus() {
+  const { t } = useTranslation();
   const { connected } = useContext(AppContext);
 
   return (
     <div className="connection-status">
-      {connected ? "connected" : "disconnected"}
+      {connected ? (
+        <PiPlugsConnected className="info-button" title={t("connected")} />
+      ) : (
+        <TbPlugConnected className="info-button" title={t("disconnected")} />
+      )}
     </div>
   );
 }
@@ -49,24 +56,24 @@ export default function CompanionParent() {
       <IntroDialogue />
       <InfoToolTip />
       <div className="header">
-        <div className="py-4 header-container">
+        <div className="header-container">
           <h1>
             {t("Onepoint Data Wellness Companion")}™{" "}
             <span className="experimental">{t("Experimental")}</span>
           </h1>
           <div className="flex flex-col items-center">
             <div className="flex flex-row items-start cursor-pointer lg:items-center">
+              <ConnectionStatus />
               {/* Language drop down */}
               <div className="relative">
                 {" "}
                 <LanguagesBtn />
               </div>{" "}
-              <div data-tooltip-id="user-info-tooltip">
+              <div>
                 <InfoButton />
               </div>
               <StartButton />
             </div>
-            <ConnectionStatus />
           </div>
         </div>
       </div>
@@ -76,7 +83,7 @@ export default function CompanionParent() {
         {!displayRegistrationMessage && <InteractionPanel />}
         <Disclaimer />
       </div>
-      <Toaster/>
+      <Toaster />
     </>
   );
 }

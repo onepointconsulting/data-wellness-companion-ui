@@ -25,7 +25,7 @@ export default function Suggestions({ message }: { message: Message }) {
     e: React.MouseEvent,
     newSuggestion: string,
     clickedIndex: number,
-    append: boolean = false
+    append: boolean = false,
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -55,7 +55,7 @@ export default function Suggestions({ message }: { message: Message }) {
               return handleSelectedSuggestion(
                 e,
                 adaptSuggestion(suggestion),
-                i
+                i,
               );
             }}
           >
@@ -92,7 +92,7 @@ export default function Suggestions({ message }: { message: Message }) {
                         e,
                         adaptSuggestion(suggestion),
                         i,
-                        true
+                        true,
                       )
                     }
                     title="Append to message"

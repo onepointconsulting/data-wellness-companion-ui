@@ -1,5 +1,3 @@
-
-
 export default function OnepointInfo() {
   return (
     <p>
@@ -11,11 +9,11 @@ export default function OnepointInfo() {
       >
         Onepoint
       </a>{" "}
-      Data Wellness Companion™ is an assistant which will ask you
-      questions to help you reflect on your data.
+      Data Wellness Companion™ is an assistant which will ask you questions to
+      help you reflect on your data.
       <br />
-      It will go through a series of questions and then will provide you
-      with a report with recommendations at the end.
+      It will go through a series of questions and then will provide you with a
+      report with recommendations at the end.
     </p>
-  )
+  );
 }

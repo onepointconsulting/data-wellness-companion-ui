@@ -26,7 +26,7 @@ interface AppState {
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   setCurrentMessageHistory: (currentMessageHistory: number) => void;
-  updatingExpectedNodes: boolean,
+  updatingExpectedNodes: boolean;
   setUpdatingExpectedNodes: (updatingExpectedNodes: boolean) => void;
 }
 
@@ -59,7 +59,7 @@ function createAppState(): AppState {
     setDisplayRegistrationMessage: (_) => {},
     setCurrentMessageHistory: (_) => {},
     updatingExpectedNodes: false,
-    setUpdatingExpectedNodes: (_) => {}
+    setUpdatingExpectedNodes: (_) => {},
   };
 }
 
@@ -117,7 +117,7 @@ export const AppContextProvider = ({ children }: Props) => {
         setDisplayRegistrationMessage,
         setCurrentMessageHistory,
         updatingExpectedNodes,
-        setUpdatingExpectedNodes
+        setUpdatingExpectedNodes,
       }}
     >
       {" "}

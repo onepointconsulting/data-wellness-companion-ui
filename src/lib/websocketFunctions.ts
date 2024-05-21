@@ -13,7 +13,7 @@ function getSessionId() {
 export function sendStartSession(
   socket: Socket<any, any> | null,
   expectedInteviewSteps: number | null,
-  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void
+  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
 ) {
   const params = new URLSearchParams(window.location.search);
   const language = i18next?.language;
@@ -25,27 +25,27 @@ export function sendStartSession(
       WEBSOCKET_COMMAND.START_SESSION,
       getSessionId(),
       expectedInteviewSteps,
-      language
+      language,
     );
   }
 }
 
 export function sendClientMessage(
   socket: Socket<any, any> | null,
-  answer: string
+  answer: string,
 ) {
   safeEmit(socket, WEBSOCKET_COMMAND.CLIENT_MESSAGE, getSessionId(), answer);
 }
 
 export function sendClarifyQuestion(
   socket: Socket<any, any> | null,
-  question: string
+  question: string,
 ) {
   safeEmit(
     socket,
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
-    question
+    question,
   );
 }
 

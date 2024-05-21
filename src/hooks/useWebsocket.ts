@@ -6,7 +6,7 @@ import { sendStartSession } from "../lib/websocketFunctions.ts";
 import { saveSession } from "../lib/sessionFunctions.ts";
 import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
 import { Message } from "../model/message.ts";
-import {toast} from "../../@/components/ui/use-toast.ts";
+import { toast } from "../../@/components/ui/use-toast.ts";
 
 interface ServerMessage {
   session_id: string;
@@ -51,7 +51,8 @@ function extractInterviewSteps(
 }
 
 export function useWebsocket() {
-  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } = useContext(AppContext);
+  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } =
+    useContext(AppContext);
   const { socket, websocketUrl } = useContext(ChatContext);
   const {
     setConnected,
@@ -93,18 +94,18 @@ export function useWebsocket() {
     }
 
     function onExtendSession(sessionSteps: number) {
-      if(sessionSteps > 0) {
+      if (sessionSteps > 0) {
         setExpectedNodes(sessionSteps);
         toast({
           title: "Interview Steps Updated",
-          description: `The interview has been extended to ${sessionSteps} steps.`
-        })
+          description: `The interview has been extended to ${sessionSteps} steps.`,
+        });
       } else {
         toast({
           title: "Interview Steps Update Failed",
           description: `The interview steps could not be extended to ${sessionSteps} steps.`,
-          variant: "destructive"
-        })
+          variant: "destructive",
+        });
       }
       setUpdatingExpectedNodes(false);
     }
@@ -126,7 +127,10 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE,
         onServerMessage,
       );
-      socket.current?.off(WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION, onExtendSession);
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION,
+        onExtendSession,
+      );
     };
   }, []);
 }
