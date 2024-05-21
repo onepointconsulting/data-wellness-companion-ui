@@ -1,5 +1,6 @@
-import {FaInfoCircle} from "react-icons/fa";
-import onCloseDialogue, {showDialogue} from "../../lib/dialogFunctions.ts";
+import { useTranslation } from "react-i18next";
+import { FaInfoCircle } from "react-icons/fa";
+import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import OnepointInfo from "./OnepointInfo.tsx";
 import GenericDialogue from "./GenericDialogue.tsx";
 import {INTRO_DIALOGUE_ID} from "./IntroDialogue.tsx";
@@ -25,6 +26,8 @@ function showIntroDdialogue(event: React.MouseEvent<HTMLAnchorElement, MouseEven
  * @constructor
  */
 export default function InfoDialogue() {
+  const { t } = useTranslation();
+
   return (
     <GenericDialogue dialogueId={INFO_DIALOGUE_ID} clazz="companion-dialogue" buttons={<button
       data-close-modal={true}
@@ -35,22 +38,12 @@ export default function InfoDialogue() {
     </button>}>
       <>
         <h2>
-          <FaInfoCircle className="inline relative -top-0.5 fill-[#0084d7]"/>{" "}
-          Info
+          <FaInfoCircle className="inline relative -top-0.5 fill-[#0084d7]" />{" "}
+          {t("Info")}
         </h2>
         <InfoSection>
           <OnepointInfo/>
-          <br/>
-          <p>
-            This application is powered by{" "}
-            <a
-              className="default-link"
-              href="https://openai.com/gpt-4"
-              target="_blank"
-            >
-              ChatGPT 4.
-            </a>
-          </p>
+
         </InfoSection>
         <InfoSection>
           <a className="default-link" href="#" onClick={showIntroDdialogue}>Usage instructions</a>
