@@ -30,7 +30,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
 
 function extractInterviewSteps(
   serverMessages: any,
-  setExpectedNodes: (expectedNodes: number) => void,
+  setExpectedNodes: (expectedNodes: number) => void
 ) {
   if (serverMessages.session_configuration) {
     if (serverMessages.session_configuration.configuration_entries) {
@@ -99,13 +99,13 @@ export function useWebsocket() {
     return () => {
       socket.current?.off(
         WEBSOCKET_SERVER_COMMAND.START_SESSION,
-        onStartSession,
+        onStartSession
       );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.CONNECT, onConnect);
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
       socket.current?.off(
         WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE,
-        onServerMessage,
+        onServerMessage
       );
     };
   }, []);

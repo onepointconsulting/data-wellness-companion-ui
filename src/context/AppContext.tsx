@@ -3,6 +3,12 @@ import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
 
+export const COOKIE_STATES = {
+  ACCEPTED: "ACCEPTED",
+  REJECTED: "REJECTED",
+  UNKNOWN: "UNKNOWN",
+};
+
 interface AppState {
   expectedNodes: number;
   setExpectedNodes: (expectedNodes: number) => void;
@@ -25,6 +31,14 @@ interface AppState {
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   setCurrentMessageHistory: (currentMessageHistory: number) => void;
+  restartOpen: boolean;
+  setRestartOpen: (restartOpen: boolean) => void;
+  languageOpen: boolean;
+  setLanguageOpen: (languageOpen: boolean) => void;
+  isRestartPopOpen: boolean;
+  setRestartPopOpen: (isRestartPopOpen: boolean) => void;
+  cookieState: string;
+  setCookieState: (cookieState: string) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -54,6 +68,14 @@ function createAppState(): AppState {
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
     setCurrentMessageHistory: (_) => {},
+    restartOpen: false,
+    setRestartOpen: (_) => {},
+    languageOpen: false,
+    setLanguageOpen: (_) => {},
+    isRestartPopOpen: false,
+    setRestartPopOpen: (_) => {},
+    cookieState: COOKIE_STATES.UNKNOWN,
+    setCookieState: (_: string) => {},
   };
 }
 
@@ -72,6 +94,11 @@ export const AppContextProvider = ({ children }: Props) => {
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
+  const [restartOpen, setRestartOpen] = useState<boolean>(false);
+  const [languageOpen, setLanguageOpen] = useState<boolean>(false);
+  const [isRestartPopOpen, setRestartPopOpen] = useState(false);
+  const [cookieState, setCookieState] = useState<string>("");
+
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -107,9 +134,16 @@ export const AppContextProvider = ({ children }: Props) => {
         displayRegistrationMessage,
         setDisplayRegistrationMessage,
         setCurrentMessageHistory,
+        restartOpen,
+        setRestartOpen,
+        languageOpen,
+        setLanguageOpen,
+        isRestartPopOpen,
+        setRestartPopOpen,
+        cookieState,
+        setCookieState,
       }}
     >
-      {" "}
       {children}{" "}
     </AppContext.Provider>
   );

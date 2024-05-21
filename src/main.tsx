@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
+import "react-tooltip/dist/react-tooltip.css";
 import App from "./App.tsx";
 import i18next from "./i18n/i18n.tsx";
 import "./index.css";
-import "react-tooltip/dist/react-tooltip.css";
 
 // Listen for language change events and update direction
 i18next.on("languageChanged", (lng) => {

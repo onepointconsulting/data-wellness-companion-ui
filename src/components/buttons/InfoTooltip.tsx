@@ -19,18 +19,10 @@ const InfoToolTip = () => {
             <h4>{t("Info")}</h4>
           </div>
 
-          <section className="mx-3 mt-10">
+          <section className="mt-10 ">
             <p>
-              {t("The")}{" "}
-              <a
-                href="https://www.onepointltd.com/"
-                target="_blank"
-                className="default-link"
-              >
-                Onepoint
-              </a>{" "}
               {t(
-                "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data"
+                "The HopeLink Chat Companion™ is designed to be your helpful assistant, providing support and guidance to refugees"
               )}
               .
               <br />

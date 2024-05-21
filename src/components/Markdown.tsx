@@ -25,7 +25,7 @@ export default function MarkdownComponent({ content }: { content: string }) {
           />
         ),
         li: ({ ...props }) => <li className="mt-0" {...props} />,
-        p: ({ ...props }) => <p className="pb-1 font-sans" {...props} />,
+        p: ({ ...props }) => <p className="pb-1 pl-8 font-sans" {...props} />,
         a: ({ children, ...props }) => (
           <a
             className="pb-4 font-sans underline sm:pb-2"

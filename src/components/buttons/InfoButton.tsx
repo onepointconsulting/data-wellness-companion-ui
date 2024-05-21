@@ -1,6 +1,7 @@
 import { FaInfoCircle } from "react-icons/fa";
 import { showDialogue } from "../../lib/dialogFunctions.ts";
-import { INFO_DIALOGUE_ID } from "../dialogue/InfoDialogue.tsx";
+
+const INFO_DIALOGUE_ID = "info-dialogue";
 
 function showInfoDialogue() {
   showDialogue(INFO_DIALOGUE_ID);

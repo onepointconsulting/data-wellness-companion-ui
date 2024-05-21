@@ -1,9 +1,14 @@
 import { Socket } from "socket.io-client";
 import { WEBSOCKET_COMMAND } from "../model/websocketCommands.ts";
-import { getSession, getSessionHistory } from "./sessionFunctions.ts";
+import {
+  clearSession,
+  getSession,
+  getSessionHistory,
+} from "./sessionFunctions.ts";
 import i18next from "i18next";
+import { Message } from "../model/message.ts";
 
-const ONEPOINT_ID_PARAM = "onepoint_id";
+const ONEPOINT_ID_PARAM = "hope_link_id";
 
 function getSessionId() {
   const session = getSession();
@@ -17,6 +22,7 @@ export function sendStartSession(
 ) {
   const params = new URLSearchParams(window.location.search);
   const language = i18next?.language;
+  console.log("Check language:", language);
   if (getSessionHistory().length > 0 && !params.get(ONEPOINT_ID_PARAM)) {
     setDisplayRegistrationMessage(true);
   } else {
@@ -45,7 +51,22 @@ export function sendClarifyQuestion(
     socket,
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
-    question
+    question,
+    i18next?.language
+  );
+}
+
+export function restartSession(
+  socket: Socket<any, any> | null,
+  messages: Message[],
+  expectedInteviewSteps: number,
+  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void
+) {
+  clearSession(messages);
+  sendStartSession(
+    socket,
+    expectedInteviewSteps,
+    setDisplayRegistrationMessage
   );
 }
 

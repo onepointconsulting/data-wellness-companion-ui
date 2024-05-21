@@ -7,8 +7,11 @@ import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
 import Clarification from "./Clarification.tsx";
+import { useTranslation } from "react-i18next";
 
 export default function InteractionPanel() {
+  const { t } = useTranslation();
+
   const { currentMessage, messages, sending, expectedNodes, isLast } =
     useContext(AppContext);
   const message = messages[currentMessage];
@@ -31,7 +34,7 @@ export default function InteractionPanel() {
         )}
         {sending && displayReportGenerationMessage && (
           <div className="final-report-message">
-            Generating final report. This might take 2 to 3 minutes.
+            {t("Generating final report. This might take 2 to 3 minutes")}.
           </div>
         )}
         {isLast && <ChatInput />}

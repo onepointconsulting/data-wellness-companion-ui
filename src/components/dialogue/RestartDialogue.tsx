@@ -1,11 +1,11 @@
+import i18next from "i18next";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ImSwitch } from "react-icons/im";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
-import { clearSession } from "../../lib/sessionFunctions.ts";
-import { sendStartSession } from "../../lib/websocketFunctions.ts";
+import { restartSession } from "../../lib/websocketFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
 
 export const RESTART_DIALOGUE_ID = "restart-dialogue";
@@ -14,33 +14,41 @@ const MIN_STEPS = 4;
 
 const MAX_STEPS = 8;
 
-function onClose() {
-  onCloseDialogue(RESTART_DIALOGUE_ID);
-}
-
 export default function RestartDialogue() {
   const { socket } = useContext(ChatContext);
   const { t } = useTranslation();
-  const { expectedNodes, messages, setDisplayRegistrationMessage } =
-    useContext(AppContext);
+  const language = i18next?.language;
+
+  console.log("RestartDialogue", language);
+  const {
+    expectedNodes,
+    setRestartOpen,
+    messages,
+    setDisplayRegistrationMessage,
+  } = useContext(AppContext);
   const [expectedInteviewSteps, setExpectedInterviewSteps] =
     useState(expectedNodes);
 
+  function onClose() {
+    setRestartOpen(false);
+    onCloseDialogue(RESTART_DIALOGUE_ID);
+  }
+
   function onOk() {
-    clearSession(messages);
-    sendStartSession(
+    restartSession(
       socket.current,
+      messages,
       expectedInteviewSteps,
       setDisplayRegistrationMessage
     );
+    setRestartOpen(false);
     onClose();
   }
 
   return (
-    <dialog
-      data-model={true}
+    <div
       id={RESTART_DIALOGUE_ID}
-      className="companion-dialogue"
+      className={`absolute ${language === "fa" ? "-left-12" : "right-4"} companion-dialogue top-20`}
     >
       <div className="companion-dialogue-content">
         <h2>
@@ -76,6 +84,6 @@ export default function RestartDialogue() {
         okText={t("ok")}
         disabled={false}
       />
-    </dialog>
+    </div>
   );
 }

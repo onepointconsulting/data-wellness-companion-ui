@@ -3,6 +3,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import englishTranslation from "./Locales/en/translation.json";
 import farsiTranslation from "./Locales/fa/translation.json";
+import germanTranslation from "./Locales/de/translation.json";
 
 const resources = {
   en: {
@@ -10,6 +11,9 @@ const resources = {
   },
   fa: {
     translations: farsiTranslation,
+  },
+  de: {
+    translations: germanTranslation,
   },
 };
 

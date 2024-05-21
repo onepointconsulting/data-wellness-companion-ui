@@ -11,11 +11,11 @@
 }
 
 #root .header-container {
-  @apply flex flex-row justify-between container items-center pr-2 max-w-[1280px] mx-auto;
+  @apply grid grid-cols-2 place-content-center container items-center pr-2 max-w-[1280px] mx-auto;
 }
 
 #root .connection-status {
-  @apply text-white text-sm;
+  @apply text-sm text-white;
 }
 
 #root .container,
@@ -25,7 +25,7 @@
 }
 
 #root .question {
-  @apply text-xl md:text-2xl font-bold mt-4 flex flex-row justify-center px-4;
+  @apply flex flex-row justify-center px-4 mt-4 text-xl font-bold md:text-2xl;
 }
 
 #root .question svg,
@@ -34,11 +34,11 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 lg:pt-10 px-8 lg:px-8 xl:px-6 mb-4;
+  @apply grid grid-cols-1 gap-4 px-8 pt-8 mb-4 md:grid-cols-2 lg:pt-10 lg:px-8 xl:px-6;
 }
 
 #root .suggestion {
-  @apply flex flex-row px-4 py-2 text-lg md:text-xl cursor-pointer
+  @apply flex lg:flex-row px-4 py-2 text-lg md:text-xl cursor-pointer
     bg-[#f1f4f8] rounded-2xl hover:bg-[#c1d9f9] transition duration-200;
 }
 
@@ -47,11 +47,11 @@
 }
 
 #root .suggestion .suggestion-img {
-  @apply w-1/12 lg:w-1/6 cursor-pointer;
+  @apply  cursor-pointer w-[8rem];
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full;
+  @apply w-full px-2 no-underline;
 }
 
 #root .chat-container {
@@ -65,32 +65,31 @@
 }
 
 #root .chat-input textarea.chat-textarea {
-  @apply lg:mx-0 overflow-hidden resize-none w-full outline-none
-    flex items-center justify-center h-12 my-4;
+  @apply flex items-center justify-center w-full h-12 my-4 overflow-hidden outline-none resize-none lg:mx-0;
 }
 
 #root .chat-input button {
-  @apply w-8 h-8 cursor-pointer flex;
+  @apply flex w-8 h-8 cursor-pointer;
 }
 
 #root .question-answer {
-  @apply text-lg lg:text-xl py-5;
+  @apply py-5 text-lg lg:text-xl;
 }
 
 #root .final-report {
-  @apply text-lg lg:text-xl py-5 px-4;
+  @apply px-4 py-5 text-lg lg:text-xl;
 }
 
 #root .final-report h1 {
-  @apply text-black mb-4;
+  @apply mb-4 text-black;
 }
 
 #root .final-report li {
-  @apply mx-4 px-2;
+  @apply px-2 mx-4;
 }
 
 #root .final-report-download {
-  @apply flex flex-row items-center justify-center md:justify-end pb-8;
+  @apply flex flex-row items-center justify-center pb-8 md:justify-end;
 }
 
 #root .final-report-download svg {
@@ -116,7 +115,7 @@
 }
 
 .final-report-message {
-  @apply text-lg lg:text-xl w-full text-center;
+  @apply w-full my-10 text-lg text-center lg:text-xl;
 }
 
 #root .registration-alert-container {

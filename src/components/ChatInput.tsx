@@ -95,7 +95,7 @@ export default function ChatInput() {
               title={
                 enoughText(chatText)
                   ? "Send message"
-                  : "Please enter some text to send"
+                  : t("Please enter some text to send")
               }
             />
           </button>

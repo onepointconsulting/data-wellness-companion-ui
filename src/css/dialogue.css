@@ -1,11 +1,11 @@
 .companion-dialogue,
 .email-dialogue {
-  @apply rounded-2xl w-11/12 md:w-8/12 bg-white shadow-lg max-w-6xl outline-0;
+  @apply bg-white shadow-lg w-max rounded-2xl;
 }
 
 .companion-dialogue-content,
 .email-dialogue-content {
-  @apply px-6 py-6;
+  @apply p-3;
 }
 
 label[for="expectedInteviewSteps"] {
@@ -17,7 +17,7 @@ label[for="expectedInteviewSteps"] {
 }
 
 .companion-dialogue-config {
-  @apply flex flex-row align-middle mt-6 mb-3;
+  @apply flex flex-row mt-6 mb-3 align-middle;
 }
 
 .companion-dialogue-config input {
@@ -25,7 +25,7 @@ label[for="expectedInteviewSteps"] {
 }
 
 .companion-dialogue-buttons {
-  @apply flex flex-row justify-end gap-4 px-6 py-4;
+  @apply flex flex-row items-center justify-between gap-2 p-2;
 }
 
 .companion-dialogue-buttons button {
@@ -33,5 +33,5 @@ label[for="expectedInteviewSteps"] {
 }
 
 .email-dialogue-form {
-  @apply flex flex-col px-6 pb-8 w-full;
+  @apply flex flex-col w-full px-6 pb-8;
 }

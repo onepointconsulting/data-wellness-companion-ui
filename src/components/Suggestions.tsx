@@ -50,7 +50,7 @@ export default function Suggestions({ message }: { message: Message }) {
         return (
           <div
             key={`suggestion_${i}`}
-            className={`suggestion group items-center ${i === clicked ? "active" : ""}`}
+            className={`suggestion flex !flex-col lg:!flex-row group items-center ${i === clicked ? "active" : ""}`}
             onClick={(e) => {
               return handleSelectedSuggestion(
                 e,
@@ -60,7 +60,7 @@ export default function Suggestions({ message }: { message: Message }) {
             }}
           >
             {suggestion.img_src && (
-              <div className="suggestion-img">
+              <div className="hidden suggestion-img lg:block">
                 <a
                   href={suggestion.title}
                   onClick={(e) =>
@@ -75,7 +75,7 @@ export default function Suggestions({ message }: { message: Message }) {
                 </a>
               </div>
             )}
-            <div className="duration-200 suggestion-text group-hover:text-gray-200">
+            <div className="flex items-center gap-3 duration-200 suggestion-text group-hover:text-gray-200">
               <div>
                 {suggestion.title && (
                   <>
@@ -85,7 +85,7 @@ export default function Suggestions({ message }: { message: Message }) {
                 {suggestion.main_text}
               </div>
               {isLast && currentMessage > 0 && (
-                <div>
+                <div className="mt-[3px]">
                   <IoMdAddCircleOutline
                     onClick={(e) =>
                       handleSelectedSuggestion(

@@ -1,49 +1,65 @@
-import { ImSwitch } from "react-icons/im";
+import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FaRegHandPointRight } from "react-icons/fa";
-import { RESTART_DIALOGUE_ID } from "../dialogue/RestartDialogue.tsx";
-import { useContext, useEffect, useState } from "react";
+import { ImSwitch } from "react-icons/im";
 import { AppContext } from "../../context/AppContext.tsx";
-import { showDialogue } from "../../lib/dialogFunctions.ts";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../../@/components/ui/popover.tsx";
 
-function showStartDialogue() {
-  showDialogue(RESTART_DIALOGUE_ID);
+function RestartNotice() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="absolute top-8 right-4">
+      <div className="mt-4 bg-white cursor-auto z-50 flex flex-col border-0 shadow outline-0 rounded-2xl p-4 w-[10rem] md:w-[15rem]">
+        <div className="flex items-end gap-2">
+          <FaRegHandPointRight className="relative inline w-5 h-5 -top-1" />{" "}
+          {t("Click")}
+          <ImSwitch className="relative inline -top-1" />{" "}
+        </div>
+
+        <div className="flex items-end gap-2">
+          {t("to restart the application")}.
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function StartButton() {
-  const { connected, isFinalMessage } = useContext(AppContext);
-  const [open, setOpen] = useState(false);
+  const {
+    connected,
+    isFinalMessage,
+    setRestartPopOpen,
+    setRestartOpen,
+    restartOpen,
+    isRestartPopOpen,
+    setLanguageOpen,
+  } = useContext(AppContext);
 
   useEffect(() => {
-    setOpen(isFinalMessage);
+    isFinalMessage && setRestartPopOpen(isFinalMessage);
   }, [isFinalMessage]);
+
+  const handleRestartClick = () => {
+    if (!connected) {
+      alert(
+        "You are disconnected. Please connect to restart the Data Wellness Companion."
+      );
+    } else {
+      setRestartPopOpen(false);
+      setRestartOpen(!restartOpen);
+      setLanguageOpen(false);
+    }
+  };
 
   return (
     <>
       <ImSwitch
         className="restart-button"
         title="Restart"
-        onClick={
-          !connected
-            ? () =>
-                alert(
-                  "You are disconnected. Please connect to restart the Data Wwllness Companion.",
-                )
-            : showStartDialogue
-        }
+        onClick={handleRestartClick}
       />
-      <Popover defaultOpen={false} open={open}>
-        <PopoverTrigger></PopoverTrigger>
-        <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4">
-          <FaRegHandPointRight className="inline relative -top-1 w-5 h-5" />{" "}
-          Click <ImSwitch className="inline relative -top-1" /> to restart the
-          application.
-        </PopoverContent>
-      </Popover>
+
+      {isRestartPopOpen && isFinalMessage && <RestartNotice />}
     </>
   );
 }
