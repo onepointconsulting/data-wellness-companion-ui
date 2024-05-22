@@ -8,6 +8,7 @@ import OnepointInfo from "./OnepointInfo.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import { setSeenIntro } from "../../lib/sessionFunctions.ts";
 import { ImSwitch } from "react-icons/im";
+import { useTranslation } from "react-i18next";
 
 export const INTRO_DIALOGUE_ID = "intro-dialogue";
 
@@ -36,6 +37,7 @@ function IntroSection({
  * @constructor
  */
 export default function IntroDialogue() {
+  const { t } = useTranslation();
   return (
     <GenericDialogue
       dialogueId={INTRO_DIALOGUE_ID}
@@ -56,16 +58,14 @@ export default function IntroDialogue() {
       <>
         <h2>
           <SiWelcometothejungle className="inline relative -top-0.5 fill-[#0084d7]" />{" "}
-          Welcome
+          {t("Welcome")}
         </h2>
         <section className="mx-3 mt-10">
           <OnepointInfo />
           <br />
-          <IntroSection content={`How can you use the ${toolName}?`}>
+          <IntroSection content={`${t("How can you use the", {'toolName': toolName})}`}>
             <p>
-              The {toolName} will ask you an initial question which you can
-              answer by either selecting one of the pre-defined answers or by
-              typing your own answer.
+              {t("explanation 1", {'toolName': toolName})}
             </p>
             <p>
               Here are some pre-defined answers on which you can click to select
