@@ -10,6 +10,7 @@ import {
   PopoverTrigger,
 } from "../../../@/components/ui/popover.tsx";
 import {useTranslation} from "react-i18next";
+import {toast} from "../../../@/components/ui/use-toast.ts";
 
 export default function StartButton() {
   const { t } = useTranslation();
@@ -32,10 +33,12 @@ export default function StartButton() {
         title="Restart"
         onClick={
           !connected
-            ? () =>
-                alert(
-                  t("You are disconnected. The Data Wwllness Companion needs to be connected to restart."),
-                )
+            ? () => {
+              toast({
+                title: t("You are disconnected."),
+                description: t("You are disconnected. The Data Wellness Companion needs to be connected to restart."),
+              });
+            }
             : showStartDialogue
         }
       />

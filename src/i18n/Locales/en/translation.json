@@ -27,12 +27,14 @@
   "Email sent. Thank you!": "Email sent. Thank you!",
   "The": "The",
   "The Onepoint Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data": "The Onepoint Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data",
+  "The Data Wellness Companion needs to be connected to change the language." : "The Data Wellness Companion needs to be connected to change the language.",
   "This application is powered by": "This application is powered by",
   "This companion can make mistakes. Consider checking important information": "This companion can make mistakes. Consider checking important information",
   "to restart the application": "to restart the application",
   "Type your message here and press ENTER": "Type your message here and press ENTER",
   "Usage instructions": "Usage instructions",
-  "You are disconnected. The Data Wwllness Companion needs to be connected to restart.": "You are disconnected. The Data Wwllness Companion needs to be connected to restart.",
+  "You are disconnected." : "You are disconnected.",
+  "You are disconnected. The Data Wellness Companion needs to be connected to restart.": "You are disconnected. The Data Wellness Companion needs to be connected to restart.",
   "Your name:": "Your name:",
   "Would you like to restart the companion?": "Would you like to restart the companion?"
 }

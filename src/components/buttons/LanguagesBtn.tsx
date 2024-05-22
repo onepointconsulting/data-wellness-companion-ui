@@ -1,27 +1,36 @@
 import "i18next";
-import { useContext, useState } from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { MdLanguage } from "react-icons/md";
 import restartCompanion from "../../lib/restartFunctions.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
+import {toast} from "../../../@/components/ui/use-toast.ts";
 
-function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: any }) {
+function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: (b: boolean) => void }) {
   const { i18n, t } = useTranslation();
+  const { connected } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const { messages, setDisplayRegistrationMessage, expectedNodes } =
     useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
-    const language = e.target.value;
-    i18n.changeLanguage(language);
-    setToggleLanguage(false);
-    restartCompanion(
-      messages,
-      socket,
-      expectedNodes,
-      setDisplayRegistrationMessage,
-    );
+    if(!connected) {
+      toast({
+        title: t("You are disconnected."),
+        description: t("The Data Wellness Companion needs to be connected to change the language."),
+      });
+    } else {
+      const language = e.target.value;
+      i18n.changeLanguage(language);
+      setToggleLanguage(false);
+      restartCompanion(
+        messages,
+        socket,
+        expectedNodes,
+        setDisplayRegistrationMessage,
+      );
+    }
   };
 
   return (
@@ -50,6 +59,20 @@ function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: any }) {
 export default function LanguagesBtn() {
   const [toggleLanguage, setToggleLanguage] = useState<boolean>(false);
   const { t } = useTranslation();
+
+  const escFunction = useCallback((event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setToggleLanguage(false)
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
 
   return (
     <>

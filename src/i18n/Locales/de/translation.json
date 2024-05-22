@@ -27,12 +27,14 @@
   "Email sent. Thank you!" : "E-Mail gesendet. Danke!",
   "The": "Der",
   "The Onepoint Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data": "Der Onepoint Daten-Wellness-Begleiter™ ist ein Assistent, der Ihnen Fragen stellt, um Ihnen zu helfen, über Ihre Daten nachzudenken",
+  "The Data Wellness Companion needs to be connected to change the language." : "Der Daten-Wellness-Begleiter muss verbunden sein, um die Sprache zu ändern.",
   "This application is powered by": "Diese Anwendung wird betrieben von",
   "This companion can make mistakes. Consider checking important information": "Dieser Begleiter kann Fehler machen. Überprüfen Sie wichtige Informationen",
   "to restart the application": "um die Anwendung neu zu starten.",
   "Type your message here and press ENTER": "Geben Sie Ihre Nachricht hier ein und drücken Sie ENTER",
+  "You are disconnected." : "Keine Verbindung.",
   "Usage instructions": "Verwendungshinweise",
-  "You are disconnected. The Data Wwllness Companion needs to be connected to restart.": "Keine Verbindung. Der Daten-Wellness-Begleiter muss verbunden sein, um neu zu starten.",
+  "You are disconnected. The Data Wellness Companion needs to be connected to restart.": "Keine Verbindung. Der Daten-Wellness-Begleiter muss verbunden sein, um neu zu starten.",
   "Your name:": "Ihr Name:",
   "Would you like to restart the companion?": "Möchten Sie den Begleiter neu starten?"
 }

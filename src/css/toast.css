@@ -101,6 +101,8 @@ button {
   justify-content: center;
   border-radius: 4px;
   font-weight: 500;
+  top: 0;
+  right: 0
 }
 .Button.small {
   font-size: 12px;
