@@ -41,11 +41,13 @@ export function sendClarifyQuestion(
   socket: Socket<any, any> | null,
   question: string,
 ) {
+  const language = i18next?.language;
   safeEmit(
     socket,
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
     question,
+    language
   );
 }
 

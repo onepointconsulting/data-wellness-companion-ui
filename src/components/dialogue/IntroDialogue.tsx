@@ -68,29 +68,19 @@ export default function IntroDialogue() {
               {t("explanation 1", {'toolName': toolName})}
             </p>
             <p>
-              Here are some pre-defined answers on which you can click to select
-              them:
+              {t("explanation 2")}
               <img
-                src={"screenshots/pre-defined-responses.png"}
+                src={"screenshots/" + t("predefined-image")}
                 alt="Pre-defined answers"
                 className="mx-auto mt-4 mb-5"
               />
-              After clicking on a pre-defined answer, the text will appear in
-              the input field. In order to submit the answer, you will need to
-              click on the "Submit"{" "}
-              <img
-                src="send_button.svg"
-                alt="Submit"
-                className="h-8 w-8 inline"
-              />{" "}
-              button.
+              <span dangerouslySetInnerHTML={
+                {__html: t('explanation 3 submit', {interpolation: {escapeValue: false}})}
+              } />
             </p>
             <br />
             <p>
-              The {toolName} will then ask you a series of follow-up questions.
-              During this process you will see the progress being displayed on
-              the progress indicator with which you can navigate to previous
-              steps.
+              {t("explanation 4 steps", {'toolName': toolName})}
             </p>
             <img
               src={"screenshots/progress-indicator.png"}
@@ -98,24 +88,17 @@ export default function IntroDialogue() {
               className="mx-auto mt-4 mb-5 w-full max-w-3xl"
             />
             <p>
-              If you are not sure about the meaning of any question you can
-              click on the light bulb{" "}
-              <FaRegLightbulb className="inline fill-[#0084d7] w-6 h-6" /> to
-              get an explanation.
+              {t("explanation 5 lightbulb", {'toolName': toolName})}{" "}<FaRegLightbulb className="inline fill-[#0084d7] w-6 h-6" />
             </p>
             <br />
             <p>
-              If you want to extend the session, you can click on the extension
-              icon <VscExtensions className="inline fill-[#0084d7] w-6 h-6" />{" "}
-              to extend the session by one step. Please note that the session
-              cannot be extended beyond 14 steps.
+              {t("explanation 6 session")}{" "}
+              <VscExtensions className="inline fill-[#0084d7] w-6 h-6" />
             </p>
             <br />
             <p>
-              When you have arrived at the end of your session, you will see a
-              report with the suggested course of action. At this stage you can
-              restart the session using the start icon{" "}
-              <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />.
+              {t("explanation 7 end")}{" "}
+              <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />
             </p>
           </IntroSection>
         </section>

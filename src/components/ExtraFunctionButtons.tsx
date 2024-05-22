@@ -62,7 +62,7 @@ export default function ExtraFunctionButtons() {
     if (messages.length > 0) {
       const activeMessage = messages[currentMessage];
       if (activeMessage.clarification === undefined) {
-        activeMessage.clarification = token;
+        activeMessage.clarification = token ?? "";
       } else {
         activeMessage.clarification += token;
       }
@@ -82,7 +82,7 @@ export default function ExtraFunctionButtons() {
         onClarificationToken,
       );
     };
-  }, [currentMessage, messages]);
+  }, [currentMessage]);
 
   useEffect(() => {
     setClarificationClicked(false);
