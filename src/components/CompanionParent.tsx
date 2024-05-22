@@ -65,7 +65,7 @@ export default function CompanionParent() {
             <div className="flex flex-row items-start cursor-pointer lg:items-center">
               <ConnectionStatus />
               {/* Language drop down */}
-              <div className="relative">
+              <div>
                 {" "}
                 <LanguagesBtn />
               </div>{" "}

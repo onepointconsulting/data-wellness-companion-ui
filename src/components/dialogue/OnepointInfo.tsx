@@ -1,4 +1,7 @@
+import {useTranslation} from "react-i18next";
+
 export default function OnepointInfo() {
+  const { t } = useTranslation();
   return (
     <p>
       The{" "}
@@ -7,13 +10,11 @@ export default function OnepointInfo() {
         target="_blank"
         className="default-link"
       >
-        Onepoint
+        {t("Company name")}
       </a>{" "}
-      Data Wellness Companion™ is an assistant which will ask you questions to
-      help you reflect on your data.
+      {t("Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data.")}
       <br />
-      It will go through a series of questions and then will provide you with a
-      report with recommendations at the end.
+      {t("It will go through a series of questions and then will provide you with a report with recommendations at the end.")}
     </p>
   );
 }

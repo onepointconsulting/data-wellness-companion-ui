@@ -31,7 +31,7 @@ const InfoToolTip = () => {
                 target="_blank"
                 className="default-link"
               >
-                Onepoint
+                {t("Company name")}
               </a>{" "}
               {t(
                 "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data",
@@ -39,7 +39,7 @@ const InfoToolTip = () => {
               .
               <br />
               {t(
-                "It will go through a series of questions and then will provide you with a report at the end",
+                "It will go through a series of questions and then will provide you with a report with recommendations at the end.",
               )}
             </p>
             <br />

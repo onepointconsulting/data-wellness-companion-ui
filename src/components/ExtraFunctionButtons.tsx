@@ -12,6 +12,7 @@ import {
 } from "../lib/websocketFunctions.ts";
 import MarkdownComponent from "./Markdown.tsx";
 import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
+import {useTranslation} from "react-i18next";
 
 function StatefulIcon({
   show,
@@ -41,6 +42,7 @@ function StatefulIcon({
  * @constructor
  */
 export default function ExtraFunctionButtons() {
+  const { t } = useTranslation();
   const [clarificationClicked, setClarificationClicked] = useState(false);
   const {
     currentMessage,
@@ -121,20 +123,20 @@ export default function ExtraFunctionButtons() {
       <StatefulIcon
         show={showShorten}
         onClick={onShorten}
-        title="Shorten the current session by one step"
+        title={t("Shorten the current session by one step")}
       >
         <IoContractOutline />
       </StatefulIcon>
       <StatefulIcon
         show={showExtend}
         onClick={onExtend}
-        title="Add one more step to current session"
+        title={t("Add one more step to current session")}
       >
         <VscExtensions />
       </StatefulIcon>
       {updatingExpectedNodes && <FaHourglassHalf />}
       {!message.clarification && (
-        <a href="#" onClick={onClarify} title="Explain the current question">
+        <a href="#" onClick={onClarify} title={t("Explain the current question")}>
           <FaRegLightbulb />
         </a>
       )}
