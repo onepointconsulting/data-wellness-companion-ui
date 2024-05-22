@@ -9,17 +9,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../../../@/components/ui/popover.tsx";
-
-function showStartDialogue() {
-  showDialogue(RESTART_DIALOGUE_ID);
-}
+import {useTranslation} from "react-i18next";
 
 export default function StartButton() {
+  const { t } = useTranslation();
   const { connected, isFinalMessage } = useContext(AppContext);
-  const [open, setOpen] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  function showStartDialogue() {
+    showDialogue(RESTART_DIALOGUE_ID);
+    setPopoverOpen(false);
+  }
 
   useEffect(() => {
-    setOpen(isFinalMessage);
+    setPopoverOpen(isFinalMessage);
   }, [isFinalMessage]);
 
   return (
@@ -31,17 +34,16 @@ export default function StartButton() {
           !connected
             ? () =>
                 alert(
-                  "You are disconnected. Please connect to restart the Data Wwllness Companion.",
+                  t("You are disconnected. The Data Wwllness Companion needs to be connected to restart."),
                 )
             : showStartDialogue
         }
       />
-      <Popover defaultOpen={false} open={open}>
+      <Popover defaultOpen={false} open={popoverOpen}>
         <PopoverTrigger></PopoverTrigger>
         <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4">
           <FaRegHandPointRight className="inline relative -top-1 w-5 h-5" />{" "}
-          Click <ImSwitch className="inline relative -top-1" /> to restart the
-          application.
+          {t("Click")} <ImSwitch className="inline relative -top-1" onClick={() => setPopoverOpen(false)}/> {t("to restart the application")}.
         </PopoverContent>
       </Popover>
     </>

@@ -8,8 +8,7 @@ import { ChatContext } from "../context/ChatContext.tsx";
 import { getSession } from "../lib/sessionFunctions.ts";
 import { showDialogue } from "../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
-
-const MAIL_TEXT = "Send report as email";
+import {useTranslation} from "react-i18next";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -22,26 +21,30 @@ function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
  * @constructor
  */
 export default function FinalReport({ message }: { message: Message }) {
+  const { t } = useTranslation();
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}`;
+  const mailText = t("Send report as email");
+  const dowwnloadText = t("Download PDF");
+
   return (
     <div className="final-report">
       {sessionId && (
         <div className="final-report-download">
           <div className="final-report-email">
-            <a href="#" onClick={showEmailDialogue} title={MAIL_TEXT}>
+            <a href="#" onClick={showEmailDialogue} title={mailText}>
               <MdOutlineAlternateEmail />
             </a>
             <a href="#" onClick={showEmailDialogue}>
-              {MAIL_TEXT}
+              {mailText}
             </a>
           </div>
           <div className="final-report-pdf">
-            <a href={reportPdf} title="Download PDF">
+            <a href={reportPdf} title={dowwnloadText}>
               <BsFileEarmarkPdf />
             </a>
-            <a href={reportPdf}>Download PDF</a>
+            <a href={reportPdf}>{dowwnloadText}</a>
           </div>
         </div>
       )}

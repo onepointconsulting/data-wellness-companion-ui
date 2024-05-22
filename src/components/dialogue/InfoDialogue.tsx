@@ -36,7 +36,7 @@ export default function InfoDialogue() {
           onClick={() => onCloseDialogue(INFO_DIALOGUE_ID)}
           className="button-cancel"
         >
-          Close
+          {t("Close")}
         </button>
       }
     >
@@ -50,7 +50,7 @@ export default function InfoDialogue() {
         </InfoSection>
         <InfoSection>
           <a className="default-link" href="#" onClick={showIntroDialogue}>
-            Usage instructions
+            {t("Usage instructions")}
           </a>
         </InfoSection>
       </>
