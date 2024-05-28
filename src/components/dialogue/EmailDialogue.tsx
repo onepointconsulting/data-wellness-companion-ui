@@ -7,6 +7,7 @@ import Alert from "../form/Alert.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
 import { getSession } from "../../lib/sessionFunctions.ts";
 import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export const EMAIL_DIALOGUE_ID = "email-dialogue";
 
@@ -28,7 +29,7 @@ export default function EmailDialogue() {
 
   const sessionId = getSession()?.id;
   const emailUrl = useMemo(
-    () => `${reportUrl}/email/${sessionId}`,
+    () => `${reportUrl}/email/${sessionId}?language=${i18next?.language}`,
     [reportUrl, sessionId],
   );
 

@@ -4,7 +4,6 @@ export default function OnepointInfo() {
   const { t } = useTranslation();
   return (
     <p>
-      The{" "}
       <a
         href="https://www.onepointltd.com/"
         target="_blank"

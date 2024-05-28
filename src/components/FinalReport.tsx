@@ -9,6 +9,7 @@ import { getSession } from "../lib/sessionFunctions.ts";
 import { showDialogue } from "../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
 import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -24,7 +25,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
-  const reportPdf = `${reportUrl}/pdf/${sessionId}`;
+  const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
   const mailText = t("Send report as email");
   const dowwnloadText = t("Download PDF");
 

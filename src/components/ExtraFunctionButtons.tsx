@@ -135,7 +135,7 @@ export default function ExtraFunctionButtons() {
         <VscExtensions />
       </StatefulIcon>
       {updatingExpectedNodes && <FaHourglassHalf />}
-      {!message.clarification && (
+      {!message.clarification && isLast && (
         <a href="#" onClick={onClarify} title={t("Explain the current question")}>
           <FaRegLightbulb />
         </a>
