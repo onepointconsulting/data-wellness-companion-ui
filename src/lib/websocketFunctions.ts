@@ -5,6 +5,8 @@ import i18next from "i18next";
 
 const ONEPOINT_ID_PARAM = "onepoint_id";
 
+const ID_PARAM = "id";
+
 function getSessionId() {
   const session = getSession();
   return session ? session.id : "";
@@ -17,7 +19,7 @@ export function sendStartSession(
 ) {
   const params = new URLSearchParams(window.location.search);
   const language = i18next?.language;
-  if (getSessionHistory().length > 0 && !params.get(ONEPOINT_ID_PARAM)) {
+  if (getSessionHistory().length > 0 && (!params.get(ONEPOINT_ID_PARAM) && !params.get(ID_PARAM))) {
     setDisplayRegistrationMessage(true);
   } else {
     safeEmit(
