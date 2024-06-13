@@ -19,7 +19,11 @@ export function sendStartSession(
 ) {
   const params = new URLSearchParams(window.location.search);
   const language = i18next?.language;
-  if (getSessionHistory().length > 0 && (!params.get(ONEPOINT_ID_PARAM) && !params.get(ID_PARAM))) {
+  if (
+    getSessionHistory().length > 0 &&
+    !params.get(ONEPOINT_ID_PARAM) &&
+    !params.get(ID_PARAM)
+  ) {
     setDisplayRegistrationMessage(true);
   } else {
     safeEmit(
@@ -49,7 +53,7 @@ export function sendClarifyQuestion(
     WEBSOCKET_COMMAND.CLARIFY_QUESTION,
     getSessionId(),
     question,
-    language
+    language,
   );
 }
 

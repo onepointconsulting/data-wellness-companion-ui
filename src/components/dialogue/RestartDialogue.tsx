@@ -1,8 +1,8 @@
-import {useContext, useState} from "react";
-import {useTranslation} from "react-i18next";
-import {ImSwitch} from "react-icons/im";
-import {AppContext} from "../../context/AppContext.tsx";
-import {ChatContext} from "../../context/ChatContext.tsx";
+import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ImSwitch } from "react-icons/im";
+import { AppContext } from "../../context/AppContext.tsx";
+import { ChatContext } from "../../context/ChatContext.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
 import restartCompanion from "../../lib/restartFunctions.ts";
@@ -17,7 +17,13 @@ function onClose() {
   onCloseDialogue(RESTART_DIALOGUE_ID);
 }
 
-function Slider({value, onChange}: { value: number, onChange: (e: any) => void }) {
+function Slider({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (e: any) => void;
+}) {
   return (
     <div className="w-full">
       <div className="pl-2 flex flex-1">
@@ -34,8 +40,8 @@ function Slider({value, onChange}: { value: number, onChange: (e: any) => void }
         />
       </div>
       <datalist id="expectedInterviewStepsValues">
-        {Array.from({length: MAX_STEPS - MIN_STEPS + 1}, (_, i) => (
-          <option key={i} value={i + MIN_STEPS} label={`${i + MIN_STEPS}`}/>
+        {Array.from({ length: MAX_STEPS - MIN_STEPS + 1 }, (_, i) => (
+          <option key={i} value={i + MIN_STEPS} label={`${i + MIN_STEPS}`} />
         ))}
       </datalist>
     </div>
@@ -43,9 +49,9 @@ function Slider({value, onChange}: { value: number, onChange: (e: any) => void }
 }
 
 export default function RestartDialogue() {
-  const {socket} = useContext(ChatContext);
-  const {t} = useTranslation();
-  const {expectedNodes, messages, setDisplayRegistrationMessage} =
+  const { socket } = useContext(ChatContext);
+  const { t } = useTranslation();
+  const { expectedNodes, messages, setDisplayRegistrationMessage } =
     useContext(AppContext);
   const [expectedInterviewSteps, setExpectedInterviewSteps] =
     useState(expectedNodes);
@@ -68,7 +74,7 @@ export default function RestartDialogue() {
     >
       <div className="companion-dialogue-content">
         <h2>
-          <ImSwitch className="inline relative -top-1 fill-[#0084d7]"/>{" "}
+          <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />{" "}
           {t("Restart")}
         </h2>
         <section className="mx-3 mt-10">
@@ -77,8 +83,12 @@ export default function RestartDialogue() {
             <label htmlFor="expectedInterviewSteps" className="text-nowrap">
               {t("Interview Steps")}:{" "}
             </label>
-            <Slider value={expectedInterviewSteps}
-                    onChange={(e) => setExpectedInterviewSteps(parseInt(e.target.value))}/>
+            <Slider
+              value={expectedInterviewSteps}
+              onChange={(e) =>
+                setExpectedInterviewSteps(parseInt(e.target.value))
+              }
+            />
           </div>
         </section>
       </div>

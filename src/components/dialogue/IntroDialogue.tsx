@@ -63,10 +63,10 @@ export default function IntroDialogue() {
         <section className="mx-3 mt-10">
           <OnepointInfo />
           <br />
-          <IntroSection content={`${t("How can you use the", {'toolName': toolName})}`}>
-            <p>
-              {t("explanation 1", {'toolName': toolName})}
-            </p>
+          <IntroSection
+            content={`${t("How can you use the", { toolName: toolName })}`}
+          >
+            <p>{t("explanation 1", { toolName: toolName })}</p>
             <p>
               {t("explanation 2")}
               <img
@@ -74,21 +74,24 @@ export default function IntroDialogue() {
                 alt="Pre-defined answers"
                 className="mx-auto mt-4 mb-5"
               />
-              <span dangerouslySetInnerHTML={
-                {__html: t('explanation 3 submit', {interpolation: {escapeValue: false}})}
-              } />
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: t("explanation 3 submit", {
+                    interpolation: { escapeValue: false },
+                  }),
+                }}
+              />
             </p>
             <br />
-            <p>
-              {t("explanation 4 steps", {'toolName': toolName})}
-            </p>
+            <p>{t("explanation 4 steps", { toolName: toolName })}</p>
             <img
               src={"screenshots/progress-indicator.png"}
               alt="Progress indicator"
               className="mx-auto mt-4 mb-5 w-full max-w-3xl"
             />
             <p>
-              {t("explanation 5 lightbulb", {'toolName': toolName})}{" "}<FaRegLightbulb className="inline fill-[#0084d7] w-6 h-6" />
+              {t("explanation 5 lightbulb", { toolName: toolName })}{" "}
+              <FaRegLightbulb className="inline fill-[#0084d7] w-6 h-6" />
             </p>
             <br />
             <p>

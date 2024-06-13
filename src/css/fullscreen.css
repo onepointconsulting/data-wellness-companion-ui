@@ -1,0 +1,4 @@
+/* Styles when the component is in full screen mode */
+.fullscreen-component:fullscreen {
+  background-color: white;
+}

@@ -6,7 +6,7 @@ import Spinner from "../Spinner.tsx";
 import Alert from "../form/Alert.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
 import { getSession } from "../../lib/sessionFunctions.ts";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 export const EMAIL_DIALOGUE_ID = "email-dialogue";
@@ -65,7 +65,9 @@ export default function EmailDialogue() {
   return (
     <dialog data-model={true} id={EMAIL_DIALOGUE_ID} className="email-dialogue">
       <div className="email-dialogue-content">
-        {t("Please enter your name and email address so we can send you the report.")}
+        {t(
+          "Please enter your name and email address so we can send you the report.",
+        )}
       </div>
       <div className="email-dialogue-form">
         <div className="grid w-full max-w-sm items-center gap-1.5">

@@ -1,13 +1,17 @@
 import "i18next";
-import {useCallback, useContext, useEffect, useState} from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdLanguage } from "react-icons/md";
 import restartCompanion from "../../lib/restartFunctions.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
-import {toast} from "../../../@/components/ui/use-toast.ts";
+import { toast } from "../../../@/components/ui/use-toast.ts";
 
-function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: (b: boolean) => void }) {
+function LanguageDropDown({
+  setToggleLanguage,
+}: {
+  setToggleLanguage: (b: boolean) => void;
+}) {
   const { i18n, t } = useTranslation();
   const { connected } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
@@ -15,10 +19,12 @@ function LanguageDropDown({ setToggleLanguage }: { setToggleLanguage: (b: boolea
     useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
-    if(!connected) {
+    if (!connected) {
       toast({
         title: t("You are disconnected."),
-        description: t("The Data Wellness Companion needs to be connected to change the language."),
+        description: t(
+          "The Data Wellness Companion needs to be connected to change the language.",
+        ),
       });
     } else {
       const language = e.target.value;
@@ -62,7 +68,7 @@ export default function LanguagesBtn() {
 
   const escFunction = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      setToggleLanguage(false)
+      setToggleLanguage(false);
     }
   }, []);
 

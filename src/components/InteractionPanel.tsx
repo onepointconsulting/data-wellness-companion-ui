@@ -7,7 +7,7 @@ import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
 import ExtraFunctionButtons from "./ExtraFunctionButtons.tsx";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function InteractionPanel() {
   const [t] = useTranslation();

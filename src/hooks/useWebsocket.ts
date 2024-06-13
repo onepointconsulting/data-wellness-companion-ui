@@ -16,18 +16,19 @@ interface ServerMessage {
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
     return {
-    question: message.question,
-    answer: message.answer,
-    final_report: message.final_report,
-    clarification: message.clarification ?? "",
-    suggestions: message.suggestions.map((suggestion: any) => ({
-      id: suggestion.id,
-      img_alt: suggestion.img_alt,
-      img_src: suggestion.img_src,
-      main_text: suggestion.main_text,
-      title: suggestion.title,
-    })),
-  }});
+      question: message.question,
+      answer: message.answer,
+      final_report: message.final_report,
+      clarification: message.clarification ?? "",
+      suggestions: message.suggestions.map((suggestion: any) => ({
+        id: suggestion.id,
+        img_alt: suggestion.img_alt,
+        img_src: suggestion.img_src,
+        main_text: suggestion.main_text,
+        title: suggestion.title,
+      })),
+    };
+  });
 }
 
 function extractInterviewSteps(

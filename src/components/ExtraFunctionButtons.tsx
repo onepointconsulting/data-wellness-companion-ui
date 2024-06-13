@@ -12,7 +12,7 @@ import {
 } from "../lib/websocketFunctions.ts";
 import MarkdownComponent from "./Markdown.tsx";
 import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function StatefulIcon({
   show,
@@ -136,7 +136,11 @@ export default function ExtraFunctionButtons() {
       </StatefulIcon>
       {updatingExpectedNodes && <FaHourglassHalf />}
       {!message.clarification && isLast && (
-        <a href="#" onClick={onClarify} title={t("Explain the current question")}>
+        <a
+          href="#"
+          onClick={onClarify}
+          title={t("Explain the current question")}
+        >
           <FaRegLightbulb />
         </a>
       )}
