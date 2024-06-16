@@ -80,10 +80,7 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      <OntologyGraph
-        ontology={ontology}
-        ontologyOpen={ontologyOpen}
-      />
+      <OntologyGraph ontology={ontology} ontologyOpen={ontologyOpen} />
       {sessionId && (
         <div className="final-report-download">
           <ReportLink

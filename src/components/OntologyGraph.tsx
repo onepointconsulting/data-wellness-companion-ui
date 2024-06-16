@@ -34,7 +34,17 @@ function extractNodes(ontology: Ontology): Node[] {
     ...new Set(relationships.flatMap((r) => [r["source"], r["target"]])),
   ].map((node: string, index: number) => {
     const centrality = betweenness_centrality[node];
-    const color = centrality > 0 ? {color: '#ff0000', font: { color: '#ffffff' }, opacity: 1 - centrality} : {};
+    const color =
+      centrality > 0
+        ? {
+            color: "#ff0000",
+            font: { color: "#ffffff" },
+            opacity: 1 - centrality,
+          }
+        : {
+            color: "#0084d7",
+            font: { color: "#ffffff" },
+          };
     return { id: index, label: node, ...color };
   });
 }
@@ -91,7 +101,12 @@ export default function OntologyGraph({
     };
 
     // Define options
-    const options = {};
+    const options = {
+      nodes: { shape: "box" },
+      physics: {
+        enabled: true,
+      },
+    };
 
     // Create a network
     const container = networkRef.current;
@@ -104,6 +119,7 @@ export default function OntologyGraph({
         scale: 1.0, // Set the initial zoom factor to 0.5 (50% zoom)
         animation: true, // Disable animation for initial zoom
       });
+      network.setOptions({...options, physics: {enabled: false}})
     }, 1000);
   }, [ontology]);
 
