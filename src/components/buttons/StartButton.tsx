@@ -11,6 +11,7 @@ import {
 } from "../../../@/components/ui/popover.tsx";
 import { useTranslation } from "react-i18next";
 import { toast } from "../../../@/components/ui/use-toast.ts";
+import { IoIosClose } from "react-icons/io";
 
 export default function StartButton() {
   const { t } = useTranslation();
@@ -25,6 +26,8 @@ export default function StartButton() {
   useEffect(() => {
     setPopoverOpen(isFinalMessage);
   }, [isFinalMessage]);
+
+  const closePopover = () => setPopoverOpen(false)
 
   return (
     <>
@@ -46,14 +49,15 @@ export default function StartButton() {
       />
       <Popover defaultOpen={false} open={popoverOpen}>
         <PopoverTrigger></PopoverTrigger>
-        <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4">
+        <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4 relative">
           <FaRegHandPointRight className="inline relative -top-1 w-5 h-5" />{" "}
           {t("Click")}{" "}
           <ImSwitch
             className="inline relative -top-1"
-            onClick={() => setPopoverOpen(false)}
+            onClick={closePopover}
           />{" "}
           {t("to restart the application")}.
+          <IoIosClose className="absolute top-2 right-2 h-10 w-8 cursor-pointer" onClick={closePopover}/>
         </PopoverContent>
       </Popover>
     </>
