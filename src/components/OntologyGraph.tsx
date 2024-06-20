@@ -5,12 +5,11 @@ import {enterFullscreen} from "../lib/fullscreen.ts";
 import {MdFullscreen} from "react-icons/md";
 import {useTranslation} from "react-i18next";
 import {Input} from "./form/Input.tsx";
-import { IoIosSearch } from "react-icons/io";
+import {IoIosSearch} from "react-icons/io";
 
 export type Ontology = {
   relationships: Relationship[];
   betweenness_centrality: { [key: string]: number };
-  // degree_centrality: { [key: string]: number };
 };
 
 export type Relationship = {
@@ -31,23 +30,23 @@ type Edge = {
   label: string;
 };
 
-// function softmax(arr: { [key: string]: number }): number[] {
-//   // Step 1: Compute the exponential of each element
-//   const expDict = Object.entries(arr).map(x => ({
-//     [x[0]]: Math.exp(x[1])
-//   }));
-//
-//   // Step 2: Compute the sum of the exponentials
-//   const sumExp = expDict.reduce((a, b) => a + b[1], 0);
-//
-//   // Step 3: Normalize the exponentials
-//   const softDict = expDict.map(x => ({[x[0]]: x[1] / sumExp}));
-// }
+function softmax(arr: { [key: string]: number }): { [key: string]: number } {
+  // Step 1: Compute the exponential of each element
+  const expDict =
+    Object.entries(arr).map(x => ({key: x[0], val: x[1] === 0 ? 0 : Math.exp(x[1])}));
+
+  // Step 2: Compute the sum of the exponentials
+  const sumExp = expDict.reduce((a, b) => a + b.val, 0);
+
+  // Step 3: Normalize the exponentials
+  return expDict.map(x => ({[x.key]: x.val / sumExp}))
+    .reduce((a, b) => ({...a, ...b}), {})
+}
 
 function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
   const lowerCaseNodeSearch = nodeSearch.toLowerCase();
-  const {relationships, betweenness_centrality} = ontology;
-  // const softmaxedCentrality = softmax(betweenness_centrality);
+  const {relationships, betweenness_centrality,} = ontology;
+  const softmaxedCentrality = softmax(betweenness_centrality);
   const filter = nodeSearch.length > 2 ? (rel: Relationship) => {
     return rel.source.toLowerCase().includes(lowerCaseNodeSearch) || rel.target.toLowerCase().includes(lowerCaseNodeSearch)
   } : () => true;
@@ -56,11 +55,14 @@ function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
   ]
     .map((node: string, index: number) => {
       const centrality = betweenness_centrality[node];
+      const softmaxValue = softmaxedCentrality[node];
+      const redChannel = Math.min(Math.round(softmaxValue * 255) + 150, 255);
+      console.log('redChannel', node, redChannel)
       console.log('centrality', centrality)
       const color =
         centrality > 0
           ? {
-            color: `rgb(255, 132, 215)`,
+            color: `rgb(${redChannel}, 0, 0)`,
             font: {color: "#ffffff"},
           }
           : {
@@ -163,7 +165,7 @@ export default function OntologyGraph({
         <div className="flex flex-row relative">
           <IoIosSearch className="h-8 w-8 absolute left-[6px] top-[5px]" title={t("Search")}/>
           <Input type="search" value={nodeSearch} onChange={(e) => setNodeSearch(e.target.value)}
-               className="w-4/5 md:!w-[250px] lg:!w-[350px] pl-10" placeholder={t("Search")}></Input>
+                 className="w-4/5 md:!w-[250px] lg:!w-[350px] pl-10" placeholder={t("Search")}></Input>
         </div>
         <MdFullscreen
           onClick={handleEnterFullscreen}
