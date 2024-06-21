@@ -1,5 +1,5 @@
 .node-container {
-  @apply flex flex-row items-center justify-center my-12 flex-wrap gap-4 md:gap-8;
+  @apply flex flex-col items-center justify-start mt-4 ml-5 flex-wrap gap-4 md:gap-8;
 }
 
 .node {
@@ -52,8 +52,8 @@
 
 @media (min-width: 1024px) {
   .node {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     font-size: large;
   }
 

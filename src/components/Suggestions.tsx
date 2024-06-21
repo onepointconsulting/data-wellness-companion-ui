@@ -63,7 +63,7 @@ export default function Suggestions({ message }: { message: Message }) {
         return (
           <div
             key={`suggestion_${i}`}
-            className={`suggestion group items-center ${i === clicked ? "active" : ""}`}
+            className={`suggestion group items-center ${i === clicked || message.answer.includes(suggestion.main_text) ? "active" : ""}`}
             onClick={(e) => {
               return handleSelectedSuggestion(
                 e,

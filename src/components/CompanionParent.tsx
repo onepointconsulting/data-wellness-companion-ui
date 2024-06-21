@@ -81,11 +81,17 @@ export default function CompanionParent() {
           </div>
         </div>
       </div>
-      <NodeNavigation />
       <div className="container">
-        {displayRegistrationMessage && <RegistrationMessage />}
-        {!displayRegistrationMessage && <InteractionPanel />}
-        <Disclaimer />
+        <div className="flex flex-row">
+          <div>
+            {displayRegistrationMessage && <RegistrationMessage />}
+            {!displayRegistrationMessage && <InteractionPanel />}
+            <Disclaimer />
+          </div>
+          <div>
+            <NodeNavigation />
+          </div>
+        </div>
       </div>
       <Toaster />
     </>
