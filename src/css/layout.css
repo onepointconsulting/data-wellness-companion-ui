@@ -59,7 +59,7 @@
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full;
+  @apply px-2 flex items-center justify-between no-underline w-full text-base md:text-lg;
 }
 
 #root .chat-container {

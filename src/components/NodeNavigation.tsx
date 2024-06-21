@@ -5,7 +5,7 @@ import { VscDebugStart } from "react-icons/vsc";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
   if (i === 0) {
-    return <VscDebugStart className="mx-auto w-8 h-8 md:w-10 md:h-10" />;
+    return <VscDebugStart className="mx-auto w-6 h-6 md:w-8 md:h-8" />;
   }
   if (i === totalNodes - 1) {
     return <FaFlagCheckered className="mx-auto" />;
