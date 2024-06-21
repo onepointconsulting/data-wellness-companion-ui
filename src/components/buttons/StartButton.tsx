@@ -27,7 +27,7 @@ export default function StartButton() {
     setPopoverOpen(isFinalMessage);
   }, [isFinalMessage]);
 
-  const closePopover = () => setPopoverOpen(false)
+  const closePopover = () => setPopoverOpen(false);
 
   return (
     <>
@@ -52,12 +52,12 @@ export default function StartButton() {
         <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4 relative">
           <FaRegHandPointRight className="inline relative -top-1 w-5 h-5" />{" "}
           {t("Click")}{" "}
-          <ImSwitch
-            className="inline relative -top-1"
-            onClick={closePopover}
-          />{" "}
+          <ImSwitch className="inline relative -top-1" onClick={closePopover} />{" "}
           {t("to restart the application")}.
-          <IoIosClose className="absolute top-2 right-2 h-10 w-8 cursor-pointer" onClick={closePopover}/>
+          <IoIosClose
+            className="absolute top-2 right-2 h-10 w-8 cursor-pointer"
+            onClick={closePopover}
+          />
         </PopoverContent>
       </Popover>
     </>

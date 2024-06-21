@@ -50,11 +50,11 @@
   @apply flex flex-row w-full;
 }
 
-#root .suggestion .suggestion-img a{
+#root .suggestion .suggestion-img a {
   @apply w-1/5 lg:w-4/12 cursor-pointer mr-2;
 }
 
-#root .suggestion .suggestion-title{
+#root .suggestion .suggestion-title {
   @apply w-full;
 }
 
@@ -168,7 +168,6 @@
   @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a];
 }
 
-#root .clarification-main .markdown-body p{
+#root .clarification-main .markdown-body p {
   @apply p-3;
 }
-

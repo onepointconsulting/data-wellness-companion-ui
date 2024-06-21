@@ -1,4 +1,3 @@
-import { AiFillQuestionCircle } from "react-icons/ai";
 import { Message } from "../model/message.ts";
 import { useEffect, useState } from "react";
 

@@ -4,6 +4,7 @@ export type Suggestion = {
   img_src: string;
   main_text: string;
   title: string;
+  svg_image: string | undefined;
 };
 
 export type Message = {

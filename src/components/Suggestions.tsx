@@ -7,6 +7,19 @@ function adaptSuggestion(suggestion: Suggestion) {
   return `${suggestion.title} - ${suggestion.main_text}`;
 }
 
+function SuggestionImage({ suggestion }: { suggestion: Suggestion }) {
+  if (!!suggestion.svg_image) {
+    return <span dangerouslySetInnerHTML={{ __html: suggestion.svg_image }} />;
+  }
+  return (
+    <img
+      className="rounded-[8px]"
+      src={suggestion.img_src}
+      alt={suggestion.img_alt}
+    />
+  );
+}
+
 /**
  * Displays the suggestions available on a specific message.
  * @param message
@@ -67,25 +80,19 @@ export default function Suggestions({ message }: { message: Message }) {
                     handleSelectedSuggestion(e, suggestion.title, i)
                   }
                 >
-                  <img
-                    className="rounded-[8px]"
-                    src={suggestion.img_src}
-                    alt={suggestion.img_alt}
-                  />
+                  <SuggestionImage suggestion={suggestion} />
                 </a>
-              <div className="suggestion-title">
-                {suggestion.title && (
-                  <>
-                    <b>{suggestion.title}</b>{" "}
-                  </>
-                )}
-              </div>
+                <div className="suggestion-title">
+                  {suggestion.title && (
+                    <>
+                      <b>{suggestion.title}</b>{" "}
+                    </>
+                  )}
+                </div>
               </div>
             )}
             <div className="duration-200 suggestion-text">
-              <div>  
-                {suggestion.main_text}
-              </div>
+              <div>{suggestion.main_text}</div>
               {isLast && currentMessage > 0 && (
                 <div>
                   <IoMdAddCircleOutline

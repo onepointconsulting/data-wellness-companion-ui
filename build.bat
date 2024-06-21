@@ -2,6 +2,7 @@ SET BUILD_NAME=companion_ui.zip
 REM Just in case the UI folder exists on your computer
 SET UI_FOLDER=C:\development\playground\langchain\data_questionnaire_agent\ui
 
+call yarn run format
 call yarn run build
 
 cd dist

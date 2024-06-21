@@ -26,6 +26,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
         img_src: suggestion.img_src,
         main_text: suggestion.main_text,
         title: suggestion.title,
+        svg_image: suggestion.svg_image,
       })),
     };
   });

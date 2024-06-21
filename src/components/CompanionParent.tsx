@@ -58,7 +58,7 @@ export default function CompanionParent() {
       <div className="header">
         <div className="header-container">
           <div className="flex flex-row items-end">
-            <img className="w-60" src="logo.png" alt="D-Well logo"/>
+            <img className="w-60" src="logo.png" alt="D-Well logo" />
             <span className="experimental">{t("Experimental")}</span>
           </div>
           {/*<h1>

@@ -1,4 +1,3 @@
-import { AiFillMessage } from "react-icons/ai";
 import { Message } from "../model/message.ts";
 
 /**
@@ -8,9 +7,7 @@ import { Message } from "../model/message.ts";
 export default function QuestionAnswer({ message }: { message: Message }) {
   return (
     <div className="chat-container">
-      <div className="chat-input question-answer">
-      {/*<AiFillMessage /> */}{message.answer}
-      </div>
+      <div className="chat-input question-answer">{message.answer}</div>
     </div>
   );
 }
