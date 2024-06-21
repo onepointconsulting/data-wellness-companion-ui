@@ -169,6 +169,6 @@
 }
 
 #root .clarification-main .markdown-body p{
-  @apply ;
+  @apply p-3;
 }
 
