@@ -14,9 +14,12 @@ export default function InteractionPanel() {
   const { currentMessage, messages, sending, expectedNodes, isLast } =
     useContext(AppContext);
   const message = messages[currentMessage];
-  if (!message) return (
-    <div className="mt-40"><Spinner /></div>
-  );
+  if (!message)
+    return (
+      <div className="mt-40">
+        <Spinner />
+      </div>
+    );
   const displayReportGenerationMessage = currentMessage === expectedNodes - 2;
   if (!message.final_report) {
     return (
