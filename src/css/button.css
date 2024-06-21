@@ -12,7 +12,7 @@
 
 .restart-button,
 .info-button {
-  @apply fill-white h-6 w-6 cursor-pointer mx-2;
+  @apply fill-[#4a4a4a] h-6 w-6 cursor-pointer mx-2;
 }
 
 .info-button {

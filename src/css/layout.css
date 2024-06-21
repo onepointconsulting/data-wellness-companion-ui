@@ -1,5 +1,5 @@
 #root {
-  @apply flex flex-col mt-0;
+  @apply flex flex-col mt-0 bg-gradient-to-b from-[#ffffff] from-15% to-[#E6F3FB] min-h-screen;
 }
 
 #root {
@@ -7,7 +7,7 @@
 }
 
 #root .header {
-  @apply bg-[#0084d7]  min-h-14 mt-0 pt-2 md:pt-3 pb-2 flex items-center;
+  @apply min-h-14 mt-0 pt-2 md:pt-3 pb-2 flex items-center;
 }
 
 #root .header-container {
@@ -25,7 +25,7 @@
 }
 
 #root .question {
-  @apply text-xl md:text-2xl font-bold mt-4 flex flex-row justify-center px-4;
+  @apply text-xl md:text-2xl font-bold mt-4 flex flex-row px-0 text-[#4a4a4a];
 }
 
 #root .question svg,
@@ -34,20 +34,28 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 lg:pt-10 px-3 mb-4;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-8 lg:pt-10 px-3 mb-4;
 }
 
 #root .suggestion {
-  @apply flex flex-row px-4 py-2 text-lg md:text-xl cursor-pointer
-    bg-[#f1f4f8] rounded-2xl hover:bg-[#c1d9f9] transition duration-200;
+  @apply flex flex-col items-start p-4 text-lg md:text-xl cursor-pointer text-[#4a4a4a] hover:text-[#055D94]
+    border border-[#a6a6a6] hover:border-[#0084d7] transition duration-200 justify-between gap-8;
 }
 
 #root .suggestion.active {
-  @apply bg-[#0084d7] text-white;
+  @apply border-[#0084d7] text-[#055D94];
 }
 
 #root .suggestion .suggestion-img {
-  @apply w-1/12 lg:w-1/6 cursor-pointer;
+  @apply flex flex-row;
+}
+
+#root .suggestion .suggestion-img a{
+  @apply w-1/5 lg:w-4/12 cursor-pointer mr-2;
+}
+
+#root .suggestion .suggestion-title{
+  @apply w-full;
 }
 
 #root .suggestion .suggestion-text {

@@ -73,15 +73,17 @@ export default function Suggestions({ message }: { message: Message }) {
                     alt={suggestion.img_alt}
                   />
                 </a>
-              </div>
-            )}
-            <div className="duration-200 suggestion-text group-hover:text-gray-200">
-              <div>
+              <div className="suggestion-title">
                 {suggestion.title && (
                   <>
-                    <b>{suggestion.title}</b> -{" "}
+                    <b>{suggestion.title}</b>{" "}
                   </>
                 )}
+              </div>
+              </div>
+            )}
+            <div className="duration-200 suggestion-text">
+              <div>  
                 {suggestion.main_text}
               </div>
               {isLast && currentMessage > 0 && (

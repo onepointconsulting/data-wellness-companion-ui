@@ -57,10 +57,14 @@ export default function CompanionParent() {
       <InfoToolTip />
       <div className="header">
         <div className="header-container">
-          <h1>
+          <div className="flex flex-row items-end">
+            <img className="w-60" src="logo.png" alt="D-Well logo"/>
+            <span className="experimental">{t("Experimental")}</span>
+          </div>
+          {/*<h1>
             {t("Onepoint Data Wellness Companion")}™{" "}
             <span className="experimental">{t("Experimental")}</span>
-          </h1>
+          </h1>*/}
           <div className="flex flex-col items-center">
             <div className="flex flex-row items-start cursor-pointer lg:items-center">
               <ConnectionStatus />
