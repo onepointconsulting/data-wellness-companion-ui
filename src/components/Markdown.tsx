@@ -9,7 +9,7 @@ import remarkGfm from "remark-gfm";
 export default function MarkdownComponent({ content }: { content: string }) {
   return (
     <Markdown
-      className={`mt-1 text-gray-900 markdown-body`}
+      className={`markdown-body`}
       remarkPlugins={[remarkGfm]}
       components={{
         ul: ({ ...props }) => (
@@ -25,7 +25,7 @@ export default function MarkdownComponent({ content }: { content: string }) {
           />
         ),
         li: ({ ...props }) => <li className="mt-0" {...props} />,
-        p: ({ ...props }) => <p className="pb-1 font-sans" {...props} />,
+        p: ({ ...props }) => <p className="pb-4" {...props} />,
         a: ({ children, ...props }) => (
           <a
             className="pb-4 font-sans underline sm:pb-2"

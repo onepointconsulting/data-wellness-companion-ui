@@ -1,14 +1,15 @@
 .node-container {
-  @apply flex flex-row items-center justify-center my-12 flex-wrap;
+  @apply flex flex-row items-center justify-center my-12 flex-wrap gap-4 md:gap-8;
 }
 
 .node {
-  width: 42px;
-  height: 42px;
-  background-color: #ccc;
+  width: 30px;
+  height: 30px;
+  background-color: #D9D9D9;
+  color: #a6a6a6;
   border-radius: 50%;
   margin: 0 -2px;
-  font-size: large;
+  font-size: medium;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,12 +23,12 @@
 
 .node.active,
 .connector.active {
-  background-color: #0084d7;
+  background-color: #055D94;
   color: white;
 }
 
 .node.current {
-  @apply bg-[#4DC48D] text-white;
+  @apply bg-[#055D94] text-white;
 }
 
 .node a {
@@ -38,6 +39,7 @@
   width: 18px;
   height: 18px;
   background-color: #ccc;
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -50,9 +52,9 @@
 
 @media (min-width: 1024px) {
   .node {
-    width: 55px;
-    height: 55px;
-    font-size: x-large;
+    width: 45px;
+    height: 45px;
+    font-size: large;
   }
 
   .connector {

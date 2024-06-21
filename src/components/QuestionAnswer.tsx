@@ -9,7 +9,7 @@ export default function QuestionAnswer({ message }: { message: Message }) {
   return (
     <div className="chat-container">
       <div className="chat-input question-answer">
-        <AiFillMessage /> {message.answer}
+      {/*<AiFillMessage /> */}{message.answer}
       </div>
     </div>
   );

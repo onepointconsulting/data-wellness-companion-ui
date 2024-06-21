@@ -47,7 +47,7 @@
 }
 
 #root .suggestion .suggestion-img {
-  @apply flex flex-row;
+  @apply flex flex-row w-full;
 }
 
 #root .suggestion .suggestion-img a{
@@ -59,7 +59,7 @@
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full;
+  @apply px-2 flex items-center justify-between no-underline w-full text-base md:text-lg;
 }
 
 #root .chat-container {
@@ -67,7 +67,7 @@
 }
 
 #root .chat-input {
-  @apply w-full px-4 flex flex-row items-center justify-center
+  @apply w-full px-4 flex flex-row items-center justify-start
     rounded-lg bg-white focus-within:outline focus-within:outline-offset-2
     focus-within:outline-1 focus-within:outline-[#0084d7] mt-10 lg:mt-14;
 }
@@ -82,7 +82,7 @@
 }
 
 #root .question-answer {
-  @apply text-lg lg:text-xl py-5;
+  @apply text-base lg:text-lg py-5 text-[#4a4a4a];
 }
 
 #root .final-report {
@@ -157,9 +157,18 @@
 
 #root .clarification-main,
 #root .disclaimer {
-  @apply px-3 pb-6;
+  @apply px-3 pb-6 text-sm;
 }
 
 #root .clarification-main {
   @apply text-lg md:text-xl;
 }
+
+#root .clarification-main .markdown-body {
+  @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a];
+}
+
+#root .clarification-main .markdown-body p{
+  @apply p-3;
+}
+
