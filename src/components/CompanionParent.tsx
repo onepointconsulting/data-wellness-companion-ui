@@ -83,7 +83,7 @@ export default function CompanionParent() {
       </div>
       <div className="container">
         <div className="flex flex-row">
-          <div>
+          <div className="w-full">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <InteractionPanel />}
             <Disclaimer />
