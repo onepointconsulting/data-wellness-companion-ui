@@ -68,8 +68,8 @@
 
 #root .chat-input {
   @apply w-full px-4 flex flex-row items-center justify-center
-    outline rounded-lg outline-offset-2 outline-1 focus:outline-offset-2
-    focus:outline-2 outline-[#0084d7] mt-10 lg:mt-14;
+    rounded-lg bg-white focus-within:outline focus-within:outline-offset-2
+    focus-within:outline-1 focus-within:outline-[#0084d7] mt-10 lg:mt-14;
 }
 
 #root .chat-input textarea.chat-textarea {
@@ -157,7 +157,7 @@
 
 #root .clarification-main,
 #root .disclaimer {
-  @apply px-3;
+  @apply px-3 pb-6;
 }
 
 #root .clarification-main {

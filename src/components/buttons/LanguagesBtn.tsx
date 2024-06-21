@@ -87,8 +87,8 @@ export default function LanguagesBtn() {
         onClick={() => setToggleLanguage(!toggleLanguage)}
         className="flex flex-col items-center lg:flex-row relative top-0.5"
       >
-        <MdLanguage className="h-[1.7rem] w-[1.7rem] text-white pr-1" />
-        <span className="text-white">{t("Language")}</span>
+        <MdLanguage className="h-[1.7rem] w-[1.7rem] text-[#4a4a4a] pr-1" />
+        <span className="text-[#4a4a4a]">{t("Language")}</span>
       </button>
 
       {toggleLanguage && (
