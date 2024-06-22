@@ -7,7 +7,7 @@
 }
 
 #root .header {
-  @apply bg-[#0084d7]  min-h-14 mt-0 pt-2 md:pt-3 pb-2 flex items-center;
+  @apply bg-[#0084d7] dark:bg-[#1f2937]  min-h-14 mt-0 pt-2 md:pt-3 pb-2 flex items-center;
 }
 
 #root .header-container {
@@ -15,7 +15,7 @@
 }
 
 #root .connection-status {
-  @apply text-white text-sm;
+  @apply text-sm text-white;
 }
 
 #root .container,
@@ -25,7 +25,7 @@
 }
 
 #root .question {
-  @apply text-xl md:text-2xl font-bold mt-4 flex flex-row justify-center px-4;
+  @apply flex flex-row justify-center px-4 mt-4 text-xl font-bold md:text-2xl;
 }
 
 #root .question svg,
@@ -34,12 +34,11 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 lg:pt-10 px-3 mb-4;
+  @apply grid grid-cols-1 gap-4 px-3 pt-8 mb-4 md:grid-cols-2 lg:pt-10;
 }
 
 #root .suggestion {
-  @apply flex flex-row px-4 py-2 text-lg md:text-xl cursor-pointer
-    bg-[#f1f4f8] rounded-2xl hover:bg-[#c1d9f9] transition duration-200;
+  @apply flex flex-row px-4 py-2 text-lg md:text-xl  cursor-pointer dark:bg-gray-800 bg-[#f1f4f8] rounded-2xl dark:hover:bg-gray-600 hover:bg-[#c1d9f9] transition duration-200;
 }
 
 #root .suggestion.active {
@@ -47,11 +46,11 @@
 }
 
 #root .suggestion .suggestion-img {
-  @apply w-1/12 lg:w-1/6 cursor-pointer;
+  @apply w-1/12 cursor-pointer lg:w-1/6;
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full;
+  @apply flex items-center justify-between w-full px-2 no-underline;
 }
 
 #root .chat-container {
@@ -65,32 +64,35 @@
 }
 
 #root .chat-input textarea.chat-textarea {
-  @apply lg:mx-0 overflow-hidden resize-none w-full outline-none
-    flex items-center justify-center h-12 my-4;
+  @apply flex items-center justify-center w-full h-12 my-4 overflow-hidden outline-none resize-none lg:mx-0;
 }
 
 #root .chat-input button {
-  @apply w-8 h-8 cursor-pointer flex;
+  @apply flex w-8 h-8 cursor-pointer;
 }
 
 #root .question-answer {
-  @apply text-lg lg:text-xl py-5;
+  @apply py-5 text-lg lg:text-xl;
 }
 
 #root .final-report {
-  @apply text-lg lg:text-xl py-5 px-4;
+  @apply px-4 py-5 text-lg lg:text-xl;
 }
 
-#root .final-report h1 {
-  @apply text-black mb-4;
+#root .final-report h1, p {
+  @apply mb-4 text-black dark:text-gray-300;
+}
+
+#root .final-report strong {
+  @apply p-1 text-black dark:text-gray-300 dark:bg-gray-800 bg-[#f1f4f8];
 }
 
 #root .final-report li {
-  @apply mx-4 px-2;
+  @apply px-2 mx-4;
 }
 
 #root .final-report-download {
-  @apply flex flex-row items-center justify-center md:justify-end pb-8;
+  @apply flex flex-row items-center justify-center pb-8 md:justify-end;
 }
 
 #root .final-report-download svg {
@@ -116,7 +118,7 @@
 }
 
 .final-report-message {
-  @apply text-lg lg:text-xl w-full text-center;
+  @apply w-full text-lg text-center lg:text-xl;
 }
 
 #root .registration-alert-container {

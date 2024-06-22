@@ -30,7 +30,7 @@ export default function EmailDialogue() {
   const sessionId = getSession()?.id;
   const emailUrl = useMemo(
     () => `${reportUrl}/email/${sessionId}?language=${i18next?.language}`,
-    [reportUrl, sessionId],
+    [reportUrl, sessionId]
   );
 
   async function onOk() {
@@ -51,7 +51,7 @@ export default function EmailDialogue() {
       }
     } catch (e) {
       setFeedbackMessage(
-        t("Error sending email. Fetch failed. Please try again later."),
+        t("Error sending email. Fetch failed. Please try again later.")
       );
     } finally {
       setSending(false);
@@ -66,7 +66,7 @@ export default function EmailDialogue() {
     <dialog data-model={true} id={EMAIL_DIALOGUE_ID} className="email-dialogue">
       <div className="email-dialogue-content">
         {t(
-          "Please enter your name and email address so we can send you the report.",
+          "Please enter your name and email address so we can send you the report."
         )}
       </div>
       <div className="email-dialogue-form">

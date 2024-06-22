@@ -1,5 +1,5 @@
 .node-container {
-  @apply flex flex-row items-center justify-center my-12 flex-wrap;
+  @apply flex flex-row flex-wrap items-center justify-center my-12;
 }
 
 .node {
@@ -15,7 +15,7 @@
 }
 
 .node-container .node-break {
-  flex-basis: 100%;
+  flex-basis: auto;
   background-color: white;
   height: 20px;
 }

@@ -28,6 +28,12 @@ interface AppState {
   setCurrentMessageHistory: (currentMessageHistory: number) => void;
   updatingExpectedNodes: boolean;
   setUpdatingExpectedNodes: (updatingExpectedNodes: boolean) => void;
+  restartOpen: boolean;
+  setRestartOpen: (restartOpen: boolean) => void;
+  languageOpen: boolean;
+  setLanguageOpen: (languageOpen: boolean) => void;
+  isRestartPopOpen: boolean;
+  setRestartPopOpen: (isRestartPopOpen: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -60,6 +66,12 @@ function createAppState(): AppState {
     setCurrentMessageHistory: (_) => {},
     updatingExpectedNodes: false,
     setUpdatingExpectedNodes: (_) => {},
+    restartOpen: false,
+    setRestartOpen: (_) => {},
+    languageOpen: false,
+    setLanguageOpen: (_) => {},
+    isRestartPopOpen: false,
+    setRestartPopOpen: (_) => {},
   };
 }
 
@@ -80,6 +92,9 @@ export const AppContextProvider = ({ children }: Props) => {
     useState(false);
   const [updatingExpectedNodes, setUpdatingExpectedNodes] = useState(false);
   const navigate = useNavigate();
+  const [restartOpen, setRestartOpen] = useState<boolean>(false);
+  const [languageOpen, setLanguageOpen] = useState<boolean>(false);
+  const [isRestartPopOpen, setRestartPopOpen] = useState(false);
 
   const isLast = currentMessage === messages.length - 1;
   const isFinalMessage = currentMessage === expectedNodes - 1;
@@ -118,6 +133,12 @@ export const AppContextProvider = ({ children }: Props) => {
         setCurrentMessageHistory,
         updatingExpectedNodes,
         setUpdatingExpectedNodes,
+        restartOpen,
+        setRestartOpen,
+        languageOpen,
+        setLanguageOpen,
+        isRestartPopOpen,
+        setRestartPopOpen,
       }}
     >
       {" "}

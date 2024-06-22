@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export const INTRO_DIALOGUE_ID = "intro-dialogue";
 
-const toolName = " Data Wellness Companion";
+const toolName = "HopeLink Chat Companion";
 
 function IntroSection({
   content,
@@ -23,7 +23,7 @@ function IntroSection({
 }) {
   return (
     <>
-      <h3 className="pb-4 pt-2">
+      <h3 className="pt-2 pb-4">
         <MdOutlineIntegrationInstructions className="inline relative -top-0.5 fill-[#0084d7]" />{" "}
         {content}
       </h3>
@@ -87,7 +87,7 @@ export default function IntroDialogue() {
             <img
               src={"screenshots/progress-indicator.png"}
               alt="Progress indicator"
-              className="mx-auto mt-4 mb-5 w-full max-w-3xl"
+              className="w-full max-w-3xl mx-auto mt-4 mb-5"
             />
             <p>
               {t("explanation 5 lightbulb", { toolName: toolName })}{" "}

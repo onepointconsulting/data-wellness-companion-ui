@@ -25,7 +25,7 @@ export default function Suggestions({ message }: { message: Message }) {
     e: React.MouseEvent,
     newSuggestion: string,
     clickedIndex: number,
-    append: boolean = false,
+    append: boolean = false
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -47,15 +47,16 @@ export default function Suggestions({ message }: { message: Message }) {
   return (
     <div className="container suggestions">
       {message.suggestions.map((suggestion, i) => {
+        const selectedTopic = i === clicked;
         return (
           <div
             key={`suggestion_${i}`}
-            className={`suggestion group items-center ${i === clicked ? "active" : ""}`}
+            className={`suggestion group items-center ${selectedTopic ? "active" : ""}`}
             onClick={(e) => {
               return handleSelectedSuggestion(
                 e,
                 adaptSuggestion(suggestion),
-                i,
+                i
               );
             }}
           >
@@ -75,7 +76,9 @@ export default function Suggestions({ message }: { message: Message }) {
                 </a>
               </div>
             )}
-            <div className="duration-200 suggestion-text group-hover:text-gray-200">
+            <div
+              className={`dark:text-gray-300  ${selectedTopic ? "dark:group-hover:text-gray-100 group-hover:text-gray-300 text-gray-100" : ""} duration-200 suggestion-text dark:group-hover:text-gray-100 group-hover:text-gray-600 text-gray-700`}
+            >
               <div>
                 {suggestion.title && (
                   <>
@@ -92,7 +95,7 @@ export default function Suggestions({ message }: { message: Message }) {
                         e,
                         adaptSuggestion(suggestion),
                         i,
-                        true,
+                        true
                       )
                     }
                     title="Append to message"

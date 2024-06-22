@@ -1,8 +1,9 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { sendClientMessage } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "next-themes";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -27,6 +28,17 @@ export default function ChatInput() {
     setChatText,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
+  const { theme } = useTheme();
+  const [sendIcon, setSendIcon] = useState("send_button.svg");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setSendIcon("send-dark.svg");
+    } else {
+      setSendIcon("send_button.svg");
+    }
+  }, [theme]);
+
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
   useEffect(() => {
@@ -69,7 +81,7 @@ export default function ChatInput() {
     <div className="chat-container">
       <div className="chat-input">
         <textarea
-          className="chat-textarea"
+          className="mt-12 chat-textarea dark:!bg-transparent pt-4"
           aria-invalid="false"
           autoComplete="false"
           id="chat-input"
@@ -90,7 +102,7 @@ export default function ChatInput() {
             className="disabled:opacity-10"
           >
             <img
-              src="send_button.svg"
+              src={sendIcon}
               alt="Send"
               title={
                 enoughText(chatText)

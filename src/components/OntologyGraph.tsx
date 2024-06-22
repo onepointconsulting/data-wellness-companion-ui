@@ -39,7 +39,6 @@ function extractNodes(ontology: Ontology): Node[] {
         ? {
             color: "#ff0000",
             font: { color: "#ffffff" },
-            opacity: 1 - centrality,
           }
         : {
             color: "#0084d7",
@@ -119,7 +118,7 @@ export default function OntologyGraph({
         scale: 1.0, // Set the initial zoom factor to 0.5 (50% zoom)
         animation: true, // Disable animation for initial zoom
       });
-      network.setOptions({...options, physics: {enabled: false}})
+      network.setOptions({ ...options, physics: { enabled: false } });
     }, 1000);
   }, [ontology]);
 

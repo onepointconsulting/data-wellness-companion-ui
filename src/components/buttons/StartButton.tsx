@@ -37,7 +37,7 @@ export default function StartButton() {
                 toast({
                   title: t("You are disconnected."),
                   description: t(
-                    "You are disconnected. The Data Wellness Companion needs to be connected to restart.",
+                    "You are disconnected. The Data Wellness Companion needs to be connected to restart."
                   ),
                 });
               }
@@ -46,11 +46,11 @@ export default function StartButton() {
       />
       <Popover defaultOpen={false} open={popoverOpen}>
         <PopoverTrigger></PopoverTrigger>
-        <PopoverContent className="border-0 outline-0 rounded-2xl bg-white shadow mt-4">
-          <FaRegHandPointRight className="inline relative -top-1 w-5 h-5" />{" "}
+        <PopoverContent className="mt-8 bg-white dark:bg-[#1f2937] border-0 shadow outline-0 rounded-xl">
+          <FaRegHandPointRight className="relative inline w-5 h-5 -top-1" />{" "}
           {t("Click")}{" "}
           <ImSwitch
-            className="inline relative -top-1"
+            className="relative inline -top-1"
             onClick={() => setPopoverOpen(false)}
           />{" "}
           {t("to restart the application")}.
