@@ -25,7 +25,7 @@
 }
 
 #root .question {
-  @apply text-xl md:text-2xl font-bold mt-4 flex flex-row px-0 text-[#4a4a4a];
+  @apply text-2xl md:text-4xl mt-4 flex flex-row px-0 text-[#4a4a4a];
 }
 
 #root .question svg,
@@ -52,6 +52,10 @@
 
 #root .suggestion .suggestion-img a {
   @apply w-1/5 lg:w-4/12 cursor-pointer mr-2;
+}
+
+#root .suggestion.active .suggestion-img path{
+  @apply fill-[#055D94];
 }
 
 #root .suggestion .suggestion-title {
