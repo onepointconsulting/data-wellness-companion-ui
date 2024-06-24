@@ -7,5 +7,5 @@ function showInfoDialogue() {
 }
 
 export default function InfoButton() {
-  return <FaInfoCircle className="info-button" onClick={showInfoDialogue} />;
+  return <div className="menu-item"><FaInfoCircle className="info-button" onClick={showInfoDialogue} /></div>
 }

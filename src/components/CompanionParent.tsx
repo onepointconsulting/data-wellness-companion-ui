@@ -1,23 +1,21 @@
 import NodeNavigation from "./NodeNavigation.tsx";
-import { useWebsocket } from "../hooks/useWebsocket.ts";
-import { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { AppContext } from "../context/AppContext.tsx";
+import {useWebsocket} from "../hooks/useWebsocket.ts";
+import {useContext, useEffect} from "react";
+import {useTranslation} from "react-i18next";
+import {AppContext} from "../context/AppContext.tsx";
 import InteractionPanel from "./InteractionPanel.tsx";
 import InfoToolTip from "./buttons/InfoTooltip.tsx";
-import LanguagesBtn from "./buttons/LanguagesBtn.tsx";
-import StartButton from "./buttons/StartButton.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import Disclaimer from "./Disclaimer.tsx";
-import InfoButton from "./buttons/InfoButton.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
-import { Toaster } from "../../@/components/ui/toaster";
+import {Toaster} from "../../@/components/ui/toaster";
 import IntroDialogue from "./dialogue/IntroDialogue.tsx";
-import { PiPlugsConnected } from "react-icons/pi";
-import { TbPlugConnected } from "react-icons/tb";
+import {PiPlugsConnected} from "react-icons/pi";
+import {TbPlugConnected} from "react-icons/tb";
+import HamburgerMenu from "./HamburgerMenu.tsx";
 
 function ConnectionStatus() {
   const { t } = useTranslation();
@@ -61,24 +59,20 @@ export default function CompanionParent() {
             <img className="w-60" src="logo.png" alt="D-Well logo" />
             <span className="experimental">{t("Experimental")}</span>
           </div>
-          {/*<h1>
-            {t("Onepoint Data Wellness Companion")}™{" "}
-            <span className="experimental">{t("Experimental")}</span>
-          </h1>*/}
-          <div className="flex flex-col items-center">
-            <div className="flex flex-row items-start cursor-pointer lg:items-center">
-              <ConnectionStatus />
-              {/* Language drop down */}
-              <div>
-                {" "}
-                <LanguagesBtn />
-              </div>{" "}
-              <div>
-                <InfoButton />
-              </div>
-              <StartButton />
-            </div>
-          </div>
+          <HamburgerMenu />
+          {/*<div className="flex flex-col items-center">*/}
+          {/*  <div className="flex flex-row items-start cursor-pointer lg:items-center">*/}
+          {/*    <ConnectionStatus />*/}
+          {/*    /!* Language drop down *!/*/}
+          {/*    <div>*/}
+          {/*      {" "}*/}
+          {/*      <LanguagesBtn />*/}
+          {/*    </div>{" "}*/}
+          {/*    <div>*/}
+          {/*      <InfoButton />*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
       </div>
       <div className="container">

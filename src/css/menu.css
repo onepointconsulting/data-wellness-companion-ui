@@ -1,0 +1,15 @@
+.hamburger-menu {
+    @apply relative;
+}
+
+.hamburger-menu img{
+    @apply pr-6 cursor-pointer;
+}
+
+.hamburger-menu > menu {
+    @apply flex flex-col items-start absolute right-4 top-[35px] w-72 py-6 px-8 rounded-lg border shadow-muted bg-white;
+}
+
+.menu-item {
+    @apply flex flex-row cursor-pointer w-full hover:bg-gray-50 py-4
+}
