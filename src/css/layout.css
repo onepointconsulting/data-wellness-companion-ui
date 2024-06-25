@@ -1,9 +1,19 @@
 #root {
-  @apply flex flex-col mt-0;
+  @apply flex flex-col mt-0
+  bg-gradient-to-b from-[#ffffff] from-15% to-[#ffffff] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
+  min-h-screen;
 }
 
 #root {
   font-family: "Lato", sans-serif;
+}
+
+ul, li, table, td, th, p, div, a, button, input, textarea, h1, h2, h3, h4, h5, h6, span, strong,label, section {
+  @apply dark:!text-white
+}
+
+#root{
+  @apply dark:!bg-gray-800 dark:!text-gray-100
 }
 
 #root .header {
@@ -16,12 +26,6 @@
 
 #root .connection-status {
   @apply text-sm text-white;
-}
-
-#root .container,
-#root .chat-input,
-#root .final-report {
-  @apply max-w-[1280px] mx-auto;
 }
 
 #root .question {
@@ -60,7 +64,7 @@
 #root .chat-input {
   @apply w-full px-4 flex flex-row items-center justify-center
     outline rounded-lg outline-offset-2 outline-1 focus:outline-offset-2
-    focus:outline-2 outline-[#0084d7] mt-10 lg:mt-14;
+    focus:outline-2 outline-[#0084d7] mt-10 lg:mt-14 dark:bg-[#1f2937] h-24;
 }
 
 #root .chat-input textarea.chat-textarea {

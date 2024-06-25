@@ -32,7 +32,7 @@ export default function InteractionPanel() {
           </div>
         )}
         {sending && displayReportGenerationMessage && (
-          <div className="final-report-message mt-10">
+          <div className="mt-10 final-report-message">
             {t("Generating final report. This might take 2 to 3 minutes...")}
           </div>
         )}

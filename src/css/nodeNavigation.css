@@ -1,23 +1,24 @@
 .node-container {
-  @apply flex flex-row flex-wrap items-center justify-center my-12;
+  @apply flex flex-row flex-wrap items-center justify-center my-4 mt-16;
 }
 
 .node {
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   background-color: #ccc;
   border-radius: 50%;
   margin: 0 -2px;
-  font-size: large;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
+  @apply dark:bg-[#1f2937] dark:text-white;
 }
 
 .node-container .node-break {
   flex-basis: auto;
   background-color: white;
-  height: 20px;
+  height: 13px;
 }
 
 .node.active,
@@ -36,7 +37,7 @@
 
 .connector {
   width: 18px;
-  height: 18px;
+  height: 5px;
   background-color: #ccc;
 }
 

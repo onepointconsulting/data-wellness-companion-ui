@@ -91,7 +91,7 @@ export default function CompanionParent() {
 
       {/* Navigation bar */}
       {!connected ? (
-        <div className="container">
+        <div className="mx-auto lg:container">
           <div className="flex flex-row items-center justify-center min-h-screen m-4 border">
             <h2 className="flex items-center">
               {t("Connecting to the server")}...{" "}
@@ -109,7 +109,7 @@ export default function CompanionParent() {
           {" "}
           <NodeNavigation />
           {/* Main chat section */}
-          <div className="container">
+          <div className="mx-auto lg:container">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <InteractionPanel />}
             <Disclaimer />

@@ -38,7 +38,7 @@ export default function LanguageDropDown() {
     }
   };
   return (
-    <div className="absolute w-max h-auto p-2 bg-white dark:bg-[#1f2937] shadow-2xl rounded-[5px] left-0 right-0 top-14 flex flex-col gap-8 cursor-auto">
+    <div className="absolute w-max h-auto p-2 bg-white dark:bg-[#1f2937] shadow-2xl rounded-br-[5px] rounded-bl-[5px] left-0 right-0 top-12 flex flex-col gap-8 cursor-auto">
       <span className="pt-2 text-gray-600 dark:text-white">
         {t("Select language")}
       </span>
