@@ -33,9 +33,7 @@ const InfoToolTip = () => {
               >
                 {t("Company name")}
               </a>{" "}
-              {t(
-                "purpose-companion",
-              )}
+              {t("purpose-companion")}
               .
               <br />
               {t(

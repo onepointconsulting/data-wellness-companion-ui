@@ -35,8 +35,7 @@ export default function Question({
 
   return (
     <div className="question container">
-      {/*<AiFillQuestionCircle />*/}
-      <div className="ml-2">{messageText}</div>
+      <div className="ml-2 dark:text-gray-100">{messageText}</div>
     </div>
   );
 }

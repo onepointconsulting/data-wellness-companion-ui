@@ -1,18 +1,14 @@
-import { Message } from "../model/message.ts";
-import { FaRegLightbulb } from "react-icons/fa6";
-import { FaHourglassHalf } from "react-icons/fa";
-import { IoContractOutline } from "react-icons/io5";
-import { VscExtensions } from "react-icons/vsc";
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { ChatContext } from "../context/ChatContext.tsx";
-import {
-  sendClarifyQuestion,
-  sendExtendSession,
-} from "../lib/websocketFunctions.ts";
+import {Message} from "../model/message.ts";
+import {FaHourglassHalf} from "react-icons/fa";
+import {IoContractOutline} from "react-icons/io5";
+import {VscExtensions} from "react-icons/vsc";
+import {useContext, useEffect} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {sendExtendSession,} from "../lib/websocketFunctions.ts";
 import MarkdownComponent from "./Markdown.tsx";
-import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
-import { useTranslation } from "react-i18next";
+import {WEBSOCKET_SERVER_COMMAND} from "../model/websocketCommands.ts";
+import {useTranslation} from "react-i18next";
 
 function StatefulIcon({
   show,
@@ -43,7 +39,6 @@ function StatefulIcon({
  */
 export default function ExtraFunctionButtons() {
   const { t } = useTranslation();
-  const [clarificationClicked, setClarificationClicked] = useState(false);
   const {
     currentMessage,
     messages,
@@ -83,17 +78,6 @@ export default function ExtraFunctionButtons() {
       );
     };
   }, [currentMessage]);
-
-  useEffect(() => {
-    setClarificationClicked(false);
-  }, [currentMessage]);
-
-  function onClarify(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    const question = message.question;
-    setClarificationClicked(true);
-    sendClarifyQuestion(socket.current, question);
-  }
 
   function onExtend(e: React.MouseEvent<HTMLAnchorElement>) {
     onChangeExpectedNodes(e, expectedNodes + 1);
@@ -135,16 +119,6 @@ export default function ExtraFunctionButtons() {
         <VscExtensions />
       </StatefulIcon>
       {updatingExpectedNodes && <FaHourglassHalf />}
-      {!message.clarification && isLast && (
-        <a
-          href="#"
-          onClick={onClarify}
-          title={t("Explain the current question")}
-        >
-          <FaRegLightbulb />
-        </a>
-      )}
-      {!message.clarification && clarificationClicked && <FaHourglassHalf />}
       {message.clarification && (
         <section className="clarification-main">
           <MarkdownComponent content={message.clarification} />

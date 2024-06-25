@@ -1,3 +1,7 @@
 #root .spinner-layout {
   @apply flex flex-col mx-auto;
 }
+
+#root .spinner-layout svg path {
+  @apply dark:fill-gray-100;
+}

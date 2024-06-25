@@ -1,12 +1,12 @@
-import { useContext } from "react";
+import {useContext, useEffect, useState} from "react";
 import { AppContext } from "../context/AppContext.tsx";
-import { FaFlagCheckered } from "react-icons/fa";
-import { VscDebugStart } from "react-icons/vsc";
+import {FaFlagCheckered, FaHourglassHalf} from "react-icons/fa";
+import {FaRegLightbulb} from "react-icons/fa6";
+import {Message} from "../model/message.ts";
+import {sendClarifyQuestion} from "../lib/websocketFunctions.ts";
+import {ChatContext} from "../context/ChatContext.tsx";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
-  if (i === 0) {
-    return <VscDebugStart className="mx-auto w-6 h-6 md:w-8 md:h-8" />;
-  }
   if (i === totalNodes - 1) {
     return <FaFlagCheckered className="mx-auto" />;
   }
@@ -54,12 +54,34 @@ function SingleNode({
 }
 
 export default function NodeNavigation() {
-  const { expectedNodes } = useContext(AppContext);
+  const { expectedNodes, isLast, messages, currentMessage } = useContext(AppContext);
+  const { socket } = useContext(ChatContext);
+  const [clarificationClicked, setClarificationClicked] = useState(false);
+  const message: Message = messages[currentMessage];
+
+  useEffect(() => {
+    setClarificationClicked(false);
+  }, [currentMessage]);
+
+  function onClarify(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    const question = message.question;
+    setClarificationClicked(true);
+    sendClarifyQuestion(socket.current, question);
+  }
+
   return (
     <div className="node-container">
       {[...Array(expectedNodes).keys()].map((i) => {
+        const missesClarification = !message?.clarification
+        const activeMessage = i === currentMessage
         return (
-          <SingleNode expectedNodes={expectedNodes} i={i} key={`node_${i}`} />
+          <div key={`node_${i}`} className="relative">
+            {missesClarification && isLast && activeMessage && i > 0 && !clarificationClicked &&
+              <div className="node-extra-icon-container"><a href="#" onClick={onClarify}><FaRegLightbulb className="w-6 h-6" /></a></div>}
+            {missesClarification && clarificationClicked && activeMessage && <div className="node-extra-icon-container"><FaHourglassHalf className="w-6 h-6" /></div>}
+            <SingleNode expectedNodes={expectedNodes} i={i} />
+          </div>
         );
       })}
     </div>

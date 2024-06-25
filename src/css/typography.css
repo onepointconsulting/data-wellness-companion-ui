@@ -11,7 +11,7 @@
 }
 
 #root .markdown-body strong {
-  @apply bg-[#e6f3fb] px-2 rounded-lg font-normal;
+  @apply bg-[#e6f3fb] px-2 rounded-lg font-normal dark:text-black;
 }
 
 .experimental {

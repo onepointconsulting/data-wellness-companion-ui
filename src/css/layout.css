@@ -1,5 +1,11 @@
 #root {
-  @apply flex flex-col mt-0 bg-gradient-to-b from-[#ffffff] from-15% to-[#E6F3FB] min-h-screen;
+  @apply flex flex-col mt-0
+  bg-gradient-to-b from-[#ffffff] from-15% to-[#E6F3FB] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
+  min-h-screen;
+}
+
+#root{
+  @apply dark:!bg-gray-800 dark:!text-gray-100
 }
 
 #root {
@@ -50,20 +56,24 @@
   @apply flex flex-row w-full;
 }
 
+#root .suggestion .suggestion-img svg path {
+  @apply dark:!fill-gray-100
+}
+
 #root .suggestion .suggestion-img a {
   @apply w-1/5 lg:w-4/12 cursor-pointer mr-2;
 }
 
-#root .suggestion.active .suggestion-img path{
+#root .suggestion.active .suggestion-img path {
   @apply fill-[#055D94];
 }
 
 #root .suggestion .suggestion-title {
-  @apply w-full;
+  @apply w-full dark:text-gray-100;
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full text-base md:text-lg;
+  @apply px-2 flex items-center justify-between no-underline w-full text-base md:text-lg dark:text-gray-100;
 }
 
 #root .chat-container {
@@ -73,20 +83,24 @@
 #root .chat-input {
   @apply w-full px-4 flex flex-row items-center justify-start
     rounded-lg bg-white focus-within:outline focus-within:outline-offset-2
-    focus-within:outline-1 focus-within:outline-[#0084d7] mt-10 lg:mt-14;
+    focus-within:outline-1 focus-within:outline-[#0084d7] mt-10 lg:mt-14 dark:bg-gray-800;
 }
 
 #root .chat-input textarea.chat-textarea {
   @apply lg:mx-0 overflow-hidden resize-none w-full outline-none
-    flex items-center justify-center h-12 my-4;
+    flex items-center justify-center h-12 my-4 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
 }
 
 #root .chat-input button {
   @apply w-8 h-8 cursor-pointer flex;
 }
 
+#root .chat-input button svg path{
+  @apply dark:!fill-gray-100;
+}
+
 #root .question-answer {
-  @apply text-base lg:text-lg py-5 text-[#4a4a4a];
+  @apply text-base lg:text-lg py-5 text-[#4a4a4a] dark:text-gray-200;
 }
 
 #root .final-report {
@@ -94,11 +108,11 @@
 }
 
 #root .final-report h1 {
-  @apply text-black mb-4;
+  @apply text-black mb-4 dark:text-gray-100;
 }
 
 #root .final-report li {
-  @apply mx-4 px-2;
+  @apply mx-4 px-2 dark:text-gray-100;
 }
 
 #root .final-report-download {
@@ -169,9 +183,13 @@
 }
 
 #root .clarification-main .markdown-body {
-  @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a];
+  @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a] dark:bg-gray-800 dark:text-white dark:border-gray-800;
 }
 
 #root .clarification-main .markdown-body p {
   @apply p-3;
+}
+
+#root .clarification-main .markdown-body li {
+  @apply dark:text-gray-100;
 }

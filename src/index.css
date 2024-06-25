@@ -9,6 +9,7 @@
 @import url("css/spinner.css");
 @import url("css/toast.css");
 @import url("css/fullscreen.css");
+@import url("css/slider.css");
 
 @tailwind base;
 @tailwind components;
