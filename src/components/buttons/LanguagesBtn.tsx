@@ -13,7 +13,7 @@ function LanguageDropDown({
   setToggleLanguage: (b: boolean) => void;
 }) {
   const { i18n, t } = useTranslation();
-  const { connected } = useContext(AppContext);
+  const { connected, setChatText } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const { messages, setDisplayRegistrationMessage, expectedNodes } =
     useContext(AppContext);
@@ -35,6 +35,7 @@ function LanguageDropDown({
         socket,
         expectedNodes,
         setDisplayRegistrationMessage,
+        setChatText,
       );
     }
   };

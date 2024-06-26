@@ -56,7 +56,9 @@ export default function CompanionParent() {
         <div className="header-container">
           <div className="flex flex-row items-end">
             <img className="w-60" src="logo.png" alt="D-Well logo" />
-            <span className="experimental dark:text-gray-100 dark:bg-gray-500">{t("Experimental")}</span>
+            <span className="experimental dark:text-gray-100 dark:bg-gray-500">
+              {t("Experimental")}
+            </span>
           </div>
           <HamburgerMenu />
         </div>

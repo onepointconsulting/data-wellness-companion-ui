@@ -3,7 +3,7 @@
 }
 
 .node-extra-icon-container {
-  @apply absolute right-10 top-0.5 border border-black p-1 bg-white dark:bg-gray-800 dark:border-gray-800;
+  @apply top-0.5 border p-1 border-black bg-white dark:bg-gray-800 dark:border-gray-800;
 }
 
 .node {
@@ -27,12 +27,15 @@
 
 .node.active,
 .connector.active {
-  background-color: #055d94;
-  color: white;
+  @apply bg-[#055d94] text-white;
 }
 
 .node.current {
   @apply bg-[#055D94] text-white;
+}
+
+.node.active.current {
+  @apply bg-green-700 text-white;
 }
 
 .node a {

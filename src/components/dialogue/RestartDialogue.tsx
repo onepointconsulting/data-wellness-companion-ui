@@ -51,8 +51,12 @@ function Slider({
 export default function RestartDialogue() {
   const { socket } = useContext(ChatContext);
   const { t } = useTranslation();
-  const { expectedNodes, messages, setDisplayRegistrationMessage } =
-    useContext(AppContext);
+  const {
+    expectedNodes,
+    messages,
+    setDisplayRegistrationMessage,
+    setChatText,
+  } = useContext(AppContext);
   const [expectedInterviewSteps, setExpectedInterviewSteps] =
     useState(expectedNodes);
 
@@ -62,6 +66,7 @@ export default function RestartDialogue() {
       socket,
       expectedInterviewSteps,
       setDisplayRegistrationMessage,
+      setChatText,
     );
     onClose();
   }

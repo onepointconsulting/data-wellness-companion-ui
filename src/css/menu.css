@@ -7,7 +7,7 @@
 }
 
 .hamburger-menu > div > svg > path {
-  @apply dark:!fill-gray-100
+  @apply dark:!fill-gray-100;
 }
 
 .hamburger-menu > menu {
@@ -19,7 +19,7 @@
 }
 
 .hamburger-menu select {
-  @apply dark:bg-gray-800 dark:text-white
+  @apply dark:bg-gray-800 dark:text-white;
 }
 
 .menu-item {
@@ -31,5 +31,5 @@
 }
 
 .menu-item svg path {
-  @apply dark:!fill-gray-100
+  @apply dark:!fill-gray-100;
 }

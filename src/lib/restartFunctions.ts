@@ -8,6 +8,7 @@ export default function restartCompanion(
   socket: React.MutableRefObject<Socket | null>,
   expectedInterviewSteps: number,
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
+  setChatText: (chatText: string) => void,
 ) {
   clearSession(messages);
   sendStartSession(
@@ -15,4 +16,5 @@ export default function restartCompanion(
     expectedInterviewSteps,
     setDisplayRegistrationMessage,
   );
+  setChatText("");
 }

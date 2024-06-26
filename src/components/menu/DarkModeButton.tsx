@@ -1,16 +1,16 @@
-import {useTranslation} from "react-i18next";
-import {useContext} from "react";
-import {DarkModeContext} from "../../context/DarkModeContext.tsx";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/DarkModeContext.tsx";
 
 /**
  * Offers a button to switch to dark mode.
  * @constructor
  */
 export default function DarkModeButton() {
-  const {dark, setDark} = useContext(DarkModeContext);
-  const {t} = useTranslation();
+  const { dark, setDark } = useContext(DarkModeContext);
+  const { t } = useTranslation();
 
-  const title = t("Dark mode")
+  const title = t("Dark mode");
 
   function toggleDark() {
     const newDark = !dark;
@@ -22,7 +22,12 @@ export default function DarkModeButton() {
   return (
     <div className="menu-item">
       <div className="w-12">
-        <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className="pl-1 w-10 h-8 dark:fill-white fill-[#4A4A4A]">
+        <svg
+          viewBox="0 0 21 21"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="pl-1 w-10 h-8 dark:fill-white fill-[#4A4A4A]"
+        >
           <g clipPath="url(#clip0_801_1020)">
             <path d="M10.5 0C10.1602 0 9.88477 0.275461 9.88477 0.615234V1.92773C9.88477 2.26751 10.1602 2.54297 10.5 2.54297C10.8398 2.54297 11.1152 2.26751 11.1152 1.92773V0.615234C11.1152 0.275461 10.8398 0 10.5 0Z" />
             <path d="M10.5 18.457C10.1602 18.457 9.88477 18.7325 9.88477 19.0723V20.3848C9.88477 20.7245 10.1602 21 10.5 21C10.8398 21 11.1152 20.7245 11.1152 20.3848V19.0723C11.1152 18.7325 10.8398 18.457 10.5 18.457Z" />
@@ -36,7 +41,7 @@ export default function DarkModeButton() {
           </g>
           <defs>
             <clipPath id="clip0_801_1020">
-              <rect width="21" height="21" fill="white"/>
+              <rect width="21" height="21" fill="white" />
             </clipPath>
           </defs>
         </svg>
@@ -44,10 +49,10 @@ export default function DarkModeButton() {
       <div className="flex flex-row justify-between flex-grow pl-2 pt-0.5">
         <button>{title}</button>
         <label className="switch mt-1.5 mr-5">
-          <input type="checkbox" checked={dark} onChange={toggleDark}/>
+          <input type="checkbox" checked={dark} onChange={toggleDark} />
           <span className="slider round"></span>
         </label>
       </div>
     </div>
-  )
+  );
 }
