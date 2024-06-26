@@ -202,6 +202,10 @@
   @apply w-5 h-5 cursor-pointer;
 }
 
+#root .clarification-main {
+    @apply transition-all duration-500 ease-in-out;
+}
+
 #root .contracted .clarification-contract svg {
   @apply w-4 h-4;
 }
@@ -211,11 +215,15 @@
 }
 
 #root .contracted {
-  @apply max-h-[2.5rem] overflow-hidden bg-transparent;
+  @apply h-[2.5rem] overflow-hidden bg-transparent dark:bg-transparent;
+}
+
+#root .expanded {
+  @apply h-auto;
 }
 
 #root .contracted > .markdown-body {
-  @apply border-none;
+  @apply border-none dark:border-none;
 }
 
 #root .expanded {

@@ -30,6 +30,8 @@ interface AppState {
   setUpdatingExpectedNodes: (updatingExpectedNodes: boolean) => void;
   clarificationClicked: boolean;
   setClarificationClicked: (clarificationClicked: boolean) => void;
+  showClarification: boolean;
+  setShowClarification: (showClarification: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -64,6 +66,8 @@ function createAppState(): AppState {
     setUpdatingExpectedNodes: (_) => {},
     clarificationClicked: false,
     setClarificationClicked: (_) => {},
+    showClarification: true,
+    setShowClarification: (_) => {},
   };
 }
 
@@ -84,6 +88,7 @@ export const AppContextProvider = ({ children }: Props) => {
     useState(false);
   const [updatingExpectedNodes, setUpdatingExpectedNodes] = useState(false);
   const [clarificationClicked, setClarificationClicked] = useState(false);
+  const [showClarification, setShowClarification] = useState(true)
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -125,6 +130,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setUpdatingExpectedNodes,
         clarificationClicked,
         setClarificationClicked,
+        showClarification,
+        setShowClarification
       }}
     >
       {" "}
