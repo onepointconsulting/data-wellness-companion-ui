@@ -17,7 +17,7 @@
 }
 
 #root .header-container {
-  @apply flex flex-row justify-between container items-center pr-2 max-w-[1280px] mx-auto pb-1;
+  @apply flex flex-row justify-between container items-center pr-4 max-w-[1280px] mx-auto pb-1;
 }
 
 #root .connection-status {

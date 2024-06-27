@@ -95,7 +95,8 @@ export default function Suggestions({message}: { message: Message }) {
       {message.suggestions.map((suggestion, i) => {
         return (
           <SuggestionTemplate suggestion={suggestion} message={message} i={i}
-                      handleSuggestion={(e) => handleSelectedSuggestion(e, adaptSuggestion(suggestion))}/>
+                      handleSuggestion={(e) => handleSelectedSuggestion(e, adaptSuggestion(suggestion))}
+          key={`suggestion_${i}`}/>
         );
       })}
     </div>

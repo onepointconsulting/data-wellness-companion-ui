@@ -12,7 +12,7 @@ export default function Disclaimer() {
     <div className="flex flex-row justify-center text-gray-500 align-middle disclaimer text-normal dark:text-gray-100">
       <p>
         {t(
-          "Onepoint D-Well can make mistakes. Consider checking important information",
+          "disclaimer",
         )}
         .
       </p>

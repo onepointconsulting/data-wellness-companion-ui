@@ -2,6 +2,7 @@ import { Message } from "../model/message.ts";
 import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
+import {Confidence} from "../model/confidence.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -32,6 +33,8 @@ interface AppState {
   setClarificationClicked: (clarificationClicked: boolean) => void;
   showClarification: boolean;
   setShowClarification: (showClarification: boolean) => void;
+  confidence: Confidence | null;
+  setConfidence: (confidence: Confidence) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -68,6 +71,8 @@ function createAppState(): AppState {
     setClarificationClicked: (_) => {},
     showClarification: true,
     setShowClarification: (_) => {},
+    confidence: null,
+    setConfidence: (_) => {},
   };
 }
 
@@ -89,6 +94,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [updatingExpectedNodes, setUpdatingExpectedNodes] = useState(false);
   const [clarificationClicked, setClarificationClicked] = useState(false);
   const [showClarification, setShowClarification] = useState(true);
+  const [confidence, setConfidence] = useState<Confidence | null>(null);
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -132,6 +138,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setClarificationClicked,
         showClarification,
         setShowClarification,
+        confidence,
+        setConfidence
       }}
     >
       {" "}

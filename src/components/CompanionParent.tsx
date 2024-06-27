@@ -14,6 +14,7 @@ import useChatHistory from "../hooks/useChatHistory.ts";
 import { Toaster } from "../../@/components/ui/toaster";
 import IntroDialogue from "./dialogue/IntroDialogue.tsx";
 import HamburgerMenu from "./menu/HamburgerMenu.tsx";
+import useConfidence from "../hooks/useConfidence.ts";
 
 // function ConnectionStatus() {
 //   const { t } = useTranslation();
@@ -44,6 +45,8 @@ export default function CompanionParent() {
 
   // Establish a websocket connection
   useWebsocket();
+
+  useConfidence()
 
   return (
     <>
