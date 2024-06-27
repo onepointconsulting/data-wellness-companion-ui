@@ -96,7 +96,6 @@ export default function EmailDialogue() {
       )}
       <ButtonPanel
         onOk={onOk}
-        onClose={onClose}
         okText={t("Send email")}
         disabled={disabled()}
       />
