@@ -1,14 +1,14 @@
-import { Message, Suggestion } from "../model/message.ts";
-import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext.tsx";
+import {Message, Suggestion} from "../model/message.ts";
+import React, {useContext} from "react";
+import {AppContext} from "../context/AppContext.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
   return `${suggestion.title} - ${suggestion.main_text}`;
 }
 
-function SuggestionImage({ suggestion }: { suggestion: Suggestion }) {
+function SuggestionImage({suggestion}: { suggestion: Suggestion }) {
   if (!!suggestion.svg_image) {
-    return <span dangerouslySetInnerHTML={{ __html: suggestion.svg_image }} />;
+    return <span dangerouslySetInnerHTML={{__html: suggestion.svg_image}}/>;
   }
   return (
     <img
@@ -23,13 +23,50 @@ function removeEmptyLines(text: string) {
   return text.replace(/^\s*[\r\n]/gm, "");
 }
 
+export function SuggestionTemplate({suggestion, message, i, handleSuggestion}: {
+  suggestion: Suggestion,
+  message: Message,
+  i: number,
+  handleSuggestion: (e: React.MouseEvent<HTMLElement>) => void
+}) {
+  const {chatText} = useContext(AppContext);
+  return (
+    <div
+      key={`suggestion_${i}`}
+      className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || message.answer.includes(suggestion.main_text) ? "active" : ""}`}
+      onClick={handleSuggestion}
+    >
+      {suggestion.img_src && (
+        <div className="suggestion-img">
+          <a
+            href={suggestion.title}
+            onClick={handleSuggestion}
+          >
+            <SuggestionImage suggestion={suggestion}/>
+          </a>
+          <div className="suggestion-title">
+            {suggestion.title && (
+              <>
+                <b>{suggestion.title}</b>{" "}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      <div className="duration-200 suggestion-text">
+        <div>{suggestion.main_text}</div>
+      </div>
+    </div>
+  )
+}
+
 /**
  * Displays the suggestions available on a specific message.
  * @param message
  * @constructor
  */
-export default function Suggestions({ message }: { message: Message }) {
-  const { setSelectedSuggestion, chatText, currentMessage } =
+export default function Suggestions({message}: { message: Message }) {
+  const {setSelectedSuggestion, chatText, currentMessage} =
     useContext(AppContext);
 
   function handleSelectedSuggestion(
@@ -56,38 +93,9 @@ export default function Suggestions({ message }: { message: Message }) {
   return (
     <div className="container suggestions">
       {message.suggestions.map((suggestion, i) => {
-        console.log("chatText", chatText);
-        console.log("suggestion.main_text", suggestion.main_text);
-
         return (
-          <div
-            key={`suggestion_${i}`}
-            className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || message.answer.includes(suggestion.main_text) ? "active" : ""}`}
-            onClick={(e) => {
-              return handleSelectedSuggestion(e, adaptSuggestion(suggestion));
-            }}
-          >
-            {suggestion.img_src && (
-              <div className="suggestion-img">
-                <a
-                  href={suggestion.title}
-                  onClick={(e) => handleSelectedSuggestion(e, suggestion.title)}
-                >
-                  <SuggestionImage suggestion={suggestion} />
-                </a>
-                <div className="suggestion-title">
-                  {suggestion.title && (
-                    <>
-                      <b>{suggestion.title}</b>{" "}
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-            <div className="duration-200 suggestion-text">
-              <div>{suggestion.main_text}</div>
-            </div>
-          </div>
+          <SuggestionTemplate suggestion={suggestion} message={message} i={i}
+                      handleSuggestion={(e) => handleSelectedSuggestion(e, adaptSuggestion(suggestion))}/>
         );
       })}
     </div>

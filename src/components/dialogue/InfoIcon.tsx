@@ -1,0 +1,20 @@
+
+
+export default function InfoIcon({name}:{name: string}) {
+  return <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="54" height="54" fill={`url(#paint0_linear_1129_69_${name})`} fillOpacity="0.6"/>
+    <rect x="6.75" y="6.75" width="40.5" height="40.5" fill={`url(#paint1_linear_1129_69_${name})`}/>
+    <path d="M27.4934 23.1458C26.1251 23.1458 25.1521 23.7236 25.1521 24.575V36.1598C25.1521 36.8896 26.1251 37.6193 27.4934 37.6193C28.8009 37.6193 29.865 36.8896 29.865 36.1598V24.5748C29.865 23.7235 28.8009 23.1458 27.4934 23.1458Z" fill="white"/>
+    <path d="M27.4933 16C26.0945 16 25 17.0034 25 18.1589C25 19.3144 26.0946 20.3482 27.4933 20.3482C28.8616 20.3482 29.9563 19.3144 29.9563 18.1589C29.9563 17.0034 28.8615 16 27.4933 16Z" fill="white"/>
+    <defs>
+      <linearGradient id={`paint0_linear_1129_69_${name}`} x1="1.95652" y1="-3.43431e-07" x2="52.0435" y2="54" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#0084D7"/>
+        <stop offset="1" stopColor="#4DC48D"/>
+      </linearGradient>
+      <linearGradient id={`paint1_linear_1129_69_${name}`} x1="8.21739" y1="6.75" x2="45.7826" y2="47.25" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#0084D7"/>
+        <stop offset="1" stopColor="#4DC48D"/>
+      </linearGradient>
+    </defs>
+  </svg>
+}
