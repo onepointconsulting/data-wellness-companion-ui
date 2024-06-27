@@ -1,5 +1,5 @@
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.75);;
+  background: rgba(0, 0, 0, 0.75);
 }
 
 .companion-dialogue,
@@ -54,14 +54,14 @@ input::-webkit-slider-thumb {
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #04AA6D;
+  background: #04aa6d;
   cursor: pointer;
 }
 
 input::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: #04AA6D;
+  background: #04aa6d;
   cursor: pointer;
 }
 
@@ -86,7 +86,7 @@ input::-moz-range-thumb {
 }
 
 .close-icon {
-  @apply w-7 h-7 cursor-pointer
+  @apply w-7 h-7 cursor-pointer;
 }
 
 .close-icon path {

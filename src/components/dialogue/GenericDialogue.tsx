@@ -9,7 +9,7 @@
 export default function GenericDialogue({
   dialogueId,
   clazz,
-  children
+  children,
 }: {
   dialogueId: string;
   clazz: string;

@@ -1,6 +1,12 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-export  default function SendImage({enoughText, className = ""}: {enoughText: boolean, className?: string}) {
+export default function SendImage({
+  enoughText,
+  className = "",
+}: {
+  enoughText: boolean;
+  className?: string;
+}) {
   const [t] = useTranslation();
   return (
     <svg
@@ -12,9 +18,7 @@ export  default function SendImage({enoughText, className = ""}: {enoughText: bo
       className={`send-button ${className}`}
     >
       <title>
-        {enoughText
-          ? t("Send message")
-          : t("Please enter some text to send")}
+        {enoughText ? t("Send message") : t("Please enter some text to send")}
       </title>
       <g clipPath="url(#clip0_771_887)">
         <path
@@ -28,5 +32,5 @@ export  default function SendImage({enoughText, className = ""}: {enoughText: bo
         </clipPath>
       </defs>
     </svg>
-  )
+  );
 }

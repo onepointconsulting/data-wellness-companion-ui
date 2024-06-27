@@ -17,5 +17,5 @@
 }
 
 .send-button path {
-    @apply dark:fill-gray-200;
+  @apply dark:fill-gray-200;
 }

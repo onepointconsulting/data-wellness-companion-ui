@@ -1,17 +1,20 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {FaFlagCheckered, FaHourglassHalf} from "react-icons/fa";
-import {FaRegLightbulb} from "react-icons/fa6";
-import {Message} from "../model/message.ts";
-import {sendClarifyQuestion, sendExtendSession,} from "../lib/websocketFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {IoContractOutline} from "react-icons/io5";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { FaFlagCheckered, FaHourglassHalf } from "react-icons/fa";
+import { FaRegLightbulb } from "react-icons/fa6";
+import { Message } from "../model/message.ts";
+import {
+  sendClarifyQuestion,
+  sendExtendSession,
+} from "../lib/websocketFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { IoContractOutline } from "react-icons/io5";
 import StatefulIcon from "./buttons/StatefulIcon.tsx";
-import {VscExtensions} from "react-icons/vsc";
+import { VscExtensions } from "react-icons/vsc";
 
-function OutputNode({i, totalNodes}: { i: number; totalNodes: number }) {
+function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
   if (i === totalNodes - 1) {
-    return <FaFlagCheckered className="mx-auto"/>;
+    return <FaFlagCheckered className="mx-auto" />;
   }
   return <>{i + 1}</>;
 }
@@ -21,9 +24,9 @@ function OutputNode({i, totalNodes}: { i: number; totalNodes: number }) {
  * @constructor
  */
 function LightBulb({
-                     i,
-                     activeMessage,
-                   }: {
+  i,
+  activeMessage,
+}: {
   i: number;
   activeMessage: boolean;
 }) {
@@ -35,7 +38,7 @@ function LightBulb({
     clarificationClicked,
     setClarificationClicked,
   } = useContext(AppContext);
-  const {socket} = useContext(ChatContext);
+  const { socket } = useContext(ChatContext);
   const message: Message = messages[currentMessage];
   const missesClarification = !message?.clarification;
 
@@ -62,13 +65,13 @@ function LightBulb({
         !isRecommendation && (
           <div className="node-extra-icon-container">
             <a href="#" onClick={onClarify}>
-              <FaRegLightbulb className="w-6 h-6"/>
+              <FaRegLightbulb className="w-6 h-6" />
             </a>
           </div>
         )}
       {missesClarification && clarificationClicked && activeMessage && (
         <div className="node-extra-icon-container">
-          <FaHourglassHalf className="w-6 h-6"/>
+          <FaHourglassHalf className="w-6 h-6" />
         </div>
       )}
     </>
@@ -76,9 +79,9 @@ function LightBulb({
 }
 
 function ShortenSession({
-                          onShorten,
-                          showShorten,
-                        }: {
+  onShorten,
+  showShorten,
+}: {
   onShorten: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   showShorten: boolean;
 }) {
@@ -89,15 +92,15 @@ function ShortenSession({
       onClick={onShorten}
       title={"Shorten the current session by one step"}
     >
-      <IoContractOutline className="w-6 h-6"/>
+      <IoContractOutline className="w-6 h-6" />
     </StatefulIcon>
   );
 }
 
 function ExtendSession({
-                         onExtend,
-                         showExtend,
-                       }: {
+  onExtend,
+  showExtend,
+}: {
   onExtend: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   showExtend: boolean;
 }) {
@@ -108,7 +111,7 @@ function ExtendSession({
       onClick={onExtend}
       title={"Add one more step to current session"}
     >
-      <VscExtensions className="w-6 h-6"/>
+      <VscExtensions className="w-6 h-6" />
     </StatefulIcon>
   );
 }
@@ -120,13 +123,13 @@ function ExtendSession({
  * @constructor
  */
 function SingleNode({
-                      i,
-                      expectedNodes,
-                    }: {
+  i,
+  expectedNodes,
+}: {
   i: number;
   expectedNodes: number;
 }) {
-  const {messages, currentMessage, setCurrentMessageHistory} =
+  const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
   const length = messages.length;
   const covered = length > i;
@@ -144,10 +147,10 @@ function SingleNode({
               setCurrentMessageHistory(i);
             }}
           >
-            <OutputNode i={i} totalNodes={expectedNodes}/>
+            <OutputNode i={i} totalNodes={expectedNodes} />
           </a>
         ) : (
-          <OutputNode i={i} totalNodes={expectedNodes}/>
+          <OutputNode i={i} totalNodes={expectedNodes} />
         )}
       </div>
       {i !== expectedNodes - 1 && (
@@ -160,7 +163,7 @@ function SingleNode({
 }
 
 function ConfidenceIcon() {
-  const {confidence} = useContext(AppContext);
+  const { confidence } = useContext(AppContext);
   if (!confidence) return <></>;
   const rating = confidence.rating;
   const image = (() => {
@@ -173,8 +176,17 @@ function ConfidenceIcon() {
       default: // low and mediocre
         return "low-confidence.svg";
     }
-  })()
-  return <div className="relative w-11 h-11"><img src={`./confidence/${image}`} alt={confidence.reasoning} title={confidence.reasoning} className="absolute right-0 top-0"/></div>;
+  })();
+  return (
+    <div className="relative w-11 h-11">
+      <img
+        src={`./confidence/${image}`}
+        alt={confidence.reasoning}
+        title={confidence.reasoning}
+        className="absolute right-0 top-0"
+      />
+    </div>
+  );
 }
 
 export default function NodeNavigation() {
@@ -184,9 +196,9 @@ export default function NodeNavigation() {
     updatingExpectedNodes,
     setUpdatingExpectedNodes,
     isLast,
-    isBeforeReport
+    isBeforeReport,
   } = useContext(AppContext);
-  const {socket} = useContext(ChatContext);
+  const { socket } = useContext(ChatContext);
 
   function onShorten(e: React.MouseEvent<HTMLAnchorElement>) {
     onChangeExpectedNodes(e, expectedNodes - 1);
@@ -227,7 +239,7 @@ export default function NodeNavigation() {
             <div className="flex flex-row absolute right-10">
               {showExtend && (
                 <div className="node-extra-icon-container">
-                  <ExtendSession onExtend={onExtend} showExtend={showExtend}/>
+                  <ExtendSession onExtend={onExtend} showExtend={showExtend} />
                 </div>
               )}
               {showShorten && (
@@ -238,13 +250,13 @@ export default function NodeNavigation() {
                   />
                 </div>
               )}
-              <LightBulb i={i} activeMessage={activeMessage}/>
+              <LightBulb i={i} activeMessage={activeMessage} />
             </div>
-            <SingleNode expectedNodes={expectedNodes} i={i}/>
+            <SingleNode expectedNodes={expectedNodes} i={i} />
           </div>
         );
       })}
-      <ConfidenceIcon/>
+      <ConfidenceIcon />
     </div>
   );
 }

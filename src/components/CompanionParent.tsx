@@ -46,7 +46,7 @@ export default function CompanionParent() {
   // Establish a websocket connection
   useWebsocket();
 
-  useConfidence()
+  useConfidence();
 
   return (
     <>

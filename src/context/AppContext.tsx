@@ -2,7 +2,7 @@ import { Message } from "../model/message.ts";
 import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
-import {Confidence} from "../model/confidence.ts";
+import { Confidence } from "../model/confidence.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -139,7 +139,7 @@ export const AppContextProvider = ({ children }: Props) => {
         showClarification,
         setShowClarification,
         confidence,
-        setConfidence
+        setConfidence,
       }}
     >
       {" "}

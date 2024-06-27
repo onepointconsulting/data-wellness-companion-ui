@@ -1,4 +1,4 @@
-import {IoCloseOutline} from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 
 /**
  * Used for dialogue headers.
@@ -7,11 +7,21 @@ import {IoCloseOutline} from "react-icons/io5";
  * @param className The optional class name.
  * @constructor
  */
-export default function DialogueHeader({children, onClose, className=""}: {children: React.ReactNode; onClose: () => void, className?: string}) {
+export default function DialogueHeader({
+  children,
+  onClose,
+  className = "",
+}: {
+  children: React.ReactNode;
+  onClose: () => void;
+  className?: string;
+}) {
   return (
-    <section className={`flex flex-row justify-between pl-8 pr-6 pt-8 ${className}`}>
+    <section
+      className={`flex flex-row justify-between pl-8 pr-6 pt-8 ${className}`}
+    >
       {children}
-      <IoCloseOutline className="close-icon" onClick={onClose}/>
+      <IoCloseOutline className="close-icon" onClick={onClose} />
     </section>
-  )
+  );
 }

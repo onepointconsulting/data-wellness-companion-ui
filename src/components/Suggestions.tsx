@@ -1,14 +1,14 @@
-import {Message, Suggestion} from "../model/message.ts";
-import React, {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { Message, Suggestion } from "../model/message.ts";
+import React, { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
   return `${suggestion.title} - ${suggestion.main_text}`;
 }
 
-function SuggestionImage({suggestion}: { suggestion: Suggestion }) {
+function SuggestionImage({ suggestion }: { suggestion: Suggestion }) {
   if (!!suggestion.svg_image) {
-    return <span dangerouslySetInnerHTML={{__html: suggestion.svg_image}}/>;
+    return <span dangerouslySetInnerHTML={{ __html: suggestion.svg_image }} />;
   }
   return (
     <img
@@ -23,13 +23,18 @@ function removeEmptyLines(text: string) {
   return text.replace(/^\s*[\r\n]/gm, "");
 }
 
-export function SuggestionTemplate({suggestion, message, i, handleSuggestion}: {
-  suggestion: Suggestion,
-  message: Message,
-  i: number,
-  handleSuggestion: (e: React.MouseEvent<HTMLElement>) => void
+export function SuggestionTemplate({
+  suggestion,
+  message,
+  i,
+  handleSuggestion,
+}: {
+  suggestion: Suggestion;
+  message: Message;
+  i: number;
+  handleSuggestion: (e: React.MouseEvent<HTMLElement>) => void;
 }) {
-  const {chatText} = useContext(AppContext);
+  const { chatText } = useContext(AppContext);
   return (
     <div
       key={`suggestion_${i}`}
@@ -38,11 +43,8 @@ export function SuggestionTemplate({suggestion, message, i, handleSuggestion}: {
     >
       {suggestion.img_src && (
         <div className="suggestion-img">
-          <a
-            href={suggestion.title}
-            onClick={handleSuggestion}
-          >
-            <SuggestionImage suggestion={suggestion}/>
+          <a href={suggestion.title} onClick={handleSuggestion}>
+            <SuggestionImage suggestion={suggestion} />
           </a>
           <div className="suggestion-title">
             {suggestion.title && (
@@ -57,7 +59,7 @@ export function SuggestionTemplate({suggestion, message, i, handleSuggestion}: {
         <div>{suggestion.main_text}</div>
       </div>
     </div>
-  )
+  );
 }
 
 /**
@@ -65,8 +67,8 @@ export function SuggestionTemplate({suggestion, message, i, handleSuggestion}: {
  * @param message
  * @constructor
  */
-export default function Suggestions({message}: { message: Message }) {
-  const {setSelectedSuggestion, chatText, currentMessage} =
+export default function Suggestions({ message }: { message: Message }) {
+  const { setSelectedSuggestion, chatText, currentMessage } =
     useContext(AppContext);
 
   function handleSelectedSuggestion(
@@ -94,9 +96,15 @@ export default function Suggestions({message}: { message: Message }) {
     <div className="container suggestions">
       {message.suggestions.map((suggestion, i) => {
         return (
-          <SuggestionTemplate suggestion={suggestion} message={message} i={i}
-                      handleSuggestion={(e) => handleSelectedSuggestion(e, adaptSuggestion(suggestion))}
-          key={`suggestion_${i}`}/>
+          <SuggestionTemplate
+            suggestion={suggestion}
+            message={message}
+            i={i}
+            handleSuggestion={(e) =>
+              handleSelectedSuggestion(e, adaptSuggestion(suggestion))
+            }
+            key={`suggestion_${i}`}
+          />
         );
       })}
     </div>

@@ -7,7 +7,6 @@ export default function ButtonPanel({
   okText: string;
   disabled: boolean;
 }) {
-
   return (
     <div className="companion-dialogue-buttons">
       <button
