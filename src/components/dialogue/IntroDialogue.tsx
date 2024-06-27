@@ -60,7 +60,7 @@ export default function IntroDialogue() {
           <SiWelcometothejungle className="inline relative -top-0.5 fill-[#0084d7]" />{" "}
           {t("Welcome")}
         </h2>
-        <section className="mx-3 mt-10">
+        <section className="mx-3 mt-8">
           <OnepointInfo />
           <br />
           <IntroSection
@@ -101,7 +101,7 @@ export default function IntroDialogue() {
             <br />
             <p>
               {t("explanation 7 end")}{" "}
-              <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />
+              <ImSwitch className="inline relative fill-[#055D94]" />
             </p>
           </IntroSection>
         </section>

@@ -1,19 +1,55 @@
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);;
+}
+
 .companion-dialogue,
 .email-dialogue {
-  @apply rounded-2xl w-11/12 md:w-8/12 bg-white shadow-lg max-w-6xl outline-0;
+  @apply w-11/12 md:w-1/2 bg-white shadow-lg max-w-3xl outline-0 rounded-lg;
 }
 
 .companion-dialogue-content,
 .email-dialogue-content {
-  @apply px-6 py-6;
+  @apply px-6 pt-8 pb-6;
+}
+
+.companion-dialogue-content h2,
+.email-dialogue-content h2 {
+  @apply flex flex-row gap-3 items-center;
+  color: #4a4a4a;
+}
+
+.companion-dialogue-content p,
+.email-dialogue-content p {
+  @apply text-base md:text-xl;
+  color: #4a4a4a;
 }
 
 label[for="expectedInteviewSteps"] {
   @apply py-1 pr-2;
 }
 
+datalist {
+  @apply flex justify-between;
+}
+
 #expectedInteviewSteps {
   @apply border-solid border-2 border-[#e6e6e6] rounded-lg w-24 pl-2 py-1;
+}
+
+input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+input::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
 }
 
 .companion-dialogue-config {
@@ -21,15 +57,11 @@ label[for="expectedInteviewSteps"] {
 }
 
 .companion-dialogue-config input {
-  @apply ml-1 pl-3 border-solid border-2 border-[#e6e6e6] rounded-lg;
+  @apply ml-1 border-solid border-2 border-[#e6e6e6] rounded-lg;
 }
 
 .companion-dialogue-buttons {
-  @apply flex flex-row justify-end gap-4 px-6 py-4;
-}
-
-.companion-dialogue-buttons button {
-  @apply w-32;
+  @apply flex flex-row justify-end gap-4 px-6 pt-4 pb-8;
 }
 
 .email-dialogue-form {
