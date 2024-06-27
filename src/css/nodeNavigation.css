@@ -35,7 +35,7 @@
 }
 
 .node.active.current {
-  @apply bg-green-700 text-white;
+  @apply bg-[#3CAF7A] text-white;
 }
 
 .node a {

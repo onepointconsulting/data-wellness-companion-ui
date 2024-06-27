@@ -27,23 +27,25 @@ function Slider({
   return (
     <div className="w-full">
       <div className="pl-2 flex flex-1">
-        <div className="pr-2 font-bold">{value}</div>
-        <input
-          id="expectedInterviewSteps"
-          type="range"
-          value={value}
-          min={MIN_STEPS}
-          max={MAX_STEPS}
-          step={1}
-          onChange={onChange}
-          list="expectedInterviewStepsValues"
-        />
+        <div className="pr-4 font-bold">{value}</div>
+          <div className="flex flex-col w-full">
+            <input
+              id="expectedInterviewSteps"
+              type="range"
+              value={value}
+              min={MIN_STEPS}
+              max={MAX_STEPS}
+              step={1}
+              onChange={onChange}
+              list="expectedInterviewStepsValues"
+            />
+            <datalist id="expectedInterviewStepsValues">
+              {Array.from({ length: MAX_STEPS - MIN_STEPS + 1 }, (_, i) => (
+                <option key={i} value={i + MIN_STEPS} label={`${i + MIN_STEPS}`} />
+              ))}
+            </datalist>
+          </div>
       </div>
-      <datalist id="expectedInterviewStepsValues">
-        {Array.from({ length: MAX_STEPS - MIN_STEPS + 1 }, (_, i) => (
-          <option key={i} value={i + MIN_STEPS} label={`${i + MIN_STEPS}`} />
-        ))}
-      </datalist>
     </div>
   );
 }
@@ -79,10 +81,10 @@ export default function RestartDialogue() {
     >
       <div className="companion-dialogue-content">
         <h2>
-          <ImSwitch className="inline relative -top-1 fill-[#0084d7]" />{" "}
+          <ImSwitch className="inline relative fill-[#055D94]" />{" "}
           {t("Restart")}
         </h2>
-        <section className="mx-3 mt-10">
+        <section className="mx-3 mt-8">
           <p>{t("Would you like to restart the companion?")}</p>
           <div className="companion-dialogue-config">
             <label htmlFor="expectedInterviewSteps" className="text-nowrap">
