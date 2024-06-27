@@ -4,7 +4,7 @@ dialog::backdrop {
 
 .companion-dialogue,
 .email-dialogue {
-  @apply w-11/12 md:w-1/2 bg-white shadow-lg max-w-3xl outline-0 rounded-lg;
+  @apply w-11/12 md:w-1/2 bg-white shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-gray-700 dark:text-white;
 }
 
 .companion-dialogue-content,
@@ -20,7 +20,7 @@ dialog::backdrop {
 
 .companion-dialogue-content p,
 .email-dialogue-content p {
-  @apply text-base md:text-xl;
+  @apply text-base md:text-xl dark:text-white;
   color: #4a4a4a;
 }
 
@@ -64,6 +64,18 @@ input::-moz-range-thumb {
   @apply flex flex-row justify-end gap-4 px-6 pt-4 pb-8;
 }
 
+.companion-dialogue-buttons button {
+  @apply dark:text-gray-100 dark:border-white;
+}
+
 .email-dialogue-form {
   @apply flex flex-col px-6 pb-8 w-full;
+}
+
+.close-icon {
+  @apply w-7 h-7 cursor-pointer
+}
+
+.close-icon path {
+  @apply dark:!text-gray-100;
 }
