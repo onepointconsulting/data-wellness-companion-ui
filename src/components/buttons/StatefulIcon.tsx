@@ -1,11 +1,11 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function StatefulIcon({
-                        show,
-                        children,
-                        onClick,
-                        title,
-                      }: {
+  show,
+  children,
+  onClick,
+  title,
+}: {
   show: boolean;
   children: React.ReactNode;
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
