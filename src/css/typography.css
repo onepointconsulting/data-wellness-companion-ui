@@ -15,7 +15,7 @@
 }
 
 .experimental {
-  @apply bg-white text-black border border-black px-2 rounded-md text-xs md:text-base mb-1 md:mb-2.5 ml-5;
+  @apply bg-white text-[#4a4a4a] border border-[#4a4a4a] px-2 text-xs md:text-sm mb-1 ml-5;
 }
 
 #root a.default-link {
