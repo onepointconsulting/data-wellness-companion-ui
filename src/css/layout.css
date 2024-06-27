@@ -1,7 +1,7 @@
 #root {
-  @apply flex flex-col mt-0
-  bg-gradient-to-b from-[#ffffff] from-15% to-[#E6F3FB] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
-  min-h-screen;
+  @apply flex flex-col
+  bg-gradient-to-b from-[#ffffff] from-15% to-[#edf7fc] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
+  min-h-screen gap-10 pt-6;
 }
 
 #root {
@@ -44,12 +44,12 @@
 }
 
 #root .suggestion {
-  @apply flex flex-col items-start p-4 text-lg md:text-xl cursor-pointer text-[#4a4a4a] hover:text-[#055D94]
+  @apply flex flex-col items-start p-4 text-lg md:text-xl cursor-pointer text-[#4a4a4a] hover:text-[#0084d7]
     border border-[#a6a6a6] hover:border-[#0084d7] transition duration-200 justify-between gap-8;
 }
 
 #root .suggestion.active {
-  @apply border-[#0084d7] text-[#055D94] bg-blue-50 dark:bg-blue-900;
+  @apply border-[#0084d7] text-[#0084d7] bg-[#0084d717] dark:bg-[#0084d717];
 }
 
 #root .suggestion .suggestion-img {
@@ -65,7 +65,7 @@
 }
 
 #root .suggestion.active .suggestion-img path {
-  @apply fill-[#055D94];
+  @apply fill-[#0084d7];
 }
 
 #root .suggestion .suggestion-title {
