@@ -73,8 +73,7 @@ export default function CompanionParent() {
             {!displayRegistrationMessage && <InteractionPanel />}
             <Disclaimer />
           </div>
-          <div className="w-20">
-          </div>
+          <div className="lg:w-20"></div>
           <div>
             <NodeNavigation />
           </div>
