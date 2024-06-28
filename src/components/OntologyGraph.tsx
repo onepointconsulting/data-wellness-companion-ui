@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import { DataSet } from "vis-data";
 import { Network } from "vis-network";
 import { enterFullscreen } from "../lib/fullscreen.ts";
@@ -6,6 +6,7 @@ import { MdFullscreen } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { Input } from "./form/Input.tsx";
 import { IoIosSearch } from "react-icons/io";
+import {DarkModeContext} from "../context/DarkModeContext.tsx";
 
 export type Ontology = {
   relationships: Relationship[];
@@ -67,8 +68,6 @@ function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
     const centrality = betweenness_centrality[node];
     const softmaxValue = softmaxedCentrality[node];
     const redChannel = Math.min(Math.round(softmaxValue * 255) + 150, 255);
-    console.log("redChannel", node, redChannel);
-    console.log("centrality", centrality);
     const color =
       centrality > 0
         ? {
@@ -84,6 +83,11 @@ function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
 }
 
 function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
+  const isDark = [...document.body.classList].includes('dark')
+  const font = isDark ? {
+    font:{color: "#efefef", strokeWidth: 0},
+    color:{color: "#efefef"}
+  } : {}
   return relationships
     .map((r: Relationship) => {
       const sourceId = nodes.find((n) => n.label === r["source"])?.id;
@@ -99,6 +103,7 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
         to: e[1] as number,
         label: e[2] as string,
         arrows: "to",
+        ...font
       };
     });
 }
@@ -110,8 +115,8 @@ export default function OntologyGraph({
   ontology: Ontology;
   ontologyOpen: boolean;
 }) {
+  const { dark } = useContext(DarkModeContext);
   const { t } = useTranslation();
-
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
 
@@ -167,7 +172,7 @@ export default function OntologyGraph({
       });
       network.setOptions({ ...options, physics: { enabled: false } });
     }, 1000);
-  }, [ontology, nodeSearch]);
+  }, [ontology, nodeSearch, dark]);
 
   return (
     <div>

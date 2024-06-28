@@ -11,7 +11,6 @@ export default function DarkModeButton() {
   const { t } = useTranslation();
 
   const title = t("Dark mode");
-
   function toggleDark() {
     const newDark = !dark;
     window.localStorage["dark"] = `${newDark}`;
