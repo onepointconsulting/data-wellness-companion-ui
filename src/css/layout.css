@@ -54,7 +54,7 @@ ul, li, table, td, th, p, div, a, button, input, textarea, h1, h2, h3, h4, h5, h
 }
 
 #root .suggestion .suggestion-text {
-  @apply flex items-center justify-between w-full px-2 no-underline;
+  @apply flex items-center justify-between w-full px-2 text-base no-underline lg:text-lg;
 }
 
 #root .chat-container {

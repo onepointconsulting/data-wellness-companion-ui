@@ -81,7 +81,7 @@ export default function ChatInput() {
     <div className="chat-container">
       <div className="chat-input">
         <textarea
-          className="pt-4 chat-textarea dark:!bg-transparent"
+          className="pt-4 chat-textarea dark:!bg-transparent text-base lg:text-lg"
           aria-invalid="false"
           autoComplete="false"
           id="chat-input"
