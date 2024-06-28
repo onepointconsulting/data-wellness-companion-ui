@@ -1,13 +1,16 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {FaFlagCheckered, FaHourglassHalf} from "react-icons/fa";
-import {FaRegLightbulb} from "react-icons/fa6";
-import {Message} from "../model/message.ts";
-import {sendClarifyQuestion, sendExtendSession,} from "../lib/websocketFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {IoContractOutline} from "react-icons/io5";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { FaFlagCheckered, FaHourglassHalf } from "react-icons/fa";
+import { FaRegLightbulb } from "react-icons/fa6";
+import { Message } from "../model/message.ts";
+import {
+  sendClarifyQuestion,
+  sendExtendSession,
+} from "../lib/websocketFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { IoContractOutline } from "react-icons/io5";
 import StatefulIcon from "./buttons/StatefulIcon.tsx";
-import {VscExtensions} from "react-icons/vsc";
+import { VscExtensions } from "react-icons/vsc";
 import ConfidenceIcon from "./buttons/ConfidenceIcon.tsx";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
