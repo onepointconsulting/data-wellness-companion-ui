@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef, useState} from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DataSet } from "vis-data";
 import { Network } from "vis-network";
 import { enterFullscreen } from "../lib/fullscreen.ts";
@@ -6,7 +6,7 @@ import { MdFullscreen } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { Input } from "./form/Input.tsx";
 import { IoIosSearch } from "react-icons/io";
-import {DarkModeContext} from "../context/DarkModeContext.tsx";
+import { DarkModeContext } from "../context/DarkModeContext.tsx";
 
 export type Ontology = {
   relationships: Relationship[];
@@ -83,11 +83,13 @@ function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
 }
 
 function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
-  const isDark = [...document.body.classList].includes('dark')
-  const font = isDark ? {
-    font:{color: "#efefef", strokeWidth: 0},
-    color:{color: "#efefef"}
-  } : {}
+  const isDark = [...document.body.classList].includes("dark");
+  const font = isDark
+    ? {
+        font: { color: "#efefef", strokeWidth: 0 },
+        color: { color: "#efefef" },
+      }
+    : {};
   return relationships
     .map((r: Relationship) => {
       const sourceId = nodes.find((n) => n.label === r["source"])?.id;
@@ -103,7 +105,7 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
         to: e[1] as number,
         label: e[2] as string,
         arrows: "to",
-        ...font
+        ...font,
       };
     });
 }
