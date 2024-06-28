@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../context/AppContext.tsx";
 import InteractionPanel from "./InteractionPanel.tsx";
-import InfoToolTip from "./buttons/InfoTooltip.tsx";
+import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import Disclaimer from "./Disclaimer.tsx";
@@ -54,7 +54,7 @@ export default function CompanionParent() {
       <EmailDialogue />
       <InfoDialogue />
       <IntroDialogue />
-      <InfoToolTip />
+      <ConfidenceDialogue />
       <div className="header">
         <div className="header-container">
           <div className="flex flex-row items-end">

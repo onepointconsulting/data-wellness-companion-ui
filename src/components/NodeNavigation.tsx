@@ -1,16 +1,14 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { FaFlagCheckered, FaHourglassHalf } from "react-icons/fa";
-import { FaRegLightbulb } from "react-icons/fa6";
-import { Message } from "../model/message.ts";
-import {
-  sendClarifyQuestion,
-  sendExtendSession,
-} from "../lib/websocketFunctions.ts";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { IoContractOutline } from "react-icons/io5";
+import {useContext, useEffect} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {FaFlagCheckered, FaHourglassHalf} from "react-icons/fa";
+import {FaRegLightbulb} from "react-icons/fa6";
+import {Message} from "../model/message.ts";
+import {sendClarifyQuestion, sendExtendSession,} from "../lib/websocketFunctions.ts";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {IoContractOutline} from "react-icons/io5";
 import StatefulIcon from "./buttons/StatefulIcon.tsx";
-import { VscExtensions } from "react-icons/vsc";
+import {VscExtensions} from "react-icons/vsc";
+import ConfidenceIcon from "./buttons/ConfidenceIcon.tsx";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
   if (i === totalNodes - 1) {
@@ -159,33 +157,6 @@ function SingleNode({
         ></div>
       )}
     </>
-  );
-}
-
-function ConfidenceIcon() {
-  const { confidence } = useContext(AppContext);
-  if (!confidence) return <></>;
-  const rating = confidence.rating;
-  const image = (() => {
-    switch (rating) {
-      case "high":
-      case "outstanding":
-        return "high-confidence.svg";
-      case "medium":
-        return "medium-confidence.svg";
-      default: // low and mediocre
-        return "low-confidence.svg";
-    }
-  })();
-  return (
-    <div className="relative w-11 h-11">
-      <img
-        src={`./confidence/${image}`}
-        alt={confidence.reasoning}
-        title={confidence.reasoning}
-        className="absolute right-0 top-0"
-      />
-    </div>
   );
 }
 
