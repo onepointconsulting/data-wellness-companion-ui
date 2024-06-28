@@ -145,7 +145,7 @@ export default function RestartDialogue() {
         </svg>
       </DialogueHeader>
       <div className="companion-dialogue-content">
-        <section className="mt-8">
+        <section className="mt-4">
           <p>{t("Would you like to restart the companion?")}</p>
           <div className="companion-dialogue-config">
             <label htmlFor="expectedInterviewSteps" className="text-nowrap">
