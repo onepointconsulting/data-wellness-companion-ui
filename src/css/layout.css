@@ -133,12 +133,12 @@
 
 #root .final-report-pdf,
 .final-report-email {
-  @apply flex flex-col items-center justify-center;
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] p-2;
 }
 
 #root .final-report-pdf a,
 .final-report-email a {
-  @apply text-base underline;
+  @apply text-base;
 }
 
 #root .final-report-email {
