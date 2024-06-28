@@ -35,6 +35,8 @@ interface AppState {
   setShowClarification: (showClarification: boolean) => void;
   confidence: Confidence | null;
   setConfidence: (confidence: Confidence) => void;
+  updatingConfidence: boolean;
+  setUpdatingConfidence: (updatingConfidence: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -73,6 +75,8 @@ function createAppState(): AppState {
     setShowClarification: (_) => {},
     confidence: null,
     setConfidence: (_) => {},
+    updatingConfidence: false,
+    setUpdatingConfidence: (_) => {},
   };
 }
 
@@ -95,6 +99,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [clarificationClicked, setClarificationClicked] = useState(false);
   const [showClarification, setShowClarification] = useState(true);
   const [confidence, setConfidence] = useState<Confidence | null>(null);
+  const [updatingConfidence, setUpdatingConfidence] = useState(false);
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -140,6 +145,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setShowClarification,
         confidence,
         setConfidence,
+        updatingConfidence,
+        setUpdatingConfidence
       }}
     >
       {" "}
