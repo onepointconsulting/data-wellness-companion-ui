@@ -1,20 +1,23 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Wellness Companion</title>
-    <script>
-      const server = "datawellness.onepointltd.ai";
-      const port = 443;
-      window.dataWellnessConfig = {
-        websocketUrl: `wss://${server}:${port}`,
-        reportUrl: `https://${server}:${port}`,
-      };
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HopeLink chat Companion</title>
+  <script>
+    const server = "127.0.0.1";
+    const port = 8085;
+    window.dataWellnessConfig = {
+      websocketUrl: `ws://${server}:${port}`,
+      reportUrl: `http://${server}:${port}`,
+    };
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
