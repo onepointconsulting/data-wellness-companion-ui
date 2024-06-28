@@ -68,6 +68,10 @@
   @apply fill-[#0084d7];
 }
 
+#root .suggestion.active .suggestion-img a[href="Data silos"] path {
+  @apply fill-[#ffffff];
+}
+
 #root .suggestion .suggestion-title {
   @apply w-full dark:text-gray-100;
 }
