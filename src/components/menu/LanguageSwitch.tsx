@@ -21,7 +21,7 @@ export default function LanguageSwitch({
       toast({
         title: t("You are disconnected."),
         description: t(
-          "The Data Wellness Companion needs to be connected to change the language.",
+          "The Data Wellness Companion needs to be connected to change the language."
         ),
       });
     } else {
@@ -33,7 +33,7 @@ export default function LanguageSwitch({
         socket,
         expectedNodes,
         setDisplayRegistrationMessage,
-        setChatText,
+        setChatText
       );
     }
   };
@@ -59,14 +59,15 @@ export default function LanguageSwitch({
           </defs>
         </svg>
       </div>
-      <div className="pl-2 flex-grow pr-6">
+      <div className="flex-grow pl-2 pr-6">
         <select
-          className="py-1 border-b border-black w-full"
+          className="w-full py-1 border-b border-black"
           onChange={onClickLanguageChange}
           value={i18n.language}
         >
           <option value="en">{t("English")}</option>
           <option value="de">{t("German")}</option>
+          <option value="fa">{t("Farsi")}</option>
         </select>
       </div>
     </div>

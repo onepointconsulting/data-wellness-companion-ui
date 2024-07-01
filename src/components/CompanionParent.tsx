@@ -58,7 +58,7 @@ export default function CompanionParent() {
       <div className="header">
         <div className="header-container">
           <div className="flex flex-row items-end">
-            <img className="w-48" src="logo.svg" alt="D-Well logo" />
+            <img className="w-48" src="logo.png" alt="D-Well logo" />
             <span className="experimental dark:text-gray-100 dark:bg-gray-500">
               {t("Experimental")}
             </span>
@@ -73,8 +73,7 @@ export default function CompanionParent() {
             {!displayRegistrationMessage && <InteractionPanel />}
             <Disclaimer />
           </div>
-          <div className="w-20">
-          </div>
+          <div className="w-20"></div>
           <div>
             <NodeNavigation />
           </div>

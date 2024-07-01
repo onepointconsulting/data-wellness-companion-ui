@@ -1,11 +1,11 @@
 #root {
   @apply flex flex-col
-  bg-gradient-to-b from-[#ffffff] from-15% to-[#edf7fc] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
+  bg-gradient-to-b from-[#ffffff] from-15% to-[#edf7fc] dark:from-slate-800 dark:to-slate-900 dark:bg-slate-800
   min-h-screen gap-10 pt-6;
 }
 
 #root {
-  @apply dark:!bg-gray-800 dark:!text-gray-100;
+  @apply dark:!bg-gray-800 dark:!text-gray-100 !pt-0;
 }
 
 #root {
@@ -13,7 +13,7 @@
 }
 
 #root .header {
-  @apply min-h-14 mt-0 pt-2 md:pt-3 pb-2 flex items-center;
+  @apply flex items-center pt-2 pb-2 mt-0 min-h-14 dark:bg-gray-900;
 }
 
 #root .header-container {
@@ -21,7 +21,7 @@
 }
 
 #root .connection-status {
-  @apply text-white text-sm;
+  @apply text-sm text-white;
 }
 
 #root .container,
@@ -40,7 +40,7 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-8 lg:pt-10 px-3 mb-4;
+  @apply grid grid-cols-1 gap-4 px-3 pt-8 mb-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:pt-10;
 }
 
 #root .suggestion {
@@ -61,7 +61,7 @@
 }
 
 #root .suggestion .suggestion-img a {
-  @apply w-1/5 lg:w-4/12 cursor-pointer mr-2;
+  @apply w-1/5 mr-2 cursor-pointer lg:w-4/12;
 }
 
 #root .suggestion.active .suggestion-img path {
@@ -77,7 +77,7 @@
 }
 
 #root .suggestion .suggestion-text {
-  @apply px-2 flex items-center justify-between no-underline w-full text-base md:text-lg dark:text-gray-100;
+  @apply flex items-center justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100;
 }
 
 #root .chat-container {
@@ -91,12 +91,11 @@
 }
 
 #root .chat-input textarea.chat-textarea {
-  @apply lg:mx-0 overflow-hidden resize-none w-full outline-none
-    flex items-center justify-center h-12 my-4 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
+  @apply flex items-center justify-center w-full h-12 my-4 overflow-hidden outline-none resize-none lg:mx-0 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
 }
 
 #root .chat-input button {
-  @apply w-8 h-8 cursor-pointer flex;
+  @apply flex w-8 h-8 cursor-pointer;
 }
 
 #root .chat-input button svg path {
@@ -108,19 +107,19 @@
 }
 
 #root .final-report {
-  @apply text-lg lg:text-xl py-5 px-4;
+  @apply px-4 py-5 text-lg lg:text-xl;
 }
 
 #root .final-report h1 {
-  @apply text-black mb-4 dark:text-gray-100;
+  @apply mb-4 text-black dark:text-gray-100;
 }
 
 #root .final-report li {
-  @apply mx-4 px-2 dark:text-gray-100;
+  @apply px-2 mx-4 dark:text-gray-100;
 }
 
 #root .final-report-download {
-  @apply flex flex-row items-center justify-center md:justify-end pb-8;
+  @apply flex flex-row items-center justify-center pb-8 md:justify-end;
 }
 
 #root .final-report-download svg {
@@ -146,7 +145,7 @@
 }
 
 .final-report-message {
-  @apply text-lg lg:text-xl w-full text-center;
+  @apply w-full text-lg text-center lg:text-xl;
 }
 
 #root .registration-alert-container {
@@ -183,7 +182,7 @@
 }
 
 #root .clarification-main {
-  @apply text-base md:text-lg w-full;
+  @apply w-full text-base md:text-lg;
 }
 
 #root .clarification-main .markdown-body {

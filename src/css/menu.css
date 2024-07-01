@@ -3,7 +3,7 @@
 }
 
 .hamburger-menu > div > svg {
-  @apply cursor-pointer mr-6;
+  @apply mr-6 cursor-pointer;
 }
 
 .hamburger-menu > div > svg > path {
@@ -11,7 +11,7 @@
 }
 
 .hamburger-menu > menu {
-  @apply flex flex-col items-start absolute right-5 top-[30px] md:top-[35px] w-80 py-6 px-8 rounded-lg border shadow-muted bg-white dark:bg-gray-700 dark:text-white;
+  @apply flex flex-col items-start absolute right-5 rtl:right-[-16rem] top-[30px] md:top-[35px] w-80 py-6 px-8 rounded-lg border shadow-muted bg-white dark:bg-gray-700 dark:text-white;
 }
 
 .hamburger-menu > menu img {
@@ -23,11 +23,11 @@
 }
 
 .menu-item {
-  @apply flex flex-row cursor-pointer w-full hover:bg-gray-50 dark:hover:bg-gray-600 py-4;
+  @apply flex flex-row w-full py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600;
 }
 
 .menu-item svg {
-  @apply pl-3 w-8 h-8;
+  @apply w-8 h-8 pl-3;
 }
 
 .menu-item svg path {
