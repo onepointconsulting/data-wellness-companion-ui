@@ -13,7 +13,7 @@
 }
 
 #root .header {
-  @apply flex items-center pt-2 pb-2 mt-0 min-h-14 dark:bg-gray-900;
+  @apply flex items-center pt-2 pb-2 mt-0 border-b min-h-14 dark:bg-gray-900;
 }
 
 #root .header-container {
@@ -53,7 +53,7 @@
 }
 
 #root .suggestion .suggestion-img {
-  @apply flex flex-row w-full;
+  @apply flex flex-col items-start w-full rtl:flex rtl:flex-row;
 }
 
 #root .suggestion .suggestion-img svg path {
@@ -91,7 +91,7 @@
 }
 
 #root .chat-input textarea.chat-textarea {
-  @apply flex items-center justify-center w-full h-12 my-4 overflow-hidden outline-none resize-none lg:mx-0 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
+  @apply flex items-center justify-center pt-[6px] w-full h-12 my-4 overflow-hidden outline-none resize-none lg:mx-0 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
 }
 
 #root .chat-input button {

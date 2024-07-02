@@ -14,7 +14,7 @@ import { SuggestionTemplate } from "../Suggestions.tsx";
 
 export const INTRO_DIALOGUE_ID = "intro-dialogue";
 
-const toolName = " Data Wellness Companion";
+const toolName = " HopeLink";
 
 function IntroSection({
   content,
@@ -25,7 +25,7 @@ function IntroSection({
 }) {
   return (
     <>
-      <h3 className="pb-4 pt-2">{content}</h3>
+      <h3 className="pt-2 pb-4">{content}</h3>
       {children}
     </>
   );
@@ -57,7 +57,7 @@ export default function IntroDialogue() {
           <p>{t("explanation 1", { toolName: toolName })}</p>
 
           <p>{t("explanation 2")}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 py-3">
+          <div className="grid grid-cols-1 py-3 md:grid-cols-2">
             <SuggestionTemplate
               suggestion={{
                 id: 0,
@@ -96,7 +96,7 @@ export default function IntroDialogue() {
           <img
             src={"screenshots/progress-indicator.png"}
             alt="Progress indicator"
-            className="mx-auto mt-4 mb-5 w-full max-w-3xl"
+            className="w-full mx-auto mt-4 mb-5 max-w-48"
           />
           <p>
             {t("explanation 5 lightbulb", { toolName: toolName })}{" "}
