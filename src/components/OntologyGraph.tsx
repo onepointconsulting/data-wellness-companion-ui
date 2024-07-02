@@ -11,6 +11,7 @@ import { DarkModeContext } from "../context/DarkModeContext.tsx";
 export type Ontology = {
   relationships: Relationship[];
   betweenness_centrality: { [key: string]: number };
+  connected_component_importance_dict: { [key: string]: number };
 };
 
 export type Relationship = {
@@ -47,11 +48,15 @@ function softmax(arr: { [key: string]: number }): { [key: string]: number } {
     .reduce((a, b) => ({ ...a, ...b }), {});
 }
 
-function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
+function extractNodes(
+  ontology: Ontology,
+  nodeSearch: string,
+  importanceLevel: number,
+): Node[] {
   const lowerCaseNodeSearch = nodeSearch.toLowerCase();
   const { relationships, betweenness_centrality } = ontology;
   const softmaxedCentrality = softmax(betweenness_centrality);
-  const filter =
+  const searchFilter =
     nodeSearch.length > 2
       ? (rel: Relationship) => {
           return (
@@ -60,9 +65,19 @@ function extractNodes(ontology: Ontology, nodeSearch: string): Node[] {
           );
         }
       : () => true;
+  const importanceFilter = (rel: Relationship) => {
+    return (
+      ontology.connected_component_importance_dict[rel.source] >
+        importanceLevel &&
+      ontology.connected_component_importance_dict[rel.target] > importanceLevel
+    );
+  };
   return [
     ...new Set(
-      relationships.filter(filter).flatMap((r) => [r["source"], r["target"]]),
+      relationships
+        .filter(searchFilter)
+        .filter(importanceFilter)
+        .flatMap((r) => [r["source"], r["target"]]),
     ),
   ].map((node: string, index: number) => {
     const centrality = betweenness_centrality[node];
@@ -121,6 +136,7 @@ export default function OntologyGraph({
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
+  const [importanceLevel, setImportanceLevel] = useState<number>(2);
 
   function handleEnterFullscreen() {
     const current = networkRef.current;
@@ -130,7 +146,7 @@ export default function OntologyGraph({
   }
 
   useEffect(() => {
-    const nodeList = extractNodes(ontology, nodeSearch);
+    const nodeList = extractNodes(ontology, nodeSearch, importanceLevel);
     // Define nodes and edges
     const nodes = new DataSet(nodeList);
 
@@ -174,7 +190,7 @@ export default function OntologyGraph({
       });
       network.setOptions({ ...options, physics: { enabled: false } });
     }, 1000);
-  }, [ontology, nodeSearch, dark]);
+  }, [ontology, nodeSearch, dark, importanceLevel]);
 
   return (
     <div>
@@ -194,11 +210,23 @@ export default function OntologyGraph({
             placeholder={t("Search")}
           ></Input>
         </div>
-        <MdFullscreen
-          onClick={handleEnterFullscreen}
-          className={`h-8 w-8`}
-          title={t("Full screen mode")}
-        />
+        <div className="flex flex-row relative">
+          <span className="mt-1 text-base">{t("Importance filter")}:</span>{" "}
+          <select
+            className="-mt-2 text-base"
+            value={importanceLevel}
+            onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
+          >
+            {[...Array(5).keys()].map((nodes, i) => (
+              <option value={nodes + 1} key={`ontology_level_${i}`}>{nodes + 1}</option>
+            ))}
+          </select>
+          <MdFullscreen
+            onClick={handleEnterFullscreen}
+            className={`h-8 w-8`}
+            title={t("Full screen mode")}
+          />
+        </div>
       </div>
       <div
         ref={networkRef}

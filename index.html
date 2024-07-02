@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Wellness Companion</title>
     <script>
-      const server = "datawellness.onepointltd.ai";
-      const port = 443;
+      const server = "127.0.0.1";
+      const port = 8085;
       window.dataWellnessConfig = {
-        websocketUrl: `wss://${server}:${port}`,
-        reportUrl: `https://${server}:${port}`,
+        websocketUrl: `ws://${server}:${port}`,
+        reportUrl: `http://${server}:${port}`,
       };
     </script>
   </head>

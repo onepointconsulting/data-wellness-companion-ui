@@ -25,7 +25,11 @@ async function fetchOntology(
   const res = await fetch(`${reportUrl}/ontology/${sessionId}`);
   if (!res.ok) {
     console.error("Network response was not ok " + res.statusText);
-    return { relationships: [], betweenness_centrality: {} };
+    return {
+      relationships: [],
+      betweenness_centrality: {},
+      connected_component_importance_dict: {},
+    };
   }
   return await res.json();
 }
@@ -63,6 +67,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const [ontology, setOntology] = useState<Ontology>({
     relationships: [],
     betweenness_centrality: {},
+    connected_component_importance_dict: {},
   });
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
   const { reportUrl } = useContext(ChatContext);
