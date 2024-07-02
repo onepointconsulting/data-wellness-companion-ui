@@ -193,7 +193,7 @@ export default function NodeNavigation() {
 
   return (
     <div className="node-container">
-      {[...Array(expectedNodes).keys()].map((i) => {
+      {!!expectedNodes && expectedNodes > 0 && [...Array(expectedNodes).keys()].map((i) => {
         const activeMessage = i === currentMessage;
         const showShorten =
           isLast &&

@@ -4,14 +4,20 @@ import restartCompanion from "../../lib/restartFunctions.ts";
 import { ChangeEvent, useContext } from "react";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
+import MenuSelectorBase from "./MenuSelectorBase.tsx";
 
+/**
+ * The language switch component used to change the language of the user interface and interaction.
+ * @param setOpen
+ * @constructor
+ */
 export default function LanguageSwitch({
   setOpen,
 }: {
   setOpen: (b: boolean) => void;
 }) {
   const { i18n, t } = useTranslation();
-  const { connected, setChatText } = useContext(AppContext);
+  const { connected, setChatText, setSelectedHistoricalSession } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const { messages, setDisplayRegistrationMessage, expectedNodes } =
     useContext(AppContext);
@@ -28,6 +34,7 @@ export default function LanguageSwitch({
       const language = e?.target?.value;
       i18n.changeLanguage(language);
       setOpen(false);
+      setSelectedHistoricalSession(null);
       restartCompanion(
         messages,
         socket,
@@ -39,8 +46,8 @@ export default function LanguageSwitch({
   };
 
   return (
-    <div className="menu-item">
-      <div className="w-12">
+    <MenuSelectorBase
+      image={
         <svg
           width="21"
           height="21"
@@ -58,17 +65,17 @@ export default function LanguageSwitch({
             </clipPath>
           </defs>
         </svg>
-      </div>
-      <div className="pl-2 flex-grow pr-6">
+      }
+      select={
         <select
-          className="py-1 border-b border-black w-full"
+          className="menu-select"
           onChange={onClickLanguageChange}
           value={i18n.language}
         >
           <option value="en">{t("English")}</option>
           <option value="de">{t("German")}</option>
         </select>
-      </div>
-    </div>
+      }
+    />
   );
 }

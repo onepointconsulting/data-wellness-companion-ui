@@ -4,6 +4,7 @@ import InfoButton from "./InfoButton.tsx";
 import ContactUsButton from "./ContactUsButton.tsx";
 import LanguageSwitch from "./LanguageSwitch.tsx";
 import DarkModeButton from "./DarkModeButton.tsx";
+import SessionSwitch from "./SessionSwitch.tsx";
 
 /**
  * The Hamburger menu component.
@@ -64,6 +65,7 @@ export default function HamburgerMenu() {
           <StartButton />
           <InfoButton />
           <ContactUsButton />
+          <SessionSwitch />
           <hr className="mt-6 mb-6 h-[1px] bg-black dark:bg-gray-100 w-full" />
           <LanguageSwitch setOpen={setOpen} />
           <DarkModeButton />

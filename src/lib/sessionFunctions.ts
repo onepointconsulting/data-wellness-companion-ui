@@ -31,6 +31,7 @@ export function getSession(): Session | null {
         return {
           id: sessionObj.id,
           timestamp: new Date(sessionObj.timestamp),
+          language: sessionObj.language ?? "en",
         };
       }
     } catch (e) {
@@ -49,6 +50,8 @@ export function getSessionHistory(): Session[] {
         return sessionHistoryObj.map((session: any) => ({
           id: session.id,
           timestamp: new Date(session.timestamp),
+          finished: session.finished,
+          language: session.language ?? "en",
         }));
       }
     } catch (e) {

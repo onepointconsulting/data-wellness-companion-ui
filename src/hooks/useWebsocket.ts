@@ -7,6 +7,7 @@ import { saveSession } from "../lib/sessionFunctions.ts";
 import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
 import { Message } from "../model/message.ts";
 import { toast } from "../../@/components/ui/use-toast.ts";
+import i18next from "i18next";
 
 interface ServerMessage {
   session_id: string;
@@ -69,7 +70,6 @@ export function useWebsocket() {
     socket.current = io(websocketUrl);
 
     const onConnect = () => {
-      console.info("connected");
       setConnected(true);
       // Handle session
       sendStartSession(socket.current, null, setDisplayRegistrationMessage);
@@ -86,7 +86,11 @@ export function useWebsocket() {
       setMessages(adaptServerMessages(serverMessages));
       setCurrentMessageHistory(serverMessages.server_messages.length - 1);
       extractInterviewSteps(serverMessages, setExpectedNodes);
-      saveSession({ id: serverMessages.session_id, timestamp: new Date() });
+      saveSession({
+        id: serverMessages.session_id,
+        timestamp: new Date(),
+        language: i18next?.language,
+      });
     }
 
     function onServerMessage(value: string) {

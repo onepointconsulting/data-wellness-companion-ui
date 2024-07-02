@@ -11,7 +11,9 @@ import { showDialogue } from "../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import OntologyGraph, { Ontology } from "./OntologyGraph.tsx";
+import OntologyGraph from "./OntologyGraph.tsx";
+import {Ontology} from "../model/ontology.ts";
+import {AppContext} from "../context/AppContext.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -64,12 +66,7 @@ function ReportLink({
  */
 export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
-  const [ontology, setOntology] = useState<Ontology>({
-    relationships: [],
-    betweenness_centrality: {},
-    connected_component_importance_dict: {},
-  });
-  const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
+  const {ontology, setOntology, ontologyOpen, setOntologyOpen} = useContext(AppContext)
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;

@@ -7,7 +7,9 @@ const ONEPOINT_ID_PARAM = "onepoint_id";
 
 const ID_PARAM = "id";
 
-function getSessionId() {
+const IGNORED_STEPS = -1;
+
+export function getSessionId() {
   const session = getSession();
   return session ? session.id : "";
 }
@@ -18,7 +20,6 @@ export function sendStartSession(
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
 ) {
   const params = new URLSearchParams(window.location.search);
-  const language = i18next?.language;
   if (
     getSessionHistory().length > 0 &&
     !params.get(ONEPOINT_ID_PARAM) &&
@@ -26,14 +27,13 @@ export function sendStartSession(
   ) {
     setDisplayRegistrationMessage(true);
   } else {
-    safeEmit(
-      socket,
-      WEBSOCKET_COMMAND.START_SESSION,
-      getSessionId(),
-      expectedInteviewSteps,
-      language,
-    );
+    switchSession(socket, getSessionId(), expectedInteviewSteps);
   }
+}
+
+export function switchSession(socket: Socket<any, any> | null, sessionId: string,
+                              expectedInteviewSteps: number | null = IGNORED_STEPS) {
+  safeEmit(socket, WEBSOCKET_COMMAND.START_SESSION, sessionId, expectedInteviewSteps, i18next?.language);
 }
 
 export function sendClientMessage(

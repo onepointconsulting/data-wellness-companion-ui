@@ -1,38 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { DataSet } from "vis-data";
-import { Network } from "vis-network";
-import { enterFullscreen } from "../lib/fullscreen.ts";
-import { MdFullscreen } from "react-icons/md";
-import { useTranslation } from "react-i18next";
-import { Input } from "./form/Input.tsx";
-import { IoIosSearch } from "react-icons/io";
-import { DarkModeContext } from "../context/DarkModeContext.tsx";
-
-export type Ontology = {
-  relationships: Relationship[];
-  betweenness_centrality: { [key: string]: number };
-  connected_component_importance_dict: { [key: string]: number };
-};
-
-export type Relationship = {
-  source: string;
-  target: string;
-  relationship: string;
-};
-
-type Node = {
-  id: number;
-  label: string;
-};
-
-type Edge = {
-  id: number;
-  from: number;
-  to: number;
-  label: string;
-};
+import {useContext, useEffect, useRef, useState} from "react";
+import {DataSet} from "vis-data";
+import {Network} from "vis-network";
+import {enterFullscreen} from "../lib/fullscreen.ts";
+import {MdFullscreen} from "react-icons/md";
+import {useTranslation} from "react-i18next";
+import {Input} from "./form/Input.tsx";
+import {IoIosSearch} from "react-icons/io";
+import {DarkModeContext} from "../context/DarkModeContext.tsx";
+import {Edge, Node, Ontology, Relationship} from "../model/ontology.ts";
 
 function softmax(arr: { [key: string]: number }): { [key: string]: number } {
+  if (!arr || Object.keys(arr).length === 0) return {};
   // Step 1: Compute the exponential of each element
   const expDict = Object.entries(arr).map((x) => ({
     key: x[0],
@@ -66,6 +44,7 @@ function extractNodes(
         }
       : () => true;
   const importanceFilter = (rel: Relationship) => {
+    if(!ontology.connected_component_importance_dict) return true;
     return (
       ontology.connected_component_importance_dict[rel.source] >
         importanceLevel &&
@@ -218,7 +197,9 @@ export default function OntologyGraph({
             onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
           >
             {[...Array(5).keys()].map((nodes, i) => (
-              <option value={nodes + 1} key={`ontology_level_${i}`}>{nodes + 1}</option>
+              <option value={nodes + 1} key={`ontology_level_${i}`}>
+                {nodes + 1}
+              </option>
             ))}
           </select>
           <MdFullscreen

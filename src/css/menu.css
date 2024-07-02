@@ -33,3 +33,7 @@
 .menu-item svg path {
   @apply dark:!fill-gray-100;
 }
+
+.menu-select {
+  @apply py-1 border-b border-black w-full;
+}

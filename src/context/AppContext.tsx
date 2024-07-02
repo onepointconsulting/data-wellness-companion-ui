@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
 import { Confidence } from "../model/confidence.ts";
+import {Ontology} from "../model/ontology.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -37,6 +38,14 @@ interface AppState {
   setConfidence: (confidence: Confidence) => void;
   updatingConfidence: boolean;
   setUpdatingConfidence: (updatingConfidence: boolean) => void;
+  selectedHistoricalSession: string | null;
+  setSelectedHistoricalSession: (
+    selectedHistoricalSession: string | null,
+  ) => void;
+  ontology: Ontology;
+  setOntology: (ontology: Ontology) => void;
+  ontologyOpen: boolean;
+  setOntologyOpen: (ontologyOpen: boolean) => void;
 }
 
 const DEFAULT_EXPECTED_NODES = 6;
@@ -77,6 +86,12 @@ function createAppState(): AppState {
     setConfidence: (_) => {},
     updatingConfidence: false,
     setUpdatingConfidence: (_) => {},
+    selectedHistoricalSession: null,
+    setSelectedHistoricalSession: (_) => {},
+    ontology: {} as Ontology,
+    setOntology: (_) => {},
+    ontologyOpen: false,
+    setOntologyOpen: (_) => {},
   };
 }
 
@@ -100,6 +115,15 @@ export const AppContextProvider = ({ children }: Props) => {
   const [showClarification, setShowClarification] = useState(true);
   const [confidence, setConfidence] = useState<Confidence | null>(null);
   const [updatingConfidence, setUpdatingConfidence] = useState(false);
+  const [selectedHistoricalSession, setSelectedHistoricalSession] =
+    useState<string | null>(null);
+  const [ontology, setOntology] = useState<Ontology>({
+    relationships: [],
+    betweenness_centrality: {},
+    connected_component_importance_dict: {},
+  });
+  const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const isLast = currentMessage === messages.length - 1;
@@ -147,6 +171,12 @@ export const AppContextProvider = ({ children }: Props) => {
         setConfidence,
         updatingConfidence,
         setUpdatingConfidence,
+        selectedHistoricalSession,
+        setSelectedHistoricalSession,
+        ontology,
+        setOntology,
+        ontologyOpen,
+        setOntologyOpen
       }}
     >
       {" "}
