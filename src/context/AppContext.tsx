@@ -177,7 +177,7 @@ export const AppContextProvider = ({ children }: Props) => {
         ontology,
         setOntology,
         ontologyOpen,
-        setOntologyOpen
+        setOntologyOpen,
       }}
     >
       {" "}

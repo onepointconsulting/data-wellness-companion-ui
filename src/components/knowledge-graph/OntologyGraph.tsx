@@ -8,7 +8,7 @@ import { Input } from "../form/Input.tsx";
 import { IoIosSearch } from "react-icons/io";
 import { DarkModeContext } from "../../context/DarkModeContext.tsx";
 import { Edge, Node, Ontology, Relationship } from "../../model/ontology.ts";
-import {AppContext} from "../../context/AppContext.tsx";
+import { AppContext } from "../../context/AppContext.tsx";
 import ImportantTopics from "./ImportantTopics.tsx";
 
 function softmax(arr: { [key: string]: number }): { [key: string]: number } {
@@ -106,10 +106,9 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
     });
 }
 
-export default function OntologyGraph()  {
+export default function OntologyGraph() {
   const { dark } = useContext(DarkModeContext);
-  const { ontology, ontologyOpen } =
-    useContext(AppContext);
+  const { ontology, ontologyOpen } = useContext(AppContext);
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
@@ -198,23 +197,32 @@ export default function OntologyGraph()  {
         className={`${ontologyOpen ? "h-[60vh]" : "h-[0vh]"} fullscreen-component`}
         style={{ transition: "height 0.5s ease-out" }}
       />
-      {ontologyOpen && <div className="flex flex-row justify-between align-middle h-16">
-        <ImportantTopics nodeSearch={nodeSearch} setNodeSearch={setNodeSearch}/>
-        <div className="md:flex flex-row place-items-center py-2 hidden">
-          <span className="text-base">{t("Importance filter")}:</span>{" "}
-          <select
-            className="text-base"
-            value={importanceLevel}
-            onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
-          >
-            {[...Array(5).keys()].map((nodes, i) => (
-              <option value={nodes + 1} key={`ontology_level_${i}`} className="text-base">
-                {nodes + 1}
-              </option>
-            ))}
-          </select>
+      {ontologyOpen && (
+        <div className="flex flex-row justify-between align-middle h-16">
+          <ImportantTopics
+            nodeSearch={nodeSearch}
+            setNodeSearch={setNodeSearch}
+          />
+          <div className="md:flex flex-row place-items-center py-2 hidden">
+            <span className="text-base">{t("Importance filter")}:</span>{" "}
+            <select
+              className="text-base"
+              value={importanceLevel}
+              onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
+            >
+              {[...Array(5).keys()].map((nodes, i) => (
+                <option
+                  value={nodes + 1}
+                  key={`ontology_level_${i}`}
+                  className="text-base"
+                >
+                  {nodes + 1}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 }

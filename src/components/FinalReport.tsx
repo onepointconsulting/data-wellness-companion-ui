@@ -14,8 +14,7 @@ import i18next from "i18next";
 import OntologyGraph from "./knowledge-graph/OntologyGraph.tsx";
 import { Ontology } from "../model/ontology.ts";
 import { AppContext } from "../context/AppContext.tsx";
-import {toast} from "../../@/components/ui/use-toast.ts";
-import ImportantTopics from "./knowledge-graph/ImportantTopics.tsx";
+import { toast } from "../../@/components/ui/use-toast.ts";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -68,8 +67,7 @@ function ReportLink({
  */
 export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
-  const { setOntology, ontologyOpen, setOntologyOpen } =
-    useContext(AppContext);
+  const { setOntology, ontologyOpen, setOntologyOpen } = useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
@@ -95,7 +93,6 @@ export default function FinalReport({ message }: { message: Message }) {
       <OntologyGraph />
       {sessionId && (
         <div className="final-report-download">
-
           <ReportLink
             click={() => setOntologyOpen(!ontologyOpen)}
             title={t("Knowledge graph")}
