@@ -62,7 +62,7 @@ export default function RestartDialogue() {
     messages,
     setDisplayRegistrationMessage,
     setChatText,
-    setSelectedHistoricalSession
+    setSelectedHistoricalSession,
   } = useContext(AppContext);
   const [expectedInterviewSteps, setExpectedInterviewSteps] =
     useState(expectedNodes);

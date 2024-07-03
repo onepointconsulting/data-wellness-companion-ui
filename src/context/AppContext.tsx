@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
 import { Confidence } from "../model/confidence.ts";
-import {Ontology} from "../model/ontology.ts";
+import { Ontology } from "../model/ontology.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -115,8 +115,9 @@ export const AppContextProvider = ({ children }: Props) => {
   const [showClarification, setShowClarification] = useState(true);
   const [confidence, setConfidence] = useState<Confidence | null>(null);
   const [updatingConfidence, setUpdatingConfidence] = useState(false);
-  const [selectedHistoricalSession, setSelectedHistoricalSession] =
-    useState<string | null>(null);
+  const [selectedHistoricalSession, setSelectedHistoricalSession] = useState<
+    string | null
+  >(null);
   const [ontology, setOntology] = useState<Ontology>({
     relationships: [],
     betweenness_centrality: {},

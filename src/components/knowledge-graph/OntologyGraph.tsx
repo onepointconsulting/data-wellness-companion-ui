@@ -1,13 +1,15 @@
-import {useContext, useEffect, useRef, useState} from "react";
-import {DataSet} from "vis-data";
-import {Network} from "vis-network";
-import {enterFullscreen} from "../lib/fullscreen.ts";
-import {MdFullscreen} from "react-icons/md";
-import {useTranslation} from "react-i18next";
-import {Input} from "./form/Input.tsx";
-import {IoIosSearch} from "react-icons/io";
-import {DarkModeContext} from "../context/DarkModeContext.tsx";
-import {Edge, Node, Ontology, Relationship} from "../model/ontology.ts";
+import { useContext, useEffect, useRef, useState } from "react";
+import { DataSet } from "vis-data";
+import { Network } from "vis-network";
+import { enterFullscreen } from "../../lib/fullscreen.ts";
+import { MdFullscreen } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+import { Input } from "../form/Input.tsx";
+import { IoIosSearch } from "react-icons/io";
+import { DarkModeContext } from "../../context/DarkModeContext.tsx";
+import { Edge, Node, Ontology, Relationship } from "../../model/ontology.ts";
+import {AppContext} from "../../context/AppContext.tsx";
+import ImportantTopics from "./ImportantTopics.tsx";
 
 function softmax(arr: { [key: string]: number }): { [key: string]: number } {
   if (!arr || Object.keys(arr).length === 0) return {};
@@ -44,7 +46,7 @@ function extractNodes(
         }
       : () => true;
   const importanceFilter = (rel: Relationship) => {
-    if(!ontology.connected_component_importance_dict) return true;
+    if (!ontology.connected_component_importance_dict) return true;
     return (
       ontology.connected_component_importance_dict[rel.source] >
         importanceLevel &&
@@ -104,14 +106,10 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
     });
 }
 
-export default function OntologyGraph({
-  ontology,
-  ontologyOpen,
-}: {
-  ontology: Ontology;
-  ontologyOpen: boolean;
-}) {
+export default function OntologyGraph()  {
   const { dark } = useContext(DarkModeContext);
+  const { ontology, ontologyOpen } =
+    useContext(AppContext);
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
@@ -174,7 +172,7 @@ export default function OntologyGraph({
   return (
     <div>
       <div
-        className={`flex flex-row justify-between ${ontologyOpen ? "block" : "hidden"}`}
+        className={`flex flex-row justify-between py-2 ${ontologyOpen ? "block" : "hidden"}`}
       >
         <div className="flex flex-row relative">
           <IoIosSearch
@@ -189,31 +187,34 @@ export default function OntologyGraph({
             placeholder={t("Search")}
           ></Input>
         </div>
-        <div className="flex flex-row relative">
-          <span className="mt-1 text-base">{t("Importance filter")}:</span>{" "}
-          <select
-            className="-mt-2 text-base"
-            value={importanceLevel}
-            onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
-          >
-            {[...Array(5).keys()].map((nodes, i) => (
-              <option value={nodes + 1} key={`ontology_level_${i}`}>
-                {nodes + 1}
-              </option>
-            ))}
-          </select>
-          <MdFullscreen
-            onClick={handleEnterFullscreen}
-            className={`h-8 w-8`}
-            title={t("Full screen mode")}
-          />
-        </div>
+        <MdFullscreen
+          onClick={handleEnterFullscreen}
+          className={`h-8 w-8`}
+          title={t("Full screen mode")}
+        />
       </div>
       <div
         ref={networkRef}
         className={`${ontologyOpen ? "h-[60vh]" : "h-[0vh]"} fullscreen-component`}
         style={{ transition: "height 0.5s ease-out" }}
       />
+      {ontologyOpen && <div className="flex flex-row justify-between align-middle h-16">
+        <ImportantTopics nodeSearch={nodeSearch} setNodeSearch={setNodeSearch}/>
+        <div className="md:flex flex-row place-items-center py-2 hidden">
+          <span className="text-base">{t("Importance filter")}:</span>{" "}
+          <select
+            className="text-base"
+            value={importanceLevel}
+            onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
+          >
+            {[...Array(5).keys()].map((nodes, i) => (
+              <option value={nodes + 1} key={`ontology_level_${i}`} className="text-base">
+                {nodes + 1}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>}
     </div>
   );
 }

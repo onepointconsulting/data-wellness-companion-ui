@@ -17,7 +17,8 @@ export default function LanguageSwitch({
   setOpen: (b: boolean) => void;
 }) {
   const { i18n, t } = useTranslation();
-  const { connected, setChatText, setSelectedHistoricalSession } = useContext(AppContext);
+  const { connected, setChatText, setSelectedHistoricalSession } =
+    useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const { messages, setDisplayRegistrationMessage, expectedNodes } =
     useContext(AppContext);

@@ -193,43 +193,48 @@ export default function NodeNavigation() {
 
   return (
     <div className="node-container">
-      {!!expectedNodes && expectedNodes > 0 && [...Array(expectedNodes).keys()].map((i) => {
-        const activeMessage = i === currentMessage;
-        const showShorten =
-          isLast &&
-          !updatingExpectedNodes &&
-          !isBeforeReport &&
-          expectedNodes > 3 &&
-          i > 0 &&
-          i === currentMessage &&
-          expectedNodes !== currentMessage + 1;
-        const showExtend =
-          isBeforeReport &&
-          isLast &&
-          !updatingExpectedNodes &&
-          i === currentMessage;
-        return (
-          <div key={`node_${i}`} className="relative">
-            <div className="flex flex-row absolute right-10">
-              {showExtend && (
-                <div className="node-extra-icon-container">
-                  <ExtendSession onExtend={onExtend} showExtend={showExtend} />
-                </div>
-              )}
-              {showShorten && (
-                <div className="node-extra-icon-container">
-                  <ShortenSession
-                    onShorten={onShorten}
-                    showShorten={showShorten}
-                  />
-                </div>
-              )}
-              <LightBulb i={i} activeMessage={activeMessage} />
+      {!!expectedNodes &&
+        expectedNodes > 0 &&
+        [...Array(expectedNodes).keys()].map((i) => {
+          const activeMessage = i === currentMessage;
+          const showShorten =
+            isLast &&
+            !updatingExpectedNodes &&
+            !isBeforeReport &&
+            expectedNodes > 3 &&
+            i > 0 &&
+            i === currentMessage &&
+            expectedNodes !== currentMessage + 1;
+          const showExtend =
+            isBeforeReport &&
+            isLast &&
+            !updatingExpectedNodes &&
+            i === currentMessage;
+          return (
+            <div key={`node_${i}`} className="relative">
+              <div className="flex flex-row absolute right-10">
+                {showExtend && (
+                  <div className="node-extra-icon-container">
+                    <ExtendSession
+                      onExtend={onExtend}
+                      showExtend={showExtend}
+                    />
+                  </div>
+                )}
+                {showShorten && (
+                  <div className="node-extra-icon-container">
+                    <ShortenSession
+                      onShorten={onShorten}
+                      showShorten={showShorten}
+                    />
+                  </div>
+                )}
+                <LightBulb i={i} activeMessage={activeMessage} />
+              </div>
+              <SingleNode expectedNodes={expectedNodes} i={i} />
             </div>
-            <SingleNode expectedNodes={expectedNodes} i={i} />
-          </div>
-        );
-      })}
+          );
+        })}
       <ConfidenceIcon />
     </div>
   );

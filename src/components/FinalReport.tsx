@@ -4,16 +4,18 @@ import remarkGfm from "remark-gfm";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { getSession } from "../lib/sessionFunctions.ts";
 import { showDialogue } from "../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import OntologyGraph from "./OntologyGraph.tsx";
-import {Ontology} from "../model/ontology.ts";
-import {AppContext} from "../context/AppContext.tsx";
+import OntologyGraph from "./knowledge-graph/OntologyGraph.tsx";
+import { Ontology } from "../model/ontology.ts";
+import { AppContext } from "../context/AppContext.tsx";
+import {toast} from "../../@/components/ui/use-toast.ts";
+import ImportantTopics from "./knowledge-graph/ImportantTopics.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -66,25 +68,34 @@ function ReportLink({
  */
 export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
-  const {ontology, setOntology, ontologyOpen, setOntologyOpen} = useContext(AppContext)
+  const { setOntology, ontologyOpen, setOntologyOpen } =
+    useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
 
   useEffect(() => {
     if (sessionId && ontologyOpen) {
-      fetchOntology(sessionId, reportUrl).then((ontology) => {
-        console.log("Ontology", ontology.relationships.length);
-        setOntology(ontology);
-      });
+      fetchOntology(sessionId, reportUrl)
+        .then((ontology) => {
+          setOntology(ontology);
+        })
+        .catch((error) => {
+          console.error("Error fetching ontology: " + error);
+          toast({
+            title: "Failed to fetch knowledge graph",
+            description: "Failed to fetch knowledge graph. Try again later",
+          });
+        });
     }
   }, [sessionId, setOntology, ontologyOpen]);
 
   return (
     <div className="final-report">
-      <OntologyGraph ontology={ontology} ontologyOpen={ontologyOpen} />
+      <OntologyGraph />
       {sessionId && (
         <div className="final-report-download">
+
           <ReportLink
             click={() => setOntologyOpen(!ontologyOpen)}
             title={t("Knowledge graph")}

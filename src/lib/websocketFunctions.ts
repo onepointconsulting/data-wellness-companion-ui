@@ -31,9 +31,18 @@ export function sendStartSession(
   }
 }
 
-export function switchSession(socket: Socket<any, any> | null, sessionId: string,
-                              expectedInteviewSteps: number | null = IGNORED_STEPS) {
-  safeEmit(socket, WEBSOCKET_COMMAND.START_SESSION, sessionId, expectedInteviewSteps, i18next?.language);
+export function switchSession(
+  socket: Socket<any, any> | null,
+  sessionId: string,
+  expectedInteviewSteps: number | null = IGNORED_STEPS,
+) {
+  safeEmit(
+    socket,
+    WEBSOCKET_COMMAND.START_SESSION,
+    sessionId,
+    expectedInteviewSteps,
+    i18next?.language,
+  );
 }
 
 export function sendClientMessage(
