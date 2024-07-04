@@ -25,8 +25,10 @@ export function sendStartSession(
     !params.get(ONEPOINT_ID_PARAM) &&
     !params.get(ID_PARAM)
   ) {
+    // Display registration message if the user is re-using the tool and there is no identifier in the URL.
     setDisplayRegistrationMessage(true);
   } else {
+    // Start a new session.
     switchSession(socket, getSessionId(), expectedInteviewSteps);
   }
 }

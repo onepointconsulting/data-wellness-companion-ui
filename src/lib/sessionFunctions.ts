@@ -75,8 +75,15 @@ function appendToSessionHistory(
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        sessionHistoryObj.push(currentSession);
-        saveSessionHistory(sessionHistoryObj);
+        if (
+          !sessionHistoryObj.find(
+            (session: any) => session.id === currentSession.id,
+          )
+        ) {
+          // Only insert if it's not already in the history
+          sessionHistoryObj.push(currentSession);
+          saveSessionHistory(sessionHistoryObj);
+        }
       }
     } catch (e) {
       console.error("Error appending session to history", e);

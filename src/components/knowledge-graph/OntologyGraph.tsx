@@ -216,7 +216,7 @@ export default function OntologyGraph() {
                   key={`ontology_level_${i}`}
                   className="text-base"
                 >
-                  {nodes + 1}
+                  {t("more than")} {nodes + 1}
                 </option>
               ))}
             </select>

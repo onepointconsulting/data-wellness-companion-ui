@@ -42,7 +42,7 @@ export default function ImportantTopics({
 
   return (
     <div className="md:flex flex-row py-2 place-items-center hidden">
-      <div className="text-base mx-1 ">{t("Important Topics")}</div>
+      <div className="text-base mx-1 ">{t("Key topics")}</div>
       <select
         className="list-decimal text-base"
         onChange={onChange}
