@@ -21,8 +21,6 @@ https://github.com/onepointconsulting/data-questionnaire-agent
 
 The configuration for connecting to the server is in the file [index.html](index.html).
 
-````javascript
-
 You can run this project using Yarn:
 
 ```bash
