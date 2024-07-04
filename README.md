@@ -1,30 +1,30 @@
 # Data Wellness Companion User Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application is a user interface for the Data Wellness Companion project. This is the client side of the project hosted
+in https://github.com/onepointconsulting/data-questionnaire-agent.
 
-Currently, two official plugins are available:
+Please note that you will need to have the server running in order to use this application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Building
 
-## Expanding the ESLint configuration
+You can use Yarn to build this project:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+```bash
+yarn run build
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Running
+
+Before you run this project, make sure you have the Python server running. The code for the Python server is here:
+
+https://github.com/onepointconsulting/data-questionnaire-agent
+
+The configuration for connecting to the server is in the file [index.html](index.html).
+
+````javascript
+
+You can run this project using Yarn:
+
+```bash
+yarn run dev
+````
