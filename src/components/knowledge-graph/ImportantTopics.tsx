@@ -44,7 +44,7 @@ export default function ImportantTopics({
     <div className="md:flex flex-row py-2 place-items-center hidden">
       <div className="text-base mx-1 ">{t("Key topics")}</div>
       <select
-        className="list-decimal text-base"
+        className="list-decimal text-base dark:text-gray-100 dark:bg-gray-800"
         onChange={onChange}
         value={importantTopic}
       >

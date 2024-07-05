@@ -206,7 +206,7 @@ export default function OntologyGraph() {
           <div className="md:flex flex-row place-items-center py-2 hidden">
             <span className="text-base">{t("Importance filter")}:</span>{" "}
             <select
-              className="text-base"
+              className="text-base dark:text-gray-100 dark:bg-gray-800"
               value={importanceLevel}
               onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
             >
