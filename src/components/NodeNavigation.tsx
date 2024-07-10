@@ -37,6 +37,7 @@ function LightBulb({
     messages,
     expectedNodes,
     clarificationClicked,
+    sending,
     setClarificationClicked,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
@@ -60,7 +61,7 @@ function LightBulb({
     <>
       {missesClarification &&
         isLast &&
-        activeMessage &&
+        activeMessage && !sending &&
         i > 0 &&
         !clarificationClicked &&
         !isRecommendation && (
@@ -171,6 +172,7 @@ export default function NodeNavigation() {
     setUpdatingExpectedNodes,
     isLast,
     isBeforeReport,
+    sending,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
@@ -200,13 +202,13 @@ export default function NodeNavigation() {
           const showShorten =
             isLast &&
             !updatingExpectedNodes &&
-            !isBeforeReport &&
+            !isBeforeReport && !sending &&
             expectedNodes > 3 &&
             i > 0 &&
             i === currentMessage &&
             expectedNodes !== currentMessage + 1;
           const showExtend =
-            isBeforeReport &&
+            isBeforeReport && !sending &&
             isLast &&
             !updatingExpectedNodes &&
             i === currentMessage;

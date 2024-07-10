@@ -25,4 +25,4 @@ You can run this project using Yarn:
 
 ```bash
 yarn run dev
-````
+```
