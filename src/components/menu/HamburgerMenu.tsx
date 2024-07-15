@@ -61,7 +61,7 @@ export default function HamburgerMenu() {
         </svg>
       </div>
       {open && (
-        <menu ref={menuRef}>
+        <menu ref={menuRef} className="animate-fade-down">
           <StartButton />
           <InfoButton />
           <ContactUsButton />

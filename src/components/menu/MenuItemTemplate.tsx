@@ -13,7 +13,7 @@ export default function MenuItemTemplate({
   return (
     <div className="menu-item" onClick={func}>
       <div className="w-12">{children}</div>
-      <div className="pl-2 pt-1">
+      <div className="pt-1 pl-2">
         <button>{t(title)}</button>
       </div>
     </div>

@@ -73,7 +73,7 @@ export default function Suggestions({ message }: { message: Message }) {
 
   function handleSelectedSuggestion(
     e: React.MouseEvent,
-    newSuggestion: string,
+    newSuggestion: string
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -93,7 +93,7 @@ export default function Suggestions({ message }: { message: Message }) {
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
   return (
-    <div className="container suggestions">
+    <div className="container suggestions animate-fade-down">
       {message.suggestions.map((suggestion, i) => {
         return (
           <SuggestionTemplate
