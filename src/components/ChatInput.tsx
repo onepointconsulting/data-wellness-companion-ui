@@ -30,6 +30,7 @@ export default function ChatInput() {
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
+
   useEffect(() => {
     if (
       selectedSuggestion !== null &&
@@ -70,8 +71,27 @@ export default function ChatInput() {
     }
   }
 
+  const checkSendButton = enoughText(chatText);
   return (
-    <div className="chat-container">
+    <div className="sticky chat-container bottom-8">
+      {/* Pointer for sending the message button. */}
+      <span
+        className={`flex justify-end p-2 mr-3 mb-3 bg-slate-200 dark:bg-slate-700 rounded-full w-fit float-right  ${checkSendButton ? "animate-bounce opacity-75" : ""}`}
+      >
+        <svg
+          className="w-6 h-6 text-violet-500"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </span>
+
+      {/* Input */}
       <div className="chat-input">
         <textarea
           className="chat-textarea"
@@ -80,11 +100,12 @@ export default function ChatInput() {
           id="chat-input"
           value={chatText}
           onChange={(e) => setChatText(e.target.value)}
-          placeholder={`${t("Type your message here and press ENTER")}...`}
+          placeholder={`${t("Please choose a topic or begin typing here")}...`}
           onKeyUp={sendEnterMessage}
           disabled={sending || !connected}
           ref={textAreaRef}
         />
+
         {connected && (
           <button
             onClick={(e) => {
@@ -92,7 +113,7 @@ export default function ChatInput() {
               sendMessage();
             }}
             disabled={!enoughText(chatText) || sending}
-            className="disabled:opacity-10"
+            className="disabled:opacity-1"
           >
             <SendImage enoughText={enoughText(chatText)} />
           </button>

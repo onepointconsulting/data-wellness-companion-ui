@@ -146,7 +146,7 @@ export const AppContextProvider = ({ children }: Props) => {
         confidence,
         setConfidence,
         updatingConfidence,
-        setUpdatingConfidence
+        setUpdatingConfidence,
       }}
     >
       {" "}

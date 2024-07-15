@@ -23,26 +23,29 @@ export default function InteractionPanel() {
   const displayReportGenerationMessage = currentMessage === expectedNodes - 2;
   if (!message.final_report) {
     return (
-      <div className="interaction-panel">
-        <Question
-          message={message}
-          currentMessage={currentMessage}
-          messagesLength={messages.length}
-        />
-        <ExtraFunctionButtons />
-        <Suggestions message={message} />
-        {sending && (
-          <div className="mt-6">
-            <Spinner />
-          </div>
-        )}
-        {sending && displayReportGenerationMessage && (
-          <div className="final-report-message mt-10">
-            {t("Generating final report. This might take 2 to 3 minutes...")}
-          </div>
-        )}
+      <div className="flex flex-col justify-between min-h-screen interaction-panel">
+        <div>
+          <Question
+            message={message}
+            currentMessage={currentMessage}
+            messagesLength={messages.length}
+          />
+          <ExtraFunctionButtons />
+          <Suggestions message={message} />
+          {sending && (
+            <div className="mt-6">
+              <Spinner />
+            </div>
+          )}
+          {sending && displayReportGenerationMessage && (
+            <div className="mt-10 final-report-message">
+              {t("Generating final report. This might take 2 to 3 minutes...")}
+            </div>
+          )}
+          {!isLast && <QuestionAnswer message={message} />}
+        </div>
+
         {isLast && <ChatInput />}
-        {!isLast && <QuestionAnswer message={message} />}
       </div>
     );
   } else {

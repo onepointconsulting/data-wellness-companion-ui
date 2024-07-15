@@ -33,7 +33,7 @@ export default function ConfidenceIcon({ className }: { className?: string }) {
             src={`./confidence-img/${image}`}
             alt={confidence.reasoning}
             title={confidence.reasoning}
-            className="absolute top-0 right-0"
+            className="absolute top-0 right-0 cursor-default"
           />
         </a>
       )}

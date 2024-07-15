@@ -8,7 +8,8 @@ import i18next from "i18next";
  * Used to fetch confidence every time the messages change.
  */
 export default function useConfidence() {
-  const { messages, setConfidence, setUpdatingConfidence } = useContext(AppContext);
+  const { messages, setConfidence, setUpdatingConfidence } =
+    useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function useConfidence() {
         })
         .finally(() => {
           setUpdatingConfidence(false);
-        })
+        });
     }
   }, [messages]);
 }

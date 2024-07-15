@@ -138,7 +138,7 @@ function SingleNode({
   return (
     <>
       <div
-        className={`node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}`}
+        className={`animate-fade-down animate-ease-in-out animate-normal node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}`}
       >
         {i < length ? (
           <a
@@ -184,7 +184,7 @@ export default function NodeNavigation() {
 
   function onChangeExpectedNodes(
     e: React.MouseEvent<HTMLAnchorElement>,
-    newExpectedNodes: number,
+    newExpectedNodes: number
   ) {
     e.preventDefault();
     setUpdatingExpectedNodes(true);
@@ -210,7 +210,7 @@ export default function NodeNavigation() {
           i === currentMessage;
         return (
           <div key={`node_${i}`} className="relative">
-            <div className="flex flex-row absolute right-10">
+            <div className="absolute flex flex-col top-[-2.6rem] right-10">
               {showExtend && (
                 <div className="node-extra-icon-container">
                   <ExtendSession onExtend={onExtend} showExtend={showExtend} />
@@ -230,7 +230,6 @@ export default function NodeNavigation() {
           </div>
         );
       })}
-      <ConfidenceIcon />
     </div>
   );
 }

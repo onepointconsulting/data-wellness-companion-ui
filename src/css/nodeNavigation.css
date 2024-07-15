@@ -1,5 +1,5 @@
 .node-container {
-  @apply flex flex-col items-center justify-start mt-4 ml-5 flex-wrap gap-4 md:gap-8;
+  @apply flex flex-col flex-wrap items-center justify-start gap-4 mt-4 ml-5 md:gap-8;
 }
 
 .node-extra-icon-container {
@@ -27,7 +27,7 @@
 
 .node.active,
 .connector.active {
-  @apply bg-[#0084d7] text-white;
+  @apply bg-[#0084d7] !text-white;
 }
 
 .node.current {
@@ -39,7 +39,7 @@
 }
 
 .node a {
-  @apply block w-full text-center;
+  @apply block w-full text-center text-white;
 }
 
 .connector {

@@ -21,7 +21,7 @@ export default function LanguageSwitch({
       toast({
         title: t("You are disconnected."),
         description: t(
-          "The Data Wellness Companion needs to be connected to change the language."
+          "The Data Wellness Companion needs to be connected to change the language.",
         ),
       });
     } else {
@@ -33,7 +33,7 @@ export default function LanguageSwitch({
         socket,
         expectedNodes,
         setDisplayRegistrationMessage,
-        setChatText
+        setChatText,
       );
     }
   };

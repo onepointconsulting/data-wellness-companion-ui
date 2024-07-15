@@ -6,6 +6,8 @@ import App from "./App.tsx";
 import i18next from "./i18n/i18n.tsx";
 import "./index.css";
 import "react-tooltip/dist/react-tooltip.css";
+import "semantic-ui-css/semantic.min.css";
+import "react-circular-progressbar/dist/styles.css";
 
 // Listen for language change events and update direction
 i18next.on("languageChanged", (lng) => {
@@ -24,5 +26,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </BrowserRouter>
     </I18nextProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

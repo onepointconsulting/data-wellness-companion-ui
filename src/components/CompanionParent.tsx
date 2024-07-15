@@ -1,6 +1,6 @@
 import NodeNavigation from "./NodeNavigation.tsx";
 import { useWebsocket } from "../hooks/useWebsocket.ts";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../context/AppContext.tsx";
 import InteractionPanel from "./InteractionPanel.tsx";
@@ -35,7 +35,6 @@ export default function CompanionParent() {
   const { t } = useTranslation();
   const { setStartSession, displayRegistrationMessage } =
     useContext(AppContext);
-
   useChatHistory();
 
   // Update the state of the session to start
@@ -54,7 +53,6 @@ export default function CompanionParent() {
       <EmailDialogue />
       <InfoDialogue />
       <IntroDialogue />
-      <ConfidenceDialogue />
       <div className="header">
         <div className="header-container">
           <div className="flex flex-row items-end">
@@ -66,15 +64,22 @@ export default function CompanionParent() {
           <HamburgerMenu />
         </div>
       </div>
+
       <div className="container">
-        <div className="flex flex-row">
-          <div className="w-full">
+        {/* Confidence level */}
+        <div className="grid grid-cols-10">
+          <div className="col-span-3 rounded-sm dark:bg-slate-700 bg-slate-200 animate-fade-down animate-ease-in h-screen 2xl:h-[45rem] overflow-auto">
+            {" "}
+            <ConfidenceDialogue />
+          </div>
+
+          <div className="w-full col-span-6 ml-3">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <InteractionPanel />}
             <Disclaimer />
           </div>
-          <div className="w-20"></div>
-          <div>
+
+          <div className="col-span-1">
             <NodeNavigation />
           </div>
         </div>

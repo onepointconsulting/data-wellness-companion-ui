@@ -34,7 +34,7 @@ export default function Question({
   }, [message, currentMessage]);
 
   return (
-    <div className="question container">
+    <div className="container py-3 question">
       <div className="ml-2 dark:text-gray-100">{messageText}</div>
     </div>
   );

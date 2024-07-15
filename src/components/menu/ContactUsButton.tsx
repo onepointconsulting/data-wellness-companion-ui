@@ -8,7 +8,9 @@ export default function ContactUsButton() {
   return (
     <MenuItemTemplate
       title="Contact us"
-      func={() => window.open("https://onepointltd.com", "_blank")}
+      func={() =>
+        window.open("mailto:officialmurtaza01@gmail.com@example.com", "_blank")
+      }
     >
       <svg
         width="21"

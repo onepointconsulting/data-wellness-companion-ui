@@ -8,11 +8,11 @@ export default function OnepointInfo() {
         {t("Company name")}
       </a>{" "}
       {t(
-        "is designed to be your helpful assistant, providing support and guidance to refugees"
+        "is designed to be your helpful assistant, providing support and guidance to refugees",
       )}
       <br />
       {t(
-        "It will go through a series of questions and then will provide you with a report with recommendations at the end."
+        "It will go through a series of questions and then will provide you with a report with recommendations at the end.",
       )}
     </p>
   );

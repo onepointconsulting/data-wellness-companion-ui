@@ -60,7 +60,7 @@ export default function HamburgerMenu() {
         </svg>
       </div>
       {open && (
-        <menu ref={menuRef}>
+        <menu ref={menuRef} className="animate-flip-down animate-ease-in-out">
           <StartButton />
           <InfoButton />
           <ContactUsButton />
