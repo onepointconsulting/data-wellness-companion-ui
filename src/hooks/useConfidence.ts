@@ -8,18 +8,17 @@ import i18next from "i18next";
  * Used to fetch confidence every time the messages change.
  */
 export default function useConfidence() {
-  const { messages, setConfidence, updatingConfidence, setUpdatingConfidence } =
+  const { messages, setConfidence, updatingConfidence, setUpdatingConfidence, currentMessage } =
     useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);
 
   useEffect(() => {
     if (!updatingConfidence) {
-      console.log("Fetching confidence");
       const session = getSession();
       if (session) {
         setUpdatingConfidence(true);
         fetch(
-          `${reportUrl}/confidence/${session.id}?language=${i18next.language}`,
+          `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,
         )
           .then((response) => response.json())
           .then((data) => {

@@ -3,7 +3,15 @@
 }
 
 .node-extra-icon-container {
-  @apply top-0.5 border p-1 border-[#4a4a4a] bg-white dark:bg-gray-800 dark:border-gray-800;
+  @apply border p-1 border-[#4a4a4a] bg-white dark:bg-gray-800 dark:border-gray-800;
+}
+
+.question-mark-icon {
+  @apply inline-block;
+}
+
+.question-mark-icon .question-mark-icon-svg {
+  @apply !w-7 !h-7 !fill-black dark:!fill-white
 }
 
 .node {

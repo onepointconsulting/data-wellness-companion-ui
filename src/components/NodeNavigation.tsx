@@ -1,102 +1,18 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
-import { FaFlagCheckered, FaHourglassHalf } from "react-icons/fa";
-import { FaRegLightbulb } from "react-icons/fa6";
-import { Message } from "../model/message.ts";
+import { FaFlagCheckered } from "react-icons/fa";
 import {
-  sendClarifyQuestion,
   sendExtendSession,
 } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
-import { IoContractOutline } from "react-icons/io5";
 import StatefulIcon from "./buttons/StatefulIcon.tsx";
 import { VscExtensions } from "react-icons/vsc";
-import ConfidenceIcon from "./buttons/ConfidenceIcon.tsx";
 
 function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
   if (i === totalNodes - 1) {
     return <FaFlagCheckered className="mx-auto" />;
   }
   return <>{i + 1}</>;
-}
-
-/**
- * The light bulb icon that can be used to get a clarification.
- * @constructor
- */
-function LightBulb({
-  i,
-  activeMessage,
-}: {
-  i: number;
-  activeMessage: boolean;
-}) {
-  const {
-    isLast,
-    currentMessage,
-    messages,
-    expectedNodes,
-    clarificationClicked,
-    sending,
-    setClarificationClicked,
-  } = useContext(AppContext);
-  const { socket } = useContext(ChatContext);
-  const message: Message = messages[currentMessage];
-  const missesClarification = !message?.clarification;
-
-  useEffect(() => {
-    setClarificationClicked(false);
-  }, [currentMessage]);
-
-  function onClarify(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    const question = message.question;
-    setClarificationClicked(true);
-    sendClarifyQuestion(socket.current, question);
-  }
-
-  const isRecommendation = expectedNodes === currentMessage + 1;
-
-  return (
-    <>
-      {missesClarification &&
-        isLast &&
-        activeMessage && !sending &&
-        i > 0 &&
-        !clarificationClicked &&
-        !isRecommendation && (
-          <div className="node-extra-icon-container">
-            <a href="#" onClick={onClarify}>
-              <FaRegLightbulb className="w-6 h-6" />
-            </a>
-          </div>
-        )}
-      {missesClarification && clarificationClicked && activeMessage && (
-        <div className="node-extra-icon-container">
-          <FaHourglassHalf className="w-6 h-6" />
-        </div>
-      )}
-    </>
-  );
-}
-
-function ShortenSession({
-  onShorten,
-  showShorten,
-}: {
-  onShorten: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-  showShorten: boolean;
-}) {
-  if (!showShorten) return <></>;
-  return (
-    <StatefulIcon
-      show={showShorten}
-      onClick={onShorten}
-      title={"Shorten the current session by one step"}
-    >
-      <IoContractOutline className="w-6 h-6" />
-    </StatefulIcon>
-  );
 }
 
 function ExtendSession({
@@ -176,10 +92,6 @@ export default function NodeNavigation() {
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
-  function onShorten(e: React.MouseEvent<HTMLAnchorElement>) {
-    onChangeExpectedNodes(e, expectedNodes - 1);
-  }
-
   function onExtend(e: React.MouseEvent<HTMLAnchorElement>) {
     onChangeExpectedNodes(e, expectedNodes + 1);
   }
@@ -198,17 +110,9 @@ export default function NodeNavigation() {
       {!!expectedNodes &&
         expectedNodes > 0 &&
         [...Array(expectedNodes).keys()].map((i) => {
-          const activeMessage = i === currentMessage;
-          const showShorten =
-            isLast &&
-            !updatingExpectedNodes &&
-            !isBeforeReport && !sending &&
-            expectedNodes > 3 &&
-            i > 0 &&
-            i === currentMessage &&
-            expectedNodes !== currentMessage + 1;
           const showExtend =
-            isBeforeReport && !sending &&
+            isBeforeReport &&
+            !sending &&
             isLast &&
             !updatingExpectedNodes &&
             i === currentMessage;
@@ -223,21 +127,11 @@ export default function NodeNavigation() {
                     />
                   </div>
                 )}
-                {showShorten && (
-                  <div className="node-extra-icon-container">
-                    <ShortenSession
-                      onShorten={onShorten}
-                      showShorten={showShorten}
-                    />
-                  </div>
-                )}
-                <LightBulb i={i} activeMessage={activeMessage} />
               </div>
               <SingleNode expectedNodes={expectedNodes} i={i} />
             </div>
           );
         })}
-      <ConfidenceIcon />
     </div>
   );
 }

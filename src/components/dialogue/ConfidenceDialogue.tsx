@@ -5,7 +5,7 @@ import onCloseDialogue, { showDialogue } from "../../lib/dialogFunctions.ts";
 import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import MarkdownComponent from "../Markdown.tsx";
-import ConfidenceIcon from "../buttons/ConfidenceIcon.tsx";
+import ConfidenceHint from "../buttons/ConfidenceHint.tsx";
 
 export const CONFIDENCE_DIALOGUE_ID = "confidence-dialogue";
 
@@ -40,8 +40,8 @@ export default function ConfidenceDialogue() {
         <div className="text-2xl font-bold pt-2">
           {confidence?.rating ? t(`confidence_${confidence?.rating}`) : "???"}
         </div>
-        <div className="text-base pt-2 mx-auto">
-          <ConfidenceIcon className="!w-[5rem] !h-[5rem] md:!w-[8rem] md:!h-[8rem]" />
+        <div className="text-base py-4">
+          <ConfidenceHint className="text-xl text-left" />
         </div>
         <div className="text-base pt-2">
           <MarkdownComponent content={confidence?.reasoning || ""} />

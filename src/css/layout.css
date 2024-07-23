@@ -36,7 +36,7 @@
 
 #root .question svg,
 #root .question-answer svg {
-  @apply hidden lg:block min-w-8 h-8 mr-2 fill-[#0084d7];
+  @apply hidden lg:block min-w-8 h-8 fill-[#0084d7];
 }
 
 #root .suggestions {
@@ -166,7 +166,7 @@
 }
 
 #root .clarification {
-  @apply flex flex-row justify-start w-full max-w-[1280px] mx-auto pt-4;
+  @apply flex flex-row justify-start w-full max-w-[1280px] mx-auto pt-0;
 }
 
 #root .clarification svg {

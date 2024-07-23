@@ -73,7 +73,7 @@ export default function Suggestions({ message }: { message: Message }) {
 
   function handleSelectedSuggestion(
     e: React.MouseEvent,
-    newSuggestion: string
+    newSuggestion: string,
   ) {
     e.preventDefault();
     e.stopPropagation();

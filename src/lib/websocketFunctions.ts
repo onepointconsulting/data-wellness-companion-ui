@@ -2,10 +2,7 @@ import { Socket } from "socket.io-client";
 import { WEBSOCKET_COMMAND } from "../model/websocketCommands.ts";
 import { getSession, getSessionHistory } from "./sessionFunctions.ts";
 import i18next from "i18next";
-
-const ONEPOINT_ID_PARAM = "onepoint_id";
-
-const ID_PARAM = "id";
+import { extractIdParam } from "./urlParamExtraction.ts";
 
 const IGNORED_STEPS = -1;
 
@@ -19,12 +16,7 @@ export function sendStartSession(
   expectedInteviewSteps: number | null,
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
 ) {
-  const params = new URLSearchParams(window.location.search);
-  if (
-    getSessionHistory().length > 0 &&
-    !params.get(ONEPOINT_ID_PARAM) &&
-    !params.get(ID_PARAM)
-  ) {
+  if (getSessionHistory().length > 0 && !extractIdParam()) {
     // Display registration message if the user is re-using the tool and there is no identifier in the URL.
     setDisplayRegistrationMessage(true);
   } else {
@@ -38,12 +30,14 @@ export function switchSession(
   sessionId: string,
   expectedInteviewSteps: number | null = IGNORED_STEPS,
 ) {
+  const client_id = extractIdParam();
   safeEmit(
     socket,
     WEBSOCKET_COMMAND.START_SESSION,
     sessionId,
     expectedInteviewSteps,
     i18next?.language,
+    client_id
   );
 }
 
