@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext.tsx";
 import { showConfidenceDialogue } from "../dialogue/ConfidenceDialogue.tsx";
 import { FaHourglassHalf } from "react-icons/fa";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const ADVICE_DICTIONARY = new Map();
 ADVICE_DICTIONARY.set("outstanding", "advice-generate-advice");
@@ -17,8 +17,22 @@ ADVICE_DICTIONARY.set("low", "advice-proceed-with-questions");
  */
 export default function ConfidenceHint({ className }: { className?: string }) {
   const [t] = useTranslation();
-  const { confidence, updatingConfidence, currentMessage, expectedNodes, isLast, clarificationClicked } = useContext(AppContext);
-  if (!confidence || currentMessage === 0 || currentMessage === expectedNodes - 1 || !isLast || clarificationClicked) return <></>;
+  const {
+    confidence,
+    updatingConfidence,
+    currentMessage,
+    expectedNodes,
+    isLast,
+    clarificationClicked,
+  } = useContext(AppContext);
+  if (
+    !confidence ||
+    currentMessage === 0 ||
+    currentMessage === expectedNodes - 1 ||
+    !isLast ||
+    clarificationClicked
+  )
+    return <></>;
   const rating = confidence.rating;
   return (
     <div className={`${className}`}>

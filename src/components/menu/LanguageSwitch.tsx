@@ -20,8 +20,7 @@ export default function LanguageSwitch({
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
   const { socket } = useContext(ChatContext);
-  const { messages, setDisplayRegistrationMessage, expectedNodes } =
-    useContext(AppContext);
+  const { messages, setDisplayRegistrationMessage } = useContext(AppContext);
 
   const onClickLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (!connected) {
@@ -39,7 +38,6 @@ export default function LanguageSwitch({
       restartCompanion(
         messages,
         socket,
-        expectedNodes,
         setDisplayRegistrationMessage,
         setChatText,
       );

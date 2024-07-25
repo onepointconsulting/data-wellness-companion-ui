@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
@@ -9,70 +9,25 @@ import DialogueHeader from "./DialogueHeader.tsx";
 
 export const RESTART_DIALOGUE_ID = "restart-dialogue";
 
-const MIN_STEPS = 4;
-
-const MAX_STEPS = 8;
-
 function onClose() {
   onCloseDialogue(RESTART_DIALOGUE_ID);
-}
-
-function Slider({
-  value,
-  onChange,
-}: {
-  value: number;
-  onChange: (e: any) => void;
-}) {
-  return (
-    <div className="w-full">
-      <div className="pl-2 flex flex-1">
-        <div className="pr-4 font-bold">{value}</div>
-        <div className="flex flex-col w-full">
-          <input
-            id="expectedInterviewSteps"
-            type="range"
-            value={value}
-            min={MIN_STEPS}
-            max={MAX_STEPS}
-            step={1}
-            onChange={onChange}
-            list="expectedInterviewStepsValues"
-          />
-          <datalist id="expectedInterviewStepsValues">
-            {Array.from({ length: MAX_STEPS - MIN_STEPS + 1 }, (_, i) => (
-              <option
-                key={i}
-                value={i + MIN_STEPS}
-                label={`${i + MIN_STEPS}`}
-              />
-            ))}
-          </datalist>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 export default function RestartDialogue() {
   const { socket } = useContext(ChatContext);
   const { t } = useTranslation();
   const {
-    expectedNodes,
     messages,
     setDisplayRegistrationMessage,
     setChatText,
     setSelectedHistoricalSession,
   } = useContext(AppContext);
-  const [expectedInterviewSteps, setExpectedInterviewSteps] =
-    useState(expectedNodes);
 
   function onOk() {
     setSelectedHistoricalSession(null);
     restartCompanion(
       messages,
       socket,
-      expectedInterviewSteps,
       setDisplayRegistrationMessage,
       setChatText,
     );
@@ -149,17 +104,6 @@ export default function RestartDialogue() {
       <div className="companion-dialogue-content">
         <section className="mt-4">
           <p>{t("Would you like to restart the companion?")}</p>
-          <div className="companion-dialogue-config">
-            <label htmlFor="expectedInterviewSteps" className="text-nowrap">
-              {t("Interview Steps")}:{" "}
-            </label>
-            <Slider
-              value={expectedInterviewSteps}
-              onChange={(e) =>
-                setExpectedInterviewSteps(parseInt(e.target.value))
-              }
-            />
-          </div>
         </section>
       </div>
 

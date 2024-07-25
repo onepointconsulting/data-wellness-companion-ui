@@ -26,6 +26,7 @@ export default function ChatInput() {
     connected,
     chatText,
     setChatText,
+    updatingConfidence
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -94,7 +95,7 @@ export default function ChatInput() {
             disabled={!enoughText(chatText) || sending}
             className="disabled:opacity-10"
           >
-            <SendImage enoughText={enoughText(chatText)} />
+            {!updatingConfidence && <SendImage enoughText={enoughText(chatText)} />}
           </button>
         )}
       </div>

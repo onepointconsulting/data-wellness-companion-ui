@@ -6,7 +6,7 @@ import ChatInput from "./ChatInput.tsx";
 import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
-import ExtraFunctionButtons from "./ExtraFunctionButtons.tsx";
+import ClarificationArea from "./ClarificationArea.tsx";
 import { useTranslation } from "react-i18next";
 
 export default function InteractionPanel() {
@@ -29,19 +29,23 @@ export default function InteractionPanel() {
           currentMessage={currentMessage}
           messagesLength={messages.length}
         />
-        <ExtraFunctionButtons />
-        <Suggestions message={message} />
         {sending && (
-          <div className="mt-6">
-            <Spinner />
-          </div>
+          <>
+            <div className="mt-6 mb-8">
+              <Spinner />
+            </div>
+            {displayReportGenerationMessage && (
+              <div className="final-report-message mt-10 mb-2">
+                {t(
+                  "Generating final report. This might take 2 to 3 minutes...",
+                )}
+              </div>
+            )}
+          </>
         )}
-        {sending && displayReportGenerationMessage && (
-          <div className="final-report-message mt-10">
-            {t("Generating final report. This might take 2 to 3 minutes...")}
-          </div>
-        )}
+        <ClarificationArea />
         {isLast && <ChatInput />}
+        <Suggestions message={message} />
         {!isLast && <QuestionAnswer message={message} />}
       </div>
     );

@@ -1,16 +1,47 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { getSession } from "../lib/sessionFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
 import i18next from "i18next";
+import { Confidence } from "../model/confidence.ts";
+import CONFIDENCE from "../lib/confidenceConstants.ts";
+import { sendExtendSession } from "../lib/websocketFunctions.ts";
+
+const LOW_BOUNDARY = [CONFIDENCE.LOW, CONFIDENCE.MEDIOCRE, CONFIDENCE.MEDIUM];
+
+const MESSAGE_LOWER_BOUND = 4;
+const MESSAGE_UPPER_BOUND = 10;
 
 /**
  * Used to fetch confidence every time the messages change.
  */
 export default function useConfidence() {
-  const { messages, setConfidence, updatingConfidence, setUpdatingConfidence, currentMessage } =
-    useContext(AppContext);
-  const { reportUrl } = useContext(ChatContext);
+  const {
+    messages,
+    setConfidence,
+    updatingConfidence,
+    setUpdatingConfidence,
+    expectedNodes,
+    currentMessage,
+    setUpdatingExpectedNodes,
+  } = useContext(AppContext);
+  const { reportUrl, socket } = useContext(ChatContext);
+
+  const updateNodes = useCallback(
+    (confidence: Confidence) => {
+      const { rating } = confidence;
+      if (
+        LOW_BOUNDARY.includes(rating) &&
+        expectedNodes - 1 === messages.length &&
+        messages.length >= MESSAGE_LOWER_BOUND &&
+        messages.length < MESSAGE_UPPER_BOUND
+      ) {
+        setUpdatingExpectedNodes(true);
+        sendExtendSession(socket.current, expectedNodes + 1);
+      }
+    },
+    [setUpdatingExpectedNodes, currentMessage, socket],
+  );
 
   useEffect(() => {
     if (!updatingConfidence) {
@@ -23,6 +54,7 @@ export default function useConfidence() {
           .then((response) => response.json())
           .then((data) => {
             setConfidence(data);
+            updateNodes(data);
           })
           .catch((error) => {
             console.error("Error fetching confidence", error);

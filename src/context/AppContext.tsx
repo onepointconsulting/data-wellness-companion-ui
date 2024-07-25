@@ -48,7 +48,7 @@ interface AppState {
   setOntologyOpen: (ontologyOpen: boolean) => void;
 }
 
-const DEFAULT_EXPECTED_NODES = 6;
+export const DEFAULT_EXPECTED_NODES = 6;
 
 function createAppState(): AppState {
   const messages: Message[] = [];

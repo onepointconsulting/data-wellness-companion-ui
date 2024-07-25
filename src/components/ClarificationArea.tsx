@@ -11,7 +11,7 @@ import { GrContract, GrExpand } from "react-icons/gr";
  * Used to display the question clarification.
  * @constructor
  */
-export default function ExtraFunctionButtons() {
+export default function ClarificationArea() {
   const {
     currentMessage,
     messages,

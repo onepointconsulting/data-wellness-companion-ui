@@ -1,11 +1,10 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
-import {ChatContext} from "../../context/ChatContext.tsx";
-import {Message} from "../../model/message.ts";
-import {sendClarifyQuestion} from "../../lib/websocketFunctions.ts";
-import {FaRegLightbulb} from "react-icons/fa6";
-import {FaHourglassHalf} from "react-icons/fa";
-
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
+import { ChatContext } from "../../context/ChatContext.tsx";
+import { Message } from "../../model/message.ts";
+import { sendClarifyQuestion } from "../../lib/websocketFunctions.ts";
+import { FaRegLightbulb } from "react-icons/fa6";
+import { FaHourglassHalf } from "react-icons/fa";
 
 /**
  * The light bulb icon that can be used to get a clarification.

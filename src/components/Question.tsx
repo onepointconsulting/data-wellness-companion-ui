@@ -1,6 +1,5 @@
-import {Message} from "../model/message.ts";
-import {useEffect, useState} from "react";
-import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
+import { Message } from "../model/message.ts";
+import { useEffect, useState } from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
 
 const STEP_MILLI_SECONDS = 25;
@@ -17,10 +16,10 @@ function incrementalText(text: string, setMessageText: (text: string) => void) {
 }
 
 export default function Question({
-                                   message,
-                                   currentMessage,
-                                   messagesLength,
-                                 }: {
+  message,
+  currentMessage,
+  messagesLength,
+}: {
   message: Message;
   currentMessage: number;
   messagesLength: number;
@@ -38,10 +37,9 @@ export default function Question({
   return (
     <>
       <div className="question container">
-        <div className="dark:text-gray-100">{messageText}{' '}<LightBulb /></div>
-      </div>
-      <div className="text-right mt-6 mr-6">
-        <ConfidenceHint className="text-base md:text-lg underline"/>
+        <div className="dark:text-gray-100">
+          {messageText} <LightBulb />
+        </div>
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import NodeNavigation from "./NodeNavigation.tsx";
 import { useWebsocket } from "../hooks/useWebsocket.ts";
 import { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { AppContext } from "../context/AppContext.tsx";
 import InteractionPanel from "./InteractionPanel.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
@@ -32,7 +31,6 @@ import useConfidence from "../hooks/useConfidence.ts";
 // }
 
 export default function CompanionParent() {
-  const { t } = useTranslation();
   const { setStartSession, displayRegistrationMessage } =
     useContext(AppContext);
 
@@ -59,9 +57,6 @@ export default function CompanionParent() {
         <div className="header-container">
           <div className="flex flex-row items-end">
             <img className="w-48" src="logo.svg" alt="D-Well logo" />
-            <span className="experimental dark:text-gray-100 dark:bg-gray-500">
-              {t("Experimental")}
-            </span>
           </div>
           <HamburgerMenu />
         </div>

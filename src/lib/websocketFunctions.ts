@@ -37,7 +37,7 @@ export function switchSession(
     sessionId,
     expectedInteviewSteps,
     i18next?.language,
-    client_id
+    client_id,
   );
 }
 
