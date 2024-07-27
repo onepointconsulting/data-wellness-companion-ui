@@ -9,7 +9,7 @@ import { sendExtendSession } from "../lib/websocketFunctions.ts";
 
 const LOW_BOUNDARY = [CONFIDENCE.LOW, CONFIDENCE.MEDIOCRE, CONFIDENCE.MEDIUM];
 
-const MESSAGE_LOWER_BOUND = 4;
+export const MESSAGE_LOWER_BOUND = 4;
 const MESSAGE_UPPER_BOUND = 10;
 
 /**
@@ -31,10 +31,13 @@ export default function useConfidence() {
     (confidence: Confidence) => {
       const { rating } = confidence;
       if (
+        currentMessage > 0 &&
+        currentMessage + 1 === messages.length &&
+        !messages.some((message) => message.final_report) &&
         LOW_BOUNDARY.includes(rating) &&
         expectedNodes - 1 === messages.length &&
         messages.length >= MESSAGE_LOWER_BOUND &&
-        messages.length < MESSAGE_UPPER_BOUND
+        messages.length < MESSAGE_UPPER_BOUND - 1
       ) {
         setUpdatingExpectedNodes(true);
         sendExtendSession(socket.current, expectedNodes + 1);
@@ -46,7 +49,7 @@ export default function useConfidence() {
   useEffect(() => {
     if (!updatingConfidence) {
       const session = getSession();
-      if (session) {
+      if (session && currentMessage > 1) {
         setUpdatingConfidence(true);
         fetch(
           `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,
@@ -64,5 +67,5 @@ export default function useConfidence() {
           });
       }
     }
-  }, [messages]);
+  }, [messages, currentMessage]);
 }

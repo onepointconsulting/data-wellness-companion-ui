@@ -86,7 +86,7 @@
 
 #root .chat-input {
   @apply w-full px-4 flex flex-row items-center justify-start
-    rounded-lg bg-white focus-within:outline focus-within:outline-offset-2
+    rounded-lg bg-white border-[1px] border-[#4a4a4a] dark:border-[#a4a4a4] focus-within:outline focus-within:outline-offset-2
     focus-within:outline-1 focus-within:outline-[#0084d7] mt-2 lg:mt-4 dark:bg-gray-800;
 }
 

@@ -10,7 +10,7 @@ export default function Disclaimer() {
 
   return (
     <div className="flex flex-row justify-center text-gray-500 align-middle disclaimer text-normal dark:text-gray-100">
-      <p>{t("disclaimer")}.</p>
+      <p>{t("disclaimer")}</p>
     </div>
   );
 }

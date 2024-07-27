@@ -10,8 +10,13 @@
   @apply text-lg md:text-xl font-bold mt-1;
 }
 
-#root .markdown-body strong {
+#root .markdown-body strong,
+#root .markdown-body code {
   @apply bg-[#e6f3fb] px-2 rounded-lg font-normal dark:text-black;
+}
+
+#root .markdown-body code {
+  @apply text-center block;
 }
 
 .experimental {

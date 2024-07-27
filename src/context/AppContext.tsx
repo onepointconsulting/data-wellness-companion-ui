@@ -46,6 +46,8 @@ interface AppState {
   setOntology: (ontology: Ontology) => void;
   ontologyOpen: boolean;
   setOntologyOpen: (ontologyOpen: boolean) => void;
+  generatingReport: boolean;
+  setGeneratingReport: (generatingReport: boolean) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -92,6 +94,8 @@ function createAppState(): AppState {
     setOntology: (_) => {},
     ontologyOpen: false,
     setOntologyOpen: (_) => {},
+    generatingReport: false,
+    setGeneratingReport: (_) => {},
   };
 }
 
@@ -118,6 +122,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [selectedHistoricalSession, setSelectedHistoricalSession] = useState<
     string | null
   >(null);
+  const [generatingReport, setGeneratingReport] = useState(false);
   const [ontology, setOntology] = useState<Ontology>({
     relationships: [],
     betweenness_centrality: {},
@@ -178,6 +183,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setOntology,
         ontologyOpen,
         setOntologyOpen,
+        generatingReport,
+        setGeneratingReport,
       }}
     >
       {" "}

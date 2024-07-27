@@ -74,6 +74,10 @@ export function sendExtendSession(
   );
 }
 
+export function generateReportNow(socket: Socket<any, any> | null) {
+  safeEmit(socket, WEBSOCKET_COMMAND.GENERATE_REPORT_NOW, getSessionId());
+}
+
 function safeEmit(
   socket: Socket<any, any> | null,
   event: string,

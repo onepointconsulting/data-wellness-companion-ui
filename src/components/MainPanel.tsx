@@ -7,12 +7,18 @@ import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
 import ClarificationArea from "./ClarificationArea.tsx";
-import { useTranslation } from "react-i18next";
+import SpinnerArea from "./SpinnerArea.tsx";
+import GiveReportNow from "./GiveReportNow.tsx";
 
-export default function InteractionPanel() {
-  const [t] = useTranslation();
-  const { currentMessage, messages, sending, expectedNodes, isLast } =
-    useContext(AppContext);
+export default function MainPanel() {
+  const {
+    currentMessage,
+    messages,
+    sending,
+    expectedNodes,
+    isLast,
+    generatingReport,
+  } = useContext(AppContext);
   const message = messages[currentMessage];
   if (!message)
     return (
@@ -20,7 +26,8 @@ export default function InteractionPanel() {
         <Spinner />
       </div>
     );
-  const displayReportGenerationMessage = currentMessage === expectedNodes - 2;
+  const displayReportGenerationMessage =
+    currentMessage === expectedNodes - 2 || generatingReport;
   if (!message.final_report) {
     return (
       <div className="interaction-panel">
@@ -29,24 +36,15 @@ export default function InteractionPanel() {
           currentMessage={currentMessage}
           messagesLength={messages.length}
         />
-        {sending && (
-          <>
-            <div className="mt-6 mb-8">
-              <Spinner />
-            </div>
-            {displayReportGenerationMessage && (
-              <div className="final-report-message mt-10 mb-2">
-                {t(
-                  "Generating final report. This might take 2 to 3 minutes...",
-                )}
-              </div>
-            )}
-          </>
-        )}
+        {!isLast && <QuestionAnswer message={message} />}
+        <SpinnerArea
+          sending={sending}
+          displayReportGenerationMessage={displayReportGenerationMessage}
+        />
         <ClarificationArea />
         {isLast && <ChatInput />}
+        <GiveReportNow />
         <Suggestions message={message} />
-        {!isLast && <QuestionAnswer message={message} />}
       </div>
     );
   } else {

@@ -60,10 +60,11 @@ export default function ClarificationArea() {
 
   if (currentMessage === 0 || message.final_report) return null;
 
-  console.log("showClarification", showClarification);
+  console.log("updatingExpectedNodes", updatingExpectedNodes);
 
   return (
     <div className="clarification">
+      {updatingExpectedNodes && "updatingExpectedNodes"}
       {updatingExpectedNodes && <FaHourglassHalf />}
       {message.clarification && (
         <section

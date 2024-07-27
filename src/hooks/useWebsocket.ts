@@ -8,10 +8,16 @@ import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
 import { Message } from "../model/message.ts";
 import { toast } from "../../@/components/ui/use-toast.ts";
 import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface ServerMessage {
   session_id: string;
   server_messages: Message[];
+}
+
+interface SingleMessage {
+  session_id: string;
+  question: string;
 }
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
@@ -55,8 +61,12 @@ function extractInterviewSteps(
 }
 
 export function useWebsocket() {
-  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } =
-    useContext(AppContext);
+  const [t] = useTranslation();
+  const {
+    setDisplayRegistrationMessage,
+    setUpdatingExpectedNodes,
+    setGeneratingReport,
+  } = useContext(AppContext);
   const { socket, websocketUrl } = useContext(ChatContext);
   const {
     setConnected,
@@ -95,22 +105,36 @@ export function useWebsocket() {
 
     function onServerMessage(value: string) {
       const serverMessages = JSON.parse(value);
-      setMessages(adaptServerMessages(serverMessages));
+      const messages = adaptServerMessages(serverMessages);
+      setMessages(messages);
       setCurrentMessageHistory(serverMessages.server_messages.length - 1);
+      const hasFinalReport = messages.some((message) => message.final_report);
+      if (hasFinalReport) {
+        setExpectedNodes(messages.length);
+      }
       setSending(false);
+      setGeneratingReport(false);
+    }
+
+    function onErrorMessage(value: string) {
+      const serverMessage: SingleMessage = JSON.parse(value);
+      toast({
+        title: t("Error"),
+        description: t(serverMessage.question),
+      });
     }
 
     function onExtendSession(sessionSteps: number) {
       if (sessionSteps > 0) {
         setExpectedNodes(sessionSteps);
         toast({
-          title: "Interview Steps Updated",
-          description: `The interview has been extended to ${sessionSteps} steps.`,
+          title: t("Interview Steps Updated"),
+          description: t("interview-steps-updated", { sessionSteps }),
         });
       } else {
         toast({
-          title: "Interview Steps Update Failed",
-          description: `The interview steps could not be extended to ${sessionSteps} steps.`,
+          title: t("Interview Steps Update Failed"),
+          description: t("interview-steps-update-failed", { sessionSteps }),
           variant: "destructive",
         });
       }
@@ -122,6 +146,7 @@ export function useWebsocket() {
     socket.current.on(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE, onServerMessage);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION, onExtendSession);
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
 
     return () => {
       socket.current?.off(
@@ -138,6 +163,7 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION,
         onExtendSession,
       );
+      socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
     };
   }, []);
 }

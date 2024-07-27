@@ -2,8 +2,7 @@ import NodeNavigation from "./NodeNavigation.tsx";
 import { useWebsocket } from "../hooks/useWebsocket.ts";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
-import InteractionPanel from "./InteractionPanel.tsx";
-import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
+import MainPanel from "./MainPanel.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import Disclaimer from "./Disclaimer.tsx";
@@ -52,7 +51,6 @@ export default function CompanionParent() {
       <EmailDialogue />
       <InfoDialogue />
       <IntroDialogue />
-      <ConfidenceDialogue />
       <div className="header">
         <div className="header-container">
           <div className="flex flex-row items-end">
@@ -65,7 +63,7 @@ export default function CompanionParent() {
         <div className="flex flex-row">
           <div className="w-full">
             {displayRegistrationMessage && <RegistrationMessage />}
-            {!displayRegistrationMessage && <InteractionPanel />}
+            {!displayRegistrationMessage && <MainPanel />}
             <Disclaimer />
           </div>
           <div className="lg:w-20"></div>

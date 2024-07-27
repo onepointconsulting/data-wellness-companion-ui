@@ -11,7 +11,7 @@
 }
 
 .question-mark-icon .question-mark-icon-svg {
-  @apply !w-7 !h-7 !fill-black dark:!fill-white;
+  @apply !w-8 !h-8 !fill-[#0084d7] dark:!fill-white relative top-1;
 }
 
 .node {
