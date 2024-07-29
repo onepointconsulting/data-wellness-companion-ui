@@ -11,10 +11,10 @@ export default function Spinner() {
     <SpinnerLayout>
       <span className="text-sm text-gray-500 mt-3 -mb-4 mx-auto">
         <img
-          src="./D-Well_Animation_24-06.gif"
+          src="./D-Well_Icons_one_frame.gif"
           alt={t("Please wait")}
           title={t("Please wait")}
-          className="h-24 w-48"
+          className="h-24 w-24"
         />
       </span>
     </SpinnerLayout>
