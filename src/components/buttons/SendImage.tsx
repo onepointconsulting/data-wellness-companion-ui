@@ -1,14 +1,19 @@
 import { useTranslation } from "react-i18next";
-import {useContext} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
 
-function pulsatingText(enoughText: boolean, sending: boolean, connected: boolean, updatingConfidence: boolean): string {
-  if (!sending && connected && !updatingConfidence ) {
-    if(enoughText) {
-        return "pulsating-icon"
+function pulsatingText(
+  enoughText: boolean,
+  sending: boolean,
+  connected: boolean,
+  updatingConfidence: boolean,
+): string {
+  if (!sending && connected && !updatingConfidence) {
+    if (enoughText) {
+      return "pulsating-icon";
     }
   }
-  return ""
+  return "";
 }
 
 export default function SendImage({
@@ -18,11 +23,7 @@ export default function SendImage({
   enoughText: boolean;
   className?: string;
 }) {
-  const {
-    sending,
-    connected,
-    updatingConfidence,
-  } = useContext(AppContext);
+  const { sending, connected, updatingConfidence } = useContext(AppContext);
   const [t] = useTranslation();
   return (
     <svg

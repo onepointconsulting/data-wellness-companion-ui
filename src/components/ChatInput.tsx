@@ -27,7 +27,7 @@ export default function ChatInput() {
     chatText,
     setChatText,
     updatingConfidence,
-    currentMessage
+    currentMessage,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

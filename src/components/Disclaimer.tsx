@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import {Trans} from "react-i18next";
+import { Trans } from "react-i18next";
 import { AppContext } from "../context/AppContext.tsx";
 
 export default function Disclaimer() {
@@ -9,7 +9,12 @@ export default function Disclaimer() {
 
   return (
     <div className="flex flex-row justify-center text-gray-500 align-middle disclaimer text-normal dark:text-gray-100">
-      <p><Trans i18nKey="disclaimer" components={{ anchor: <a />, bold: <strong />, underline: <u /> }}/></p>
+      <p>
+        <Trans
+          i18nKey="disclaimer"
+          components={{ anchor: <a />, bold: <strong />, underline: <u /> }}
+        />
+      </p>
     </div>
   );
 }
