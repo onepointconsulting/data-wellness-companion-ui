@@ -13,7 +13,7 @@ export default function RegistrationMessage() {
         <AlertDescription className="registration-alert-description">
           Please{" "}
           <a
-            href="https://www.onepointltd.com/"
+            href="https://www.onepointltd.com/data-wellness/onepoint-d-well/"
             target="_blank"
             className="default-link"
           >

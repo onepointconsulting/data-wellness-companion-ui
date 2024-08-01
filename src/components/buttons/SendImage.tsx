@@ -1,4 +1,15 @@
 import { useTranslation } from "react-i18next";
+import {useContext} from "react";
+import {AppContext} from "../../context/AppContext.tsx";
+
+function pulsatingText(enoughText: boolean, sending: boolean, connected: boolean, updatingConfidence: boolean): string {
+  if (!sending && connected && !updatingConfidence ) {
+    if(enoughText) {
+        return "pulsating-icon"
+    }
+  }
+  return ""
+}
 
 export default function SendImage({
   enoughText,
@@ -7,6 +18,11 @@ export default function SendImage({
   enoughText: boolean;
   className?: string;
 }) {
+  const {
+    sending,
+    connected,
+    updatingConfidence,
+  } = useContext(AppContext);
   const [t] = useTranslation();
   return (
     <svg
@@ -15,7 +31,7 @@ export default function SendImage({
       viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`send-button ${className}`}
+      className={`send-button ${className} ${pulsatingText(enoughText, sending, connected, updatingConfidence)}`}
     >
       <title>
         {enoughText ? t("Send message") : t("Please enter some text to send")}

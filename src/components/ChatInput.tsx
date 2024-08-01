@@ -27,6 +27,7 @@ export default function ChatInput() {
     chatText,
     setChatText,
     updatingConfidence,
+    currentMessage
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -81,7 +82,7 @@ export default function ChatInput() {
           id="chat-input"
           value={chatText}
           onChange={(e) => setChatText(e.target.value)}
-          placeholder={`${t("Type your message here and press ENTER")}...`}
+          placeholder={`${t(currentMessage === 0 ? "placeholder-start" : "placeholder-normal")}...`}
           onKeyUp={sendEnterMessage}
           disabled={sending || !connected}
           ref={textAreaRef}

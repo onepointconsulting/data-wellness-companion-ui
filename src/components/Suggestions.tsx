@@ -34,11 +34,11 @@ export function SuggestionTemplate({
   i: number;
   handleSuggestion: (e: React.MouseEvent<HTMLElement>) => void;
 }) {
-  const { chatText } = useContext(AppContext);
+  const { chatText, currentMessage, messages } = useContext(AppContext);
   return (
     <div
       key={`suggestion_${i}`}
-      className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || message.answer.includes(suggestion.main_text) ? "active" : ""}`}
+      className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || (messages.length -1 !== currentMessage && message.answer.includes(suggestion.main_text)) ? "active" : ""}`}
       onClick={handleSuggestion}
     >
       {suggestion.img_src && (
@@ -78,7 +78,7 @@ export default function Suggestions({ message }: { message: Message }) {
     e.preventDefault();
     e.stopPropagation();
     if (currentMessage === 0) {
-      setSelectedSuggestion(newSuggestion);
+      setSelectedSuggestion(chatText.includes(newSuggestion) ? "" : newSuggestion);
     } else {
       if (!chatText.includes(newSuggestion)) {
         const concatenated = `${chatText}\n${newSuggestion}`;
