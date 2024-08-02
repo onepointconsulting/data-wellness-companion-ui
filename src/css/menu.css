@@ -3,7 +3,7 @@
 }
 
 .hamburger-menu > div > svg {
-  @apply cursor-pointer mr-5;
+  @apply cursor-pointer mr-2.5;
 }
 
 .hamburger-menu > div > svg > path {

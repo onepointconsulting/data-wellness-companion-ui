@@ -60,13 +60,12 @@ export default function CompanionParent() {
         </div>
       </div>
       <div className="container">
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-8">
           <div className="w-full">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <MainPanel />}
             <Disclaimer />
           </div>
-          <div className="lg:w-20"></div>
           <div>
             <NodeNavigation />
           </div>

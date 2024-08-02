@@ -1,13 +1,8 @@
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { FaFlagCheckered } from "react-icons/fa";
+import {useContext} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {useTranslation} from "react-i18next";
 
-function OutputNode({ i, totalNodes }: { i: number; totalNodes: number }) {
-  if (i === totalNodes - 1) {
-    return <FaFlagCheckered className="mx-auto" />;
-  }
-  return <>{i + 1}</>;
-}
+
 /**
  * The single node used to display a number and used to navigate through a conversation.
  * @param i
@@ -21,35 +16,27 @@ function SingleNode({
   i: number;
   expectedNodes: number;
 }) {
+  const [t] = useTranslation();
   const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
   const length = messages.length;
   const covered = length > i;
-  const connectorCovered = length > i + 1;
+
+  function handleClick(e: React.MouseEvent) {
+      e.preventDefault();
+      setCurrentMessageHistory(i);
+  }
+
+  const isLastNode = i === expectedNodes - 1;
+
   return (
     <>
       <div
-        className={`node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}`}
+        className={`node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}${isLastNode ? " last-node" : ""}`}
+        onClick={(e) => i < length && handleClick(e)}
       >
-        {i < length ? (
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              setCurrentMessageHistory(i);
-            }}
-          >
-            <OutputNode i={i} totalNodes={expectedNodes} />
-          </a>
-        ) : (
-          <OutputNode i={i} totalNodes={expectedNodes} />
-        )}
+        {currentMessage === i && <div className="navigation-icon">{isLastNode ? <img src="./navigation-icon.svg" alt={t("navigation icon")}/> : <img src="./navigation-icon.svg" alt={t("navigation icon")}/>}</div>}
       </div>
-      {i !== expectedNodes - 1 && (
-        <div
-          className={`connector ${connectorCovered ? "active" : ""} ${i > 0 && i % 6 === 0 ? "node-break" : ""}`}
-        ></div>
-      )}
     </>
   );
 }
@@ -63,9 +50,7 @@ export default function NodeNavigation() {
         expectedNodes > 0 &&
         [...Array(expectedNodes).keys()].map((i) => {
           return (
-            <div key={`node_${i}`} className="relative">
-              <SingleNode expectedNodes={expectedNodes} i={i} />
-            </div>
+              <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i} />
           );
         })}
     </div>
