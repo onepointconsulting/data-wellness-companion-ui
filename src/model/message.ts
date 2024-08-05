@@ -14,5 +14,3 @@ export type Message = {
   suggestions: Suggestion[];
   clarification: string | undefined;
 };
-
-export type MessagePair = [Message, Message | null];

@@ -1,7 +1,6 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {useTranslation} from "react-i18next";
-
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { useTranslation } from "react-i18next";
 
 /**
  * The single node used to display a number and used to navigate through a conversation.
@@ -23,8 +22,8 @@ function SingleNode({
   const covered = length > i;
 
   function handleClick(e: React.MouseEvent) {
-      e.preventDefault();
-      setCurrentMessageHistory(i);
+    e.preventDefault();
+    setCurrentMessageHistory(i);
   }
 
   const isLastNode = i === expectedNodes - 1;
@@ -35,7 +34,15 @@ function SingleNode({
         className={`node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}${isLastNode ? " last-node" : ""}`}
         onClick={(e) => i < length && handleClick(e)}
       >
-        {currentMessage === i && <div className="navigation-icon">{isLastNode ? <img src="./navigation-icon.svg" alt={t("navigation icon")}/> : <img src="./navigation-icon.svg" alt={t("navigation icon")}/>}</div>}
+        {currentMessage === i && (
+          <div className="navigation-icon">
+            {isLastNode ? (
+              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
+            ) : (
+              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );
@@ -50,7 +57,7 @@ export default function NodeNavigation() {
         expectedNodes > 0 &&
         [...Array(expectedNodes).keys()].map((i) => {
           return (
-              <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i} />
+            <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i} />
           );
         })}
     </div>

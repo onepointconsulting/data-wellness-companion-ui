@@ -4,7 +4,7 @@ import { VscExtensions } from "react-icons/vsc";
 
 import OnepointInfo from "./OnepointInfo.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
-import { setSeenIntro } from "../../lib/sessionFunctions.ts";
+import { hasSeenIntro } from "../../lib/sessionFunctions.ts";
 import { ImSwitch } from "react-icons/im";
 import { useTranslation } from "react-i18next";
 import InfoIcon from "./InfoIcon.tsx";
@@ -41,7 +41,7 @@ export default function IntroDialogue() {
     <GenericDialogue dialogueId={INTRO_DIALOGUE_ID} clazz="companion-dialogue">
       <DialogueHeader
         onClose={() => {
-          setSeenIntro();
+          hasSeenIntro();
           onCloseDialogue(INTRO_DIALOGUE_ID);
         }}
         className="!pl-3 !pr-0 !pt-0"

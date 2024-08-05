@@ -3,7 +3,7 @@
 }
 
 .node {
-  @apply relative bg-[#e8e8e8] h-[55px] w-[16px] mb-[3px]
+  @apply relative bg-[#e8e8e8] h-[55px] w-[16px] mb-[3px];
 }
 
 .node.active {
@@ -23,7 +23,7 @@
 }
 
 .navigation-icon {
-  @apply absolute top-[-22px] left-[-11px];
+  @apply absolute top-[-22px] left-[-12px];
 }
 
 .navigation-icon > img {
@@ -94,7 +94,6 @@
 }
 
 @media (min-width: 1024px) {
-
   .connector {
     width: 100px;
     height: 20px;

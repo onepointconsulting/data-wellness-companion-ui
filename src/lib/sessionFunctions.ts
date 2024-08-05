@@ -98,6 +98,6 @@ export function getSeenIntro(): boolean {
   return seenIntro === SEEN_INTRO_VALUE;
 }
 
-export function setSeenIntro() {
+export function hasSeenIntro() {
   localStorage.setItem(SEEN_INTRO_KEY, SEEN_INTRO_VALUE);
 }

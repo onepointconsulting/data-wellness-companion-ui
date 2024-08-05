@@ -1,9 +1,10 @@
-import { Message } from "../model/message.ts";
-import { createContext, useState } from "react";
-import { Props } from "./commonModel.ts";
-import { useNavigate } from "react-router-dom";
-import { Confidence } from "../model/confidence.ts";
-import { Ontology } from "../model/ontology.ts";
+import {Message} from "../model/message.ts";
+import {createContext, useEffect, useState} from "react";
+import {Props} from "./commonModel.ts";
+import {useNavigate} from "react-router-dom";
+import {Confidence} from "../model/confidence.ts";
+import {Ontology} from "../model/ontology.ts";
+import {getSeenIntro, hasSeenIntro} from "../lib/sessionFunctions.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -48,6 +49,8 @@ interface AppState {
   setOntologyOpen: (ontologyOpen: boolean) => void;
   generatingReport: boolean;
   setGeneratingReport: (generatingReport: boolean) => void;
+  seenIntro: boolean;
+  setSeenIntro: (seenIntro: boolean) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -64,38 +67,60 @@ function createAppState(): AppState {
     sending: false,
     currentMessage: 0,
     chatText: "",
-    setStartSession: (_) => {},
-    setConnected: (_) => {},
-    setMessages: (_: Message[]) => {},
-    setCurrentMessage: (_) => {},
-    setSelectedSuggestion: (_) => {},
-    setSending: (_) => {},
-    setExpectedNodes: (_) => {},
-    setChatText: (_) => {},
+    setStartSession: (_) => {
+    },
+    setConnected: (_) => {
+    },
+    setMessages: (_: Message[]) => {
+    },
+    setCurrentMessage: (_) => {
+    },
+    setSelectedSuggestion: (_) => {
+    },
+    setSending: (_) => {
+    },
+    setExpectedNodes: (_) => {
+    },
+    setChatText: (_) => {
+    },
     isLast: true,
     isFinalMessage: false,
     isBeforeReport: false,
     displayRegistrationMessage: false,
-    setDisplayRegistrationMessage: (_) => {},
-    setCurrentMessageHistory: (_) => {},
+    setDisplayRegistrationMessage: (_) => {
+    },
+    setCurrentMessageHistory: (_) => {
+    },
     updatingExpectedNodes: false,
-    setUpdatingExpectedNodes: (_) => {},
+    setUpdatingExpectedNodes: (_) => {
+    },
     clarificationClicked: false,
-    setClarificationClicked: (_) => {},
+    setClarificationClicked: (_) => {
+    },
     showClarification: true,
-    setShowClarification: (_) => {},
+    setShowClarification: (_) => {
+    },
     confidence: null,
-    setConfidence: (_) => {},
+    setConfidence: (_) => {
+    },
     updatingConfidence: false,
-    setUpdatingConfidence: (_) => {},
+    setUpdatingConfidence: (_) => {
+    },
     selectedHistoricalSession: null,
-    setSelectedHistoricalSession: (_) => {},
+    setSelectedHistoricalSession: (_) => {
+    },
     ontology: {} as Ontology,
-    setOntology: (_) => {},
+    setOntology: (_) => {
+    },
     ontologyOpen: false,
-    setOntologyOpen: (_) => {},
+    setOntologyOpen: (_) => {
+    },
     generatingReport: false,
-    setGeneratingReport: (_) => {},
+    setGeneratingReport: (_) => {
+    },
+    seenIntro: false,
+    setSeenIntro: (_) => {
+    },
   };
 }
 
@@ -103,7 +128,7 @@ const initial = createAppState();
 
 export const AppContext = createContext<AppState>(initial);
 
-export const AppContextProvider = ({ children }: Props) => {
+export const AppContextProvider = ({children}: Props) => {
   const [connected, setConnected] = useState(false);
   const [startSession, setStartSession] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -129,6 +154,7 @@ export const AppContextProvider = ({ children }: Props) => {
     connected_component_importance_dict: {},
   });
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
+  const [seenIntro, setSeenIntro] = useState(getSeenIntro());
 
   const navigate = useNavigate();
 
@@ -140,6 +166,12 @@ export const AppContextProvider = ({ children }: Props) => {
     setCurrentMessage(currentMessage);
     navigate(`/${currentMessage}${location.search}`);
   }
+
+  useEffect(() => {
+    if (seenIntro) {
+      hasSeenIntro()
+    }
+  }, [seenIntro]);
 
   return (
     <AppContext.Provider
@@ -185,6 +217,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setOntologyOpen,
         generatingReport,
         setGeneratingReport,
+        seenIntro,
+        setSeenIntro,
       }}
     >
       {" "}
