@@ -27,7 +27,7 @@
 #root .container,
 #root .chat-input,
 #root .final-report {
-  @apply max-w-[1280px] mx-auto px-0;
+  @apply max-w-[1280px] mx-auto px-4;
 }
 
 #root .question {
@@ -87,7 +87,7 @@
 }
 
 #root .chat-container {
-  @apply px-3 pb-5;
+  @apply px-3;
 }
 
 #root .chat-input {
@@ -184,7 +184,7 @@
 
 #root .clarification-main,
 #root .disclaimer {
-  @apply px-3 pb-6 text-sm;
+  @apply px-3 text-sm;
 }
 
 #root .clarification-main {

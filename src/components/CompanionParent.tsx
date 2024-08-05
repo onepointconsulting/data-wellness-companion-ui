@@ -1,20 +1,19 @@
-import NodeNavigation from "./NodeNavigation.tsx";
-import { useWebsocket } from "../hooks/useWebsocket.ts";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "../context/AppContext.tsx";
-import InteractionPanel from "./InteractionPanel.tsx";
-import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
-import RestartDialogue from "./dialogue/RestartDialogue.tsx";
-import EmailDialogue from "./dialogue/EmailDialogue.tsx";
-import Disclaimer from "./Disclaimer.tsx";
-import InfoDialogue from "./dialogue/InfoDialogue.tsx";
-import RegistrationMessage from "./RegistrationMessage.tsx";
-import useChatHistory from "../hooks/useChatHistory.ts";
 import { Toaster } from "../../@/components/ui/toaster";
-import IntroDialogue from "./dialogue/IntroDialogue.tsx";
-import HamburgerMenu from "./menu/HamburgerMenu.tsx";
+import { AppContext } from "../context/AppContext.tsx";
+import useChatHistory from "../hooks/useChatHistory.ts";
 import useConfidence from "../hooks/useConfidence.ts";
+import { useWebsocket } from "../hooks/useWebsocket.ts";
+import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
+import EmailDialogue from "./dialogue/EmailDialogue.tsx";
+import InfoDialogue from "./dialogue/InfoDialogue.tsx";
+import IntroDialogue from "./dialogue/IntroDialogue.tsx";
+import RestartDialogue from "./dialogue/RestartDialogue.tsx";
+import Disclaimer from "./Disclaimer.tsx";
+import InteractionPanel from "./InteractionPanel.tsx";
+import HamburgerMenu from "./menu/HamburgerMenu.tsx";
+import RegistrationMessage from "./RegistrationMessage.tsx";
 
 // function ConnectionStatus() {
 //   const { t } = useTranslation();
@@ -73,14 +72,9 @@ export default function CompanionParent() {
             <ConfidenceDialogue />
           </div>
 
-          <div className="w-full col-span-6 ml-3">
+          <div className="w-full col-span-7 ml-3">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <InteractionPanel />}
-            <Disclaimer />
-          </div>
-
-          <div className="col-span-1">
-            <NodeNavigation />
           </div>
         </div>
       </div>

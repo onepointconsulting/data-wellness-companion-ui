@@ -1,6 +1,9 @@
-import { Message, Suggestion } from "../model/message.ts";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext.tsx";
+import { Message, Suggestion } from "../model/message.ts";
+import ExtraFunctionButtons from "./ExtraFunctionButtons.tsx";
+import NodeNavigation from "./NodeNavigation.tsx";
+import Question from "./Question.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
   return `${suggestion.title} - ${suggestion.main_text}`;
@@ -78,7 +81,7 @@ export function SuggestionTemplate({
  * @constructor
  */
 export default function Suggestions({ message }: { message: Message }) {
-  const { setSelectedSuggestion, chatText, currentMessage } =
+  const { setSelectedSuggestion, chatText, messages, currentMessage } =
     useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(true);
 
@@ -103,22 +106,32 @@ export default function Suggestions({ message }: { message: Message }) {
 
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
-  console.log("currentMessage", currentMessage);
-
   return (
     <div className="container">
       <div className="w-full">
         {/* Open menu */}
-        <div
-          className="cursor-pointer w-fit dark:bg-slate-700 bg-slate-200"
-          onClickCapture={() => setMenuOpen(!menuOpen)}
-        >
-          <img
-            className={`w-16 h-16 ${menuOpen ? "animate-rotate-x animate-ease-linear" : "animate-rotate-x animate-ease-in"}`}
-            src={`/public/svg/${menuOpen ? "menu-dropdown-close.svg" : "menu-dropdown-open.svg"}`}
-            alt=""
-            style={{ filter: "invert(1)" }}
+        <div className="w-full">
+          <div className="flex items-center">
+            <div
+              className="cursor-pointer w-fit dark:bg-slate-700 bg-slate-200"
+              onClickCapture={() => setMenuOpen(!menuOpen)}
+            >
+              <img
+                className={`w-16 h-16 ${menuOpen ? "animate-rotate-x animate-ease-linear" : "animate-rotate-x animate-ease-in"}`}
+                src={`/public/svg/${menuOpen ? "menu-dropdown-close.svg" : "menu-dropdown-open.svg"}`}
+                alt=""
+                style={{ filter: "invert(1)" }}
+              />
+            </div>
+            <NodeNavigation />
+          </div>
+
+          <Question
+            message={message}
+            currentMessage={currentMessage}
+            messagesLength={messages.length}
           />
+          <ExtraFunctionButtons />
         </div>
 
         {/* Logo */}

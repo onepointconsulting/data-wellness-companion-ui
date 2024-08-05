@@ -66,13 +66,17 @@ function LightBulb({
         !isRecommendation && (
           <div className="node-extra-icon-container">
             <a href="#" onClick={onClarify}>
-              <FaRegLightbulb className="w-6 h-6" />
+              <FaRegLightbulb
+                className="w-8 h-8"
+                title={"Please provide more details to clarify your question."}
+              />
             </a>
           </div>
         )}
+
       {missesClarification && clarificationClicked && activeMessage && (
         <div className="node-extra-icon-container">
-          <FaHourglassHalf className="w-6 h-6" />
+          <FaHourglassHalf className="w-8 h-8" />
         </div>
       )}
     </>
@@ -93,7 +97,7 @@ function ShortenSession({
       onClick={onShorten}
       title={"Shorten the current session by one step"}
     >
-      <IoContractOutline className="w-6 h-6" />
+      <IoContractOutline className="w-8 h-8" />
     </StatefulIcon>
   );
 }
@@ -112,7 +116,7 @@ function ExtendSession({
       onClick={onExtend}
       title={"Add one more step to current session"}
     >
-      <VscExtensions className="w-6 h-6" />
+      <VscExtensions className="w-8 h-8" />
     </StatefulIcon>
   );
 }
@@ -135,10 +139,12 @@ function SingleNode({
   const length = messages.length;
   const covered = length > i;
   const connectorCovered = length > i + 1;
+
+  console.log("expectedNodes covered", i !== expectedNodes - 1);
   return (
     <>
       <div
-        className={`animate-fade-down animate-ease-in-out animate-normal node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}`}
+        className={`relative flex items-center z-[132] animate-fade-down animate-ease-in-out animate-normal node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}`}
       >
         {i < length ? (
           <a
@@ -154,6 +160,48 @@ function SingleNode({
           <OutputNode i={i} totalNodes={expectedNodes} />
         )}
       </div>
+
+      <div
+        className={`${i === expectedNodes - 1 ? "ml-[7px]" : "ml-[32px] "} h-auto mx-auto text-2xl rounded-bl-full rounded-br-full mt-[-41px] -z-50`}
+      >
+        <svg
+          className={`node-icon ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""} w-12 h-12`}
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 4a1 1 0 0 0-.822 1.57L6.632 12l-4.454 6.43A1 1 0 0 0 3 20h13.153a1 1 0 0 0 .822-.43l4.847-7a1 1 0 0 0 0-1.14l-4.847-7a1 1 0 0 0-.822-.43H3Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+
+      {/* backward icon  */}
+      <div
+        className={`${i === 0 ? "ml-[3px]" : ""} ml-[-17px] h-auto mx-auto text-2xl rounded-bl-full rounded-br-full mt-[-42px]  -z-50`}
+      >
+        <svg
+          className={`node-icon ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""} w-12 h-12`}
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 4a1 1 0 0 0-.822 1.57L6.632 12l-4.454 6.43A1 1 0 0 0 3 20h13.153a1 1 0 0 0 .822-.43l4.847-7a1 1 0 0 0 0-1.14l-4.847-7a1 1 0 0 0-.822-.43H3Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+
       {i !== expectedNodes - 1 && (
         <div
           className={`connector ${connectorCovered ? "active" : ""} ${i > 0 && i % 6 === 0 ? "node-break" : ""}`}
@@ -192,7 +240,7 @@ export default function NodeNavigation() {
   }
 
   return (
-    <div className="node-container">
+    <div className="relative flex items-center w-full gap-4 ml-10">
       {[...Array(expectedNodes).keys()].map((i) => {
         const activeMessage = i === currentMessage;
         const showShorten =
@@ -208,9 +256,10 @@ export default function NodeNavigation() {
           isLast &&
           !updatingExpectedNodes &&
           i === currentMessage;
+
         return (
-          <div key={`node_${i}`} className="relative">
-            <div className="absolute flex flex-col top-[-2.6rem] right-10">
+          <div key={`node_${i}`}>
+            <div className="absolute right-0 flex">
               {showExtend && (
                 <div className="node-extra-icon-container">
                   <ExtendSession onExtend={onExtend} showExtend={showExtend} />
@@ -226,7 +275,10 @@ export default function NodeNavigation() {
               )}
               <LightBulb i={i} activeMessage={activeMessage} />
             </div>
-            <SingleNode expectedNodes={expectedNodes} i={i} />
+
+            <div className="node-container ml-[-10px]">
+              <SingleNode expectedNodes={expectedNodes} i={i} />
+            </div>
           </div>
         );
       })}

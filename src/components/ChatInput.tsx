@@ -4,6 +4,7 @@ import { sendClientMessage } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
+import Disclaimer from "./Disclaimer.tsx";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -73,7 +74,7 @@ export default function ChatInput() {
 
   const checkSendButton = enoughText(chatText);
   return (
-    <div className="sticky chat-container bottom-8">
+    <div className="sticky bottom-0 mx-4 chat-container">
       {/* Pointer for sending the message button. */}
       <span
         className={`flex justify-end p-2 mr-3 mb-3 bg-slate-200 dark:bg-slate-700 rounded-full w-fit float-right  ${checkSendButton ? "animate-bounce opacity-75" : ""}`}
@@ -113,12 +114,13 @@ export default function ChatInput() {
               sendMessage();
             }}
             disabled={!enoughText(chatText) || sending}
-            className="disabled:opacity-1"
+            className="disabled:opacity-[0.3]"
           >
             <SendImage enoughText={enoughText(chatText)} />
           </button>
         )}
       </div>
+      <Disclaimer />
     </div>
   );
 }

@@ -36,12 +36,12 @@ export default function ExtraFunctionButtons() {
     if (socket.current === null) return;
     socket.current.on(
       WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
-      onClarificationToken,
+      onClarificationToken
     );
     return () => {
       socket.current?.off(
         WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
-        onClarificationToken,
+        onClarificationToken
       );
     };
   }, [currentMessage]);
@@ -59,8 +59,6 @@ export default function ExtraFunctionButtons() {
   }
 
   if (currentMessage === 0 || message.final_report) return null;
-
-  console.log("showClarification", showClarification);
 
   return (
     <div className="clarification">
