@@ -1,10 +1,12 @@
-import { useTranslation } from "react-i18next";
-import onCloseDialogue, { showDialogue } from "../../lib/dialogFunctions.ts";
+import {useTranslation} from "react-i18next";
+import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import OnepointInfo from "./OnepointInfo.tsx";
 import GenericDialogue from "./GenericDialogue.tsx";
-import { INTRO_DIALOGUE_ID } from "./IntroDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import InfoIcon from "./InfoIcon.tsx";
+import {useContext} from "react";
+import {AppContext} from "../../context/AppContext.tsx";
+import {forgetSeenIntro} from "../../lib/sessionFunctions.ts";
 
 export const INFO_DIALOGUE_ID = "info-dialogue";
 
@@ -12,20 +14,22 @@ function InfoSection({ children }: { children: React.ReactNode }) {
   return <section className="mx-3 mt-5">{children}</section>;
 }
 
-function showIntroDialogue(
-  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-) {
-  event.preventDefault();
-  onCloseDialogue(INFO_DIALOGUE_ID);
-  showDialogue(INTRO_DIALOGUE_ID);
-}
-
 /**
  * Used to display information about the application.
  * @constructor
  */
 export default function InfoDialogue() {
+  const { setSeenIntro } = useContext(AppContext);
   const { t } = useTranslation();
+
+  function showIntroDialogue(
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) {
+    event.preventDefault();
+    onCloseDialogue(INFO_DIALOGUE_ID);
+    setSeenIntro(false);
+    forgetSeenIntro();
+  }
 
   return (
     <GenericDialogue dialogueId={INFO_DIALOGUE_ID} clazz="companion-dialogue">

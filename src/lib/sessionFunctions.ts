@@ -101,3 +101,7 @@ export function getSeenIntro(): boolean {
 export function hasSeenIntro() {
   localStorage.setItem(SEEN_INTRO_KEY, SEEN_INTRO_VALUE);
 }
+
+export function forgetSeenIntro() {
+  localStorage.removeItem(SEEN_INTRO_KEY);
+}

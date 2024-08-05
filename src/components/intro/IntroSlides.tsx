@@ -1,6 +1,22 @@
 import {IntroContext, IntroSlide} from "./IntroContext.tsx";
 import {useContext} from "react";
 import "./intro.css";
+import VideoIframe from "./VideoIFrame.tsx";
+
+function Progress({slides, currentSlide, setCurrentSlide}: {
+  slides: IntroSlide[], currentSlide: number, setCurrentSlide: (n: number) => void }) {
+  return (
+    <div className="progress">
+      {slides.map((_, index) => {
+        const visited = index < currentSlide;
+        return <div key={`intro-slide-${index}`}
+                    className={`progress-item ${index === currentSlide ? 'hightlighted' : ''} ${visited ? 'visited' : ''}`}
+                    onClick={() => visited && setCurrentSlide(index)}
+        ></div>
+      })}
+    </div>
+  )
+}
 
 export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slides}: {
   showIntro: boolean,
@@ -25,9 +41,13 @@ export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slid
     }
   }
 
-  console.log('currentSlide', currentSlide)
+  function showVideo(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    e.preventDefault()
+    setCurrentSlide(0)
+  }
 
   const slide = slides[currentSlide];
+  const isLast = currentSlide === slides.length - 1;
   return (
     <section className={`intro-slides ${showIntro ? '' : 'hidden'}`}>
       <section className="intro-main-container">
@@ -45,24 +65,17 @@ export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slid
           </div>
           <div className="intro-body-right">
             <div className="gray-back"></div>
-            {slide.image && <img src={slide.image} alt="D-Well app"/>}
+            {!!slide.video && <VideoIframe videoUrl={slide.video} />}
+            {slide.image && !slide.video && <img src={slide.image} alt="D-Well app"/>}
           </div>
         </section>
-        <div className="progress">
-          {slides.map((_, index) => {
-            const visited = index < currentSlide;
-            return <div key={`intro-slide-${index}`}
-                        className={`progress-item ${index === currentSlide ? 'hightlighted' : ''} ${visited ? 'visited' : ''}`}
-                        onClick={() => visited && setCurrentSlide(index)}
-            ></div>
-          })}
-        </div>
+        <Progress slides={slides} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}/>
         <section className="intro-footer">
-          <button className="intro-next" onClick={onNext}>
-            <div>Next</div>
-            <div>&#x2192;</div>
+          <button className={`intro-next ${isLast ? "!justify-center" : ""}`} onClick={onNext}>
+            <div>{isLast ? "Get started" : "Next"}</div>
+            {!isLast && <div>&#x2192;</div>}
           </button>
-          <div className="intro-next-extras"><a href="#">Watch tutorial video</a></div>
+          {currentSlide > 0 && <div className="intro-next-extras"><a href="#" onClick={showVideo}>Watch tutorial video</a></div>}
         </section>
       </section>
     </section>

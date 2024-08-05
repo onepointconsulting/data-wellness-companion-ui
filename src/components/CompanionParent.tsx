@@ -15,7 +15,7 @@ import useConfidence from "../hooks/useConfidence.ts";
 import {IntroSlides} from "./intro/IntroSlides.tsx";
 import {useTranslation} from "react-i18next";
 import {IoMdClose} from "react-icons/io";
-import {INTRO_SLIDES} from "../intro/slides.tsx";
+import getIntroSlides from "../intro/slides.tsx";
 
 
 export default function CompanionParent() {
@@ -37,39 +37,41 @@ export default function CompanionParent() {
 
   const imageAlt = t("D-Well logo");
 
-  const imageNodeFunc = (imageSize: string = "48") => {
-    return <img className={`w-${imageSize}`} src="logo.svg" alt={imageAlt}/>
+  const imageNodeFunc = () => {
+    return <img className="w-60 lg:w-72" src="logo.svg" alt={imageAlt}/>
   }
 
   return (
     <>
-      <IntroSlides showIntro={!seenIntro} setSeenIntro={setSeenIntro} imageNode={imageNodeFunc("72")}
-                   closeIcon={<IoMdClose className="w-16 h-16"/>} slides={INTRO_SLIDES}/>
-      <RestartDialogue/>
-      <EmailDialogue/>
-      <InfoDialogue/>
-      {/*<IntroDialogue />*/}
-      <div className="header">
-        <div className="header-container">
-          <div className="flex flex-row items-end">
-            {imageNodeFunc()}
-          </div>
-          <HamburgerMenu/>
-        </div>
-      </div>
-      <div className="container">
-        <div className="flex flex-row gap-8">
-          <div className="w-full">
-            {displayRegistrationMessage && <RegistrationMessage/>}
-            {!displayRegistrationMessage && <MainPanel/>}
-            <Disclaimer/>
-          </div>
-          <div>
-            <NodeNavigation/>
+      <IntroSlides showIntro={!seenIntro} setSeenIntro={setSeenIntro} imageNode={imageNodeFunc()}
+                   closeIcon={<IoMdClose className="w-16 h-16"/>} slides={getIntroSlides()}/>
+      {seenIntro && <>
+        <RestartDialogue/>
+        <EmailDialogue/>
+        <InfoDialogue/>
+        {/*<IntroDialogue />*/}
+        <div className="header">
+          <div className="header-container">
+            <div className="flex flex-row items-end">
+              {imageNodeFunc()}
+            </div>
+            <HamburgerMenu/>
           </div>
         </div>
-      </div>
-      <Toaster/>
+        <div className="container">
+          <div className="flex flex-row gap-8">
+            <div className="w-full">
+              {displayRegistrationMessage && <RegistrationMessage/>}
+              {!displayRegistrationMessage && <MainPanel/>}
+              <Disclaimer/>
+            </div>
+            <div>
+              <NodeNavigation/>
+            </div>
+          </div>
+        </div>
+        <Toaster/>
+      </>}
     </>
   );
 }

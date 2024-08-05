@@ -1,5 +1,5 @@
 .intro-slides {
-    @apply block bg-white w-full h-full z-20 top-0 left-0 fixed;
+    @apply block bg-white w-full h-full z-20;
 }
 
 .intro-main-container {
@@ -20,7 +20,7 @@
 }
 
 .intro-body {
-    @apply flex flex-row flex-wrap;
+    @apply flex flex-row flex-wrap lg:min-h-[650px];
 }
 
 .intro-body-left {
@@ -32,7 +32,7 @@
 }
 
 .intro-body-right img {
-    @apply block w-full lg:w-[94%] mt-[6rem] mx-auto mb-[2rem];
+    @apply block w-full lg:w-[94%] mt-[1rem] lg:mt-[6rem] mx-auto mb-[2rem];
 }
 
 #root .intro-body .intro-body-left > div > h1 {
@@ -77,4 +77,12 @@
 
 .intro-footer .intro-next-extras {
     @apply my-auto
+}
+
+.video-iframe {
+    @apply block;
+}
+
+.video-iframe iframe {
+    @apply w-full h-full;
 }
