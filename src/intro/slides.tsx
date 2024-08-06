@@ -10,7 +10,8 @@ export default function getIntroSlides() {
       explanation: t("intro-welcome"),
       image: null,
       video: "q7slV210RqQ",
-    },{
+    },
+    {
       title: t("intro-how-to-use"),
       subtitle: t("intro-step", { step: 1 }),
       explanation: t("intro-explanation-1"),
@@ -44,6 +45,6 @@ export default function getIntroSlides() {
       explanation: t("intro-explanation-5"),
       image: "./screenshots/d-well-screenshot-5.png",
       video: null,
-    }
-  ]
+    },
+  ];
 }

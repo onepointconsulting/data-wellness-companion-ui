@@ -1,31 +1,47 @@
-import {IntroContext, IntroSlide} from "./IntroContext.tsx";
-import {useContext} from "react";
+import { IntroContext, IntroSlide } from "./IntroContext.tsx";
+import { useContext } from "react";
 import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
 
-function Progress({slides, currentSlide, setCurrentSlide}: {
-  slides: IntroSlide[], currentSlide: number, setCurrentSlide: (n: number) => void }) {
+function Progress({
+  slides,
+  currentSlide,
+  setCurrentSlide,
+}: {
+  slides: IntroSlide[];
+  currentSlide: number;
+  setCurrentSlide: (n: number) => void;
+}) {
   return (
     <div className="progress">
       {slides.map((_, index) => {
         const visited = index < currentSlide;
-        return <div key={`intro-slide-${index}`}
-                    className={`progress-item ${index === currentSlide ? 'hightlighted' : ''} ${visited ? 'visited' : ''}`}
-                    onClick={() => visited && setCurrentSlide(index)}
-        ></div>
+        return (
+          <div
+            key={`intro-slide-${index}`}
+            className={`progress-item ${index === currentSlide ? "hightlighted" : ""} ${visited ? "visited" : ""}`}
+            onClick={() => visited && setCurrentSlide(index)}
+          ></div>
+        );
       })}
     </div>
-  )
+  );
 }
 
-export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slides}: {
-  showIntro: boolean,
-  setSeenIntro: (b: boolean) => void,
-  imageNode: React.ReactNode,
-  closeIcon: React.ReactNode,
-  slides: IntroSlide[] | null
+export function IntroSlides({
+  showIntro,
+  setSeenIntro,
+  imageNode,
+  closeIcon,
+  slides,
+}: {
+  showIntro: boolean;
+  setSeenIntro: (b: boolean) => void;
+  imageNode: React.ReactNode;
+  closeIcon: React.ReactNode;
+  slides: IntroSlide[] | null;
 }) {
-  const {currentSlide, setCurrentSlide} = useContext(IntroContext);
+  const { currentSlide, setCurrentSlide } = useContext(IntroContext);
   if (slides == null || slides.length < 1) {
     return null;
   }
@@ -42,18 +58,23 @@ export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slid
   }
 
   function showVideo(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    e.preventDefault()
-    setCurrentSlide(0)
+    e.preventDefault();
+    setCurrentSlide(0);
   }
 
   const slide = slides[currentSlide];
   const isLast = currentSlide === slides.length - 1;
   return (
-    <section className={`intro-slides ${showIntro ? '' : 'hidden'}`}>
+    <section className={`intro-slides ${showIntro ? "" : "hidden"}`}>
       <section className="intro-main-container">
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
-          <div className="intro-header-close" onClick={() => setSeenIntro(true)}>{closeIcon}</div>
+          <div
+            className="intro-header-close"
+            onClick={() => setSeenIntro(true)}
+          >
+            {closeIcon}
+          </div>
         </section>
         <section className="intro-body">
           <div className="intro-body-left">
@@ -66,18 +87,33 @@ export function IntroSlides({showIntro, setSeenIntro, imageNode, closeIcon, slid
           <div className="intro-body-right">
             <div className="gray-back"></div>
             {!!slide.video && <VideoIframe videoUrl={slide.video} />}
-            {slide.image && !slide.video && <img src={slide.image} alt="D-Well app"/>}
+            {slide.image && !slide.video && (
+              <img src={slide.image} alt="D-Well app" />
+            )}
           </div>
         </section>
-        <Progress slides={slides} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}/>
+        <Progress
+          slides={slides}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
+        />
         <section className="intro-footer">
-          <button className={`intro-next ${isLast ? "!justify-center" : ""}`} onClick={onNext}>
+          <button
+            className={`intro-next ${isLast ? "!justify-center" : ""}`}
+            onClick={onNext}
+          >
             <div>{isLast ? "Get started" : "Next"}</div>
             {!isLast && <div>&#x2192;</div>}
           </button>
-          {currentSlide > 0 && <div className="intro-next-extras"><a href="#" onClick={showVideo}>Watch tutorial video</a></div>}
+          {currentSlide > 0 && (
+            <div className="intro-next-extras">
+              <a href="#" onClick={showVideo}>
+                Watch tutorial video
+              </a>
+            </div>
+          )}
         </section>
       </section>
     </section>
-  )
+  );
 }

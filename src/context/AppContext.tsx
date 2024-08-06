@@ -1,10 +1,10 @@
-import {Message} from "../model/message.ts";
-import {createContext, useEffect, useState} from "react";
-import {Props} from "./commonModel.ts";
-import {useNavigate} from "react-router-dom";
-import {Confidence} from "../model/confidence.ts";
-import {Ontology} from "../model/ontology.ts";
-import {getSeenIntro, hasSeenIntro} from "../lib/sessionFunctions.ts";
+import { Message } from "../model/message.ts";
+import { createContext, useEffect, useState } from "react";
+import { Props } from "./commonModel.ts";
+import { useNavigate } from "react-router-dom";
+import { Confidence } from "../model/confidence.ts";
+import { Ontology } from "../model/ontology.ts";
+import { getSeenIntro, hasSeenIntro } from "../lib/sessionFunctions.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -67,60 +67,40 @@ function createAppState(): AppState {
     sending: false,
     currentMessage: 0,
     chatText: "",
-    setStartSession: (_) => {
-    },
-    setConnected: (_) => {
-    },
-    setMessages: (_: Message[]) => {
-    },
-    setCurrentMessage: (_) => {
-    },
-    setSelectedSuggestion: (_) => {
-    },
-    setSending: (_) => {
-    },
-    setExpectedNodes: (_) => {
-    },
-    setChatText: (_) => {
-    },
+    setStartSession: (_) => {},
+    setConnected: (_) => {},
+    setMessages: (_: Message[]) => {},
+    setCurrentMessage: (_) => {},
+    setSelectedSuggestion: (_) => {},
+    setSending: (_) => {},
+    setExpectedNodes: (_) => {},
+    setChatText: (_) => {},
     isLast: true,
     isFinalMessage: false,
     isBeforeReport: false,
     displayRegistrationMessage: false,
-    setDisplayRegistrationMessage: (_) => {
-    },
-    setCurrentMessageHistory: (_) => {
-    },
+    setDisplayRegistrationMessage: (_) => {},
+    setCurrentMessageHistory: (_) => {},
     updatingExpectedNodes: false,
-    setUpdatingExpectedNodes: (_) => {
-    },
+    setUpdatingExpectedNodes: (_) => {},
     clarificationClicked: false,
-    setClarificationClicked: (_) => {
-    },
+    setClarificationClicked: (_) => {},
     showClarification: true,
-    setShowClarification: (_) => {
-    },
+    setShowClarification: (_) => {},
     confidence: null,
-    setConfidence: (_) => {
-    },
+    setConfidence: (_) => {},
     updatingConfidence: false,
-    setUpdatingConfidence: (_) => {
-    },
+    setUpdatingConfidence: (_) => {},
     selectedHistoricalSession: null,
-    setSelectedHistoricalSession: (_) => {
-    },
+    setSelectedHistoricalSession: (_) => {},
     ontology: {} as Ontology,
-    setOntology: (_) => {
-    },
+    setOntology: (_) => {},
     ontologyOpen: false,
-    setOntologyOpen: (_) => {
-    },
+    setOntologyOpen: (_) => {},
     generatingReport: false,
-    setGeneratingReport: (_) => {
-    },
+    setGeneratingReport: (_) => {},
     seenIntro: false,
-    setSeenIntro: (_) => {
-    },
+    setSeenIntro: (_) => {},
   };
 }
 
@@ -128,7 +108,7 @@ const initial = createAppState();
 
 export const AppContext = createContext<AppState>(initial);
 
-export const AppContextProvider = ({children}: Props) => {
+export const AppContextProvider = ({ children }: Props) => {
   const [connected, setConnected] = useState(false);
   const [startSession, setStartSession] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -169,7 +149,7 @@ export const AppContextProvider = ({children}: Props) => {
 
   useEffect(() => {
     if (seenIntro) {
-      hasSeenIntro()
+      hasSeenIntro();
     }
   }, [seenIntro]);
 

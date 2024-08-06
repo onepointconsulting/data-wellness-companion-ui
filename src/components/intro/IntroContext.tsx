@@ -1,5 +1,5 @@
-import {createContext, useState} from "react";
-import {Props} from "../../context/commonModel.ts";
+import { createContext, useState } from "react";
+import { Props } from "../../context/commonModel.ts";
 
 export interface IntroSlide {
   title: string;
@@ -26,6 +26,9 @@ export const IntroContext = createContext<IntroState>(createIntroState());
 export const IntroContextProvider = ({ children }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  return <IntroContext.Provider value={{ currentSlide, setCurrentSlide }}>{children}</IntroContext.Provider>;
-}
-
+  return (
+    <IntroContext.Provider value={{ currentSlide, setCurrentSlide }}>
+      {children}
+    </IntroContext.Provider>
+  );
+};

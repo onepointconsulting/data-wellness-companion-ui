@@ -1,12 +1,12 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import OnepointInfo from "./OnepointInfo.tsx";
 import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import InfoIcon from "./InfoIcon.tsx";
-import {useContext} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
-import {forgetSeenIntro} from "../../lib/sessionFunctions.ts";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
+import { forgetSeenIntro } from "../../lib/sessionFunctions.ts";
 
 export const INFO_DIALOGUE_ID = "info-dialogue";
 
