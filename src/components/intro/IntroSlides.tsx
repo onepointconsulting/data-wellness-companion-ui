@@ -64,9 +64,12 @@ export function IntroSlides({
 
   const slide = slides[currentSlide];
   const isLast = currentSlide === slides.length - 1;
+  const subTitle = slide.subtitle;
+
   return (
     <section className={`intro-slides ${showIntro ? "" : "hidden"}`}>
       <section className="intro-main-container">
+        {/* Header */}
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
           <div
@@ -76,43 +79,58 @@ export function IntroSlides({
             {closeIcon}
           </div>
         </section>
-        <section className="intro-body">
-          <div className="intro-body-left">
-            <div>
-              <h1>{slide.title}</h1>
-              <h2>{slide.subtitle}</h2>
-              <div className="explanation">{slide.explanation}</div>
+
+        <div className="flex flex-col min-h-screen pt-4 2xl:justify-center lg:pt-12 2xl:pt-0 2xl:-mt-16">
+          {/* Body */}
+          <section className="intro-body">
+            {/* Left */}
+            <div className="intro-body-left">
+              <div className="flex flex-col items-start justify-start h-full gap-4 lg:pt-12 lg:gap-14">
+                <h1>{slide.title}</h1>
+                <div className="explanation">
+                  {!!subTitle && <h2>{subTitle}</h2>}
+                  <p>{slide.explanation}</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="intro-body-right">
-            <div className="gray-back"></div>
-            {!!slide.video && <VideoIframe videoUrl={slide.video} />}
-            {slide.image && !slide.video && (
-              <img src={slide.image} alt="D-Well app" />
-            )}
-          </div>
-        </section>
-        <Progress
-          slides={slides}
-          currentSlide={currentSlide}
-          setCurrentSlide={setCurrentSlide}
-        />
-        <section className="intro-footer">
-          <button
-            className={`intro-next ${isLast ? "!justify-center" : ""}`}
-            onClick={onNext}
-          >
-            <div>{isLast ? "Get started" : "Next"}</div>
-            {!isLast && <div>&#x2192;</div>}
-          </button>
-          {currentSlide > 0 && (
-            <div className="intro-next-extras">
-              <a href="#" onClick={showVideo}>
-                Watch tutorial video
-              </a>
+
+            {/* Right */}
+            <div className="intro-body-right">
+              <div className="gray-back"></div>
+              {!!slide.video && <VideoIframe videoUrl={slide.video} />}
+              {slide.image && !slide.video && (
+                <img src={slide.image ? slide.image : ""} alt="D-Well app" />
+              )}
             </div>
-          )}
-        </section>
+          </section>
+
+          {/* Progress */}
+          <Progress
+            slides={slides}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
+          />
+
+          <div className="flex items-center">
+            <section className="intro-footer">
+              <button
+                className={`intro-next ${isLast ? "!justify-center" : ""}`}
+                onClick={onNext}
+              >
+                <div>{isLast ? "Get started" : "Next"}</div>
+                {!isLast && <div>&#x2192;</div>}
+              </button>
+
+              {currentSlide > 0 && (
+                <div className="intro-next-extras">
+                  <a href="#" onClick={showVideo}>
+                    Watch tutorial video
+                  </a>
+                </div>
+              )}
+            </section>
+          </div>
+        </div>
       </section>
     </section>
   );
