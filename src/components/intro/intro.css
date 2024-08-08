@@ -5,7 +5,7 @@
 
 .intro-main-container {
   @apply block min-h-screen mx-auto px-4 mt-12;
-  max-width: 1320px;
+  max-width: 1280px;
 }
 
 .intro-header {
@@ -69,7 +69,7 @@
 }
 
 .intro-footer a {
-  @apply no-underline ml-[2rem];
+  @apply no-underline;
 }
 
 .intro-footer .intro-next {
@@ -77,11 +77,11 @@
 }
 
 .intro-footer .intro-next-extras {
-  @apply my-auto;
+  @apply my-auto pl-4;
 }
 
 .video-iframe {
-  @apply block;
+  @apply block min-h-[40vh];
 }
 
 .video-iframe iframe {
