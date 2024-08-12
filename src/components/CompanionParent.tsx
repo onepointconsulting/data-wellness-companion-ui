@@ -41,7 +41,7 @@ export default function CompanionParent() {
   const imageAlt = t("D-Well logo");
 
   const imageNodeFunc = () => {
-    return <img className="w-60 lg:w-72" src="logo.svg" alt={imageAlt} />;
+    return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;
   };
 
   return (
@@ -50,7 +50,7 @@ export default function CompanionParent() {
         showIntro={!seenIntro}
         setSeenIntro={setSeenIntro}
         imageNode={imageNodeFunc()}
-        closeIcon={<IoMdClose className="w-16 h-16" />}
+        closeIcon={<IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />}
         slides={getIntroSlides()}
       />
       {seenIntro && (
