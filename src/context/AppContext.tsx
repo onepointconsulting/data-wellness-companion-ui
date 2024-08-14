@@ -51,6 +51,8 @@ interface AppState {
   setGeneratingReport: (generatingReport: boolean) => void;
   seenIntro: boolean;
   setSeenIntro: (seenIntro: boolean) => void;
+  errorMessage?: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -101,6 +103,8 @@ function createAppState(): AppState {
     setGeneratingReport: (_) => {},
     seenIntro: false,
     setSeenIntro: (_) => {},
+    errorMessage: "",
+    setErrorMessage: (_) => {},
   };
 }
 
@@ -135,6 +139,7 @@ export const AppContextProvider = ({ children }: Props) => {
   });
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
   const [seenIntro, setSeenIntro] = useState(getSeenIntro());
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -199,6 +204,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setGeneratingReport,
         seenIntro,
         setSeenIntro,
+        errorMessage,
+        setErrorMessage
       }}
     >
       {" "}

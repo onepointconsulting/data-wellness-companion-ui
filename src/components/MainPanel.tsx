@@ -9,6 +9,7 @@ import FinalReport from "./FinalReport.tsx";
 import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import GiveReportNow from "./GiveReportNow.tsx";
+import ErrorMessage from "./message/ErrorMessage.tsx";
 
 export default function MainPanel() {
   const {
@@ -18,12 +19,14 @@ export default function MainPanel() {
     expectedNodes,
     isLast,
     generatingReport,
+    errorMessage
   } = useContext(AppContext);
   const message = messages[currentMessage];
   if (!message)
     return (
       <div className="mt-40">
         <Spinner />
+        {!!errorMessage && <ErrorMessage error={errorMessage}/>}
       </div>
     );
   const displayReportGenerationMessage =

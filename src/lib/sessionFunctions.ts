@@ -32,6 +32,7 @@ export function getSession(): Session | null {
           id: sessionObj.id,
           timestamp: new Date(sessionObj.timestamp),
           language: sessionObj.language ?? "en",
+          messages: sessionObj.messages ?? [],
         };
       }
     } catch (e) {
@@ -52,6 +53,7 @@ export function getSessionHistory(): Session[] {
           timestamp: new Date(session.timestamp),
           finished: session.finished,
           language: session.language ?? "en",
+          messages: session.messages ?? [],
         }));
       }
     } catch (e) {

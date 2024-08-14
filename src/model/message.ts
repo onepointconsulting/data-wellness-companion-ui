@@ -14,3 +14,20 @@ export type Message = {
   suggestions: Suggestion[];
   clarification: string | undefined;
 };
+
+export type BoomiSuggestion = {
+  title: string;
+  suggestion: string;
+  image: string;
+}
+
+export type BoomiData = {
+  session: string,
+  step: number,
+  question: string,
+  suggestions: BoomiSuggestion[]
+}
+
+export type BoomiMessage = {
+  data: BoomiData
+}

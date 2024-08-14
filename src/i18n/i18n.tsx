@@ -5,6 +5,8 @@ import englishTranslation from "./Locales/en/translation.json";
 import farsiTranslation from "./Locales/fa/translation.json";
 import germanTranslation from "./Locales/de/translation.json";
 
+export const DEFAULT_LANGUAGE = "en";
+
 const resources = {
   en: {
     translations: englishTranslation,
@@ -22,7 +24,7 @@ i18next
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en",
+    fallbackLng: DEFAULT_LANGUAGE,
     debug: true,
 
     // have a common namespace used around the full app
