@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import StartButton from "./StartButton.tsx";
+import StartMenuItem from "./StartMenuItem.tsx";
 import InfoButton from "./InfoButton.tsx";
 import ContactUsButton from "./ContactUsButton.tsx";
 import LanguageSwitch from "./LanguageSwitch.tsx";
@@ -62,7 +62,7 @@ export default function HamburgerMenu() {
       </div>
       {open && (
         <menu ref={menuRef} className="animate-fade-down">
-          <StartButton />
+          <StartMenuItem />
           <InfoButton />
           <ContactUsButton />
           <SessionSwitch />

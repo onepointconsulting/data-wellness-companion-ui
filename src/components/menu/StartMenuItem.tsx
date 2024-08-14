@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "../../../@/components/ui/use-toast.ts";
 import MenuItemTemplate from "./MenuItemTemplate.tsx";
 
-export default function StartButton() {
+export default function StartMenuItem() {
   const { t } = useTranslation();
   const { connected } = useContext(AppContext);
 
