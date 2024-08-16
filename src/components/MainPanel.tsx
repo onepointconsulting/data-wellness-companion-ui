@@ -1,15 +1,13 @@
-import { AppContext } from "../context/AppContext.tsx";
-import { useContext } from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {useContext} from "react";
 import Question from "./Question.tsx";
 import Suggestions from "./Suggestions.tsx";
 import ChatInput from "./ChatInput.tsx";
 import QuestionAnswer from "./QuestionAnswer.tsx";
-import Spinner from "./Spinner.tsx";
 import FinalReport from "./FinalReport.tsx";
 import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import GiveReportNow from "./GiveReportNow.tsx";
-import ErrorMessage from "./message/ErrorMessage.tsx";
 
 export default function MainPanel() {
   const {
@@ -22,13 +20,15 @@ export default function MainPanel() {
     errorMessage
   } = useContext(AppContext);
   const message = messages[currentMessage];
-  if (!message)
+  if (!message) {
     return (
-      <div className="mt-40">
-        <Spinner />
-        {!!errorMessage && <ErrorMessage error={errorMessage}/>}
-      </div>
+      <SpinnerArea
+        sending={sending}
+        displayReportGenerationMessage={false}
+        errorMessage={errorMessage}
+      />
     );
+  }
   const displayReportGenerationMessage =
     currentMessage === expectedNodes - 2 || generatingReport;
   if (!message.final_report) {
@@ -43,6 +43,7 @@ export default function MainPanel() {
         <SpinnerArea
           sending={sending}
           displayReportGenerationMessage={displayReportGenerationMessage}
+          errorMessage={errorMessage}
         />
         <ClarificationArea />
         {isLast && <ChatInput />}
