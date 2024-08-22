@@ -41,7 +41,7 @@ export function SuggestionTemplate({
       className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || (messages.length - 1 !== currentMessage && message.answer.includes(suggestion.main_text)) ? "active" : ""}`}
       onClick={handleSuggestion}
     >
-      {suggestion.img_src && (
+      {(suggestion.img_src || suggestion.svg_image) && (
         <div className="suggestion-img">
           <a href={suggestion.title} onClick={handleSuggestion}>
             <SuggestionImage suggestion={suggestion} />

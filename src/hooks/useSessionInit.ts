@@ -45,6 +45,7 @@ export default function useSessionInit() {
         queryInitSession(DEFAULT_LANGUAGE, "gf@onepointltd.com")
           .then((response: BoomiMessage) => {
             const {data} = response
+            debugger
             if(!data) {
               setErrorMessage(t("Missing question"))
               return
@@ -56,10 +57,10 @@ export default function useSessionInit() {
               suggestions: data.suggestions.map((s: BoomiSuggestion, index: number) => ({
                 id: index,
                 img_alt: "",
-                img_src: s.image,
+                img_src: "",
                 main_text: s.suggestion,
                 title: s.title,
-                svg_image: undefined
+                svg_image: s.image
               })) ?? [],
               clarification: undefined
             }

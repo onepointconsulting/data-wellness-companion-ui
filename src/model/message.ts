@@ -1,3 +1,9 @@
+export type ServerSuggestion = {
+  title: string;
+  suggestion: string;
+  image: string;
+}
+
 export type Suggestion = {
   id: number;
   img_alt: string;

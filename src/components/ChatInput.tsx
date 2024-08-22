@@ -5,7 +5,7 @@ import SendImage from "./buttons/SendImage.tsx";
 // @ts-ignore
 import {SUCCESS, upsertUserAnswer} from "companion-ui-api/apiClient";
 import {getSessionId} from "../lib/websocketFunctions.ts";
-import {BoomiMessage} from "../model/message.ts";
+import {BoomiMessage, ServerSuggestion} from "../model/message.ts";
 import {getSession, saveSession} from "../lib/sessionFunctions.ts";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
@@ -76,7 +76,7 @@ export default function ChatInput() {
               question,
               answer: "",
               final_report: false,
-              suggestions: suggestions.map((s, index) => ({
+              suggestions: suggestions.map((s: ServerSuggestion, index: number) => ({
                 id: index,
                 img_alt: "",
                 img_src: s.image,
