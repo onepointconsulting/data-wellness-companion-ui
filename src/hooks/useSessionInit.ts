@@ -45,7 +45,6 @@ export default function useSessionInit() {
         queryInitSession(DEFAULT_LANGUAGE, "gf@onepointltd.com")
           .then((response: BoomiMessage) => {
             const {data} = response
-            debugger
             if(!data) {
               setErrorMessage(t("Missing question"))
               return

@@ -64,13 +64,12 @@ export default function ChatInput() {
   function sendMessage() {
     setSending(true);
     const sessionId = getSessionId()
-    debugger
-    upsertUserAnswer(sessionId, currentMessage, chatText)
+    upsertUserAnswer(sessionId, currentMessage + 1, chatText)
       .then((response: BoomiMessage) => {
-        debugger
         const {code, data, message} = response;
+        debugger
         if (code === SUCCESS && !!data) {
-          const {question, suggestions, step} = data;
+          const {question, suggestions} = data;
           if (!!question) {
             const newMessage = {
               question,
@@ -81,7 +80,7 @@ export default function ChatInput() {
                 img_alt: "",
                 img_src: s.image,
                 main_text: s.suggestion,
-                title: s.title,
+                title: s.title ?? "",
                 svg_image: undefined
               })),
               clarification: "",
@@ -89,7 +88,7 @@ export default function ChatInput() {
             const newMessages = [...messages, newMessage];
             const session = getSession();
             setMessages(newMessages);
-            setCurrentMessage(step);
+            setCurrentMessage(newMessages.length - 1);
             if(session) {
               session.messages = newMessages;
               saveSession(session);
