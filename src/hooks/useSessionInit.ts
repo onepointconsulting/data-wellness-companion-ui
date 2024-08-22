@@ -8,6 +8,7 @@ import {DEFAULT_LANGUAGE} from "../i18n/i18n.tsx";
 
 // @ts-ignore
 import {queryInitSession} from "companion-ui-api/apiClient";
+import {useTranslation} from "react-i18next";
 
 
 export default function useSessionInit() {
@@ -22,6 +23,8 @@ export default function useSessionInit() {
     setSending,
     setConnected
   } = useContext(AppContext);
+
+  const [t] = useTranslation();
 
   useEffect(() => {
     const sessionHistory = getSessionHistory();
@@ -38,11 +41,16 @@ export default function useSessionInit() {
     if(seenIntro) {
       if (!session) {
         setSending(true)
+
         queryInitSession(DEFAULT_LANGUAGE, "gf@onepointltd.com")
           .then((response: BoomiMessage) => {
             const {data} = response
+            if(!data) {
+              setErrorMessage(t("Missing question"))
+              return
+            }
             const message: Message = {
-              question: data.question,
+              question: data.question ?? t("Missing question"),
               answer: "",
               final_report: false,
               suggestions: data.suggestions.map((s: BoomiSuggestion, index: number) => ({
@@ -52,7 +60,7 @@ export default function useSessionInit() {
                 main_text: s.suggestion,
                 title: s.title,
                 svg_image: undefined
-              })),
+              })) ?? [],
               clarification: undefined
             }
             const messages: Message[] = [message]

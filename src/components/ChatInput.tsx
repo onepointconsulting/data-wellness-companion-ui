@@ -1,9 +1,12 @@
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { sendClientMessage } from "../lib/websocketFunctions.ts";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { useTranslation } from "react-i18next";
+import {useContext, useEffect, useRef} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {useTranslation} from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
+// @ts-ignore
+import {SUCCESS, upsertUserAnswer} from "companion-ui-api/apiClient";
+import {getSessionId} from "../lib/websocketFunctions.ts";
+import {BoomiMessage} from "../model/message.ts";
+import {getSession, saveSession} from "../lib/sessionFunctions.ts";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -27,9 +30,11 @@ export default function ChatInput() {
     chatText,
     setChatText,
     updatingConfidence,
+    messages, setMessages,
     currentMessage,
+    setCurrentMessage,
+    setErrorMessage
   } = useContext(AppContext);
-  const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
   useEffect(() => {
@@ -58,7 +63,54 @@ export default function ChatInput() {
 
   function sendMessage() {
     setSending(true);
-    sendClientMessage(socket.current, chatText);
+    const sessionId = getSessionId()
+    debugger
+    upsertUserAnswer(sessionId, currentMessage, chatText)
+      .then((response: BoomiMessage) => {
+        debugger
+        const {code, data, message} = response;
+        if (code === SUCCESS && !!data) {
+          const {question, suggestions, step} = data;
+          if (!!question) {
+            const newMessage = {
+              question,
+              answer: "",
+              final_report: false,
+              suggestions: suggestions.map((s, index) => ({
+                id: index,
+                img_alt: "",
+                img_src: s.image,
+                main_text: s.suggestion,
+                title: s.title,
+                svg_image: undefined
+              })),
+              clarification: "",
+            }
+            const newMessages = [...messages, newMessage];
+            const session = getSession();
+            setMessages(newMessages);
+            setCurrentMessage(step);
+            if(session) {
+              session.messages = newMessages;
+              saveSession(session);
+            }
+          } else {
+            // The final report is ready
+            const {outcomes} = data;
+            if(!outcomes) {
+              setErrorMessage(!!message ? t(message) : "Unspecified error");
+            }
+          }
+        } else {
+          setErrorMessage(!!message ? t(message) : "Unspecified error");
+        }
+      })
+      .catch((error: Error) => {
+        setErrorMessage(error.message);
+      })
+      .finally(() => {
+        setSending(false);
+      })
   }
 
   function sendEnterMessage(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -97,7 +149,7 @@ export default function ChatInput() {
             className="disabled:opacity-10"
           >
             {!updatingConfidence && (
-              <SendImage enoughText={enoughText(chatText)} />
+              <SendImage enoughText={enoughText(chatText)}/>
             )}
           </button>
         )}

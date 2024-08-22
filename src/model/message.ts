@@ -24,10 +24,13 @@ export type BoomiSuggestion = {
 export type BoomiData = {
   session: string,
   step: number,
-  question: string,
+  question?: string,
   suggestions: BoomiSuggestion[]
+  outcomes?: string[],
 }
 
 export type BoomiMessage = {
-  data: BoomiData
+  data?: BoomiData,
+  message?: string,
+  code: number,
 }
