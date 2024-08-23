@@ -37,7 +37,9 @@ export type BoomiData = {
   recommendations?: string[],
   avoidance?: string[],
   outcomes?: string[],
+  confidence_level?: CONFIDENCE_ENUM,
   previous_step_confidence_level?: CONFIDENCE_ENUM,
+  rational?: string,
 }
 
 export type BoomiMessage = {

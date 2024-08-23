@@ -78,6 +78,8 @@
   "Please wait": "Bitte warten",
   "predefined-image": "german-predefined-responses.png",
   "recommendations-avoidance-header": "Was Sie vermeiden sollten ...",
+  "recommendations-confidence-degree": "D-Well Vertrauensgrad",
+  "recommendations-confidence-degree-reasoning": "D-Well-Konfidenzgrad-Argumentation",
   "recommendations-header": "Empfehlungen and was getan werden sollte ...",
   "recommendations-outcomes-header": "Was Sie erwarten können ...",
   "registration-message": "Bitte <anchor href=\"https://www.onepointltd.com/data-wellness/onepoint-d-well/\" target=\"_blank\" className=\"default-link\">anmelden</a> damit die Anwendung weiterhin funktioniert.",

@@ -84,6 +84,8 @@
   "purpose-companion": "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data",
   "predefined-image": "pre-defined-responses.png",
   "recommendations-avoidance-header": "What you should avoid ...",
+  "recommendations-confidence-degree": "D-Well confidence degree",
+  "recommendations-confidence-degree-reasoning": "D-Well confidence degree reasoning",
   "recommendations-header": "Recommendations and suggested courses of action ...",
   "recommendations-outcomes-header": "Positive outcomes (if you follow the advices) ...",
   "registration-message": "Please <anchor href=\"https://www.onepointltd.com/data-wellness/onepoint-d-well/\" target=\"_blank\" className=\"default-link\">register</a> to continue using the app.",

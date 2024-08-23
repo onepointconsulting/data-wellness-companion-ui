@@ -79,10 +79,10 @@ export default function useUserAnswer() {
             handleNewMessage(newMessage, expectedNodes, setMessages, setCurrentMessage, setCurrentMessageHistory, setExpectedNodes);
           } else if (hasRecommendations) {
             // The final report is ready
-            const {recommendations, avoidance, outcomes} = data;
             const newMessage = {
-              question: reportMarkdownAdapter(recommendations ?? [], avoidance ?? [], outcomes ?? [],
-                t("recommendations-header"), t("recommendations-avoidance-header"), t("recommendations-outcomes-header")),
+              question: reportMarkdownAdapter(data,
+                t("recommendations-header"), t("recommendations-avoidance-header"), t("recommendations-outcomes-header"),
+                t("recommendations-confidence-degree"), t("recommendations-confidence-degree-reasoning")),
               answer: "",
               final_report: true,
               suggestions: [],

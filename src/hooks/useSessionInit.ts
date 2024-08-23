@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import {AppContext, DEFAULT_EXPECTED_NODES} from "../context/AppContext.tsx";
 import {getSeenIntro, getSession, getSessionHistory, saveSession} from "../lib/sessionFunctions.ts";
 import {extractIdParam} from "../lib/urlParamExtraction.ts";
 import {BoomiMessage, BoomiSuggestion, Message} from "../model/message.ts";
@@ -23,7 +23,8 @@ export default function useSessionInit() {
     setConnected,
     sessionStartTimestamp,
     expectedNodes,
-    setExpectedNodes
+    setExpectedNodes,
+    setCurrentMessageHistory
   } = useContext(AppContext);
 
   const [t] = useTranslation();
@@ -75,6 +76,7 @@ export default function useSessionInit() {
             })
             setStartSession(true)
             setCurrentMessage(0)
+            setExpectedNodes(DEFAULT_EXPECTED_NODES)
             setSending(false)
           })
           .catch((error: Error) => {
@@ -86,9 +88,10 @@ export default function useSessionInit() {
         const splits = pathname.split("/")
         const string = splits.pop();
         const maxSession = session.messages.length - 1;
-        const currentMessage = !!pathname && !!splits && splits.length > 0 && !!string ? parseInt(string) : maxSession
+        const currentMessage = Math.min(!!pathname && !!splits && splits.length > 0 && !!string ? parseInt(string) : maxSession, maxSession)
         setExpectedNodes(Math.max(session.messages.length, expectedNodes))
-        setCurrentMessage(Math.min(currentMessage, maxSession))
+        setCurrentMessage(currentMessage)
+        setCurrentMessageHistory(currentMessage)
         setStartSession(true)
       }
     }
