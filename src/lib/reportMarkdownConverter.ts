@@ -1,12 +1,12 @@
-import {BoomiData} from "../model/message.ts";
+import { BoomiData } from "../model/message.ts";
 
 function renderItems(items: string[] | undefined, header: string): string {
   if (!items || items.length === 0) {
-    return ''
+    return "";
   }
   return `# ${header}
-${items.map((r, i) => `${i + 1}. ${r}`).join('\n')}
-`
+${items.map((r, i) => `${i + 1}. ${r}`).join("\n")}
+`;
 }
 
 export default function reportMarkdownAdapter(
@@ -15,8 +15,10 @@ export default function reportMarkdownAdapter(
   avoidanceHeader: string,
   outcomesHeader: string,
   confidenceDegreeHeader: string,
-  confidenceDegreereasoningHeader: string): string {
-  const {recommendations, avoidance, outcomes, confidence_level, rational} = data
+  confidenceDegreereasoningHeader: string,
+): string {
+  const { recommendations, avoidance, outcomes, confidence_level, rational } =
+    data;
   return `${renderItems(recommendations, recommendationsHeader)}
 ${renderItems(avoidance, avoidanceHeader)}
 ${renderItems(outcomes, outcomesHeader)}
@@ -24,5 +26,5 @@ ${renderItems(outcomes, outcomesHeader)}
 \`\`\`${confidence_level}\`\`\`
 ## ${confidenceDegreereasoningHeader}
 ${rational}
-`
+`;
 }

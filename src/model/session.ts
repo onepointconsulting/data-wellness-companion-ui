@@ -1,4 +1,4 @@
-import {Message} from "./message.ts";
+import { Message } from "./message.ts";
 
 export type Session = {
   id: string;

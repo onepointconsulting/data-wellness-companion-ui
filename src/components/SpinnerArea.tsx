@@ -2,9 +2,9 @@ import Spinner from "./Spinner.tsx";
 import ErrorMessage from "./message/ErrorMessage.tsx";
 
 export default function SpinnerArea({
-                                      sending,
-                                      errorMessage
-                                    }: {
+  sending,
+  errorMessage,
+}: {
   sending: boolean;
   errorMessage: string | undefined;
 }) {
@@ -13,11 +13,11 @@ export default function SpinnerArea({
       {sending && (
         <>
           <div className="mt-6 mb-8">
-            <Spinner/>
+            <Spinner />
           </div>
         </>
       )}
-      {!!errorMessage && <ErrorMessage error={errorMessage}/>}
+      {!!errorMessage && <ErrorMessage error={errorMessage} />}
     </>
   );
 }

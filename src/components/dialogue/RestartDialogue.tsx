@@ -1,6 +1,6 @@
-import {useContext} from "react";
-import {useTranslation} from "react-i18next";
-import {AppContext} from "../../context/AppContext.tsx";
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { AppContext } from "../../context/AppContext.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
 import restartCompanion from "../../lib/restartFunctions.ts";

@@ -1,14 +1,14 @@
 import Markdown from "react-markdown";
-import {Message} from "../model/message.ts";
+import { Message } from "../model/message.ts";
 import remarkGfm from "remark-gfm";
-import {useContext, useEffect} from "react";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {getSession} from "../lib/sessionFunctions.ts";
+import { useContext, useEffect } from "react";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { getSession } from "../lib/sessionFunctions.ts";
 // import {showDialogue} from "../lib/dialogFunctions.ts";
 // import {EMAIL_DIALOGUE_ID} from "./dialogue/EmailDialogue.tsx";
-import {Ontology} from "../model/ontology.ts";
-import {AppContext} from "../context/AppContext.tsx";
-import {toast} from "../../@/components/ui/use-toast.ts";
+import { Ontology } from "../model/ontology.ts";
+import { AppContext } from "../context/AppContext.tsx";
+import { toast } from "../../@/components/ui/use-toast.ts";
 
 // function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
 //   e.preventDefault();

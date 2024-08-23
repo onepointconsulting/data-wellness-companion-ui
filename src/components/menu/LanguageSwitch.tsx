@@ -1,8 +1,8 @@
-import {useTranslation} from "react-i18next";
-import {toast} from "../../../@/components/ui/use-toast.ts";
+import { useTranslation } from "react-i18next";
+import { toast } from "../../../@/components/ui/use-toast.ts";
 import restartCompanion from "../../lib/restartFunctions.ts";
-import {ChangeEvent, useContext} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
+import { ChangeEvent, useContext } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
 import MenuSelectorBase from "./MenuSelectorBase.tsx";
 
 /**
@@ -18,7 +18,8 @@ export default function LanguageSwitch({
   const { i18n, t } = useTranslation();
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { messages, setDisplayRegistrationMessage, setSessionStartTimestamp } = useContext(AppContext);
+  const { messages, setDisplayRegistrationMessage, setSessionStartTimestamp } =
+    useContext(AppContext);
 
   const onClickLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (!connected) {

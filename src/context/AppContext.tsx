@@ -53,7 +53,7 @@ interface AppState {
   setSeenIntro: (seenIntro: boolean) => void;
   errorMessage?: string;
   setErrorMessage: (errorMessage: string) => void;
-  sessionStartTimestamp: Date,
+  sessionStartTimestamp: Date;
   setSessionStartTimestamp: (sessionStartTimestamp: Date) => void;
 }
 
@@ -144,7 +144,9 @@ export const AppContextProvider = ({ children }: Props) => {
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
   const [seenIntro, setSeenIntro] = useState(getSeenIntro());
   const [errorMessage, setErrorMessage] = useState("");
-  const [sessionStartTimestamp, setSessionStartTimestamp] = useState(new Date());
+  const [sessionStartTimestamp, setSessionStartTimestamp] = useState(
+    new Date(),
+  );
 
   const navigate = useNavigate();
 
@@ -212,7 +214,7 @@ export const AppContextProvider = ({ children }: Props) => {
         errorMessage,
         setErrorMessage,
         sessionStartTimestamp,
-        setSessionStartTimestamp
+        setSessionStartTimestamp,
       }}
     >
       {" "}

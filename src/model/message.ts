@@ -1,10 +1,10 @@
-import {CONFIDENCE_ENUM} from "../lib/confidenceConstants.ts";
+import { CONFIDENCE_ENUM } from "../lib/confidenceConstants.ts";
 
 export type ServerSuggestion = {
   title: string;
   suggestion: string;
   image: string;
-}
+};
 
 export type Suggestion = {
   id: number;
@@ -27,23 +27,23 @@ export type BoomiSuggestion = {
   title: string;
   suggestion: string;
   image: string;
-}
+};
 
 export type BoomiData = {
-  session: string,
-  step: number,
-  question?: string,
-  suggestions: BoomiSuggestion[]
-  recommendations?: string[],
-  avoidance?: string[],
-  outcomes?: string[],
-  confidence_level?: CONFIDENCE_ENUM,
-  previous_step_confidence_level?: CONFIDENCE_ENUM,
-  rational?: string,
-}
+  session: string;
+  step: number;
+  question?: string;
+  suggestions: BoomiSuggestion[];
+  recommendations?: string[];
+  avoidance?: string[];
+  outcomes?: string[];
+  confidence_level?: CONFIDENCE_ENUM;
+  previous_step_confidence_level?: CONFIDENCE_ENUM;
+  rational?: string;
+};
 
 export type BoomiMessage = {
-  data?: BoomiData,
-  message?: string,
-  code: number,
-}
+  data?: BoomiData;
+  message?: string;
+  code: number;
+};

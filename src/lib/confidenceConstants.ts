@@ -16,4 +16,4 @@ enum CONFIDENCE_ENUM {
 
 export default CONFIDENCE;
 
-export {CONFIDENCE_ENUM};
+export { CONFIDENCE_ENUM };

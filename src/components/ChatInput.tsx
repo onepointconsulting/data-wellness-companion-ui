@@ -1,9 +1,9 @@
-import {useContext, useEffect, useRef} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {useTranslation} from "react-i18next";
+import { useContext, useEffect, useRef } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 // @ts-ignore
-import {SUCCESS, upsertUserAnswer} from "companion-ui-api/apiClient";
+import { SUCCESS, upsertUserAnswer } from "companion-ui-api/apiClient";
 import useUserAnswer from "../hooks/useUserAnswer.ts";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
@@ -55,7 +55,7 @@ export default function ChatInput() {
     }
   }, [sending]);
 
-  const {sendMessage} = useUserAnswer();
+  const { sendMessage } = useUserAnswer();
 
   function sendEnterMessage(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (!e.shiftKey && e.key === "Enter" && chatText.length > 0) {
@@ -93,7 +93,7 @@ export default function ChatInput() {
             className="disabled:opacity-10"
           >
             {!updatingConfidence && (
-              <SendImage enoughText={enoughText(chatText)}/>
+              <SendImage enoughText={enoughText(chatText)} />
             )}
           </button>
         )}

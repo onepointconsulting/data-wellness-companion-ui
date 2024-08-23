@@ -1,5 +1,5 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 import MainPanel from "./MainPanel.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
@@ -7,11 +7,11 @@ import Disclaimer from "./Disclaimer.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
-import {Toaster} from "../../@/components/ui/toaster";
+import { Toaster } from "../../@/components/ui/toaster";
 import HamburgerMenu from "./menu/HamburgerMenu.tsx";
-import {IntroSlides} from "./intro/IntroSlides.tsx";
-import {useTranslation} from "react-i18next";
-import {IoMdClose} from "react-icons/io";
+import { IntroSlides } from "./intro/IntroSlides.tsx";
+import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import useSessionInit from "../hooks/useSessionInit.ts";
 import NodeNavigation from "./NodeNavigation.tsx";
@@ -25,7 +25,7 @@ export default function CompanionParent() {
     setSeenIntro,
   } = useContext(AppContext);
 
-  useSessionInit()
+  useSessionInit();
 
   useChatHistory();
 
