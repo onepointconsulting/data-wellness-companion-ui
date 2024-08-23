@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { MdLanguage } from "react-icons/md";
 import restartCompanion from "../../lib/restartFunctions.ts";
 import { AppContext } from "../../context/AppContext.tsx";
-import { ChatContext } from "../../context/ChatContext.tsx";
 import { toast } from "../../../@/components/ui/use-toast.ts";
 
 function LanguageDropDown({
@@ -15,8 +14,7 @@ function LanguageDropDown({
   const { i18n, t } = useTranslation();
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { socket } = useContext(ChatContext);
-  const { messages, setDisplayRegistrationMessage } = useContext(AppContext);
+  const { messages, setDisplayRegistrationMessage, setCurrentMessageHistory, setSessionStartTimestamp, setExpectedNodes } = useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
     if (!connected) {
@@ -33,8 +31,10 @@ function LanguageDropDown({
       setSelectedHistoricalSession(null);
       restartCompanion(
         messages,
-        socket,
         setDisplayRegistrationMessage,
+        setSessionStartTimestamp,
+        setCurrentMessageHistory,
+        setExpectedNodes,
         setChatText,
       );
     }

@@ -14,6 +14,7 @@ import {useTranslation} from "react-i18next";
 import {IoMdClose} from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import useSessionInit from "../hooks/useSessionInit.ts";
+import NodeNavigation from "./NodeNavigation.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -68,7 +69,7 @@ export default function CompanionParent() {
                 <Disclaimer />
               </div>
               <div>
-                {/*<NodeNavigation />*/}
+                <NodeNavigation />
               </div>
             </div>
           </div>

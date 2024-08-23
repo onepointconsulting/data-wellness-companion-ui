@@ -53,6 +53,8 @@ interface AppState {
   setSeenIntro: (seenIntro: boolean) => void;
   errorMessage?: string;
   setErrorMessage: (errorMessage: string) => void;
+  sessionStartTimestamp: Date,
+  setSessionStartTimestamp: (sessionStartTimestamp: Date) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -105,6 +107,8 @@ function createAppState(): AppState {
     setSeenIntro: (_) => {},
     errorMessage: "",
     setErrorMessage: (_) => {},
+    sessionStartTimestamp: new Date(),
+    setSessionStartTimestamp: (_) => {},
   };
 }
 
@@ -140,6 +144,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
   const [seenIntro, setSeenIntro] = useState(getSeenIntro());
   const [errorMessage, setErrorMessage] = useState("");
+  const [sessionStartTimestamp, setSessionStartTimestamp] = useState(new Date());
 
   const navigate = useNavigate();
 
@@ -205,7 +210,9 @@ export const AppContextProvider = ({ children }: Props) => {
         seenIntro,
         setSeenIntro,
         errorMessage,
-        setErrorMessage
+        setErrorMessage,
+        sessionStartTimestamp,
+        setSessionStartTimestamp
       }}
     >
       {" "}

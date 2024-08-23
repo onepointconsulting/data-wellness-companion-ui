@@ -18,10 +18,12 @@ export default function useSessionInit() {
     setCurrentMessage,
     setDisplayRegistrationMessage,
     seenIntro,
-    setSeenIntro,
     setErrorMessage,
     setSending,
-    setConnected
+    setConnected,
+    sessionStartTimestamp,
+    expectedNodes,
+    setExpectedNodes
   } = useContext(AppContext);
 
   const [t] = useTranslation();
@@ -35,7 +37,6 @@ export default function useSessionInit() {
       return
     }
     const seenIntro = getSeenIntro()
-    setSeenIntro(seenIntro)
     setErrorMessage("")
     setConnected(true)
     if(seenIntro) {
@@ -81,9 +82,15 @@ export default function useSessionInit() {
           })
       } else {
         setMessages(session.messages)
-        setCurrentMessage(session.messages.length - 1)
+        const pathname = location.pathname
+        const splits = pathname.split("/")
+        const string = splits.pop();
+        const maxSession = session.messages.length - 1;
+        const currentMessage = !!pathname && !!splits && splits.length > 0 && !!string ? parseInt(string) : maxSession
+        setExpectedNodes(Math.max(session.messages.length, expectedNodes))
+        setCurrentMessage(Math.min(currentMessage, maxSession))
         setStartSession(true)
       }
     }
-  }, [seenIntro])
+  }, [seenIntro, sessionStartTimestamp])
 }

@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import { useTranslation } from "react-i18next";
-import { AppContext } from "../../context/AppContext.tsx";
-import { ChatContext } from "../../context/ChatContext.tsx";
+import {useContext} from "react";
+import {useTranslation} from "react-i18next";
+import {AppContext} from "../../context/AppContext.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
 import restartCompanion from "../../lib/restartFunctions.ts";
@@ -14,21 +13,25 @@ function onClose() {
 }
 
 export default function RestartDialogue() {
-  const { socket } = useContext(ChatContext);
   const { t } = useTranslation();
   const {
     messages,
     setDisplayRegistrationMessage,
     setChatText,
     setSelectedHistoricalSession,
+    setSessionStartTimestamp,
+    setCurrentMessageHistory,
+    setExpectedNodes
   } = useContext(AppContext);
 
   function onOk() {
     setSelectedHistoricalSession(null);
     restartCompanion(
       messages,
-      socket,
       setDisplayRegistrationMessage,
+      setSessionStartTimestamp,
+      setCurrentMessageHistory,
+      setExpectedNodes,
       setChatText,
     );
     onClose();

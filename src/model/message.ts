@@ -1,3 +1,5 @@
+import {CONFIDENCE_ENUM} from "../lib/confidenceConstants.ts";
+
 export type ServerSuggestion = {
   title: string;
   suggestion: string;
@@ -32,7 +34,10 @@ export type BoomiData = {
   step: number,
   question?: string,
   suggestions: BoomiSuggestion[]
+  recommendations?: string[],
+  avoidance?: string[],
   outcomes?: string[],
+  previous_step_confidence_level?: CONFIDENCE_ENUM,
 }
 
 export type BoomiMessage = {

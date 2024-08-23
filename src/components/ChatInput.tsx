@@ -4,9 +4,7 @@ import {useTranslation} from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 // @ts-ignore
 import {SUCCESS, upsertUserAnswer} from "companion-ui-api/apiClient";
-import {getSessionId} from "../lib/websocketFunctions.ts";
-import {BoomiMessage, ServerSuggestion} from "../model/message.ts";
-import {getSession, saveSession} from "../lib/sessionFunctions.ts";
+import useUserAnswer from "../hooks/useUserAnswer.ts";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -24,16 +22,12 @@ function enoughText(chatText: string) {
 export default function ChatInput() {
   const {
     selectedSuggestion,
-    setSending,
     sending,
     connected,
     chatText,
     setChatText,
     updatingConfidence,
-    messages, setMessages,
     currentMessage,
-    setCurrentMessage,
-    setErrorMessage
   } = useContext(AppContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
@@ -61,56 +55,7 @@ export default function ChatInput() {
     }
   }, [sending]);
 
-  function sendMessage() {
-    setSending(true);
-    const sessionId = getSessionId()
-    upsertUserAnswer(sessionId, currentMessage + 1, chatText)
-      .then((response: BoomiMessage) => {
-        const {code, data, message} = response;
-        debugger
-        if (code === SUCCESS && !!data) {
-          const {question, suggestions} = data;
-          if (!!question) {
-            const newMessage = {
-              question,
-              answer: "",
-              final_report: false,
-              suggestions: suggestions.map((s: ServerSuggestion, index: number) => ({
-                id: index,
-                img_alt: "",
-                img_src: s.image,
-                main_text: s.suggestion,
-                title: s.title ?? "",
-                svg_image: undefined
-              })),
-              clarification: "",
-            }
-            const newMessages = [...messages, newMessage];
-            const session = getSession();
-            setMessages(newMessages);
-            setCurrentMessage(newMessages.length - 1);
-            if(session) {
-              session.messages = newMessages;
-              saveSession(session);
-            }
-          } else {
-            // The final report is ready
-            const {outcomes} = data;
-            if(!outcomes) {
-              setErrorMessage(!!message ? t(message) : "Unspecified error");
-            }
-          }
-        } else {
-          setErrorMessage(!!message ? t(message) : "Unspecified error");
-        }
-      })
-      .catch((error: Error) => {
-        setErrorMessage(error.message);
-      })
-      .finally(() => {
-        setSending(false);
-      })
-  }
+  const {sendMessage} = useUserAnswer();
 
   function sendEnterMessage(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (!e.shiftKey && e.key === "Enter" && chatText.length > 0) {

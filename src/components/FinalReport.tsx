@@ -1,25 +1,19 @@
 import Markdown from "react-markdown";
-import { Message } from "../model/message.ts";
+import {Message} from "../model/message.ts";
 import remarkGfm from "remark-gfm";
-import { BsFileEarmarkPdf } from "react-icons/bs";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { PiGraphLight } from "react-icons/pi";
-import { useContext, useEffect } from "react";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { getSession } from "../lib/sessionFunctions.ts";
-import { showDialogue } from "../lib/dialogFunctions.ts";
-import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
-import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-import OntologyGraph from "./knowledge-graph/OntologyGraph.tsx";
-import { Ontology } from "../model/ontology.ts";
-import { AppContext } from "../context/AppContext.tsx";
-import { toast } from "../../@/components/ui/use-toast.ts";
+import {useContext, useEffect} from "react";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {getSession} from "../lib/sessionFunctions.ts";
+// import {showDialogue} from "../lib/dialogFunctions.ts";
+// import {EMAIL_DIALOGUE_ID} from "./dialogue/EmailDialogue.tsx";
+import {Ontology} from "../model/ontology.ts";
+import {AppContext} from "../context/AppContext.tsx";
+import {toast} from "../../@/components/ui/use-toast.ts";
 
-function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
-  e.preventDefault();
-  showDialogue(EMAIL_DIALOGUE_ID);
-}
+// function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
+//   e.preventDefault();
+//   showDialogue(EMAIL_DIALOGUE_ID);
+// }
 
 async function fetchOntology(
   sessionId: string,
@@ -37,40 +31,15 @@ async function fetchOntology(
   return await res.json();
 }
 
-function ReportLink({
-  click,
-  clazzName,
-  title,
-  children,
-}: {
-  click: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-  clazzName: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={clazzName}>
-      <a href="#" onClick={click} title={title}>
-        {children}
-      </a>
-      <a href="#" onClick={click} className="hidden md:block">
-        {title}
-      </a>
-    </div>
-  );
-}
-
 /**
  * The final report of the conversation.
  * @param message The message with the final report.
  * @constructor
  */
 export default function FinalReport({ message }: { message: Message }) {
-  const { t } = useTranslation();
-  const { setOntology, ontologyOpen, setOntologyOpen } = useContext(AppContext);
+  const { setOntology, ontologyOpen } = useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
-  const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
 
   useEffect(() => {
     if (sessionId && ontologyOpen) {
@@ -90,30 +59,30 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      <OntologyGraph />
+      {/*<OntologyGraph />*/}
       {sessionId && (
         <div className="final-report-download">
-          <ReportLink
-            click={() => setOntologyOpen(!ontologyOpen)}
-            title={t("Knowledge graph")}
-            clazzName="final-report-pdf"
-          >
-            <PiGraphLight />
-          </ReportLink>
-          <ReportLink
-            click={showEmailDialogue}
-            title={t("Send report as email")}
-            clazzName="final-report-email"
-          >
-            <MdOutlineAlternateEmail />
-          </ReportLink>
-          <ReportLink
-            click={(_e) => (location.href = reportPdf)}
-            title={t("Download PDF")}
-            clazzName="final-report-pdf"
-          >
-            <BsFileEarmarkPdf />
-          </ReportLink>
+          {/*<ReportLink*/}
+          {/*  click={() => setOntologyOpen(!ontologyOpen)}*/}
+          {/*  title={t("Knowledge graph")}*/}
+          {/*  clazzName="final-report-pdf"*/}
+          {/*>*/}
+          {/*  <PiGraphLight />*/}
+          {/*</ReportLink>*/}
+          {/*<ReportLink*/}
+          {/*  click={showEmailDialogue}*/}
+          {/*  title={t("Send report as email")}*/}
+          {/*  clazzName="final-report-email"*/}
+          {/*>*/}
+          {/*  <MdOutlineAlternateEmail />*/}
+          {/*</ReportLink>*/}
+          {/*<ReportLink*/}
+          {/*  click={(_e) => (location.href = reportPdf)}*/}
+          {/*  title={t("Download PDF")}*/}
+          {/*  clazzName="final-report-pdf"*/}
+          {/*>*/}
+          {/*  <BsFileEarmarkPdf />*/}
+          {/*</ReportLink>*/}
         </div>
       )}
       <Markdown

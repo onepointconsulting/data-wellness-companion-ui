@@ -14,9 +14,7 @@ export default function MainPanel() {
     currentMessage,
     messages,
     sending,
-    expectedNodes,
     isLast,
-    generatingReport,
     errorMessage
   } = useContext(AppContext);
   const message = messages[currentMessage];
@@ -24,13 +22,10 @@ export default function MainPanel() {
     return (
       <SpinnerArea
         sending={sending}
-        displayReportGenerationMessage={false}
         errorMessage={errorMessage}
       />
     );
   }
-  const displayReportGenerationMessage =
-    currentMessage === expectedNodes - 2 || generatingReport;
   if (!message.final_report) {
     return (
       <div className="interaction-panel">
@@ -42,7 +37,6 @@ export default function MainPanel() {
         {!isLast && <QuestionAnswer message={message} />}
         <SpinnerArea
           sending={sending}
-          displayReportGenerationMessage={displayReportGenerationMessage}
           errorMessage={errorMessage}
         />
         <ClarificationArea />
