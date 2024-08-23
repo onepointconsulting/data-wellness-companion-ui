@@ -14,7 +14,7 @@ function LanguageDropDown({
   const { i18n, t } = useTranslation();
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { messages, setDisplayRegistrationMessage, setCurrentMessageHistory, setSessionStartTimestamp, setExpectedNodes } = useContext(AppContext);
+  const { messages, setDisplayRegistrationMessage, setSessionStartTimestamp } = useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
     if (!connected) {
@@ -33,8 +33,6 @@ function LanguageDropDown({
         messages,
         setDisplayRegistrationMessage,
         setSessionStartTimestamp,
-        setCurrentMessageHistory,
-        setExpectedNodes,
         setChatText,
       );
     }

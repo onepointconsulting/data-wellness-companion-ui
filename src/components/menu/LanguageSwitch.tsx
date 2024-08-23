@@ -18,7 +18,7 @@ export default function LanguageSwitch({
   const { i18n, t } = useTranslation();
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { messages, setDisplayRegistrationMessage, setSessionStartTimestamp, setCurrentMessageHistory, setExpectedNodes } = useContext(AppContext);
+  const { messages, setDisplayRegistrationMessage, setSessionStartTimestamp } = useContext(AppContext);
 
   const onClickLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (!connected) {
@@ -37,8 +37,6 @@ export default function LanguageSwitch({
         messages,
         setDisplayRegistrationMessage,
         setSessionStartTimestamp,
-        setCurrentMessageHistory,
-        setExpectedNodes,
         setChatText,
       );
     }

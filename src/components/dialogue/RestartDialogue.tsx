@@ -20,8 +20,6 @@ export default function RestartDialogue() {
     setChatText,
     setSelectedHistoricalSession,
     setSessionStartTimestamp,
-    setCurrentMessageHistory,
-    setExpectedNodes
   } = useContext(AppContext);
 
   function onOk() {
@@ -30,8 +28,6 @@ export default function RestartDialogue() {
       messages,
       setDisplayRegistrationMessage,
       setSessionStartTimestamp,
-      setCurrentMessageHistory,
-      setExpectedNodes,
       setChatText,
     );
     onClose();

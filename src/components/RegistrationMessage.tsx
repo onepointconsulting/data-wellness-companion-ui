@@ -18,15 +18,6 @@ export default function RegistrationMessage() {
           i18nKey="registration-message"
           components={{ anchor: <a />, bold: <strong />, underline: <u /> }}
         />
-          Please{" "}
-          <a
-            href="https://www.onepointltd.com/data-wellness/onepoint-d-well/"
-            target="_blank"
-            className="default-link"
-          >
-            register
-          </a>{" "}
-          to continue using the app.
         </AlertDescription>
       </Alert>
     </div>
