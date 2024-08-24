@@ -12,8 +12,8 @@ import { Session } from "../model/session.ts";
 import { DEFAULT_LANGUAGE } from "../i18n/i18n.tsx";
 
 // @ts-ignore
-import { queryInitSession } from "companion-ui-api/apiClient";
 import { useTranslation } from "react-i18next";
+import { queryInitSession } from "../lib/boomiApi/apiClient.ts";
 
 export default function useSessionInit() {
   const {

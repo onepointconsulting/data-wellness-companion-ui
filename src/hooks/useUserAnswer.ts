@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 
 // @ts-ignore
-import { SUCCESS, upsertUserAnswer } from "companion-ui-api/apiClient";
+import { SUCCESS, upsertUserAnswer } from "../lib/boomiApi/apiClient.ts";
 import { useTranslation } from "react-i18next";
 import reportMarkdownAdapter from "../lib/reportMarkdownConverter.ts";
 
