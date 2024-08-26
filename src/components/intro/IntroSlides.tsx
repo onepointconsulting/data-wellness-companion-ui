@@ -1,7 +1,8 @@
-import { IntroContext, IntroSlide } from "./IntroContext.tsx";
-import { useContext } from "react";
+import {IntroContext, IntroSlide} from "./IntroContext.tsx";
+import {useContext} from "react";
 import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
+import {useSeenIntroHook} from "../../hooks/useSeenIntroHook.ts";
 
 function Progress({
   slides,
@@ -30,18 +31,17 @@ function Progress({
 
 export function IntroSlides({
   showIntro,
-  setSeenIntro,
   imageNode,
   closeIcon,
   slides,
 }: {
   showIntro: boolean;
-  setSeenIntro: (b: boolean) => void;
   imageNode: React.ReactNode;
   closeIcon: React.ReactNode;
   slides: IntroSlide[] | null;
 }) {
   const { currentSlide, setCurrentSlide } = useContext(IntroContext);
+  const {setSeenIntroHook} = useSeenIntroHook()
   if (slides == null || slides.length < 1) {
     return null;
   }
@@ -52,7 +52,7 @@ export function IntroSlides({
         const newCurrentSlide = currentSlide + 1;
         setCurrentSlide(newCurrentSlide);
       } else {
-        setSeenIntro(true);
+        setSeenIntroHook()
       }
     }
   }
@@ -74,7 +74,7 @@ export function IntroSlides({
           <div className="intro-header-image">{imageNode}</div>
           <div
             className="intro-header-close"
-            onClick={() => setSeenIntro(true)}
+            onClick={() => setSeenIntroHook()}
           >
             {closeIcon}
           </div>

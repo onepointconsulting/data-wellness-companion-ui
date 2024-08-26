@@ -1,10 +1,10 @@
-import { Message } from "../model/message.ts";
-import { createContext, useEffect, useState } from "react";
-import { Props } from "./commonModel.ts";
-import { useNavigate } from "react-router-dom";
-import { Confidence } from "../model/confidence.ts";
-import { Ontology } from "../model/ontology.ts";
-import { getSeenIntro, hasSeenIntro } from "../lib/sessionFunctions.ts";
+import {Message} from "../model/message.ts";
+import {createContext, useState} from "react";
+import {Props} from "./commonModel.ts";
+import {useNavigate} from "react-router-dom";
+import {Confidence} from "../model/confidence.ts";
+import {Ontology} from "../model/ontology.ts";
+import {getSeenIntro} from "../lib/sessionFunctions.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -158,12 +158,6 @@ export const AppContextProvider = ({ children }: Props) => {
     setCurrentMessage(currentMessage);
     navigate(`/${currentMessage}${location.search}`);
   }
-
-  useEffect(() => {
-    if (seenIntro) {
-      hasSeenIntro();
-    }
-  }, [seenIntro]);
 
   return (
     <AppContext.Provider

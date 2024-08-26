@@ -22,7 +22,6 @@ export default function CompanionParent() {
     setStartSession,
     displayRegistrationMessage,
     seenIntro,
-    setSeenIntro,
   } = useContext(AppContext);
 
   useSessionInit();
@@ -44,7 +43,6 @@ export default function CompanionParent() {
     <>
       <IntroSlides
         showIntro={!seenIntro}
-        setSeenIntro={setSeenIntro}
         imageNode={imageNodeFunc()}
         closeIcon={<IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />}
         slides={getIntroSlides()}
