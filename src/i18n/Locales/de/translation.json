@@ -38,6 +38,8 @@
   "explanation 7 end": "Wenn Sie am Ende Ihrer Sitzung angekommen sind, sehen Sie einen Bericht mit den vorgeschlagenen Maßnahmen. An diesem Punkt können Sie die Sitzung mit dem Startsymbol neu starten.",
   "Failed to fetch knowledge graph": "Abrufen des Wissensgraphen fehlgeschlagen",
   "Failed to fetch knowledge graph. Try again later": "Abrufen des Wissensgraphen fehlgeschlagen. Versuchen Sie es später erneut",
+  "Failed to retrieve clarification.": "Abrufen der Klarstellung fehlgeschlagen.",
+  "Failed to retrieve clarification. Try again later": "Abrufen der Klarstellung fehlgeschlagen. Versuchen Sie es später erneut",
   "Farsi": "Farsi",
   "Full screen mode": "Vollbildmodus",
   "Generating final report. This might take 2 to 3 minutes...": "Endbericht wird generiert. Dies kann 2 bis 3 Minuten dauern...",

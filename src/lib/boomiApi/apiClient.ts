@@ -15,7 +15,13 @@ type RequestData = {
   username?: string;
 };
 
-export async function queryInitSession(language: string = "en", email: string) {
+export type ResponseData = {
+  code: number;
+  message?: string,
+  data?: any;
+}
+
+export async function queryInitSession(language: string = "en", email: string): Promise<ResponseData> {
   if (!email) {
     return createError("Missing email");
   }
@@ -25,7 +31,7 @@ export async function queryInitSession(language: string = "en", email: string) {
   });
 }
 
-export async function askClarification(session: string, stepNumber: number) {
+export async function askClarification(session: string, stepNumber: number): Promise<ResponseData> {
   if (!session) {
     return createError("Missing session");
   }
@@ -42,7 +48,7 @@ export async function upsertUserAnswer(
   session: string,
   stepNumber: number,
   userAnswer: string,
-) {
+): Promise<ResponseData> {
   if (!session) {
     return createError("Missing session");
   }
@@ -63,7 +69,7 @@ export async function queryReportEmail(
   session: string,
   username: string,
   email: string,
-) {
+): Promise<ResponseData> {
   if (!session) {
     return createError("Missing session");
   }
@@ -84,8 +90,9 @@ function textMissing(text: string) {
   return !text || text.trim().length === 0;
 }
 
-async function handleRequest(endpoint: string, query: RequestData) {
+async function handleRequest(endpoint: string, query: RequestData): Promise<ResponseData> {
   try {
+    debugger
     console.info("query", query);
     const headers = {
       "Access-Control-Allow-Headers": "*",

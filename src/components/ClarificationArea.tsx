@@ -1,11 +1,11 @@
-import { Message } from "../model/message.ts";
-import { FaHourglassHalf } from "react-icons/fa";
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { ChatContext } from "../context/ChatContext.tsx";
+import {Message} from "../model/message.ts";
+import {FaHourglassHalf} from "react-icons/fa";
+import {useContext, useEffect, useRef} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {ChatContext} from "../context/ChatContext.tsx";
 import MarkdownComponent from "./Markdown.tsx";
-import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
-import { GrContract, GrExpand } from "react-icons/gr";
+import {WEBSOCKET_SERVER_COMMAND} from "../model/websocketCommands.ts";
+import {GrContract, GrExpand} from "react-icons/gr";
 
 /**
  * Used to display the question clarification.
