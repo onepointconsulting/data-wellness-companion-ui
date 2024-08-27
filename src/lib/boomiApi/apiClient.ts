@@ -17,11 +17,14 @@ type RequestData = {
 
 export type ResponseData = {
   code: number;
-  message?: string,
+  message?: string;
   data?: any;
-}
+};
 
-export async function queryInitSession(language: string = "en", email: string): Promise<ResponseData> {
+export async function queryInitSession(
+  language: string = "en",
+  email: string,
+): Promise<ResponseData> {
   if (!email) {
     return createError("Missing email");
   }
@@ -31,7 +34,10 @@ export async function queryInitSession(language: string = "en", email: string): 
   });
 }
 
-export async function askClarification(session: string, stepNumber: number): Promise<ResponseData> {
+export async function askClarification(
+  session: string,
+  stepNumber: number,
+): Promise<ResponseData> {
   if (!session) {
     return createError("Missing session");
   }
@@ -90,7 +96,10 @@ function textMissing(text: string) {
   return !text || text.trim().length === 0;
 }
 
-async function handleRequest(endpoint: string, query: RequestData): Promise<ResponseData> {
+async function handleRequest(
+  endpoint: string,
+  query: RequestData,
+): Promise<ResponseData> {
   try {
     console.info("query", query);
     const headers = {

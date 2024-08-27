@@ -1,9 +1,9 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
-import {Message} from "../../model/message.ts";
-import {FaHourglassHalf} from "react-icons/fa";
-import {IoIosInformationCircleOutline} from "react-icons/io";
-import {useClarification} from "../../hooks/useClarification.ts";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
+import { Message } from "../../model/message.ts";
+import { FaHourglassHalf } from "react-icons/fa";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { useClarification } from "../../hooks/useClarification.ts";
 
 /**
  * The light bulb icon that can be used to get a clarification.
@@ -21,7 +21,7 @@ export default function LightBulb() {
   } = useContext(AppContext);
   const message: Message = messages[currentMessage];
   const missesClarification = !message?.clarification;
-  const { processClarification } = useClarification()
+  const { processClarification } = useClarification();
 
   useEffect(() => {
     setClarificationClicked(false);
@@ -30,7 +30,7 @@ export default function LightBulb() {
   function onClarify(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     setClarificationClicked(true);
-    processClarification()
+    processClarification();
   }
 
   const isRecommendation = expectedNodes === currentMessage + 1;

@@ -18,11 +18,8 @@ import NodeNavigation from "./NodeNavigation.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
-  const {
-    setStartSession,
-    displayRegistrationMessage,
-    seenIntro,
-  } = useContext(AppContext);
+  const { setStartSession, displayRegistrationMessage, seenIntro } =
+    useContext(AppContext);
 
   useSessionInit();
 

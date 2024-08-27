@@ -7,7 +7,11 @@ export const SESSION_HISTORY_KEY = "history";
 
 export const SEEN_INTRO_KEY = "seenIntro";
 
-const SEEN_INTRO_VALUE = "true";
+export const OPEN_CLARIFICATION_KEY = "openClarification";
+
+const TRUE_VALUE = "true";
+
+const FALSE_VALUE = "false";
 
 export function saveSession(session: Session) {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
@@ -96,14 +100,24 @@ function appendToSessionHistory(
 }
 
 export function getSeenIntro(): boolean {
-  const seenIntro = localStorage.getItem(SEEN_INTRO_KEY);
-  return seenIntro === SEEN_INTRO_VALUE;
+  return localStorage.getItem(SEEN_INTRO_KEY) === TRUE_VALUE;
 }
 
 export function hasSeenIntro() {
-  localStorage.setItem(SEEN_INTRO_KEY, SEEN_INTRO_VALUE);
+  localStorage.setItem(SEEN_INTRO_KEY, TRUE_VALUE);
 }
 
 export function forgetSeenIntro() {
   localStorage.removeItem(SEEN_INTRO_KEY);
+}
+
+export function getOpenClarification(): boolean {
+  return localStorage.getItem(OPEN_CLARIFICATION_KEY) === TRUE_VALUE;
+}
+
+export function toggleOpenClarification() {
+  localStorage.setItem(
+    OPEN_CLARIFICATION_KEY,
+    getOpenClarification() ? FALSE_VALUE: TRUE_VALUE,
+  );
 }

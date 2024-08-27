@@ -1,19 +1,20 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 
-import {Session} from "../model/session.ts";
-import {getSession, saveSession} from "../lib/sessionFunctions.ts";
-import {SUCCESS, askClarification, ResponseData} from "../lib/boomiApi/apiClient.ts";
-import {toast} from "../../@/components/ui/use-toast.ts";
-import {useTranslation} from "react-i18next";
+import { Session } from "../model/session.ts";
+import { getSession, saveSession } from "../lib/sessionFunctions.ts";
+import {
+  SUCCESS,
+  askClarification,
+  ResponseData,
+} from "../lib/boomiApi/apiClient.ts";
+import { toast } from "../../@/components/ui/use-toast.ts";
+import { useTranslation } from "react-i18next";
 
 export function useClarification() {
   const { t } = useTranslation();
-  const {
-    messages,
-    currentMessage,
-    setClarificationClicked,
-  } = useContext(AppContext);
+  const { messages, currentMessage, setClarificationClicked } =
+    useContext(AppContext);
 
   function sendErrorMessage() {
     toast({
@@ -25,18 +26,21 @@ export function useClarification() {
   function processClarification() {
     setClarificationClicked(true);
     const session: Session | null = getSession();
-    if(!!session) {
+    if (!!session) {
       askClarification(session.id, currentMessage + 1)
         .then((response: ResponseData) => {
-          const {code} = response;
-          if(code === SUCCESS && !!response.data) {
+          const { code } = response;
+          if (code === SUCCESS && !!response.data) {
             const activeMessage = messages[currentMessage];
-            activeMessage.clarification = response.data['clarification']
+            activeMessage.clarification = response.data["clarification"];
             session.messages[currentMessage] = activeMessage;
             saveSession(session);
           } else {
             sendErrorMessage();
-            console.error("Failed to retrieve clarification.", response.message);
+            console.error(
+              "Failed to retrieve clarification.",
+              response.message,
+            );
           }
         })
         .catch((error: Error) => {
@@ -45,8 +49,7 @@ export function useClarification() {
         })
         .finally(() => {
           setClarificationClicked(false);
-        })
-      ;
+        });
     }
   }
 

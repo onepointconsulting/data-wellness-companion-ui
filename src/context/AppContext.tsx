@@ -1,10 +1,10 @@
-import {Message} from "../model/message.ts";
-import {createContext, useState} from "react";
-import {Props} from "./commonModel.ts";
-import {useNavigate} from "react-router-dom";
-import {Confidence} from "../model/confidence.ts";
-import {Ontology} from "../model/ontology.ts";
-import {getSeenIntro} from "../lib/sessionFunctions.ts";
+import { Message } from "../model/message.ts";
+import { createContext, useState } from "react";
+import { Props } from "./commonModel.ts";
+import { useNavigate } from "react-router-dom";
+import { Confidence } from "../model/confidence.ts";
+import { Ontology } from "../model/ontology.ts";
+import {getOpenClarification, getSeenIntro} from "../lib/sessionFunctions.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -129,7 +129,7 @@ export const AppContextProvider = ({ children }: Props) => {
     useState(false);
   const [updatingExpectedNodes, setUpdatingExpectedNodes] = useState(false);
   const [clarificationClicked, setClarificationClicked] = useState(false);
-  const [showClarification, setShowClarification] = useState(true);
+  const [showClarification, setShowClarification] = useState(getOpenClarification);
   const [confidence, setConfidence] = useState<Confidence | null>(null);
   const [updatingConfidence, setUpdatingConfidence] = useState(false);
   const [selectedHistoricalSession, setSelectedHistoricalSession] = useState<

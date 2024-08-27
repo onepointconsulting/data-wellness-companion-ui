@@ -1,16 +1,16 @@
 import GenericDialogue from "./GenericDialogue.tsx";
-import {FaRegLightbulb} from "react-icons/fa6";
-import {VscExtensions} from "react-icons/vsc";
+import { FaRegLightbulb } from "react-icons/fa6";
+import { VscExtensions } from "react-icons/vsc";
 
 import OnepointInfo from "./OnepointInfo.tsx";
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
-import {ImSwitch} from "react-icons/im";
-import {useTranslation} from "react-i18next";
+import { ImSwitch } from "react-icons/im";
+import { useTranslation } from "react-i18next";
 import InfoIcon from "./InfoIcon.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import SendImage from "../buttons/SendImage.tsx";
-import {SuggestionTemplate} from "../Suggestions.tsx";
-import {useSeenIntroHook} from "../../hooks/useSeenIntroHook.ts";
+import { SuggestionTemplate } from "../Suggestions.tsx";
+import { useSeenIntroHook } from "../../hooks/useSeenIntroHook.ts";
 
 export const INTRO_DIALOGUE_ID = "intro-dialogue";
 
@@ -36,13 +36,13 @@ function IntroSection({
  * @constructor
  */
 export default function IntroDialogue() {
-  const {setSeenIntroHook} = useSeenIntroHook()
+  const { setSeenIntroHook } = useSeenIntroHook();
   const { t } = useTranslation();
   return (
     <GenericDialogue dialogueId={INTRO_DIALOGUE_ID} clazz="companion-dialogue">
       <DialogueHeader
         onClose={() => {
-          setSeenIntroHook()
+          setSeenIntroHook();
           onCloseDialogue(INTRO_DIALOGUE_ID);
         }}
         className="!pl-3 !pr-0 !pt-0"
