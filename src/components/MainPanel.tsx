@@ -24,9 +24,9 @@ export default function MainPanel() {
           currentMessage={currentMessage}
           messagesLength={messages.length}
         />
-        {!isLast && <QuestionAnswer message={message} />}
         <SpinnerArea sending={sending} errorMessage={errorMessage} />
         <ClarificationArea />
+        {!isLast && <QuestionAnswer message={message} />}
         {isLast && <ChatInput />}
         <GiveReportNow />
         <Suggestions message={message} />

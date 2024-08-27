@@ -92,7 +92,6 @@ function textMissing(text: string) {
 
 async function handleRequest(endpoint: string, query: RequestData): Promise<ResponseData> {
   try {
-    debugger
     console.info("query", query);
     const headers = {
       "Access-Control-Allow-Headers": "*",

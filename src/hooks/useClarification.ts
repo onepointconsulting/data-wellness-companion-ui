@@ -23,7 +23,6 @@ export function useClarification() {
   }
 
   function processClarification() {
-    debugger
     setClarificationClicked(true);
     const session: Session | null = getSession();
     if(!!session) {
