@@ -92,6 +92,22 @@ export async function queryReportEmail(
   });
 }
 
+export async function finalReport(
+  session: string,
+  stepNumber: number,
+): Promise<ResponseData> {
+  if (!session) {
+    return createError("Missing session");
+  }
+  if (stepNumber === null || typeof stepNumber === "undefined") {
+    return createError("Missing step number");
+  }
+  return await handleRequest(`${SERVER}/FinalReport${USER_INFO}`, {
+    session,
+    step_number: stepNumber,
+  });
+}
+
 function textMissing(text: string) {
   return !text || text.trim().length === 0;
 }

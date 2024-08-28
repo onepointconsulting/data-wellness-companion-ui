@@ -17,14 +17,17 @@ export default function reportMarkdownAdapter(
   confidenceDegreeHeader: string,
   confidenceDegreereasoningHeader: string,
 ): string {
-  const { recommendations, avoidance, outcomes, confidence_level, rational } =
+  const { recommendations, avoidance, outcomes,
+    confidence_level, rational, previous_step_confidence_level, previous_step_rational } =
     data;
+  const confidenceLevel = confidence_level ?? previous_step_confidence_level;
+  const rationale = rational ?? previous_step_rational;
   return `${renderItems(recommendations, recommendationsHeader)}
 ${renderItems(avoidance, avoidanceHeader)}
 ${renderItems(outcomes, outcomesHeader)}
 # ${confidenceDegreeHeader}
-\`\`\`${confidence_level}\`\`\`
+\`\`\`${confidenceLevel}\`\`\`
 ## ${confidenceDegreereasoningHeader}
-${rational}
+${rationale}
 `;
 }

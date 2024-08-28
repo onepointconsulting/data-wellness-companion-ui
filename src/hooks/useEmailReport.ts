@@ -42,6 +42,8 @@ export function useEmailReport(): EmaiReport {
         .finally(() => {
           setSending(false);
         })
+    } else {
+      setFeedbackMessage(t("Error sending email: no session. Please refresh and try later."));
     }
   }
 

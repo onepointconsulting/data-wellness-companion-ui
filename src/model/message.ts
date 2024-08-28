@@ -40,6 +40,7 @@ export type BoomiData = {
   confidence_level?: CONFIDENCE_ENUM;
   previous_step_confidence_level?: CONFIDENCE_ENUM;
   rational?: string;
+  previous_step_rational?: string;
 };
 
 export type BoomiMessage = {

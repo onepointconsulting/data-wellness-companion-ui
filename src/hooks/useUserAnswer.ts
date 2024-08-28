@@ -1,6 +1,6 @@
 import { getSessionId } from "../lib/websocketFunctions.ts";
 import { getSession, saveSession } from "../lib/sessionFunctions.ts";
-import { BoomiMessage, Message, ServerSuggestion } from "../model/message.ts";
+import {BoomiData, BoomiMessage, Message, ServerSuggestion} from "../model/message.ts";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 
@@ -31,8 +31,45 @@ function handleNewMessage(
   return messageCount;
 }
 
+export function useFinalReportData() {
+  const [t] = useTranslation();
+  const {
+    setMessages,
+    setCurrentMessage,
+    expectedNodes,
+    setExpectedNodes,
+    setCurrentMessageHistory,
+  } = useContext(AppContext);
+  function processData(data: BoomiData) {
+    const newMessage = {
+      question: reportMarkdownAdapter(
+        data,
+        t("recommendations-header"),
+        t("recommendations-avoidance-header"),
+        t("recommendations-outcomes-header"),
+        t("recommendations-confidence-degree"),
+        t("recommendations-confidence-degree-reasoning"),
+      ),
+      answer: "",
+      final_report: true,
+      suggestions: [],
+      clarification: "",
+    };
+    setExpectedNodes(handleNewMessage(
+      newMessage,
+      expectedNodes,
+      setMessages,
+      setCurrentMessage,
+      setCurrentMessageHistory,
+      setExpectedNodes,
+    ));
+  }
+  return { processData };
+}
+
 export default function useUserAnswer() {
   const [t] = useTranslation();
+  const {processData} = useFinalReportData();
 
   const {
     setSending,
@@ -88,30 +125,7 @@ export default function useUserAnswer() {
               setExpectedNodes,
             );
           } else if (hasRecommendations) {
-            // The final report is ready
-            const newMessage = {
-              question: reportMarkdownAdapter(
-                data,
-                t("recommendations-header"),
-                t("recommendations-avoidance-header"),
-                t("recommendations-outcomes-header"),
-                t("recommendations-confidence-degree"),
-                t("recommendations-confidence-degree-reasoning"),
-              ),
-              answer: "",
-              final_report: true,
-              suggestions: [],
-              clarification: "",
-            };
-            const messageCount = handleNewMessage(
-              newMessage,
-              expectedNodes,
-              setMessages,
-              setCurrentMessage,
-              setCurrentMessageHistory,
-              setExpectedNodes,
-            );
-            setExpectedNodes(messageCount);
+            processData(data);
           } else {
             setErrorMessage(!!message ? t(message) : "Unspecified error");
           }

@@ -1,21 +1,18 @@
-import { useTranslation } from "react-i18next";
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { MESSAGE_LOWER_BOUND } from "../hooks/useConfidence.ts";
-import { generateReportNow } from "../lib/websocketFunctions.ts";
-import { ChatContext } from "../context/ChatContext.tsx";
+import {useTranslation} from "react-i18next";
+import {useContext} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {MESSAGE_LOWER_BOUND} from "../hooks/useConfidence.ts";
+import useFinalReport from "../hooks/useFinalReport.ts";
 
 export default function GiveReportNow() {
   const [t] = useTranslation();
-  const { socket } = useContext(ChatContext);
-  const { currentMessage, messages, sending, setSending, setGeneratingReport } =
+  const { currentMessage, messages, sending } =
     useContext(AppContext);
+  const {generateReport} = useFinalReport()
 
   const handleGiveReportNow = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setSending(true);
-    setGeneratingReport(true);
-    generateReportNow(socket.current);
+    generateReport()
   };
 
   if (
