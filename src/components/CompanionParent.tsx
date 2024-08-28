@@ -15,15 +15,17 @@ import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import useSessionInit from "../hooks/useSessionInit.ts";
 import NodeNavigation from "./NodeNavigation.tsx";
+import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
+import useConfidenceHint from "../hooks/useConfidenceHint.ts";
+import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
   const { setStartSession, displayRegistrationMessage, seenIntro } =
     useContext(AppContext);
-
   useSessionInit();
-
   useChatHistory();
+  const {missingConfidence} = useConfidenceHint()
 
   // Update the state of the session to start
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function CompanionParent() {
           <RestartDialogue />
           <EmailDialogue />
           <InfoDialogue />
+          <ConfidenceDialogue />
           {/*<IntroDialogue />*/}
           <div className="header">
             <div className="header-container">
@@ -56,7 +59,7 @@ export default function CompanionParent() {
               <HamburgerMenu />
             </div>
           </div>
-          <div className="container">
+          <div className={`container ${missingConfidence ? '' : 'px-4'}`}>
             <div className="flex flex-row gap-8">
               <div className="w-full">
                 {displayRegistrationMessage && <RegistrationMessage />}
@@ -64,6 +67,7 @@ export default function CompanionParent() {
                 <Disclaimer />
               </div>
               <div>
+                <ConfidenceHint className="mb-2"/>
                 <NodeNavigation />
               </div>
             </div>

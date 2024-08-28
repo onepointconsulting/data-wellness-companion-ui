@@ -92,3 +92,11 @@ input::-moz-range-thumb {
 .close-icon path {
   @apply dark:!text-gray-100;
 }
+
+.confidence-dialogue {
+  @apply flex justify-center items-center;
+}
+
+.confidence-dialogue img {
+    @apply w-32 h-32;
+}

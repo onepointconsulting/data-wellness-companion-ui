@@ -40,8 +40,8 @@ export default function ConfidenceDialogue() {
         <div className="text-2xl font-bold pt-2">
           {confidence?.rating ? t(`confidence_${confidence?.rating}`) : "???"}
         </div>
-        <div className="text-base py-4">
-          <ConfidenceHint className="text-xl text-left" />
+        <div className="text-base py-4 w-full">
+          <ConfidenceHint className="text-xl confidence-dialogue" />
         </div>
         <div className="text-base pt-2">
           <MarkdownComponent content={confidence?.reasoning || ""} />

@@ -81,6 +81,7 @@ export default function useUserAnswer() {
     setExpectedNodes,
     setErrorMessage,
     setCurrentMessageHistory,
+    setConfidence
   } = useContext(AppContext);
 
   function sendMessage() {
@@ -96,9 +97,10 @@ export default function useUserAnswer() {
       .then((response: BoomiMessage) => {
         const { code, data, message } = response;
         if (code === SUCCESS && !!data) {
-          const { question, suggestions } = data;
+          const { question, suggestions, previous_step_confidence_level, previous_step_rational } = data;
           const hasRecommendations = !!data.recommendations;
           if (!!question && !hasRecommendations) {
+            const previousConfidence = {rating: previous_step_confidence_level ?? "", reasoning: previous_step_rational ?? ""}
             // The server has sent a new question
             const newMessage = {
               question,
@@ -115,6 +117,7 @@ export default function useUserAnswer() {
                 }),
               ),
               clarification: "",
+              confidence: previousConfidence
             };
             handleNewMessage(
               newMessage,
@@ -124,6 +127,7 @@ export default function useUserAnswer() {
               setCurrentMessageHistory,
               setExpectedNodes,
             );
+            setConfidence(previousConfidence);
           } else if (hasRecommendations) {
             processData(data);
           } else {

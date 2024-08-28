@@ -1,5 +1,5 @@
 .node-container {
-  @apply flex flex-col;
+  @apply flex flex-col items-center;
 }
 
 .node {
