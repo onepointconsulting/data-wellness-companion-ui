@@ -10,7 +10,7 @@ export default function useFinalReport() {
   const {t} = useTranslation();
   const {currentMessage, setSending, setGeneratingReport} =
     useContext(AppContext);
-  const {processData} = useFinalReportData();
+  const {processFinalReport} = useFinalReportData();
 
   function sendErrorMessage() {
     toast({
@@ -32,7 +32,7 @@ export default function useFinalReport() {
           if (code === SUCCESS && !!data) {
             const hasRecommendations = !!data.recommendations;
             if (hasRecommendations) {
-              processData(data);
+              processFinalReport(data);
             } else {
               console.error("Report generated without recommendationa", data);
               sendErrorMessage()

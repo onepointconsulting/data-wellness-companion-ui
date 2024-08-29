@@ -39,8 +39,10 @@ export function useFinalReportData() {
     expectedNodes,
     setExpectedNodes,
     setCurrentMessageHistory,
+    setConfidence
   } = useContext(AppContext);
-  function processData(data: BoomiData) {
+  function processFinalReport(data: BoomiData) {
+    const confidence = {rating: data.confidence_level ?? "", reasoning: data.rational ?? ""}
     const newMessage = {
       question: reportMarkdownAdapter(
         data,
@@ -54,7 +56,9 @@ export function useFinalReportData() {
       final_report: true,
       suggestions: [],
       clarification: "",
+      confidence
     };
+    setConfidence(confidence);
     setExpectedNodes(handleNewMessage(
       newMessage,
       expectedNodes,
@@ -64,12 +68,12 @@ export function useFinalReportData() {
       setExpectedNodes,
     ));
   }
-  return { processData };
+  return { processFinalReport };
 }
 
 export default function useUserAnswer() {
   const [t] = useTranslation();
-  const {processData} = useFinalReportData();
+  const {processFinalReport} = useFinalReportData();
 
   const {
     setSending,
@@ -129,7 +133,7 @@ export default function useUserAnswer() {
             );
             setConfidence(previousConfidence);
           } else if (hasRecommendations) {
-            processData(data);
+            processFinalReport(data);
           } else {
             setErrorMessage(!!message ? t(message) : "Unspecified error");
           }

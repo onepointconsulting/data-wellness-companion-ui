@@ -29,7 +29,7 @@ function chooseImage(rating: string) {
 export default function ConfidenceHint({ className }: { className?: string }) {
   const [t] = useTranslation();
   const {missingConfidence, updatingConfidence, confidence} = useConfidenceHint()
-  if (missingConfidence)
+  if (missingConfidence || !confidence)
     return <></>;
   const rating = confidence!!.rating;
   return (

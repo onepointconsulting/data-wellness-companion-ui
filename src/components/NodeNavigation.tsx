@@ -36,11 +36,7 @@ function SingleNode({
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            {isLastNode ? (
-              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
-            ) : (
-              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
-            )}
+            <img src="./navigation-icon.svg" alt={t("navigation icon")} />
           </div>
         )}
       </div>
@@ -49,13 +45,17 @@ function SingleNode({
 }
 
 export default function NodeNavigation() {
-  const { expectedNodes } = useContext(AppContext);
+  const { expectedNodes, messages } = useContext(AppContext);
+
+  const unknown = 1000
+  // Limit by the final report
+  const limit = messages.reduce((_, m, index) => m.final_report ? index : unknown, unknown)
 
   return (
     <div className="node-container">
       {!!expectedNodes &&
         expectedNodes > 0 &&
-        [...Array(expectedNodes).keys()].map((i) => {
+        [...Array(expectedNodes).keys()].filter((_, i) => i <= limit).map((i) => {
           return (
             <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i} />
           );
