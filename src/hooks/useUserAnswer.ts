@@ -48,8 +48,8 @@ export function useFinalReportData() {
   } = useContext(AppContext);
   function processFinalReport(data: BoomiData) {
     const confidence = {
-      rating: data.confidence_level ?? "",
-      reasoning: data.rational ?? "",
+      rating: data.confidence_level ?? data.previous_step_confidence_level ?? "",
+      reasoning: data.rational ?? data.previous_step_rational ?? "",
     };
     const newMessage = {
       question: reportMarkdownAdapter(
