@@ -98,5 +98,5 @@ input::-moz-range-thumb {
 }
 
 .confidence-dialogue img {
-    @apply w-32 h-32;
+  @apply w-32 h-32;
 }

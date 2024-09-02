@@ -1,6 +1,11 @@
 import { getSessionId } from "../lib/websocketFunctions.ts";
 import { getSession, saveSession } from "../lib/sessionFunctions.ts";
-import {BoomiData, BoomiMessage, Message, ServerSuggestion} from "../model/message.ts";
+import {
+  BoomiData,
+  BoomiMessage,
+  Message,
+  ServerSuggestion,
+} from "../model/message.ts";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 
@@ -39,10 +44,13 @@ export function useFinalReportData() {
     expectedNodes,
     setExpectedNodes,
     setCurrentMessageHistory,
-    setConfidence
+    setConfidence,
   } = useContext(AppContext);
   function processFinalReport(data: BoomiData) {
-    const confidence = {rating: data.confidence_level ?? "", reasoning: data.rational ?? ""}
+    const confidence = {
+      rating: data.confidence_level ?? "",
+      reasoning: data.rational ?? "",
+    };
     const newMessage = {
       question: reportMarkdownAdapter(
         data,
@@ -56,24 +64,26 @@ export function useFinalReportData() {
       final_report: true,
       suggestions: [],
       clarification: "",
-      confidence
+      confidence,
     };
     setConfidence(confidence);
-    setExpectedNodes(handleNewMessage(
-      newMessage,
-      expectedNodes,
-      setMessages,
-      setCurrentMessage,
-      setCurrentMessageHistory,
-      setExpectedNodes,
-    ));
+    setExpectedNodes(
+      handleNewMessage(
+        newMessage,
+        expectedNodes,
+        setMessages,
+        setCurrentMessage,
+        setCurrentMessageHistory,
+        setExpectedNodes,
+      ),
+    );
   }
   return { processFinalReport };
 }
 
 export default function useUserAnswer() {
   const [t] = useTranslation();
-  const {processFinalReport} = useFinalReportData();
+  const { processFinalReport } = useFinalReportData();
 
   const {
     setSending,
@@ -85,7 +95,7 @@ export default function useUserAnswer() {
     setExpectedNodes,
     setErrorMessage,
     setCurrentMessageHistory,
-    setConfidence
+    setConfidence,
   } = useContext(AppContext);
 
   function sendMessage() {
@@ -101,10 +111,18 @@ export default function useUserAnswer() {
       .then((response: BoomiMessage) => {
         const { code, data, message } = response;
         if (code === SUCCESS && !!data) {
-          const { question, suggestions, previous_step_confidence_level, previous_step_rational } = data;
+          const {
+            question,
+            suggestions,
+            previous_step_confidence_level,
+            previous_step_rational,
+          } = data;
           const hasRecommendations = !!data.recommendations;
           if (!!question && !hasRecommendations) {
-            const previousConfidence = {rating: previous_step_confidence_level ?? "", reasoning: previous_step_rational ?? ""}
+            const previousConfidence = {
+              rating: previous_step_confidence_level ?? "",
+              reasoning: previous_step_rational ?? "",
+            };
             // The server has sent a new question
             const newMessage = {
               question,
@@ -121,7 +139,7 @@ export default function useUserAnswer() {
                 }),
               ),
               clarification: "",
-              confidence: previousConfidence
+              confidence: previousConfidence,
             };
             handleNewMessage(
               newMessage,

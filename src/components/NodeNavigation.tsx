@@ -47,19 +47,28 @@ function SingleNode({
 export default function NodeNavigation() {
   const { expectedNodes, messages } = useContext(AppContext);
 
-  const unknown = 1000
+  const unknown = 1000;
   // Limit by the final report
-  const limit = messages.reduce((_, m, index) => m.final_report ? index : unknown, unknown)
+  const limit = messages.reduce(
+    (_, m, index) => (m.final_report ? index : unknown),
+    unknown,
+  );
 
   return (
     <div className="node-container">
       {!!expectedNodes &&
         expectedNodes > 0 &&
-        [...Array(expectedNodes).keys()].filter((_, i) => i <= limit).map((i) => {
-          return (
-            <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i} />
-          );
-        })}
+        [...Array(expectedNodes).keys()]
+          .filter((_, i) => i <= limit)
+          .map((i) => {
+            return (
+              <SingleNode
+                key={`node_${i}`}
+                expectedNodes={expectedNodes}
+                i={i}
+              />
+            );
+          })}
     </div>
   );
 }

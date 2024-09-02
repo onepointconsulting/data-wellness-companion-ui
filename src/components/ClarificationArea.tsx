@@ -1,10 +1,10 @@
-import {Message} from "../model/message.ts";
-import {FaHourglassHalf} from "react-icons/fa";
-import {useContext, useEffect, useRef} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { Message } from "../model/message.ts";
+import { FaHourglassHalf } from "react-icons/fa";
+import { useContext, useEffect, useRef } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 import MarkdownComponent from "./Markdown.tsx";
-import {GrContract, GrExpand} from "react-icons/gr";
-import {toggleOpenClarification} from "../lib/sessionFunctions.ts";
+import { GrContract, GrExpand } from "react-icons/gr";
+import { toggleOpenClarification } from "../lib/sessionFunctions.ts";
 
 /**
  * Used to display the question clarification.
@@ -30,8 +30,8 @@ export default function ClarificationArea() {
   }, [clarificationClicked]);
 
   function onClarification(state: boolean) {
-    setShowClarification(state)
-    toggleOpenClarification()
+    setShowClarification(state);
+    toggleOpenClarification();
   }
 
   if (currentMessage === 0 || message.final_report) return null;

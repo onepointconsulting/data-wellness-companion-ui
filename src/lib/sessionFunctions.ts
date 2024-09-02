@@ -118,6 +118,6 @@ export function getOpenClarification(): boolean {
 export function toggleOpenClarification() {
   localStorage.setItem(
     OPEN_CLARIFICATION_KEY,
-    getOpenClarification() ? FALSE_VALUE: TRUE_VALUE,
+    getOpenClarification() ? FALSE_VALUE : TRUE_VALUE,
   );
 }

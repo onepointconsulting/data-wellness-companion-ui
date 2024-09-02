@@ -1,18 +1,17 @@
-import {useTranslation} from "react-i18next";
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {MESSAGE_LOWER_BOUND} from "../hooks/useConfidence.ts";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { MESSAGE_LOWER_BOUND } from "../hooks/useConfidence.ts";
 import useFinalReport from "../hooks/useFinalReport.ts";
 
 export default function GiveReportNow() {
   const [t] = useTranslation();
-  const { currentMessage, messages, sending } =
-    useContext(AppContext);
-  const {generateReport} = useFinalReport()
+  const { currentMessage, messages, sending } = useContext(AppContext);
+  const { generateReport } = useFinalReport();
 
   const handleGiveReportNow = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    generateReport()
+    generateReport();
   };
 
   if (

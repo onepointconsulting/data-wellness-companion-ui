@@ -29,7 +29,7 @@ export default function useSessionInit() {
     expectedNodes,
     setExpectedNodes,
     setCurrentMessageHistory,
-    setConfidence
+    setConfidence,
   } = useContext(AppContext);
 
   const [t] = useTranslation();
@@ -103,9 +103,10 @@ export default function useSessionInit() {
         setExpectedNodes(Math.max(session.messages.length, expectedNodes));
         setCurrentMessage(currentMessage);
         setCurrentMessageHistory(currentMessage);
-        if(session.messages.length > 1) {
-          const confidence = session.messages[session.messages.length - 1].confidence
-          if(!!confidence) {
+        if (session.messages.length > 1) {
+          const confidence =
+            session.messages[session.messages.length - 1].confidence;
+          if (!!confidence) {
             setConfidence(confidence);
           }
         }

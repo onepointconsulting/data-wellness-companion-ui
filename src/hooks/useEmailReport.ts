@@ -1,7 +1,11 @@
-import {useState} from "react";
-import {getSession} from "../lib/sessionFunctions.ts";
-import {queryReportEmail, ResponseData, SUCCESS} from "../lib/boomiApi/apiClient.ts";
-import {useTranslation} from "react-i18next";
+import { useState } from "react";
+import { getSession } from "../lib/sessionFunctions.ts";
+import {
+  queryReportEmail,
+  ResponseData,
+  SUCCESS,
+} from "../lib/boomiApi/apiClient.ts";
+import { useTranslation } from "react-i18next";
 
 type EmaiReport = {
   sending: boolean;
@@ -12,10 +16,10 @@ type EmaiReport = {
   email: string;
   setEmail: (value: string) => void;
   onOk: () => void;
-}
+};
 
 export function useEmailReport(): EmaiReport {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
@@ -32,7 +36,9 @@ export function useEmailReport(): EmaiReport {
             setFeedbackMessage(t("Email sent. Thank you!"));
             return;
           } else {
-            setFeedbackMessage(t("Error sending email. Please try again later."));
+            setFeedbackMessage(
+              t("Error sending email. Please try again later."),
+            );
           }
         })
         .catch((error) => {
@@ -41,13 +47,22 @@ export function useEmailReport(): EmaiReport {
         })
         .finally(() => {
           setSending(false);
-        })
+        });
     } else {
-      setFeedbackMessage(t("Error sending email: no session. Please refresh and try later."));
+      setFeedbackMessage(
+        t("Error sending email: no session. Please refresh and try later."),
+      );
     }
   }
 
   return {
-    sending, feedbackMessage, setFeedbackMessage, name, setName, email, setEmail, onOk
-  }
+    sending,
+    feedbackMessage,
+    setFeedbackMessage,
+    name,
+    setName,
+    email,
+    setEmail,
+    onOk,
+  };
 }

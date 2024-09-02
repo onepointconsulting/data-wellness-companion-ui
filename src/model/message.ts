@@ -1,5 +1,5 @@
 import { CONFIDENCE_ENUM } from "../lib/confidenceConstants.ts";
-import {Confidence} from "./confidence.ts";
+import { Confidence } from "./confidence.ts";
 
 export type ServerSuggestion = {
   title: string;
@@ -22,7 +22,7 @@ export type Message = {
   final_report: boolean;
   suggestions: Suggestion[];
   clarification: string | undefined;
-  confidence?: Confidence
+  confidence?: Confidence;
 };
 
 export type BoomiSuggestion = {

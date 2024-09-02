@@ -1,6 +1,6 @@
-import {showConfidenceDialogue} from "../dialogue/ConfidenceDialogue.tsx";
-import {FaHourglassHalf} from "react-icons/fa";
-import {useTranslation} from "react-i18next";
+import { showConfidenceDialogue } from "../dialogue/ConfidenceDialogue.tsx";
+import { FaHourglassHalf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import useConfidenceHint from "../../hooks/useConfidenceHint.ts";
 
 const ADVICE_DICTIONARY = new Map();
@@ -28,12 +28,12 @@ function chooseImage(rating: string) {
  */
 export default function ConfidenceHint({ className }: { className?: string }) {
   const [t] = useTranslation();
-  const {missingConfidence, updatingConfidence, confidence} = useConfidenceHint()
-  if (missingConfidence || !confidence)
-    return <></>;
+  const { missingConfidence, updatingConfidence, confidence } =
+    useConfidenceHint();
+  if (missingConfidence || !confidence) return <></>;
   const rating = confidence!!.rating;
   return (
-    <div className={`${className ?? ''}`}>
+    <div className={`${className ?? ""}`}>
       {updatingConfidence && (
         <div className="flex flex-row justify-end">
           <FaHourglassHalf className="w-6 h-6 fill-gray-400" />
@@ -41,8 +41,11 @@ export default function ConfidenceHint({ className }: { className?: string }) {
       )}
       {!updatingConfidence && (
         <a href="#" onClick={showConfidenceDialogue}>
-          <img src={`confidence-img/${chooseImage(rating)}`} alt={t("recommendations-confidence-degree")}
-            className="w-12 h-12"/>
+          <img
+            src={`confidence-img/${chooseImage(rating)}`}
+            alt={t("recommendations-confidence-degree")}
+            className="w-12 h-12"
+          />
           {/*{t("Hint")}: {t(ADVICE_DICTIONARY.get(rating))}*/}
         </a>
       )}

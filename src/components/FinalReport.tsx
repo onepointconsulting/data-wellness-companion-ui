@@ -4,13 +4,13 @@ import remarkGfm from "remark-gfm";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { getSession } from "../lib/sessionFunctions.ts";
-import {showDialogue} from "../lib/dialogFunctions.ts";
-import {EMAIL_DIALOGUE_ID} from "./dialogue/EmailDialogue.tsx";
+import { showDialogue } from "../lib/dialogFunctions.ts";
+import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
 import { Ontology } from "../model/ontology.ts";
 import { AppContext } from "../context/AppContext.tsx";
 import { toast } from "../../@/components/ui/use-toast.ts";
-import {useTranslation} from "react-i18next";
-import {MdOutlineAlternateEmail} from "react-icons/md";
+import { useTranslation } from "react-i18next";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -34,11 +34,11 @@ async function fetchOntology(
 }
 
 function ReportLink({
-                      click,
-                      clazzName,
-                      title,
-                      children,
-                    }: {
+  click,
+  clazzName,
+  title,
+  children,
+}: {
   click: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   clazzName: string;
   title: string;
@@ -62,7 +62,6 @@ function ReportLink({
  * @constructor
  */
 export default function FinalReport({ message }: { message: Message }) {
-
   const { t } = useTranslation();
   const { setOntology, ontologyOpen } = useContext(AppContext);
   const { reportUrl } = useContext(ChatContext);

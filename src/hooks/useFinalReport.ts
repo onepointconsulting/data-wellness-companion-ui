@@ -1,16 +1,16 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {finalReport, SUCCESS} from "../lib/boomiApi/apiClient.ts";
-import {getSession} from "../lib/sessionFunctions.ts";
-import {useTranslation} from "react-i18next";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { finalReport, SUCCESS } from "../lib/boomiApi/apiClient.ts";
+import { getSession } from "../lib/sessionFunctions.ts";
+import { useTranslation } from "react-i18next";
 import { toast } from "../../@/components/ui/use-toast.ts";
-import {useFinalReportData} from "./useUserAnswer.ts";
+import { useFinalReportData } from "./useUserAnswer.ts";
 
 export default function useFinalReport() {
-  const {t} = useTranslation();
-  const {currentMessage, setSending, setGeneratingReport} =
+  const { t } = useTranslation();
+  const { currentMessage, setSending, setGeneratingReport } =
     useContext(AppContext);
-  const {processFinalReport} = useFinalReportData();
+  const { processFinalReport } = useFinalReportData();
 
   function sendErrorMessage() {
     toast({
@@ -20,7 +20,6 @@ export default function useFinalReport() {
   }
 
   function generateReport() {
-
     setSending(true);
     setGeneratingReport(true);
 
@@ -28,32 +27,32 @@ export default function useFinalReport() {
     if (!!session?.id) {
       finalReport(session.id, currentMessage + 1)
         .then((response) => {
-          const {code, data} = response;
+          const { code, data } = response;
           if (code === SUCCESS && !!data) {
             const hasRecommendations = !!data.recommendations;
             if (hasRecommendations) {
               processFinalReport(data);
             } else {
               console.error("Report generated without recommendationa", data);
-              sendErrorMessage()
+              sendErrorMessage();
             }
           } else {
             console.error("Failed to generate final report", data);
-            sendErrorMessage()
+            sendErrorMessage();
           }
         })
         .catch((error) => {
           console.error("Failed to generate final report", error);
-          sendErrorMessage()
+          sendErrorMessage();
         })
         .finally(() => {
           setSending(false);
           setGeneratingReport(false);
-        })
+        });
     } else {
-      sendErrorMessage()
+      sendErrorMessage();
     }
   }
 
-  return {generateReport}
+  return { generateReport };
 }

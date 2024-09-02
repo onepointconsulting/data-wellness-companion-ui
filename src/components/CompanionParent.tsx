@@ -25,7 +25,7 @@ export default function CompanionParent() {
     useContext(AppContext);
   useSessionInit();
   useChatHistory();
-  const {missingConfidence} = useConfidenceHint()
+  const { missingConfidence } = useConfidenceHint();
 
   // Update the state of the session to start
   useEffect(() => {
@@ -55,12 +55,23 @@ export default function CompanionParent() {
           {/*<IntroDialogue />*/}
           <div className="header">
             <div className="header-container">
-              <div className="flex flex-row items-end">{imageNodeFunc()}
-                <span className="ml-2 px-2 border border-[#4a4a4a] relative -top-1">Powered by <a href="https://boomi.com/" target="_blank" className="underline">Boomi</a></span></div>
+              <div className="flex flex-row items-end">
+                {imageNodeFunc()}
+                <span className="ml-2 px-2 border border-[#4a4a4a] relative -top-1">
+                  Powered by{" "}
+                  <a
+                    href="https://boomi.com/"
+                    target="_blank"
+                    className="underline"
+                  >
+                    Boomi
+                  </a>
+                </span>
+              </div>
               <HamburgerMenu />
             </div>
           </div>
-          <div className={`container ${missingConfidence ? '' : 'px-4'}`}>
+          <div className={`container ${missingConfidence ? "" : "px-4"}`}>
             <div className="flex flex-row gap-8">
               <div className="w-full">
                 {displayRegistrationMessage && <RegistrationMessage />}
@@ -68,7 +79,7 @@ export default function CompanionParent() {
                 <Disclaimer />
               </div>
               <div>
-                <ConfidenceHint className="mb-2"/>
+                <ConfidenceHint className="mb-2" />
                 <NodeNavigation />
               </div>
             </div>

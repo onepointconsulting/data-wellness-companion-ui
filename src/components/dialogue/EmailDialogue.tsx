@@ -1,11 +1,11 @@
 import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
-import {Input} from "../form/Input.tsx";
+import { Input } from "../form/Input.tsx";
 import Spinner from "../Spinner.tsx";
 import Alert from "../form/Alert.tsx";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import DialogueHeader from "./DialogueHeader.tsx";
-import {useEmailReport} from "../../hooks/useEmailReport.ts";
+import { useEmailReport } from "../../hooks/useEmailReport.ts";
 
 export const EMAIL_DIALOGUE_ID = "email-dialogue";
 
@@ -20,7 +20,14 @@ function onClose() {
 export default function EmailDialogue() {
   const { t } = useTranslation();
   const {
-    sending, feedbackMessage, setFeedbackMessage, name, setName, email, setEmail, onOk
+    sending,
+    feedbackMessage,
+    setFeedbackMessage,
+    name,
+    setName,
+    email,
+    setEmail,
+    onOk,
   } = useEmailReport();
 
   function disabled(): boolean {
