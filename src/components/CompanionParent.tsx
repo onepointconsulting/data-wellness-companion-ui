@@ -55,7 +55,8 @@ export default function CompanionParent() {
           {/*<IntroDialogue />*/}
           <div className="header">
             <div className="header-container">
-              <div className="flex flex-row items-end">{imageNodeFunc()}</div>
+              <div className="flex flex-row items-end">{imageNodeFunc()}
+                <span className="ml-2 px-2 border border-[#4a4a4a] relative -top-1">Powered by <a href="https://boomi.com/" target="_blank" className="underline">Boomi</a></span></div>
               <HamburgerMenu />
             </div>
           </div>
