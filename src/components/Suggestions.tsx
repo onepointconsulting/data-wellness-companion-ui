@@ -3,6 +3,9 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
+  if(!suggestion.title) {
+    return suggestion.main_text;
+  }
   return `${suggestion.title} - ${suggestion.main_text}`;
 }
 
