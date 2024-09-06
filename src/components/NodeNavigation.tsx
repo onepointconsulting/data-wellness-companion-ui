@@ -36,11 +36,7 @@ function SingleNode({
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            {isLastNode ? (
-              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
-            ) : (
-              <img src="./navigation-icon.svg" alt={t("navigation icon")} />
-            )}
+            <img src="./navigation-icon.svg" alt={t("navigation icon")} />
           </div>
         )}
       </div>
