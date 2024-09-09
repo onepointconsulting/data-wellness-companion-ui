@@ -23,12 +23,22 @@ function chooseImage(rating: string) {
   return IMAGE_MAP.get(rating) ?? "thinking.svg";
 }
 
+export function ConfidenceImage({ rating, className }: { rating: string, className?: string }) {
+  const [t] = useTranslation();
+  return (
+    <img
+      src={`confidence-img/${chooseImage(rating)}`}
+      alt={t("recommendations-confidence-degree")}
+      className={`w-12 h-12 ${className ?? ""}`}
+    />
+  )
+}
+
 /**
  * The confidence icon that can be used to show the confidence dialogue.
  * @constructor
  */
 export default function ConfidenceHint({ className }: { className?: string }) {
-  const [t] = useTranslation();
   const {
     confidence,
     updatingConfidence,
@@ -46,11 +56,7 @@ export default function ConfidenceHint({ className }: { className?: string }) {
       )}
       {!hide && !updatingConfidence && (
         <a href="#" onClick={showConfidenceDialogue}>
-          <img
-            src={`confidence-img/${chooseImage(rating)}`}
-            alt={t("recommendations-confidence-degree")}
-            className="w-12 h-12"
-          />
+          <ConfidenceImage rating={rating} />
         </a>
       )}
     </div>

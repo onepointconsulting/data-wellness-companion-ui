@@ -17,6 +17,7 @@ const MESSAGE_UPPER_BOUND = 10;
  */
 export default function useConfidence() {
   const {
+    setMessages,
     messages,
     setConfidence,
     updatingConfidence,
@@ -46,25 +47,39 @@ export default function useConfidence() {
     [setUpdatingExpectedNodes, currentMessage, socket],
   );
 
+  function updateMessage(confidence: Confidence) {
+    const message = messages[currentMessage];
+    if (!!message) {
+      message.confidence = confidence;
+      setMessages([...messages]);
+    }
+  }
+
   useEffect(() => {
     if (!updatingConfidence) {
       const session = getSession();
       if (session && currentMessage > 0) {
-        setUpdatingConfidence(true);
-        fetch(
-          `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            setConfidence(data);
-            updateNodes(data);
-          })
-          .catch((error) => {
-            console.error("Error fetching confidence", error);
-          })
-          .finally(() => {
-            setUpdatingConfidence(false);
-          });
+        const message = messages[currentMessage];
+        if(!message?.confidence) {
+          setUpdatingConfidence(true);
+          fetch(
+            `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,
+          )
+            .then((response) => response.json())
+            .then((confidence) => {
+              setConfidence(confidence);
+              updateNodes(confidence);
+              updateMessage(confidence);
+            })
+            .catch((error) => {
+              console.error("Error fetching confidence", error);
+            })
+            .finally(() => {
+              setUpdatingConfidence(false);
+            });
+        } else {
+          setConfidence(message.confidence);
+        }
       }
     }
   }, [messages, currentMessage]);

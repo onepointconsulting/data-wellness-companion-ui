@@ -1,3 +1,5 @@
+import {Confidence} from "./confidence.ts";
+
 export type Suggestion = {
   id: number;
   img_alt: string;
@@ -13,4 +15,5 @@ export type Message = {
   final_report: boolean;
   suggestions: Suggestion[];
   clarification: string | undefined;
+  confidence?: Confidence;
 };

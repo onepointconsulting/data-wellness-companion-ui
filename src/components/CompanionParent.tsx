@@ -16,6 +16,7 @@ import { IntroSlides } from "./intro/IntroSlides.tsx";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
+import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -58,7 +59,7 @@ export default function CompanionParent() {
           <RestartDialogue />
           <EmailDialogue />
           <InfoDialogue />
-          {/*<IntroDialogue />*/}
+          <ConfidenceDialogue />
           <div className="header">
             <div className="header-container">
               <div className="flex flex-row items-end">{imageNodeFunc()}</div>
