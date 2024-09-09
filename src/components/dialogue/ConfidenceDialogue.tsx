@@ -1,11 +1,11 @@
-import {useTranslation} from "react-i18next";
-import {useContext} from "react";
-import {AppContext} from "../../context/AppContext.tsx";
-import onCloseDialogue, {showDialogue} from "../../lib/dialogFunctions.ts";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext.tsx";
+import onCloseDialogue, { showDialogue } from "../../lib/dialogFunctions.ts";
 import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import MarkdownComponent from "../Markdown.tsx";
-import {ConfidenceImage} from "../buttons/ConfidenceHint.tsx";
+import { ConfidenceImage } from "../buttons/ConfidenceHint.tsx";
 
 export const CONFIDENCE_DIALOGUE_ID = "confidence-dialogue";
 
@@ -41,7 +41,12 @@ export default function ConfidenceDialogue() {
           {confidence?.rating ? t(`confidence_${confidence?.rating}`) : "???"}
         </div>
         <div className="text-base py-4 mx-auto">
-          {confidence?.rating && <ConfidenceImage rating={confidence?.rating} className="w-24 h-24" />}
+          {confidence?.rating && (
+            <ConfidenceImage
+              rating={confidence?.rating}
+              className="w-24 h-24"
+            />
+          )}
         </div>
         <div className="text-base pt-2">
           <MarkdownComponent content={confidence?.reasoning || ""} />

@@ -23,7 +23,13 @@ function chooseImage(rating: string) {
   return IMAGE_MAP.get(rating) ?? "thinking.svg";
 }
 
-export function ConfidenceImage({ rating, className }: { rating: string, className?: string }) {
+export function ConfidenceImage({
+  rating,
+  className,
+}: {
+  rating: string;
+  className?: string;
+}) {
   const [t] = useTranslation();
   return (
     <img
@@ -31,7 +37,7 @@ export function ConfidenceImage({ rating, className }: { rating: string, classNa
       alt={t("recommendations-confidence-degree")}
       className={`w-12 h-12 ${className ?? ""}`}
     />
-  )
+  );
 }
 
 /**
@@ -46,7 +52,7 @@ export default function ConfidenceHint({ className }: { className?: string }) {
     clarificationClicked,
   } = useContext(AppContext);
   const rating = confidence?.rating;
-  const hide = !rating || currentMessage === 0 || clarificationClicked
+  const hide = !rating || currentMessage === 0 || clarificationClicked;
   return (
     <div className={`min-h-14 ${className ?? ""}`}>
       {!hide && updatingConfidence && (

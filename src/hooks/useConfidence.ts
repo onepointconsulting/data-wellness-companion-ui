@@ -60,7 +60,7 @@ export default function useConfidence() {
       const session = getSession();
       if (session && currentMessage > 0) {
         const message = messages[currentMessage];
-        if(!message?.confidence) {
+        if (!message?.confidence) {
           setUpdatingConfidence(true);
           fetch(
             `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,

@@ -1,6 +1,6 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {useTranslation} from "react-i18next";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
 
 /**
@@ -10,14 +10,14 @@ import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
  * @constructor
  */
 function SingleNode({
-                      i,
-                      expectedNodes,
-                    }: {
+  i,
+  expectedNodes,
+}: {
   i: number;
   expectedNodes: number;
 }) {
   const [t] = useTranslation();
-  const {messages, currentMessage, setCurrentMessageHistory} =
+  const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
   const length = messages.length;
   const covered = length > i;
@@ -37,7 +37,7 @@ function SingleNode({
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img src="./navigation-icon.svg" alt={t("navigation icon")}/>
+            <img src="./navigation-icon.svg" alt={t("navigation icon")} />
           </div>
         )}
       </div>
@@ -46,17 +46,21 @@ function SingleNode({
 }
 
 export default function NodeNavigation() {
-  const {expectedNodes} = useContext(AppContext);
+  const { expectedNodes } = useContext(AppContext);
 
   return (
     <div className="min-w-12">
-      <ConfidenceHint/>
+      <ConfidenceHint />
       <div className="node-container my-2">
         {!!expectedNodes &&
           expectedNodes > 0 &&
           [...Array(expectedNodes).keys()].map((i) => {
             return (
-              <SingleNode key={`node_${i}`} expectedNodes={expectedNodes} i={i}/>
+              <SingleNode
+                key={`node_${i}`}
+                expectedNodes={expectedNodes}
+                i={i}
+              />
             );
           })}
       </div>

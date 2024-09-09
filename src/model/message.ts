@@ -1,4 +1,4 @@
-import {Confidence} from "./confidence.ts";
+import { Confidence } from "./confidence.ts";
 
 export type Suggestion = {
   id: number;
