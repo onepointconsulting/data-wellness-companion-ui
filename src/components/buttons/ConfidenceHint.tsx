@@ -33,34 +33,24 @@ export default function ConfidenceHint({ className }: { className?: string }) {
     confidence,
     updatingConfidence,
     currentMessage,
-    expectedNodes,
-    isLast,
     clarificationClicked,
   } = useContext(AppContext);
-  if (
-    !confidence ||
-    currentMessage === 0 ||
-    currentMessage === expectedNodes - 1 ||
-    !isLast ||
-    clarificationClicked
-  )
-    return <></>;
-  const rating = confidence.rating;
+  const rating = confidence?.rating;
+  const hide = !rating || currentMessage === 0 || clarificationClicked
   return (
-    <div className={`${className}`}>
-      {updatingConfidence && (
-        <div className="flex flex-row justify-end">
+    <div className={`min-h-14 ${className ?? ""}`}>
+      {!hide && updatingConfidence && (
+        <div className={`flex flex-row justify-end`}>
           <FaHourglassHalf className="w-6 h-6 fill-gray-400" />
         </div>
       )}
-      {!updatingConfidence && (
+      {!hide && !updatingConfidence && (
         <a href="#" onClick={showConfidenceDialogue}>
           <img
             src={`confidence-img/${chooseImage(rating)}`}
             alt={t("recommendations-confidence-degree")}
             className="w-12 h-12"
           />
-          {t("Hint")}: {t(ADVICE_DICTIONARY.get(rating))}
         </a>
       )}
     </div>

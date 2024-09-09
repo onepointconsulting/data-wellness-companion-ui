@@ -49,7 +49,7 @@ export default function useConfidence() {
   useEffect(() => {
     if (!updatingConfidence) {
       const session = getSession();
-      if (session && currentMessage > 1) {
+      if (session && currentMessage > 0) {
         setUpdatingConfidence(true);
         fetch(
           `${reportUrl}/confidence/${session.id}?language=${i18next.language}&step=${currentMessage}`,
