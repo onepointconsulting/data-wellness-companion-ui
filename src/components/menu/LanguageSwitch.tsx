@@ -19,7 +19,7 @@ export default function LanguageSwitch({
   const { i18n, t } = useTranslation();
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { socket } = useContext(ChatContext);
+  const { socket, reportUrl } = useContext(ChatContext);
   const { messages, setDisplayRegistrationMessage } = useContext(AppContext);
 
   const onClickLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -40,6 +40,7 @@ export default function LanguageSwitch({
         socket,
         setDisplayRegistrationMessage,
         setChatText,
+        reportUrl,
       );
     }
   };

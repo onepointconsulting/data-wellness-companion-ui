@@ -14,7 +14,7 @@ function onClose() {
 }
 
 export default function RestartDialogue() {
-  const { socket } = useContext(ChatContext);
+  const { socket, reportUrl } = useContext(ChatContext);
   const { t } = useTranslation();
   const {
     messages,
@@ -30,6 +30,7 @@ export default function RestartDialogue() {
       socket,
       setDisplayRegistrationMessage,
       setChatText,
+      reportUrl,
     );
     onClose();
   }

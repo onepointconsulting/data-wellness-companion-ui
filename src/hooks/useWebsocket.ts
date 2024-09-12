@@ -67,7 +67,7 @@ export function useWebsocket() {
     setUpdatingExpectedNodes,
     setGeneratingReport,
   } = useContext(AppContext);
-  const { socket, websocketUrl } = useContext(ChatContext);
+  const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
   const {
     setConnected,
     setMessages,
@@ -82,7 +82,12 @@ export function useWebsocket() {
     const onConnect = () => {
       setConnected(true);
       // Handle session
-      sendStartSession(socket.current, null, setDisplayRegistrationMessage);
+      sendStartSession({
+        socket: socket.current,
+        expectedInteviewSteps: null,
+        setDisplayRegistrationMessage,
+        apiServer: reportUrl,
+      });
     };
 
     const onDisconnect = () => {

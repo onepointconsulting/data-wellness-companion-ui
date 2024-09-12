@@ -9,12 +9,14 @@ export default function restartCompanion(
   socket: React.MutableRefObject<Socket | null>,
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
   setChatText: (chatText: string) => void,
+  reportUrl: string,
 ) {
   clearSession(messages);
-  sendStartSession(
-    socket.current,
-    DEFAULT_EXPECTED_NODES,
+  sendStartSession({
+    socket: socket.current,
+    expectedInteviewSteps: DEFAULT_EXPECTED_NODES,
     setDisplayRegistrationMessage,
-  );
+    apiServer: reportUrl,
+  });
   setChatText("");
 }

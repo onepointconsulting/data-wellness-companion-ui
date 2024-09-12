@@ -3,6 +3,7 @@ import { WEBSOCKET_COMMAND } from "../model/websocketCommands.ts";
 import { getSession, getSessionHistory } from "./sessionFunctions.ts";
 import i18next from "i18next";
 import { extractIdParam } from "./urlParamExtraction.ts";
+import { StartSession } from "../model/session.ts";
 
 const IGNORED_STEPS = -1;
 
@@ -11,14 +12,34 @@ export function getSessionId() {
   return session ? session.id : "";
 }
 
-export function sendStartSession(
-  socket: Socket<any, any> | null,
-  expectedInteviewSteps: number | null,
-  setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
-) {
-  if (getSessionHistory().length > 0 && !extractIdParam()) {
-    // Display registration message if the user is re-using the tool and there is no identifier in the URL.
-    setDisplayRegistrationMessage(true);
+export function sendStartSession(startSession: StartSession) {
+  const {
+    socket,
+    setDisplayRegistrationMessage,
+    expectedInteviewSteps,
+    apiServer,
+  } = startSession;
+  if (getSessionHistory().length > 0) {
+    debugger;
+    const idParam = extractIdParam();
+    if (!idParam) {
+      // Display registration message if the user is re-using the tool and there is no identifier in the URL.
+      setDisplayRegistrationMessage(true);
+    } else {
+      fetch(`${apiServer}/validate_jwt_token`, {
+        method: "POST",
+        body: JSON.stringify({ token: idParam }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.info("Token data", data);
+          switchSession(socket, getSessionId(), expectedInteviewSteps);
+        })
+        .catch((error) => {
+          console.error("Error validating JWT token", error);
+          setDisplayRegistrationMessage(true);
+        });
+    }
   } else {
     // Start a new session.
     switchSession(socket, getSessionId(), expectedInteviewSteps);
