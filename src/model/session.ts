@@ -1,4 +1,5 @@
 import { Socket } from "socket.io-client";
+import { ChatType } from "../context/ChatContext.tsx";
 
 export type Session = {
   id: string;
@@ -12,4 +13,5 @@ export type StartSession = {
   expectedInteviewSteps: number | null;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   apiServer: string;
+  chatType: ChatType;
 };

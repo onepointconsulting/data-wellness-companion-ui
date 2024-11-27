@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { ChatContext } from "../context/ChatContext.tsx";
+import { ChatContext, readChatTYpeFromLS } from "../context/ChatContext.tsx";
 import { io } from "socket.io-client";
 import { AppContext } from "../context/AppContext.tsx";
 import { sendStartSession } from "../lib/websocketFunctions.ts";
@@ -87,6 +87,7 @@ export function useWebsocket() {
         expectedInteviewSteps: null,
         setDisplayRegistrationMessage,
         apiServer: reportUrl,
+        chatType: readChatTYpeFromLS(),
       });
     };
 

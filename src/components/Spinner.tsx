@@ -4,7 +4,7 @@ function SpinnerLayout({ children }: { children: React.ReactNode }) {
   return <div className="spinner-layout">{children}</div>;
 }
 
-export default function Spinner() {
+export default function Spinner({ size = 24 }: { size?: number }) {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ export default function Spinner() {
           src="./D-Well_Icons_one_frame.gif"
           alt={t("Please wait")}
           title={t("Please wait")}
-          className="h-24 w-24"
+          className={`h-${size} w-${size}`}
         />
       </span>
     </SpinnerLayout>

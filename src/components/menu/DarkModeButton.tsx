@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/DarkModeContext.tsx";
+import ModeButtonContainer from "./ModeButtonContainer.tsx";
 
 /**
  * Offers a button to switch to dark mode.
@@ -11,6 +12,7 @@ export default function DarkModeButton() {
   const { t } = useTranslation();
 
   const title = t("Dark mode");
+
   function toggleDark() {
     const newDark = !dark;
     window.localStorage["dark"] = `${newDark}`;
@@ -19,8 +21,8 @@ export default function DarkModeButton() {
   }
 
   return (
-    <div className="menu-item">
-      <div className="w-12">
+    <ModeButtonContainer
+      imgElement={
         <svg
           viewBox="0 0 21 21"
           fill="none"
@@ -44,14 +46,16 @@ export default function DarkModeButton() {
             </clipPath>
           </defs>
         </svg>
-      </div>
-      <div className="flex flex-row justify-between flex-grow pl-2 pt-0.5">
-        <button>{title}</button>
-        <label className="switch mt-1.5 mr-5">
-          <input type="checkbox" checked={dark} onChange={toggleDark} />
-          <span className="slider round"></span>
-        </label>
-      </div>
-    </div>
+      }
+      mainElement={
+        <>
+          <button>{title}</button>
+          <label className="switch mt-1.5 mr-5">
+            <input type="checkbox" checked={dark} onChange={toggleDark} />
+            <span className="slider round"></span>
+          </label>
+        </>
+      }
+    />
   );
 }

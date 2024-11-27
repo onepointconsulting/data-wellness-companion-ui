@@ -3,6 +3,7 @@ import { sendStartSession } from "./websocketFunctions.ts";
 import { Message } from "../model/message.ts";
 import { Socket } from "socket.io-client";
 import { DEFAULT_EXPECTED_NODES } from "../context/AppContext.tsx";
+import { readChatTYpeFromLS } from "../context/ChatContext.tsx";
 
 export default function restartCompanion(
   messages: Message[],
@@ -17,6 +18,7 @@ export default function restartCompanion(
     expectedInteviewSteps: DEFAULT_EXPECTED_NODES,
     setDisplayRegistrationMessage,
     apiServer: reportUrl,
+    chatType: readChatTYpeFromLS(),
   });
   setChatText("");
 }

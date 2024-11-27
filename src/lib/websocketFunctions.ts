@@ -4,6 +4,7 @@ import { getSession, getSessionHistory } from "./sessionFunctions.ts";
 import i18next from "i18next";
 import { extractIdParam } from "./urlParamExtraction.ts";
 import { StartSession } from "../model/session.ts";
+import { ChatType } from "../context/ChatContext.tsx";
 
 const IGNORED_STEPS = -1;
 
@@ -18,9 +19,9 @@ export function sendStartSession(startSession: StartSession) {
     setDisplayRegistrationMessage,
     expectedInteviewSteps,
     apiServer,
+    chatType,
   } = startSession;
   if (getSessionHistory().length > 0) {
-    debugger;
     const idParam = extractIdParam();
     if (!idParam) {
       // Display registration message if the user is re-using the tool and there is no identifier in the URL.
@@ -33,7 +34,12 @@ export function sendStartSession(startSession: StartSession) {
         .then((response) => response.json())
         .then((data) => {
           console.info("Token data", data);
-          switchSession(socket, getSessionId(), expectedInteviewSteps);
+          switchSession(
+            socket,
+            getSessionId(),
+            expectedInteviewSteps,
+            chatType,
+          );
         })
         .catch((error) => {
           console.error("Error validating JWT token", error);
@@ -42,7 +48,7 @@ export function sendStartSession(startSession: StartSession) {
     }
   } else {
     // Start a new session.
-    switchSession(socket, getSessionId(), expectedInteviewSteps);
+    switchSession(socket, getSessionId(), expectedInteviewSteps, chatType);
   }
 }
 
@@ -50,6 +56,7 @@ export function switchSession(
   socket: Socket<any, any> | null,
   sessionId: string,
   expectedInteviewSteps: number | null = IGNORED_STEPS,
+  chatType: ChatType = ChatType.DIVERGING,
 ) {
   const client_id = extractIdParam();
   safeEmit(
@@ -59,6 +66,7 @@ export function switchSession(
     expectedInteviewSteps,
     i18next?.language,
     client_id,
+    chatType,
   );
 }
 
