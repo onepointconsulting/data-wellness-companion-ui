@@ -2,7 +2,8 @@ import World from "../buttons/World.tsx";
 import { ChangeEvent, useContext } from "react";
 import {
   ChatContext,
-  ChatType, KEY_CHAT_TYPE,
+  ChatType,
+  KEY_CHAT_TYPE,
   toChatType,
 } from "../../context/ChatContext.tsx";
 import MenuSelectorBase from "./MenuSelectorBase.tsx";
@@ -15,7 +16,7 @@ export default function ChatModeButton() {
   const { restartFunction } = useSessionRestart({
     func: (e) => {
       const value = e.target.value;
-      const chatType = toChatType(value)
+      const chatType = toChatType(value);
       window.localStorage.setItem(KEY_CHAT_TYPE, chatType);
       setChatType(chatType);
     },

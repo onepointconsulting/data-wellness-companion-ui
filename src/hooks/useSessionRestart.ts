@@ -23,21 +23,21 @@ export default function useSessionRestart({
         toast({
           title: t("You are disconnected."),
           description: t(
-              "The Data Wellness Companion needs to be connected to change the language.",
+            "The Data Wellness Companion needs to be connected to change the language.",
           ),
         });
       } else {
         func(e);
         setSelectedHistoricalSession(null);
         restartCompanion(
-            messages,
-            socket,
-            setDisplayRegistrationMessage,
-            setChatText,
-            reportUrl,
+          messages,
+          socket,
+          setDisplayRegistrationMessage,
+          setChatText,
+          reportUrl,
         );
       }
     }
-  }
+  };
   return { restartFunction };
 }

@@ -114,7 +114,7 @@ function safeEmit(
 ) {
   if (!!socket) {
     socket.emit(event, ...args);
-    console.info(`Sent ${event} message`);
+    console.info(`Sent ${event} message!`);
   } else {
     console.warn(`Socket is null, cannot send ${event} message.`);
   }

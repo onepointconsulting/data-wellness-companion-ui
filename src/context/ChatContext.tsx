@@ -1,6 +1,6 @@
-import {createContext, useRef, useState} from "react";
-import {Props} from "./commonModel.ts";
-import {Socket} from "socket.io-client";
+import { createContext, useRef, useState } from "react";
+import { Props } from "./commonModel.ts";
+import { Socket } from "socket.io-client";
 
 const DEFAULT_WEBSOCKET_URL = "ws://127.0.0.1:5000";
 
