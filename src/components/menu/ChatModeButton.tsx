@@ -1,14 +1,9 @@
-import World from "../buttons/World.tsx";
-import { ChangeEvent, useContext } from "react";
-import {
-  ChatContext,
-  ChatType,
-  KEY_CHAT_TYPE,
-  toChatType,
-} from "../../context/ChatContext.tsx";
+import {ChangeEvent, useContext} from "react";
+import {ChatContext, ChatType, KEY_CHAT_TYPE, toChatType,} from "../../context/ChatContext.tsx";
 import MenuSelectorBase from "./MenuSelectorBase.tsx";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 import useSessionRestart from "../../hooks/useSessionRestart.ts";
+import Dialog from "../buttons/Dialog.tsx";
 
 export default function ChatModeButton() {
   const { t } = useTranslation();
@@ -26,7 +21,7 @@ export default function ChatModeButton() {
   }
   return (
     <MenuSelectorBase
-      image={<World />}
+      image={<Dialog />}
       select={
         <select
           className="menu-select"
