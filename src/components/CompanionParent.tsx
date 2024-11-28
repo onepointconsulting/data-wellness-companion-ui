@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
+import HamburgerMenuContextProvider from "../context/HamburgerMenuContext.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -63,7 +64,9 @@ export default function CompanionParent() {
           <div className="header">
             <div className="header-container">
               <div className="flex flex-row items-end">{imageNodeFunc()}</div>
-              <HamburgerMenu />
+              <HamburgerMenuContextProvider>
+                <HamburgerMenu />
+              </HamburgerMenuContextProvider>
             </div>
           </div>
           <div className="container">
