@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef} from "react";
+import { useContext, useEffect, useRef } from "react";
 import StartButton from "./StartButton.tsx";
 import InfoButton from "./InfoButton.tsx";
 import ContactUsButton from "./ContactUsButton.tsx";
@@ -6,14 +6,14 @@ import LanguageSwitch from "./LanguageSwitch.tsx";
 import DarkModeButton from "./DarkModeButton.tsx";
 import SessionSwitch from "./SessionSwitch.tsx";
 import ChatModeButton from "./ChatModeButton.tsx";
-import {HamburgerMenuContext} from "../../context/HamburgerMenuContext.tsx";
+import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
 /**
  * The Hamburger menu component.
  * @constructor
  */
 export default function HamburgerMenu() {
-  const {open, setOpen} = useContext(HamburgerMenuContext)
+  const { open, setOpen } = useContext(HamburgerMenuContext);
   const menuRef = useRef<HTMLMenuElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 

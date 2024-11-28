@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import {ChangeEvent, useContext} from "react";
+import { ChangeEvent, useContext } from "react";
 import MenuSelectorBase from "./MenuSelectorBase.tsx";
 import World from "../buttons/World.tsx";
 import useSessionRestart from "../../hooks/useSessionRestart.ts";
-import {HamburgerMenuContext} from "../../context/HamburgerMenuContext.tsx";
+import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
 /**
  * The language switch component used to change the language of the user interface and interaction.
@@ -11,7 +11,7 @@ import {HamburgerMenuContext} from "../../context/HamburgerMenuContext.tsx";
  */
 export default function LanguageSwitch() {
   const { i18n, t } = useTranslation();
-  const {setOpen} = useContext(HamburgerMenuContext)
+  const { setOpen } = useContext(HamburgerMenuContext);
   const { restartFunction } = useSessionRestart({
     func: (e) => {
       const language = e?.target?.value;

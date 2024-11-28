@@ -9,11 +9,11 @@ import MenuSelectorBase from "./MenuSelectorBase.tsx";
 import { useTranslation } from "react-i18next";
 import useSessionRestart from "../../hooks/useSessionRestart.ts";
 import Dialog from "../buttons/Dialog.tsx";
-import {HamburgerMenuContext} from "../../context/HamburgerMenuContext.tsx";
+import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
 export default function ChatModeButton() {
   const { t } = useTranslation();
-  const {setOpen} = useContext(HamburgerMenuContext)
+  const { setOpen } = useContext(HamburgerMenuContext);
   const { chatType, setChatType } = useContext(ChatContext);
   const { restartFunction } = useSessionRestart({
     func: (e) => {
@@ -21,7 +21,7 @@ export default function ChatModeButton() {
       const chatType = toChatType(value);
       window.localStorage.setItem(KEY_CHAT_TYPE, chatType);
       setChatType(chatType);
-      setOpen(false)
+      setOpen(false);
     },
   });
   function onChange(e: ChangeEvent<HTMLSelectElement>) {
