@@ -8,7 +8,8 @@ import { showDialogue } from "./lib/dialogFunctions.ts";
 import { INTRO_DIALOGUE_ID } from "./components/dialogue/IntroDialogue.tsx";
 import { DarkModeContextProvider } from "./context/DarkModeContext.tsx";
 import { IntroContextProvider } from "./components/intro/IntroContext.tsx";
-import JwtTokenForm from "./components/token/JwtTokenForm.tsx";
+import JwtTokenForm from "./components/admin/token/JwtTokenForm.tsx";
+import ReportForm from "./components/admin/reporting/ReportForm.tsx";
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
           <DarkModeContextProvider>
             <Routes>
               <Route path="/jwt-token" element={<JwtTokenForm />} />
+              <Route path="/reports" element={<ReportForm />} />
               <Route path="*" element={<CompanionParent />} />
             </Routes>
           </DarkModeContextProvider>
