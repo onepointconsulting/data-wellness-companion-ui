@@ -4,7 +4,8 @@ import { ChatContext } from "../../../context/ChatContext.tsx";
 import Spinner from "../../Spinner.tsx";
 import {
   generateJwtToken,
-  generateJwtTokenBatch, handleError,
+  generateJwtTokenBatch,
+  handleError,
   handleJson,
 } from "../apiClient.ts";
 import Field from "./Field.tsx";

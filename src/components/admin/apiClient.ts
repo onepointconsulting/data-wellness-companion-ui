@@ -1,4 +1,4 @@
-import {MessageType} from "./model.ts";
+import { MessageType } from "./model.ts";
 
 interface JwtTokenData {
   reportUrl: string;

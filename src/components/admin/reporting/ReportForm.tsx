@@ -7,7 +7,12 @@ import Spinner from "../../Spinner.tsx";
 import FormContainer from "../FormContainer.tsx";
 import Field from "../token/Field.tsx";
 import AdminMessage from "../AdminMessage.tsx";
-import {generateReport, handleError, handleJson, ReportData} from "../apiClient.ts";
+import {
+  generateReport,
+  handleError,
+  handleJson,
+  ReportData,
+} from "../apiClient.ts";
 import { MessageType } from "../model.ts";
 
 const supportedLanguages = ["en", "de"];
@@ -37,9 +42,9 @@ export default function ReportForm() {
             "Request sent. The report will be sent to all emails you specified.",
           ),
           messageType: MessageType.SUCCESS,
-        })
+        });
       })
-        .catch((error) => handleError(error, dispatch));
+      .catch((error) => handleError(error, dispatch));
   }
 
   return (
@@ -83,7 +88,9 @@ export default function ReportForm() {
             }
           >
             {supportedLanguages.map((l, i) => (
-              <option key={`lang_${i}`} value={l}>{l}</option>
+              <option key={`lang_${i}`} value={l}>
+                {l}
+              </option>
             ))}
           </select>
         </Field>
