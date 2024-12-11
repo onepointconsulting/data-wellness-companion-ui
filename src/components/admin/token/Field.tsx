@@ -11,10 +11,10 @@ export default function Field({
   const [t] = useTranslation();
   return (
     <div className="flex flex-wrap mt-8">
-      <div className="w-2/12 text-right pr-2 mt-2 dark:text-gray-100">
+      <div className="w-full md:w-2/12 md:text-right pr-2 md:mt-2 dark:text-gray-100">
         {t(label)}:
       </div>
-      <div className="w-10/12">{children}</div>
+      <div className="w-full md:w-10/12">{children}</div>
     </div>
   );
 }

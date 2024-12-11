@@ -22,6 +22,7 @@ function App() {
         <ConfigContextProvider>
           <DarkModeContextProvider>
             <Routes>
+              <Route path="/admin" element={<AdminApp />} />
               <Route path="/admin/*" element={<AdminApp />} />
               <Route path="*" element={<CompanionParent />} />
             </Routes>

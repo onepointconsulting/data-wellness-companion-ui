@@ -185,6 +185,7 @@ export default function JwtTokenForm() {
         <Field label="Name">
           <input
             type="text"
+            autoFocus={true}
             className="admin-input"
             placeholder={t("Name")}
             value={state.name}
