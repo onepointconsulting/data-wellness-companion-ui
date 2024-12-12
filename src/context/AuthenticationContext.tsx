@@ -12,7 +12,7 @@ interface UserState {
   setUser: (user: TokenResponse) => void;
   profile: object | null;
   setProfile: (profile: object) => void;
-  logOut: () => void;
+  logout: () => void;
   login: (overrideConfig?: OverridableTokenClientConfig) => void;
 }
 
@@ -20,7 +20,7 @@ export const AuthenticationContext = createContext<UserState>({
   profile: null,
   setUser: (_) => {},
   setProfile: (_) => {},
-  logOut: () => {},
+  logout: () => {},
   login: (_?: OverridableTokenClientConfig) => {},
 });
 
@@ -55,13 +55,13 @@ export const AuthenticationContextProvider = ({ children }: Props) => {
         .catch((err) => console.log(err));
     }
   }, [user]);
-  const logOut = () => {
+  const logout = () => {
     googleLogout();
     setProfile(null);
   };
   return (
     <AuthenticationContext.Provider
-      value={{ user, setUser, profile, setProfile, login, logOut }}
+      value={{ user, setUser, profile, setProfile, login, logout }}
     >
       {children}
     </AuthenticationContext.Provider>
