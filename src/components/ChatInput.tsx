@@ -4,6 +4,7 @@ import { sendClientMessage } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
+import {JoyrideContext} from "../context/JoyrideContext.tsx";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -30,8 +31,14 @@ export default function ChatInput() {
     currentMessage,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
+  const {setInitState, mainQuestionRef} = useContext(JoyrideContext)
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
+
+  useEffect(() => {
+    setInitState(true)
+  }, []);
+
   useEffect(() => {
     if (
       selectedSuggestion !== null &&
@@ -73,7 +80,7 @@ export default function ChatInput() {
   }
 
   return (
-    <div className="chat-container">
+    <div className="chat-container" ref={mainQuestionRef}>
       <div className="chat-input">
         <textarea
           className="chat-textarea"

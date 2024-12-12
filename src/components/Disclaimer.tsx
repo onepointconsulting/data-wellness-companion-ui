@@ -11,6 +11,7 @@ export default function Disclaimer() {
     <div className="flex flex-row justify-center text-gray-500 align-middle disclaimer text-normal dark:text-gray-100">
       <p>
         <Trans
+          key="disclaimer"
           i18nKey="disclaimer"
           components={{ anchor: <a />, bold: <strong />, underline: <u /> }}
         />

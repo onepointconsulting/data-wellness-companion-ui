@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { AdminContext, PageType } from "../../context/AdminContext.tsx";
-import {AuthenticationContext} from "../../context/AuthenticationContext.tsx";
+import { AuthenticationContext } from "../../context/AuthenticationContext.tsx";
 
 type MenuItem = {
   key: string;
@@ -26,13 +26,13 @@ const menuItems: MenuItem[] = [
 ];
 
 function Separator() {
-  return <span className="dark:text-gray-200">|</span>
+  return <span className="dark:text-gray-200">|</span>;
 }
 
 export default function Menu() {
   const [t] = useTranslation();
   const { page, setPage } = useContext(AdminContext);
-  const { logout } = useContext(AuthenticationContext)
+  const { logout } = useContext(AuthenticationContext);
 
   function onClick(e: React.MouseEvent<HTMLAnchorElement>, menuItem: MenuItem) {
     e.preventDefault();
@@ -40,23 +40,32 @@ export default function Menu() {
   }
 
   return (
-      <menu className="flex justify-end pt-3">
-        {menuItems.map((menuItem, i) => (
-            <li key={`menuItem_${i}`}>
-              <a
-                  className={`px-2 default-link ${menuItem.page === page ? "font-bold" : ""}`}
-                  href={menuItem.link}
-                  title={t(menuItem.title)}
-                  onClick={(e) => onClick(e, menuItem)}
-              >
-                {t(menuItem.key)}
-              </a>
-              <Separator />
-            </li>
-        ))}
-        <li key={`menuItem_${menuItems.length}`}>
-          <a href="#" className="px-2 default-link" onClick={(e) => {e.preventDefault(); logout()}}>{t("Logout")}</a>
+    <menu className="flex justify-end pt-3">
+      {menuItems.map((menuItem, i) => (
+        <li key={`menuItem_${i}`}>
+          <a
+            className={`px-2 default-link ${menuItem.page === page ? "font-bold" : ""}`}
+            href={menuItem.link}
+            title={t(menuItem.title)}
+            onClick={(e) => onClick(e, menuItem)}
+          >
+            {t(menuItem.key)}
+          </a>
+          <Separator />
         </li>
-      </menu>
-);
+      ))}
+      <li key={`menuItem_${menuItems.length}`}>
+        <a
+          href="#"
+          className="px-2 default-link"
+          onClick={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        >
+          {t("Logout")}
+        </a>
+      </li>
+    </menu>
+  );
 }

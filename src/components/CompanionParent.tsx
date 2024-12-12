@@ -18,6 +18,8 @@ import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import HamburgerMenuContextProvider from "../context/HamburgerMenuContext.tsx";
+import Joyride from "react-joyride";
+import { JoyrideContext } from "../context/JoyrideContext.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -28,9 +30,12 @@ export default function CompanionParent() {
     setSeenIntro,
   } = useContext(AppContext);
 
+  const { joyrideState, handleJoyrideCallback } = useContext(JoyrideContext);
+
+  const { run, stepIndex, steps } = joyrideState;
+
   useChatHistory();
 
-  // Update the state of the session to start
   useEffect(() => {
     setStartSession(true);
   }, []);
@@ -48,6 +53,19 @@ export default function CompanionParent() {
 
   return (
     <>
+      <Joyride
+        callback={handleJoyrideCallback}
+        continuous
+        locale={{
+          nextLabelWithProgress: "Next ({step} of {steps})",
+        }}
+        run={run}
+        scrollToFirstStep
+        showProgress
+        showSkipButton
+        stepIndex={stepIndex}
+        steps={steps}
+      />
       <IntroSlides
         showIntro={!seenIntro}
         setSeenIntro={setSeenIntro}

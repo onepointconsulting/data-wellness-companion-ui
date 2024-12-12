@@ -9,6 +9,7 @@ import { INTRO_DIALOGUE_ID } from "./components/dialogue/IntroDialogue.tsx";
 import { DarkModeContextProvider } from "./context/DarkModeContext.tsx";
 import { IntroContextProvider } from "./components/intro/IntroContext.tsx";
 import AdminApp from "./AdminApp.tsx";
+import JoyrideContextProvider from "./context/JoyrideContext.tsx";
 
 function App() {
   useEffect(() => {
@@ -24,7 +25,14 @@ function App() {
             <Routes>
               <Route path="/admin" element={<AdminApp />} />
               <Route path="/admin/*" element={<AdminApp />} />
-              <Route path="*" element={<CompanionParent />} />
+              <Route
+                path="*"
+                element={
+                  <JoyrideContextProvider>
+                    <CompanionParent />
+                  </JoyrideContextProvider>
+                }
+              />
             </Routes>
           </DarkModeContextProvider>
         </ConfigContextProvider>

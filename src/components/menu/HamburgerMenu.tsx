@@ -8,12 +8,15 @@ import SessionSwitch from "./SessionSwitch.tsx";
 import ChatModeButton from "./ChatModeButton.tsx";
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
+import { JoyrideContext } from "../../context/JoyrideContext.tsx";
+
 /**
  * The Hamburger menu component.
  * @constructor
  */
 export default function HamburgerMenu() {
   const { open, setOpen } = useContext(HamburgerMenuContext);
+  const { hamburgerMenu, joyrideState, setJoyrideState } = useContext(JoyrideContext);
   const menuRef = useRef<HTMLMenuElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -38,7 +41,17 @@ export default function HamburgerMenu() {
   }, [handleClickOutside]);
 
   return (
-    <div className="hamburger-menu">
+    <div
+      className="hamburger-menu"
+      ref={hamburgerMenu}
+      onClick={() => {
+        setJoyrideState({
+          ...joyrideState,
+          run: false,
+          sidebarOpen: false,
+        });
+      }}
+    >
       <div ref={imgRef}>
         <svg
           width="27"
