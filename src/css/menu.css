@@ -37,3 +37,7 @@
 .menu-select {
   @apply py-1 border-b border-black w-full;
 }
+
+.menu-instructions li {
+  @apply list-inside list-['-_']
+}

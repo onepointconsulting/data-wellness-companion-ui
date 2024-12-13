@@ -5,6 +5,7 @@ import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 import {JoyrideContext} from "../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../context/JoyrideStore.tsx";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -31,12 +32,13 @@ export default function ChatInput() {
     currentMessage,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
-  const {setInitState, mainQuestionRef} = useContext(JoyrideContext)
+  const {chatInputRef} = useContext(JoyrideContext)
+  const setInitChatInputRef = useJoyrideStore((state) => state.setInitChatInputRef)
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
 
   useEffect(() => {
-    setInitState(true)
+    setInitChatInputRef()
   }, []);
 
   useEffect(() => {
@@ -80,7 +82,7 @@ export default function ChatInput() {
   }
 
   return (
-    <div className="chat-container" ref={mainQuestionRef}>
+    <div className="chat-container" ref={chatInputRef}>
       <div className="chat-input">
         <textarea
           className="chat-textarea"

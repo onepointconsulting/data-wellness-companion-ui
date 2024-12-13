@@ -38,7 +38,8 @@
     "tailwindcss-animated": "^1.1.2",
     "ulid": "^2.3.0",
     "vis-data": "^7.1.9",
-    "vis-network": "^9.1.9"
+    "vis-network": "^9.1.9",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.7",

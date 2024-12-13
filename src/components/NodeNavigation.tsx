@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
+import {JoyrideContext} from "../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../context/JoyrideStore.tsx";
 
 /**
  * The single node used to display a number and used to navigate through a conversation.
@@ -47,9 +49,15 @@ function SingleNode({
 
 export default function NodeNavigation() {
   const { expectedNodes } = useContext(AppContext);
+  const { navbarRef } = useContext(JoyrideContext)
+    const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef)
+
+    useEffect(() => {
+        setNavbarRef()
+    }, []);
 
   return (
-    <div className="min-w-12">
+    <div className="min-w-12" ref={navbarRef}>
       <ConfidenceHint />
       <div className="node-container my-2">
         {!!expectedNodes &&

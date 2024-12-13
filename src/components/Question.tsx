@@ -1,6 +1,8 @@
 import { Message } from "../model/message.ts";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
+import {JoyrideContext} from "../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../context/JoyrideStore.tsx";
 
 const STEP_MILLI_SECONDS = 25;
 
@@ -24,7 +26,13 @@ export default function Question({
   currentMessage: number;
   messagesLength: number;
 }) {
+  const { questionRef } = useContext(JoyrideContext)
+  const setInitQuestionRef = useJoyrideStore((state) => state.setInitQuestionRef)
   const [messageText, setMessageText] = useState<string>("");
+
+  useEffect(() => {
+    setInitQuestionRef()
+  }, []);
 
   useEffect(() => {
     if (currentMessage === 0 && messagesLength < 2) {
@@ -36,7 +44,7 @@ export default function Question({
 
   return (
     <>
-      <div className="question container">
+      <div className="question container" ref={questionRef}>
         <div className="dark:text-gray-100">
           {messageText} <LightBulb />
         </div>
