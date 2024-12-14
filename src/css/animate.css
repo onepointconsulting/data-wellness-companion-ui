@@ -13,3 +13,8 @@
 .pulsating-icon {
   animation: pulsate 0.75s 3;
 }
+
+.react-joyride__beacon {
+  width: 30px !important;
+  height: 30px !important;
+}

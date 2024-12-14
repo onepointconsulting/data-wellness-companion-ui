@@ -39,5 +39,5 @@
 }
 
 .menu-instructions li {
-  @apply list-inside list-['-_']
+  @apply list-inside list-['-_'];
 }

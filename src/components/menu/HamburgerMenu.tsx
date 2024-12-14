@@ -16,7 +16,7 @@ import { JoyrideContext } from "../../context/JoyrideContext.tsx";
  */
 export default function HamburgerMenu() {
   const { open, setOpen } = useContext(HamburgerMenuContext);
-  const { hamburgerMenu, joyrideState, setJoyrideState } = useContext(JoyrideContext);
+  const { hamburgerMenu } = useContext(JoyrideContext);
   const menuRef = useRef<HTMLMenuElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -41,17 +41,7 @@ export default function HamburgerMenu() {
   }, [handleClickOutside]);
 
   return (
-    <div
-      className="hamburger-menu"
-      ref={hamburgerMenu}
-      onClick={() => {
-        setJoyrideState({
-          ...joyrideState,
-          run: false,
-          sidebarOpen: false,
-        });
-      }}
-    >
+    <div className="hamburger-menu" ref={hamburgerMenu}>
       <div ref={imgRef}>
         <svg
           width="27"

@@ -1,14 +1,14 @@
-import {useWebsocket} from "../hooks/useWebsocket.ts";
-import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { useWebsocket } from "../hooks/useWebsocket.ts";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
 import useConfidence from "../hooks/useConfidence.ts";
-import {IntroSlides} from "./intro/IntroSlides.tsx";
-import {useTranslation} from "react-i18next";
-import {IoMdClose} from "react-icons/io";
+import { IntroSlides } from "./intro/IntroSlides.tsx";
+import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 import getIntroSlides from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
@@ -16,11 +16,7 @@ import JoyrideContextProvider from "../context/JoyrideContext.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
-  const {
-    setStartSession,
-    seenIntro,
-    setSeenIntro,
-  } = useContext(AppContext);
+  const { setStartSession, seenIntro, setSeenIntro } = useContext(AppContext);
 
   useChatHistory();
 
@@ -49,13 +45,13 @@ export default function CompanionParent() {
         slides={getIntroSlides()}
       />
       {seenIntro && (
-          <JoyrideContextProvider>
-            <RestartDialogue />
-            <EmailDialogue />
-            <InfoDialogue />
-            <ConfidenceDialogue />
-            <MainApp />
-          </JoyrideContextProvider>
+        <JoyrideContextProvider>
+          <RestartDialogue />
+          <EmailDialogue />
+          <InfoDialogue />
+          <ConfidenceDialogue />
+          <MainApp />
+        </JoyrideContextProvider>
       )}
     </>
   );
