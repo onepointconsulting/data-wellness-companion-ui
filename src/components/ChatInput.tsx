@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.tsx";
-import {useShallow} from "zustand/react/shallow";
+import { useShallow } from "zustand/react/shallow";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -34,15 +34,15 @@ export default function ChatInput() {
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
   const { chatInputRef, sendButtonRef } = useContext(JoyrideContext);
-  const {setInitChatInputRef, setSendButtonRef} = useJoyrideStore(
-    useShallow((state) => ({...state})),
+  const { setInitChatInputRef, setSendButtonRef } = useJoyrideStore(
+    useShallow((state) => ({ ...state })),
   );
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
 
   useEffect(() => {
     setInitChatInputRef();
-    setSendButtonRef()
+    setSendButtonRef();
   }, []);
 
   useEffect(() => {
@@ -102,7 +102,6 @@ export default function ChatInput() {
         />
         {connected && (
           <button
-
             onClick={(e) => {
               e.preventDefault();
               sendMessage();

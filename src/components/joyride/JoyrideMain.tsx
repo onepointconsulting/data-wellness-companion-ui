@@ -19,20 +19,25 @@ const baseSlide = {
   },
 };
 
-const KEY_FINISHED = "tourFinished_20241214"
+const KEY_FINISHED = "tourFinished_20241214";
 
 export default function JoyrideMain() {
   const [t] = useTranslation();
-  const { joyrideState, setJoyrideState, initChatInputRef, initQuestionRef, initSendButtonRef } =
-    useJoyrideStore(
-      useShallow((state) => ({
-        joyrideState: state.joyrideState,
-        setJoyrideState: state.setJoyrideState,
-        initChatInputRef: state.initChatInputRef,
-        initQuestionRef: state.initQuestionRef,
-        initSendButtonRef: state.initSendButtonRef
-      })),
-    );
+  const {
+    joyrideState,
+    setJoyrideState,
+    initChatInputRef,
+    initQuestionRef,
+    initSendButtonRef,
+  } = useJoyrideStore(
+    useShallow((state) => ({
+      joyrideState: state.joyrideState,
+      setJoyrideState: state.setJoyrideState,
+      initChatInputRef: state.initChatInputRef,
+      initQuestionRef: state.initQuestionRef,
+      initSendButtonRef: state.initSendButtonRef,
+    })),
+  );
   const { questionRef, chatInputRef, hamburgerMenu, navbarRef, sendButtonRef } =
     useContext(JoyrideContext);
   const { run, steps } = joyrideState;
@@ -43,12 +48,18 @@ export default function JoyrideMain() {
 
     if (finishedStatuses.includes(status)) {
       setJoyrideState({ ...joyrideState, run: false });
-      window.localStorage.setItem(KEY_FINISHED, "true")
+      window.localStorage.setItem(KEY_FINISHED, "true");
     }
   };
 
   useEffect(() => {
-    if (window.localStorage.getItem(KEY_FINISHED) !== "true" && initChatInputRef && initQuestionRef && navbarRef && initSendButtonRef) {
+    if (
+      window.localStorage.getItem(KEY_FINISHED) !== "true" &&
+      initChatInputRef &&
+      initQuestionRef &&
+      navbarRef &&
+      initSendButtonRef
+    ) {
       setJoyrideState({
         run: true,
         sidebarOpen: true,
@@ -81,16 +92,14 @@ export default function JoyrideMain() {
           },
           {
             content: (
-                <>
-                  <div className="text-left">
-                    {t(
-                        "Instruction: Use this button to submit your response.",
-                    )}
-                  </div>
-                  <div className="flex justify-center mt-3">
-                    <SendImage enoughText={true} />
-                  </div>
-                </>
+              <>
+                <div className="text-left">
+                  {t("Instruction: Use this button to submit your response.")}
+                </div>
+                <div className="flex justify-center mt-3">
+                  <SendImage enoughText={true} />
+                </div>
+              </>
             ),
             placement: "auto",
             ...baseSlide,
@@ -99,13 +108,13 @@ export default function JoyrideMain() {
           },
           {
             content: (
-                <>
-                  <div className="text-left">
-                    {t(
-                        "Instruction: You can use any suggested answers in this section. You can also select one and edit it or you can combined multiple selected answers too.",
-                    )}
-                  </div>
-                </>
+              <>
+                <div className="text-left">
+                  {t(
+                    "Instruction: You can use any suggested answers in this section. You can also select one and edit it or you can combined multiple selected answers too.",
+                  )}
+                </div>
+              </>
             ),
             ...baseSlide,
             placement: "top",
@@ -142,6 +151,18 @@ export default function JoyrideMain() {
             ...baseSlide,
             target: navbarRef?.current!,
             title: t("Instruction: Progress bar"),
+          },
+          {
+            content: (
+              <div className="text-left">
+                {t(
+                  "Instruction: If you are interested in a free consultation, please click here",
+                )}
+              </div>
+            ),
+            ...baseSlide,
+            target: "#free-consultation",
+            title: t("Instruction: Free consultation"),
           },
         ],
       });

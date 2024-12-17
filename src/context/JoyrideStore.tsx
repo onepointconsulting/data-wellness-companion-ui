@@ -37,7 +37,8 @@ export const useJoyrideStore = create<JoyrideState>((set) => ({
   setInitQuestionRef: () =>
     set((state) => ({ ...state, initQuestionRef: true })),
   setNavbarRef: () => set((state) => ({ ...state, initNavbarRef: true })),
-  setSendButtonRef: () => set((state) => ({ ...state, initSendButtonRef: true })),
+  setSendButtonRef: () =>
+    set((state) => ({ ...state, initSendButtonRef: true })),
   setJoyrideState: (joyrideState: State) =>
     set((state) => ({ ...state, joyrideState })),
 }));

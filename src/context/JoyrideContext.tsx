@@ -6,7 +6,7 @@ export type JoyrideState = {
   questionRef: RefObject<HTMLDivElement> | null;
   hamburgerMenu: RefObject<HTMLDivElement> | null;
   navbarRef: RefObject<HTMLDivElement> | null;
-    sendButtonRef: RefObject<HTMLButtonElement> | null;
+  sendButtonRef: RefObject<HTMLButtonElement> | null;
 };
 
 export const JoyrideContext = createContext<JoyrideState>({
@@ -14,7 +14,7 @@ export const JoyrideContext = createContext<JoyrideState>({
   chatInputRef: null,
   hamburgerMenu: null,
   navbarRef: null,
-    sendButtonRef: null
+  sendButtonRef: null,
 });
 
 export default function JoyrideContextProvider({ children }: Props) {
@@ -22,7 +22,8 @@ export default function JoyrideContextProvider({ children }: Props) {
   const chatInputRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const questionRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const navbarRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const sendButtonRef: RefObject<HTMLButtonElement> = useRef<HTMLButtonElement>(null);
+  const sendButtonRef: RefObject<HTMLButtonElement> =
+    useRef<HTMLButtonElement>(null);
 
   return (
     <JoyrideContext.Provider
@@ -31,7 +32,7 @@ export default function JoyrideContextProvider({ children }: Props) {
         questionRef,
         hamburgerMenu,
         navbarRef,
-          sendButtonRef
+        sendButtonRef,
       }}
     >
       {children}
