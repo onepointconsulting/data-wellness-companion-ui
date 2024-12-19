@@ -11,11 +11,6 @@ import { IntroContextProvider } from "./components/intro/IntroContext.tsx";
 import AdminApp from "./AdminApp.tsx";
 
 function App() {
-  useEffect(() => {
-    if (!getSeenIntro()) {
-      showDialogue(INTRO_DIALOGUE_ID);
-    }
-  }, []);
   return (
     <IntroContextProvider>
       <AppContextProvider>

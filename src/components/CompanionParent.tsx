@@ -22,6 +22,7 @@ export default function CompanionParent() {
 
   useEffect(() => {
     setStartSession(true);
+    setSeenIntro(true)
   }, []);
 
   // Establish a websocket connection
