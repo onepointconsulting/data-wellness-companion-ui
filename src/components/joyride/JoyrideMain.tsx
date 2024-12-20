@@ -5,6 +5,8 @@ import { useJoyrideStore } from "../../context/JoyrideStore.tsx";
 import { useShallow } from "zustand/react/shallow";
 import { useTranslation } from "react-i18next";
 import SendImage from "../buttons/SendImage.tsx";
+import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
+import ConfidenceLevels from "./ConfidenceLevels.tsx";
 
 const baseSlide = {
   disableBeacon: false,
@@ -22,6 +24,7 @@ const baseSlide = {
 const KEY_FINISHED = "tourFinished_20241214";
 
 export default function JoyrideMain() {
+  const showIntroDialogue = useShowIntroDialogue();
   const [t] = useTranslation();
   const {
     joyrideState,
@@ -132,6 +135,7 @@ export default function JoyrideMain() {
                   <li>{t("Instruction: Help")}</li>
                   <li>{t("Instruction: Contact Us")}</li>
                   <li>{t("Instruction: Switch languages")}</li>
+                  <li>{t("Instruction: Night mode")}</li>
                   <li>...</li>
                 </ul>
               </div>
@@ -142,13 +146,22 @@ export default function JoyrideMain() {
           },
           {
             content: (
-              <div className="text-left">
-                {t(
-                  "Instruction: Navigate between questions using the progress bar.",
-                )}
-              </div>
+              <>
+                <div className="text-left">
+                  {t(
+                    "Instruction: Navigate between questions using the progress bar.",
+                  )}
+                </div>
+                <div className="text-left">
+                  {t(
+                    "Instruction: You will see a smiley on top of this bar with the internal confidence levels of the tool",
+                  )}
+                </div>
+                <ConfidenceLevels />
+              </>
             ),
             ...baseSlide,
+            placement: "bottom",
             target: navbarRef?.current!,
             title: t("Instruction: Progress bar"),
           },
@@ -163,6 +176,25 @@ export default function JoyrideMain() {
             ...baseSlide,
             target: "#free-consultation",
             title: t("Instruction: Free consultation"),
+          },
+          {
+            content: (
+              <div className="text-left">
+                {t("Instruction: For more informations on D-Well check the")}{" "}
+                <br />
+                <a
+                  href="#"
+                  onClick={showIntroDialogue}
+                  className="default-link"
+                >
+                  {t("D-Well Tour")}
+                </a>
+              </div>
+            ),
+            ...baseSlide,
+            placement: "center",
+            target: "body",
+            title: t("Instruction: More on D-Well"),
           },
         ],
       });

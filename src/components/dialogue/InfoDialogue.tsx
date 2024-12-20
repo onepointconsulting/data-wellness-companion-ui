@@ -4,9 +4,7 @@ import OnepointInfo from "./OnepointInfo.tsx";
 import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import InfoIcon from "./InfoIcon.tsx";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext.tsx";
-import { forgetSeenIntro } from "../../lib/sessionFunctions.ts";
+import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
 
 export const INFO_DIALOGUE_ID = "info-dialogue";
 
@@ -19,17 +17,8 @@ function InfoSection({ children }: { children: React.ReactNode }) {
  * @constructor
  */
 export default function InfoDialogue() {
-  const { setSeenIntro } = useContext(AppContext);
+  const showIntroDialogue = useShowIntroDialogue();
   const { t } = useTranslation();
-
-  function showIntroDialogue(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) {
-    event.preventDefault();
-    onCloseDialogue(INFO_DIALOGUE_ID);
-    setSeenIntro(false);
-    forgetSeenIntro();
-  }
 
   return (
     <GenericDialogue dialogueId={INFO_DIALOGUE_ID} clazz="companion-dialogue">

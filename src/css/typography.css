@@ -23,6 +23,6 @@
   @apply bg-white text-[#4a4a4a] border border-[#4a4a4a] px-2 text-xs md:text-sm mb-1 ml-5;
 }
 
-#root a.default-link {
+a.default-link {
   @apply underline text-[#0084d7] hover:text-[#0084d7] visited:text-[#0084d7] outline-0 dark:text-gray-200 dark:hover:text-gray-50;
 }
