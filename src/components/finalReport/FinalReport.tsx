@@ -148,7 +148,7 @@ export default function FinalReport({ message }: { message: Message }) {
       >
         {message.question}
       </Markdown>
-        <Transcript/>
+      <Transcript />
     </div>
   );
 }
