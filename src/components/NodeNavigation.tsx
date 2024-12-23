@@ -1,27 +1,31 @@
-import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {useTranslation} from "react-i18next";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
-import {JoyrideContext} from "../context/JoyrideContext.tsx";
-import {useJoyrideStore} from "../context/JoyrideStore.tsx";
+import { JoyrideContext } from "../context/JoyrideContext.tsx";
+import { useJoyrideStore } from "../context/JoyrideStore.tsx";
 
-function selectLastNodeCss(covered: boolean, current: boolean, isLastNode: boolean, isFinalMessage: boolean) {
-  const css = []
+function selectLastNodeCss(
+  covered: boolean,
+  current: boolean,
+  isLastNode: boolean,
+  isFinalMessage: boolean,
+) {
+  const css = [];
   if (covered) {
-    css.push("active")
+    css.push("active");
   }
-  if(current) {
-    css.push("current")
+  if (current) {
+    css.push("current");
   }
-  if(isLastNode) {
-    css.push("last-node")
-    if(isFinalMessage) {
-      css.push("!bg-opacity-0")
+  if (isLastNode) {
+    css.push("last-node");
+    if (isFinalMessage) {
+      css.push("!bg-opacity-0");
     }
   }
-  return css.join(" ")
+  return css.join(" ");
 }
-
 
 /**
  * The single node used to display a number and used to navigate through a conversation.
@@ -29,9 +33,7 @@ function selectLastNodeCss(covered: boolean, current: boolean, isLastNode: boole
  * @param expectedNodes
  * @constructor
  */
-function SingleNode({i}: {
-  i: number;
-}) {
+function SingleNode({ i }: { i: number }) {
   const { expectedNodes, isFinalMessage } = useContext(AppContext);
   const [t] = useTranslation();
   const { messages, currentMessage, setCurrentMessageHistory } =
@@ -67,7 +69,6 @@ export default function NodeNavigation() {
   const { navbarRef } = useContext(JoyrideContext);
   const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef);
 
-
   useEffect(() => {
     setNavbarRef();
   }, []);
@@ -79,12 +80,7 @@ export default function NodeNavigation() {
         {!!expectedNodes &&
           expectedNodes > 0 &&
           [...Array(expectedNodes).keys()].map((i) => {
-            return (
-              <SingleNode
-                key={`node_${i}`}
-                i={i}
-              />
-            );
+            return <SingleNode key={`node_${i}`} i={i} />;
           })}
       </div>
     </div>

@@ -1,20 +1,21 @@
 import Markdown from "react-markdown";
-import { Message } from "../model/message.ts";
+import { Message } from "../../model/message.ts";
 import remarkGfm from "remark-gfm";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
 import { useContext, useEffect } from "react";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { getSession } from "../lib/sessionFunctions.ts";
-import { showDialogue } from "../lib/dialogFunctions.ts";
-import { EMAIL_DIALOGUE_ID } from "./dialogue/EmailDialogue.tsx";
+import { ChatContext } from "../../context/ChatContext.tsx";
+import { getSession } from "../../lib/sessionFunctions.ts";
+import { showDialogue } from "../../lib/dialogFunctions.ts";
+import { EMAIL_DIALOGUE_ID } from "../dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import OntologyGraph from "./knowledge-graph/OntologyGraph.tsx";
-import { Ontology } from "../model/ontology.ts";
-import { AppContext } from "../context/AppContext.tsx";
-import { toast } from "../../@/components/ui/use-toast.ts";
+import OntologyGraph from "../knowledge-graph/OntologyGraph.tsx";
+import { Ontology } from "../../model/ontology.ts";
+import { AppContext } from "../../context/AppContext.tsx";
+import { toast } from "../../../@/components/ui/use-toast.ts";
+import Transcript from "./Transcript.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -147,6 +148,7 @@ export default function FinalReport({ message }: { message: Message }) {
       >
         {message.question}
       </Markdown>
+        <Transcript/>
     </div>
   );
 }
