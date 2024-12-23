@@ -2,7 +2,6 @@ import HamburgerMenuContextProvider from "../context/HamburgerMenuContext.tsx";
 import HamburgerMenu from "./menu/HamburgerMenu.tsx";
 import RegistrationMessage from "./RegistrationMessage.tsx";
 import MainPanel from "./MainPanel.tsx";
-import Disclaimer from "./Disclaimer.tsx";
 import NodeNavigation from "./NodeNavigation.tsx";
 import { Toaster } from "../../@/components/ui/toaster.tsx";
 import { useTranslation } from "react-i18next";
@@ -38,7 +37,6 @@ export default function MainApp() {
           <div className="w-full">
             {displayRegistrationMessage && <RegistrationMessage />}
             {!displayRegistrationMessage && <MainPanel />}
-            <Disclaimer />
           </div>
           <div>
             <NodeNavigation />

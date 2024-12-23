@@ -1,9 +1,27 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { useTranslation } from "react-i18next";
+import {useContext, useEffect} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {useTranslation} from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
-import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.tsx";
+import {JoyrideContext} from "../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../context/JoyrideStore.tsx";
+
+function selectLastNodeCss(covered: boolean, current: boolean, isLastNode: boolean, isFinalMessage: boolean) {
+  const css = []
+  if (covered) {
+    css.push("active")
+  }
+  if(current) {
+    css.push("current")
+  }
+  if(isLastNode) {
+    css.push("last-node")
+    if(isFinalMessage) {
+      css.push("!bg-opacity-0")
+    }
+  }
+  return css.join(" ")
+}
+
 
 /**
  * The single node used to display a number and used to navigate through a conversation.
@@ -11,13 +29,10 @@ import { useJoyrideStore } from "../context/JoyrideStore.tsx";
  * @param expectedNodes
  * @constructor
  */
-function SingleNode({
-  i,
-  expectedNodes,
-}: {
+function SingleNode({i}: {
   i: number;
-  expectedNodes: number;
 }) {
+  const { expectedNodes, isFinalMessage } = useContext(AppContext);
   const [t] = useTranslation();
   const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
@@ -34,7 +49,7 @@ function SingleNode({
   return (
     <>
       <div
-        className={`node ${covered ? "active" : ""} ${currentMessage === i ? "current" : ""}${isLastNode ? " last-node" : ""}`}
+        className={`node ${selectLastNodeCss(covered, currentMessage === i, isLastNode, isFinalMessage)}`}
         onClick={(e) => i < length && handleClick(e)}
       >
         {currentMessage === i && (
@@ -52,6 +67,7 @@ export default function NodeNavigation() {
   const { navbarRef } = useContext(JoyrideContext);
   const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef);
 
+
   useEffect(() => {
     setNavbarRef();
   }, []);
@@ -66,7 +82,6 @@ export default function NodeNavigation() {
             return (
               <SingleNode
                 key={`node_${i}`}
-                expectedNodes={expectedNodes}
                 i={i}
               />
             );

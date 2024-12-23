@@ -9,6 +9,7 @@ import FinalReport from "./FinalReport.tsx";
 import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import GiveReportNow from "./GiveReportNow.tsx";
+import Disclaimer from "./Disclaimer.tsx";
 
 export default function MainPanel() {
   const {
@@ -28,24 +29,32 @@ export default function MainPanel() {
     );
   const displayReportGenerationMessage =
     currentMessage === expectedNodes - 2 || generatingReport;
+  const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   if (!message.final_report) {
     return (
-      <div className="interaction-panel">
-        <Question
-          message={message}
-          currentMessage={currentMessage}
-          messagesLength={messages.length}
-        />
-        {!isLast && <QuestionAnswer message={message} />}
-        <SpinnerArea
-          sending={sending}
-          displayReportGenerationMessage={displayReportGenerationMessage}
-        />
-        <ClarificationArea />
-        {isLast && <ChatInput />}
-        <GiveReportNow />
-        <Suggestions message={message} />
-      </div>
+      <>
+        <div className="interaction-panel">
+          <Question
+            message={message}
+            currentMessage={currentMessage}
+            messagesLength={messages.length}
+          />
+          {!isLast && <QuestionAnswer message={message} />}
+          <SpinnerArea
+            sending={sending}
+            displayReportGenerationMessage={displayReportGenerationMessage}
+          />
+          {displayChatAreaElements && (
+            <>
+              <ClarificationArea />
+              {isLast && <ChatInput />}
+              <GiveReportNow />
+              <Suggestions message={message} />
+            </>
+          )}
+        </div>
+        {displayChatAreaElements && <Disclaimer />}
+      </>
     );
   } else {
     return <FinalReport message={message} />;

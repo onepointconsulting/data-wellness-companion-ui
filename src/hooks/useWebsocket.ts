@@ -134,12 +134,12 @@ export function useWebsocket() {
       if (sessionSteps > 0) {
         setExpectedNodes(sessionSteps);
         toast({
-          title: t("Interview Steps Updated"),
+          title: t("Interview steps updated"),
           description: t("interview-steps-updated", { sessionSteps }),
         });
       } else {
         toast({
-          title: t("Interview Steps Update Failed"),
+          title: t("Interview steps update failed"),
           description: t("interview-steps-update-failed", { sessionSteps }),
           variant: "destructive",
         });

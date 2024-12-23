@@ -18,7 +18,7 @@ export default function SpinnerArea({
           </div>
           {displayReportGenerationMessage && (
             <div className="final-report-message mt-10 mb-2">
-              {t("Generating final report. This might take 2 to 3 minutes...")}
+              {t("Generating report. This might take 2 to 3 minutes...")}
             </div>
           )}
         </>
