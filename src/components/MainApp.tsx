@@ -19,8 +19,6 @@ export default function MainApp() {
     return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;
   };
 
-  console.log("MainApp");
-
   return (
     <>
       <JoyrideMain />

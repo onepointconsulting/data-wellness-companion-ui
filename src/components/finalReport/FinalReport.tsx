@@ -1,6 +1,4 @@
-import Markdown from "react-markdown";
 import { Message } from "../../model/message.ts";
-import remarkGfm from "remark-gfm";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
@@ -16,6 +14,9 @@ import { Ontology } from "../../model/ontology.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import { toast } from "../../../@/components/ui/use-toast.ts";
 import Transcript from "./Transcript.tsx";
+import { Confidence } from "../../model/confidence.ts";
+import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
+import MarkdownAccordion from "./MarkdownAccordion.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -61,6 +62,14 @@ function ReportLink({
   );
 }
 
+function extractReasoning(reportData: any): Confidence {
+  const confidence = reportData["confidence"];
+  return {
+    rating: confidence["rating"],
+    reasoning: confidence["reasoning"],
+  };
+}
+
 /**
  * The final report of the conversation.
  * @param message The message with the final report.
@@ -72,6 +81,11 @@ export default function FinalReport({ message }: { message: Message }) {
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
+  const reportData = JSON.parse(message.question);
+  const confidence = extractReasoning(reportData);
+  const advices = reportData["advices"] as string[];
+  const whatToAvoid = reportData["what_you_should_avoid"] as string[];
+  const benefits = reportData["positive_outcomes"] as string[];
 
   useEffect(() => {
     if (sessionId && ontologyOpen) {
@@ -117,37 +131,17 @@ export default function FinalReport({ message }: { message: Message }) {
           </ReportLink>
         </div>
       )}
-      <Markdown
-        className={`mt-1 text-gray-900 markdown-body`}
-        remarkPlugins={[remarkGfm]}
-        components={{
-          ul: ({ ...props }) => (
-            <ul
-              className="mb-3 ml-5 space-y-1 text-gray-500 list-disc gray-color"
-              {...props}
-            />
-          ),
-          ol: ({ ...props }) => (
-            <ol
-              className="mx-4 my-3 space-y-3 text-gray-500 list-decimal gray-color"
-              {...props}
-            />
-          ),
-          li: ({ ...props }) => <li className="mt-0" {...props} />,
-          p: ({ ...props }) => <p className="pb-1 font-sans" {...props} />,
-          a: ({ children, ...props }) => (
-            <a
-              className="pb-4 font-sans underline sm:pb-2"
-              {...props}
-              target="_blank"
-            >
-              {children}
-            </a>
-          ),
-        }}
-      >
-        {message.question}
-      </Markdown>
+      <MarkdownAccordion
+        title="Suggested courses of action"
+        items={advices}
+        defaultOpen={true}
+      />
+      <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
+      <MarkdownAccordion
+        title="Benefits (If you follow the advice)"
+        items={benefits}
+      />
+      <ReportConfidenceLevel confidence={confidence} />
       <Transcript />
     </div>
   );

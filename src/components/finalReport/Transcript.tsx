@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext.tsx";
-import { useTranslation } from "react-i18next";
+import { AccordionText } from "../accordion/AccordionText.tsx";
 
 export default function Transcript() {
-  const { t } = useTranslation();
   const { messages } = useContext(AppContext);
   return (
-    <div className="mt-1 text-gray-900 markdown-body">
-      <h1>{t("Transcript")}</h1>
+    <AccordionText title={"Transcript"}>
       <ol className="mb-3 ml-5 space-y-1 text-gray-500 list-decimal gray-color">
         {messages
           .filter((message) => !message.final_report)
@@ -18,6 +16,6 @@ export default function Transcript() {
             </li>
           ))}
       </ol>
-    </div>
+    </AccordionText>
   );
 }

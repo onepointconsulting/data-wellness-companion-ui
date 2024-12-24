@@ -198,8 +198,9 @@
   @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a] dark:bg-gray-800 dark:text-white dark:border-gray-800;
 }
 
-#root .clarification-main .markdown-body p {
-  @apply p-3;
+#root .clarification-main .markdown-body p,
+#root .markdown-body p {
+  @apply p-3 dark:text-gray-100;
 }
 
 #root .clarification-main .markdown-body li {

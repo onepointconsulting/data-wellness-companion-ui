@@ -6,6 +6,7 @@ import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
 import MarkdownComponent from "../Markdown.tsx";
 import { ConfidenceImage } from "../buttons/ConfidenceHint.tsx";
+import { confidenceAdapter } from "../../lib/confidenceAdapter.ts";
 
 export const CONFIDENCE_DIALOGUE_ID = "confidence-dialogue";
 
@@ -38,7 +39,7 @@ export default function ConfidenceDialogue() {
       </DialogueHeader>
       <div className="flex flex-col items-start px-2.5">
         <div className="text-2xl font-bold pt-2">
-          {confidence?.rating ? t(`confidence_${confidence?.rating}`) : "???"}
+          {confidenceAdapter(t, confidence)}
         </div>
         <div className="text-base py-4 mx-auto">
           {confidence?.rating && (

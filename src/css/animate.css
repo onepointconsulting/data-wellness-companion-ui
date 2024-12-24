@@ -18,3 +18,7 @@
   width: 30px !important;
   height: 30px !important;
 }
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
