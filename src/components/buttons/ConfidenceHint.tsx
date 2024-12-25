@@ -45,14 +45,10 @@ export function ConfidenceImage({
  * @constructor
  */
 export default function ConfidenceHint({ className }: { className?: string }) {
-  const {
-    confidence,
-    updatingConfidence,
-    currentMessage,
-    clarificationClicked,
-  } = useContext(AppContext);
+  const { confidence, updatingConfidence, currentMessage } =
+    useContext(AppContext);
   const rating = confidence?.rating;
-  const hide = !rating || currentMessage === 0 || clarificationClicked;
+  const hide = !rating || currentMessage === 0;
   return (
     <div className={`min-h-14 ${className ?? ""}`}>
       {!hide && updatingConfidence && (

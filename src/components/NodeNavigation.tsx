@@ -65,13 +65,17 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { expectedNodes } = useContext(AppContext);
+  const { expectedNodes, isLast, isReport } = useContext(AppContext);
   const { navbarRef } = useContext(JoyrideContext);
   const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef);
 
   useEffect(() => {
     setNavbarRef();
   }, []);
+
+  if (isLast && isReport) {
+    return <></>;
+  }
 
   return (
     <div className="min-w-12" ref={navbarRef}>

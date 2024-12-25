@@ -25,6 +25,7 @@ interface AppState {
   setChatText: (chatText: string) => void;
   readonly isLast: boolean;
   readonly isBeforeReport: boolean;
+  readonly isReport: boolean;
   readonly isFinalMessage: boolean;
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
@@ -77,6 +78,7 @@ function createAppState(): AppState {
     setChatText: (_) => {},
     isLast: true,
     isFinalMessage: false,
+    isReport: false,
     isBeforeReport: false,
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
@@ -141,6 +143,8 @@ export const AppContextProvider = ({ children }: Props) => {
   const isLast = currentMessage === messages.length - 1;
   const isFinalMessage = currentMessage === expectedNodes - 1;
   const isBeforeReport = currentMessage === expectedNodes - 2;
+  const isReport =
+    messages?.length > 0 && messages[messages.length - 1].final_report;
 
   function setCurrentMessageHistory(currentMessage: number) {
     setCurrentMessage(currentMessage);
@@ -176,6 +180,7 @@ export const AppContextProvider = ({ children }: Props) => {
         isLast,
         isFinalMessage,
         isBeforeReport,
+        isReport,
         displayRegistrationMessage,
         setDisplayRegistrationMessage,
         setCurrentMessageHistory,

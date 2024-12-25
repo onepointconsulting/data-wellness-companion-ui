@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import JoyrideMain from "./joyride/JoyrideMain.tsx";
+import NavigationTab from "./NavigationTabs.tsx";
 
 export default function MainApp() {
   const [t] = useTranslation();
@@ -33,8 +34,13 @@ export default function MainApp() {
       <div className="container">
         <div className="flex flex-row gap-8">
           <div className="w-full">
-            {displayRegistrationMessage && <RegistrationMessage />}
-            {!displayRegistrationMessage && <MainPanel />}
+            {displayRegistrationMessage ? (
+              <RegistrationMessage />
+            ) : (
+              <NavigationTab>
+                <MainPanel />
+              </NavigationTab>
+            )}
           </div>
           <div>
             <NodeNavigation />

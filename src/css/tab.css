@@ -1,0 +1,11 @@
+.tab-main {
+  @apply flex flex-wrap border-b-[1px] border-[#4a4a4a] dark:border-[#efefef] justify-start md:mb-5;
+}
+
+.tab-item-active {
+  @apply border-t-[1px] border-x-[1px] border-[#4a4a4a] dark:border-[#efefef] mb-[-1px] bg-white dark:bg-slate-700 px-3 py-3 mr-1;
+}
+
+.tab-item-inactive {
+  @apply bg-white dark:bg-slate-700 px-3 py-3 mr-1 cursor-pointer;
+}

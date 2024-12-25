@@ -106,13 +106,16 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
     });
 }
 
+const DEFAULT_IMPORTANCE_LEVEL = 2
+
 export default function OntologyGraph() {
   const { dark } = useContext(DarkModeContext);
   const { ontology, ontologyOpen } = useContext(AppContext);
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
-  const [importanceLevel, setImportanceLevel] = useState<number>(2);
+  const [importanceLevel, setImportanceLevel] = useState<number>(DEFAULT_IMPORTANCE_LEVEL);
+  const [maxNodes, setMaxNodes] = useState<number>(5);
 
   function handleEnterFullscreen() {
     const current = networkRef.current;
@@ -159,6 +162,9 @@ export default function OntologyGraph() {
       }
     });
 
+    const maxNodes = Object.values(ontology.connected_component_importance_dict).reduce((a, e) => Math.max(a, e), 1);
+    setMaxNodes(maxNodes)
+
     setTimeout(() => {
       network.moveTo({
         scale: 1.0, // Set the initial zoom factor to 0.5 (50% zoom)
@@ -167,6 +173,10 @@ export default function OntologyGraph() {
       network.setOptions({ ...options, physics: { enabled: false } });
     }, 1000);
   }, [ontology, nodeSearch, dark, importanceLevel]);
+
+  useEffect(() => {
+    setImportanceLevel(Math.min(DEFAULT_IMPORTANCE_LEVEL, maxNodes))
+  }, [maxNodes, setImportanceLevel]);
 
   return (
     <div>
@@ -210,7 +220,7 @@ export default function OntologyGraph() {
               value={importanceLevel}
               onChange={(e) => setImportanceLevel(parseInt(e.target.value))}
             >
-              {[...Array(5).keys()].map((nodes, i) => (
+              {[...Array(maxNodes - 1).keys()].map((nodes, i) => (
                 <option
                   value={nodes + 1}
                   key={`ontology_level_${i}`}
