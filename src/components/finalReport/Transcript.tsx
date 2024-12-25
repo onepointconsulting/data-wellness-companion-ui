@@ -11,8 +11,11 @@ export default function Transcript() {
           .filter((message) => !message.final_report)
           .map((message, i) => (
             <li key={`qa_${i}`}>
-              <p className="italic">{message.question}</p>
-              <p>{message.answer}</p>
+              <p>
+                <span className="italic">{message.question}</span>
+                <br />
+                {message.answer}
+              </p>
             </li>
           ))}
       </ol>

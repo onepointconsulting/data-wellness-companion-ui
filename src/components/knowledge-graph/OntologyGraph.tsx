@@ -106,7 +106,7 @@ function extractEdges(relationships: Relationship[], nodes: Node[]): Edge[] {
     });
 }
 
-const DEFAULT_IMPORTANCE_LEVEL = 2
+const DEFAULT_IMPORTANCE_LEVEL = 2;
 
 export default function OntologyGraph() {
   const { dark } = useContext(DarkModeContext);
@@ -114,7 +114,9 @@ export default function OntologyGraph() {
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
-  const [importanceLevel, setImportanceLevel] = useState<number>(DEFAULT_IMPORTANCE_LEVEL);
+  const [importanceLevel, setImportanceLevel] = useState<number>(
+    DEFAULT_IMPORTANCE_LEVEL,
+  );
   const [maxNodes, setMaxNodes] = useState<number>(5);
 
   function handleEnterFullscreen() {
@@ -162,8 +164,10 @@ export default function OntologyGraph() {
       }
     });
 
-    const maxNodes = Object.values(ontology.connected_component_importance_dict).reduce((a, e) => Math.max(a, e), 1);
-    setMaxNodes(maxNodes)
+    const maxNodes = Object.values(
+      ontology.connected_component_importance_dict,
+    ).reduce((a, e) => Math.max(a, e), 1);
+    setMaxNodes(maxNodes);
 
     setTimeout(() => {
       network.moveTo({
@@ -175,7 +179,7 @@ export default function OntologyGraph() {
   }, [ontology, nodeSearch, dark, importanceLevel]);
 
   useEffect(() => {
-    setImportanceLevel(Math.min(DEFAULT_IMPORTANCE_LEVEL, maxNodes))
+    setImportanceLevel(Math.min(DEFAULT_IMPORTANCE_LEVEL, maxNodes));
   }, [maxNodes, setImportanceLevel]);
 
   return (

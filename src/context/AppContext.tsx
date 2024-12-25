@@ -27,6 +27,7 @@ interface AppState {
   readonly isBeforeReport: boolean;
   readonly isReport: boolean;
   readonly isFinalMessage: boolean;
+  readonly isSuggestionDeactivated: boolean;
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   setCurrentMessageHistory: (currentMessageHistory: number) => void;
@@ -80,6 +81,7 @@ function createAppState(): AppState {
     isFinalMessage: false,
     isReport: false,
     isBeforeReport: false,
+    isSuggestionDeactivated: false,
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
     setCurrentMessageHistory: (_) => {},
@@ -151,6 +153,8 @@ export const AppContextProvider = ({ children }: Props) => {
     navigate(`/${currentMessage}${location.search}`);
   }
 
+  const isSuggestionDeactivated = isReport || sending || !isLast;
+
   useEffect(() => {
     if (seenIntro) {
       hasSeenIntro();
@@ -181,6 +185,7 @@ export const AppContextProvider = ({ children }: Props) => {
         isFinalMessage,
         isBeforeReport,
         isReport,
+        isSuggestionDeactivated,
         displayRegistrationMessage,
         setDisplayRegistrationMessage,
         setCurrentMessageHistory,

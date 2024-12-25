@@ -1,6 +1,7 @@
 import { Message, Suggestion } from "../model/message.ts";
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
+import { useTranslation } from "react-i18next";
 
 function adaptSuggestion(suggestion: Suggestion) {
   if (!suggestion.title) {
@@ -26,6 +27,20 @@ function removeEmptyLines(text: string) {
   return text.replace(/^\s*[\r\n]/gm, "");
 }
 
+function isActive(
+  chatText: string,
+  suggestion: Suggestion,
+  messages: Message[],
+  currentMessage: number,
+  message: Message,
+) {
+  return (
+    chatText.includes(suggestion.main_text) ||
+    (messages.length - 1 !== currentMessage &&
+      message.answer.includes(suggestion.main_text))
+  );
+}
+
 export function SuggestionTemplate({
   suggestion,
   message,
@@ -37,11 +52,13 @@ export function SuggestionTemplate({
   i: number;
   handleSuggestion: (e: React.MouseEvent<HTMLElement>) => void;
 }) {
-  const { chatText, currentMessage, messages } = useContext(AppContext);
+  const { chatText, currentMessage, messages, isSuggestionDeactivated } =
+    useContext(AppContext);
   return (
     <div
       key={`suggestion_${i}`}
-      className={`suggestion group items-center ${chatText.includes(suggestion.main_text) || (messages.length - 1 !== currentMessage && message.answer.includes(suggestion.main_text)) ? "active" : ""}`}
+      className={`suggestion group items-center 
+        ${isActive(chatText, suggestion, messages, currentMessage, message) ? "active" : ""} ${isSuggestionDeactivated ? "has-report" : ""}`}
       onClick={handleSuggestion}
     >
       {suggestion.img_src && (
@@ -71,26 +88,34 @@ export function SuggestionTemplate({
  * @constructor
  */
 export default function Suggestions({ message }: { message: Message }) {
-  const { setSelectedSuggestion, chatText, currentMessage } =
-    useContext(AppContext);
+  const { t } = useTranslation();
+  const {
+    setSelectedSuggestion,
+    chatText,
+    currentMessage,
+    sending,
+    isSuggestionDeactivated,
+  } = useContext(AppContext);
 
   function handleSelectedSuggestion(
     e: React.MouseEvent,
     newSuggestion: string,
   ) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (currentMessage === 0) {
-      setSelectedSuggestion(
-        chatText.includes(newSuggestion) ? "" : newSuggestion,
-      );
-    } else {
-      if (!chatText.includes(newSuggestion)) {
-        const concatenated = `${chatText}\n${newSuggestion}`;
-        setSelectedSuggestion(removeEmptyLines(concatenated));
+    if (!sending) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (currentMessage === 0) {
+        setSelectedSuggestion(
+          chatText.includes(newSuggestion) ? "" : newSuggestion,
+        );
       } else {
-        const newText = removeEmptyLines(chatText.replace(newSuggestion, ""));
-        setSelectedSuggestion(newText);
+        if (!chatText.includes(newSuggestion)) {
+          const concatenated = `${chatText}\n${newSuggestion}`;
+          setSelectedSuggestion(removeEmptyLines(concatenated));
+        } else {
+          const newText = removeEmptyLines(chatText.replace(newSuggestion, ""));
+          setSelectedSuggestion(newText);
+        }
       }
     }
   }
@@ -98,20 +123,29 @@ export default function Suggestions({ message }: { message: Message }) {
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
   return (
-    <div className="container suggestions animate-fade-down">
-      {message.suggestions.map((suggestion, i) => {
-        return (
-          <SuggestionTemplate
-            suggestion={suggestion}
-            message={message}
-            i={i}
-            handleSuggestion={(e) =>
-              handleSelectedSuggestion(e, adaptSuggestion(suggestion))
-            }
-            key={`suggestion_${i}`}
-          />
-        );
-      })}
-    </div>
+    <>
+      {isSuggestionDeactivated && (
+        <div className="not-editable-warning">
+          {t(
+            "Note: You can view previous questions, but you cannot edit them.",
+          )}
+        </div>
+      )}
+      <div className="container suggestions animate-fade-down">
+        {message.suggestions.map((suggestion, i) => {
+          return (
+            <SuggestionTemplate
+              suggestion={suggestion}
+              message={message}
+              i={i}
+              handleSuggestion={(e) =>
+                handleSelectedSuggestion(e, adaptSuggestion(suggestion))
+              }
+              key={`suggestion_${i}`}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
