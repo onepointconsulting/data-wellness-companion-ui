@@ -126,9 +126,7 @@ export default function Suggestions({ message }: { message: Message }) {
     <>
       {isSuggestionDeactivated && (
         <div className="not-editable-warning">
-          {t(
-            "Note: You can view previous questions, but you cannot edit them.",
-          )}
+          {t("previous-question-note")}
         </div>
       )}
       <div className="container suggestions animate-fade-down">

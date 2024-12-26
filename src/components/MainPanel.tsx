@@ -8,8 +8,8 @@ import Spinner from "./Spinner.tsx";
 import FinalReport from "./finalReport/FinalReport.tsx";
 import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
-import GiveReportNow from "./GiveReportNow.tsx";
 import Disclaimer from "./Disclaimer.tsx";
+import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
 
 export default function MainPanel() {
   const {
@@ -19,6 +19,7 @@ export default function MainPanel() {
     expectedNodes,
     isLast,
     generatingReport,
+    displayConfidenceLevelProceedWarning
   } = useContext(AppContext);
   const message = messages[currentMessage];
   if (!message)
@@ -30,30 +31,32 @@ export default function MainPanel() {
   const displayReportGenerationMessage =
     currentMessage === expectedNodes - 2 || generatingReport;
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
+  const displayConfidenceLevelWarning = displayConfidenceLevelProceedWarning && isLast
+  const displayChatRelatedElements = displayChatAreaElements && !displayConfidenceLevelWarning
   if (!message.final_report) {
     return (
       <>
         <div className="interaction-panel">
-          <Question
-            message={message}
-            currentMessage={currentMessage}
-            messagesLength={messages.length}
-          />
+          {displayChatRelatedElements && <Question
+              message={message}
+              currentMessage={currentMessage}
+              messagesLength={messages.length}
+          />}
           {!isLast && <QuestionAnswer message={message} />}
           <SpinnerArea
             sending={sending}
             displayReportGenerationMessage={displayReportGenerationMessage}
           />
-          {displayChatAreaElements && (
+          {displayChatRelatedElements && (
             <>
               <ClarificationArea />
               {isLast && <ChatInput />}
-              <GiveReportNow />
               <Suggestions message={message} />
             </>
           )}
+          {displayConfidenceLevelWarning && <ConfidenceLevelWarning/>}
         </div>
-        {displayChatAreaElements && <Disclaimer />}
+        {displayChatRelatedElements && <Disclaimer />}
       </>
     );
   } else {

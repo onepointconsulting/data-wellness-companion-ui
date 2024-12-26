@@ -9,16 +9,13 @@ import { Message } from "../model/message.ts";
 import { toast } from "../../@/components/ui/use-toast.ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-
-interface ServerMessage {
-  session_id: string;
-  server_messages: Message[];
-}
-
-interface SingleMessage {
-  session_id: string;
-  question: string;
-}
+import {
+  GlobalProperties,
+  Property,
+  ServerMessage,
+  SingleMessage,
+} from "../model/serverMessage.ts";
+import {readDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -37,6 +34,11 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
       })),
     };
   });
+}
+
+function adaptGlobalProperties(serverMessages: ServerMessage): Property[] {
+  const globalConfig = serverMessages.global_configuration;
+  return globalConfig.properties;
 }
 
 function extractInterviewSteps(
@@ -66,6 +68,9 @@ export function useWebsocket() {
     setDisplayRegistrationMessage,
     setUpdatingExpectedNodes,
     setGeneratingReport,
+    setMessageUpperLimit,
+    setMessageLowerLimit,
+    setDisplayedConfidenceLevelProceedWarning,
   } = useContext(AppContext);
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
   const {
@@ -99,9 +104,23 @@ export function useWebsocket() {
     function onStartSession(value: string) {
       if (!value) return;
       const serverMessages = JSON.parse(value);
-      setMessages(adaptServerMessages(serverMessages));
+      const messages = adaptServerMessages(serverMessages);
+      setMessages(messages);
       setCurrentMessageHistory(serverMessages.server_messages.length - 1);
       extractInterviewSteps(serverMessages, setExpectedNodes);
+      setDisplayedConfidenceLevelProceedWarning(readDisplayedConfidenceLevelProceedWarning());
+      const globalProperties = adaptGlobalProperties(serverMessages);
+      for (const prop of globalProperties) {
+        const value = prop.config_value;
+        switch (prop.config_key) {
+          case GlobalProperties.MESSAGE_UPPER_LIMIT:
+            setMessageUpperLimit(parseInt(value));
+            break;
+          case GlobalProperties.MESSAGE_LOWER_LIMIT:
+            setMessageLowerLimit(parseInt(value));
+            break;
+        }
+      }
       saveSession({
         id: serverMessages.session_id,
         timestamp: new Date(),

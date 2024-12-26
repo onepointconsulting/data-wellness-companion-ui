@@ -53,8 +53,22 @@ interface AppState {
   setGeneratingReport: (generatingReport: boolean) => void;
   seenIntro: boolean;
   setSeenIntro: (seenIntro: boolean) => void;
+  messageLowerLimit: number;
+  setMessageLowerLimit: (messageLowerLimit: number) => void;
+  messageUpperLimit: number;
+  setMessageUpperLimit: (messageUpperLimit: number) => void;
+  displayConfidenceLevelProceedWarning: boolean;
+  setDisplayConfidenceLevelProceedWarning: (
+    displayConfidenceLevelProceedWarning: boolean,
+  ) => void;
+  displayedConfidenceLevelProceedWarning: boolean;
+  setDisplayedConfidenceLevelProceedWarning: (
+    displayedConfidenceLevelProceedWarning: boolean,
+  ) => void;
 }
 
+const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
+const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
 export const DEFAULT_EXPECTED_NODES = 6;
 
 function createAppState(): AppState {
@@ -105,6 +119,14 @@ function createAppState(): AppState {
     setGeneratingReport: (_) => {},
     seenIntro: false,
     setSeenIntro: (_) => {},
+    messageLowerLimit: DEFAULT_MESSAGE_LOWER_LIMIT,
+    setMessageLowerLimit: (_) => {},
+    messageUpperLimit: DEFAULT_MESSAGE_UPPER_LIMIT,
+    setMessageUpperLimit: (_) => {},
+    displayConfidenceLevelProceedWarning: false,
+    setDisplayConfidenceLevelProceedWarning: (_) => {},
+    displayedConfidenceLevelProceedWarning: false,
+    setDisplayedConfidenceLevelProceedWarning: (_) => {},
   };
 }
 
@@ -139,6 +161,20 @@ export const AppContextProvider = ({ children }: Props) => {
   });
   const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
   const [seenIntro, setSeenIntro] = useState(getSeenIntro());
+  const [messageLowerLimit, setMessageLowerLimit] = useState<number>(
+    DEFAULT_MESSAGE_LOWER_LIMIT,
+  );
+  const [messageUpperLimit, setMessageUpperLimit] = useState<number>(
+    DEFAULT_MESSAGE_UPPER_LIMIT,
+  );
+  const [
+    displayConfidenceLevelProceedWarning,
+    setDisplayConfidenceLevelProceedWarning,
+  ] = useState<boolean>(false);
+  const [
+    displayedConfidenceLevelProceedWarning,
+    setDisplayedConfidenceLevelProceedWarning,
+  ] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -209,6 +245,14 @@ export const AppContextProvider = ({ children }: Props) => {
         setGeneratingReport,
         seenIntro,
         setSeenIntro,
+        messageUpperLimit,
+        setMessageUpperLimit,
+        messageLowerLimit,
+        setMessageLowerLimit,
+        displayConfidenceLevelProceedWarning,
+        setDisplayConfidenceLevelProceedWarning,
+        displayedConfidenceLevelProceedWarning,
+        setDisplayedConfidenceLevelProceedWarning,
       }}
     >
       {" "}

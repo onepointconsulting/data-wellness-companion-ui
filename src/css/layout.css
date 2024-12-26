@@ -150,8 +150,9 @@
 }
 
 #root .final-report-pdf,
-.final-report-email {
-  @apply flex flex-row items-center justify-center border border-[#4a4a4a] p-2;
+.final-report-email,
+.border-button {
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2;
 }
 
 #root .final-report-pdf a,
