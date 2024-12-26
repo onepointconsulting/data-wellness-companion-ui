@@ -19,7 +19,7 @@ export default function MainPanel() {
     expectedNodes,
     isLast,
     generatingReport,
-    displayConfidenceLevelProceedWarning
+    displayConfidenceLevelProceedWarning,
   } = useContext(AppContext);
   const message = messages[currentMessage];
   if (!message)
@@ -31,17 +31,21 @@ export default function MainPanel() {
   const displayReportGenerationMessage =
     currentMessage === expectedNodes - 2 || generatingReport;
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
-  const displayConfidenceLevelWarning = displayConfidenceLevelProceedWarning && isLast
-  const displayChatRelatedElements = displayChatAreaElements && !displayConfidenceLevelWarning
+  const displayConfidenceLevelWarning =
+    displayConfidenceLevelProceedWarning && isLast;
+  const displayChatRelatedElements =
+    displayChatAreaElements && !displayConfidenceLevelWarning;
   if (!message.final_report) {
     return (
       <>
         <div className="interaction-panel">
-          {displayChatRelatedElements && <Question
+          {displayChatRelatedElements && (
+            <Question
               message={message}
               currentMessage={currentMessage}
               messagesLength={messages.length}
-          />}
+            />
+          )}
           {!isLast && <QuestionAnswer message={message} />}
           <SpinnerArea
             sending={sending}
@@ -54,7 +58,7 @@ export default function MainPanel() {
               <Suggestions message={message} />
             </>
           )}
-          {displayConfidenceLevelWarning && <ConfidenceLevelWarning/>}
+          {displayConfidenceLevelWarning && <ConfidenceLevelWarning />}
         </div>
         {displayChatRelatedElements && <Disclaimer />}
       </>

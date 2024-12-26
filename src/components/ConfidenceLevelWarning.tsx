@@ -1,10 +1,13 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {Trans, useTranslation} from "react-i18next";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {generateReportNow, sendExtendSession,} from "../lib/websocketFunctions.ts";
-import {confidenceAdapter} from "../lib/confidenceAdapter.ts";
-import {saveDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { Trans, useTranslation } from "react-i18next";
+import { ChatContext } from "../context/ChatContext.tsx";
+import {
+  generateReportNow,
+  sendExtendSession,
+} from "../lib/websocketFunctions.ts";
+import { confidenceAdapter } from "../lib/confidenceAdapter.ts";
+import { saveDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
 
 function DecisionButtons({
   label,
@@ -15,7 +18,10 @@ function DecisionButtons({
 }) {
   const [t] = useTranslation();
   return (
-    <div className="border-button w-full md:flex-1 cursor-pointer" onClick={onClick}>
+    <div
+      className="border-button w-full md:flex-1 cursor-pointer"
+      onClick={onClick}
+    >
       {t(label)}
     </div>
   );
@@ -40,7 +46,10 @@ export default function ConfidenceLevelWarning() {
   }
 
   function setDisplayFlags() {
-      saveDisplayedConfidenceLevelProceedWarning(true, setDisplayedConfidenceLevelProceedWarning)
+    saveDisplayedConfidenceLevelProceedWarning(
+      true,
+      setDisplayedConfidenceLevelProceedWarning,
+    );
     setDisplayConfidenceLevelProceedWarning(false);
   }
 

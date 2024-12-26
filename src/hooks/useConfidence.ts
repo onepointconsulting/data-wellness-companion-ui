@@ -1,12 +1,12 @@
-import {useCallback, useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {getSession} from "../lib/sessionFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
+import { useCallback, useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { getSession } from "../lib/sessionFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
 import i18next from "i18next";
-import {Confidence} from "../model/confidence.ts";
+import { Confidence } from "../model/confidence.ts";
 import CONFIDENCE from "../lib/confidenceConstants.ts";
-import {messagesOverLowerLimit} from "../lib/confidenceAdapter.ts";
-import {sendExtendSession} from "../lib/websocketFunctions.ts";
+import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
+import { sendExtendSession } from "../lib/websocketFunctions.ts";
 
 const LOW_BOUNDARY = [CONFIDENCE.LOW, CONFIDENCE.MEDIOCRE, CONFIDENCE.MEDIUM];
 const HIGH_CONFIDENCE = [CONFIDENCE.HIGH, CONFIDENCE.OUTSTANDING];
@@ -18,7 +18,7 @@ export default function useConfidence() {
   const {
     setMessages,
     messages,
-      confidence,
+    confidence,
     setConfidence,
     updatingConfidence,
     setUpdatingConfidence,
@@ -90,11 +90,16 @@ export default function useConfidence() {
   }, [messages, currentMessage]);
 
   useEffect(() => {
-    if(confidence && HIGH_CONFIDENCE.includes(confidence?.rating)) {
-      if(currentMessage + 1 >= messageLowerLimit && messages && messages.length && !messages[messages.length - 1]?.final_report) {
+    if (confidence && HIGH_CONFIDENCE.includes(confidence?.rating)) {
+      if (
+        currentMessage + 1 >= messageLowerLimit &&
+        messages &&
+        messages.length &&
+        !messages[messages.length - 1]?.final_report
+      ) {
         // Shorten the session.
-        debugger
-        sendExtendSession(socket.current, currentMessage + 2)
+        debugger;
+        sendExtendSession(socket.current, currentMessage + 2);
       }
     }
   }, [confidence, currentMessage, messageLowerLimit, messages]);

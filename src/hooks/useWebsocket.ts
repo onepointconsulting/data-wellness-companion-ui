@@ -15,7 +15,7 @@ import {
   ServerMessage,
   SingleMessage,
 } from "../model/serverMessage.ts";
-import {readDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
+import { readDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -108,7 +108,9 @@ export function useWebsocket() {
       setMessages(messages);
       setCurrentMessageHistory(serverMessages.server_messages.length - 1);
       extractInterviewSteps(serverMessages, setExpectedNodes);
-      setDisplayedConfidenceLevelProceedWarning(readDisplayedConfidenceLevelProceedWarning());
+      setDisplayedConfidenceLevelProceedWarning(
+        readDisplayedConfidenceLevelProceedWarning(),
+      );
       const globalProperties = adaptGlobalProperties(serverMessages);
       for (const prop of globalProperties) {
         const value = prop.config_value;
