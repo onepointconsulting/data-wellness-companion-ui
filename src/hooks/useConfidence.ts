@@ -98,7 +98,6 @@ export default function useConfidence() {
         !messages[messages.length - 1]?.final_report
       ) {
         // Shorten the session.
-        debugger;
         sendExtendSession(socket.current, currentMessage + 2);
       }
     }
