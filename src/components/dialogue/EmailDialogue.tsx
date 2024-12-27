@@ -125,27 +125,25 @@ export default function EmailDialogue() {
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <label htmlFor="name">{t("Your name:")} </label>
           <Input
-              id="name"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+            id="name"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
           />
           <label htmlFor="email">{t("Email")}: </label>
           <Input
-              id="email"
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+            id="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </div>
-        <div className="font-bold px-1 pt-5">
-          {t("consent-email")}
-        </div>
+        <div className="font-bold px-1 pt-5">{t("consent-email")}</div>
       </div>
-      {sending && <Spinner/>}
+      {sending && <Spinner />}
       {feedbackMessage && (
-          <Alert
-              feedback={feedbackMessage}
+        <Alert
+          feedback={feedbackMessage}
           onClose={() => setFeedbackMessage("")}
         />
       )}
