@@ -8,6 +8,8 @@ import {
 } from "../lib/websocketFunctions.ts";
 import { confidenceAdapter } from "../lib/confidenceAdapter.ts";
 import { saveDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function DecisionButtons({
   label,
@@ -33,13 +35,15 @@ export default function ConfidenceLevelWarning() {
     messages,
     sending,
     setSending,
-    setGeneratingReport,
     confidence,
+    setUpdatingExpectedNodes,
+  } = useContext(AppContext);
+  const {
+    setGeneratingReport,
+    messageUpperLimit,
     setDisplayConfidenceLevelProceedWarning,
     setDisplayedConfidenceLevelProceedWarning,
-    setUpdatingExpectedNodes,
-    messageUpperLimit,
-  } = useContext(AppContext);
+  } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket } = useContext(ChatContext);
   if (sending) {
     return <></>;

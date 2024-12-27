@@ -1,10 +1,9 @@
 import { Message } from "../model/message.ts";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
 import { Confidence } from "../model/confidence.ts";
 import { Ontology } from "../model/ontology.ts";
-import { getSeenIntro, hasSeenIntro } from "../lib/sessionFunctions.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -47,28 +46,8 @@ interface AppState {
   ) => void;
   ontology: Ontology;
   setOntology: (ontology: Ontology) => void;
-  ontologyOpen: boolean;
-  setOntologyOpen: (ontologyOpen: boolean) => void;
-  generatingReport: boolean;
-  setGeneratingReport: (generatingReport: boolean) => void;
-  seenIntro: boolean;
-  setSeenIntro: (seenIntro: boolean) => void;
-  messageLowerLimit: number;
-  setMessageLowerLimit: (messageLowerLimit: number) => void;
-  messageUpperLimit: number;
-  setMessageUpperLimit: (messageUpperLimit: number) => void;
-  displayConfidenceLevelProceedWarning: boolean;
-  setDisplayConfidenceLevelProceedWarning: (
-    displayConfidenceLevelProceedWarning: boolean,
-  ) => void;
-  displayedConfidenceLevelProceedWarning: boolean;
-  setDisplayedConfidenceLevelProceedWarning: (
-    displayedConfidenceLevelProceedWarning: boolean,
-  ) => void;
 }
 
-const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
-const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
 export const DEFAULT_EXPECTED_NODES = 6;
 
 function createAppState(): AppState {
@@ -113,20 +92,6 @@ function createAppState(): AppState {
     setSelectedHistoricalSession: (_) => {},
     ontology: {} as Ontology,
     setOntology: (_) => {},
-    ontologyOpen: false,
-    setOntologyOpen: (_) => {},
-    generatingReport: false,
-    setGeneratingReport: (_) => {},
-    seenIntro: false,
-    setSeenIntro: (_) => {},
-    messageLowerLimit: DEFAULT_MESSAGE_LOWER_LIMIT,
-    setMessageLowerLimit: (_) => {},
-    messageUpperLimit: DEFAULT_MESSAGE_UPPER_LIMIT,
-    setMessageUpperLimit: (_) => {},
-    displayConfidenceLevelProceedWarning: false,
-    setDisplayConfidenceLevelProceedWarning: (_) => {},
-    displayedConfidenceLevelProceedWarning: false,
-    setDisplayedConfidenceLevelProceedWarning: (_) => {},
   };
 }
 
@@ -153,28 +118,11 @@ export const AppContextProvider = ({ children }: Props) => {
   const [selectedHistoricalSession, setSelectedHistoricalSession] = useState<
     string | null
   >(null);
-  const [generatingReport, setGeneratingReport] = useState(false);
   const [ontology, setOntology] = useState<Ontology>({
     relationships: [],
     betweenness_centrality: {},
     connected_component_importance_dict: {},
   });
-  const [ontologyOpen, setOntologyOpen] = useState<boolean>(false);
-  const [seenIntro, setSeenIntro] = useState(getSeenIntro());
-  const [messageLowerLimit, setMessageLowerLimit] = useState<number>(
-    DEFAULT_MESSAGE_LOWER_LIMIT,
-  );
-  const [messageUpperLimit, setMessageUpperLimit] = useState<number>(
-    DEFAULT_MESSAGE_UPPER_LIMIT,
-  );
-  const [
-    displayConfidenceLevelProceedWarning,
-    setDisplayConfidenceLevelProceedWarning,
-  ] = useState<boolean>(false);
-  const [
-    displayedConfidenceLevelProceedWarning,
-    setDisplayedConfidenceLevelProceedWarning,
-  ] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -190,12 +138,6 @@ export const AppContextProvider = ({ children }: Props) => {
   }
 
   const isSuggestionDeactivated = isReport || sending || !isLast;
-
-  useEffect(() => {
-    if (seenIntro) {
-      hasSeenIntro();
-    }
-  }, [seenIntro]);
 
   return (
     <AppContext.Provider
@@ -239,20 +181,6 @@ export const AppContextProvider = ({ children }: Props) => {
         setSelectedHistoricalSession,
         ontology,
         setOntology,
-        ontologyOpen,
-        setOntologyOpen,
-        generatingReport,
-        setGeneratingReport,
-        seenIntro,
-        setSeenIntro,
-        messageUpperLimit,
-        setMessageUpperLimit,
-        messageLowerLimit,
-        setMessageLowerLimit,
-        displayConfidenceLevelProceedWarning,
-        setDisplayConfidenceLevelProceedWarning,
-        displayedConfidenceLevelProceedWarning,
-        setDisplayedConfidenceLevelProceedWarning,
       }}
     >
       {" "}

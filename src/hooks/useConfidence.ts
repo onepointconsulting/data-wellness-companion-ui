@@ -7,6 +7,8 @@ import { Confidence } from "../model/confidence.ts";
 import CONFIDENCE from "../lib/confidenceConstants.ts";
 import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
 import { sendExtendSession } from "../lib/websocketFunctions.ts";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 const LOW_BOUNDARY = [CONFIDENCE.LOW, CONFIDENCE.MEDIOCRE, CONFIDENCE.MEDIUM];
 const HIGH_CONFIDENCE = [CONFIDENCE.HIGH, CONFIDENCE.OUTSTANDING];
@@ -25,11 +27,13 @@ export default function useConfidence() {
     expectedNodes,
     currentMessage,
     setUpdatingExpectedNodes,
+  } = useContext(AppContext);
+  const {
     messageLowerLimit,
     messageUpperLimit,
-    setDisplayConfidenceLevelProceedWarning,
     displayedConfidenceLevelProceedWarning,
-  } = useContext(AppContext);
+    setDisplayConfidenceLevelProceedWarning,
+  } = useAppStore(useShallow((state) => ({ ...state })));
   const { reportUrl, socket } = useContext(ChatContext);
 
   const updateNodes = useCallback(

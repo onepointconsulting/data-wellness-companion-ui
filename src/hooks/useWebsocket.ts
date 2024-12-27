@@ -16,6 +16,8 @@ import {
   SingleMessage,
 } from "../model/serverMessage.ts";
 import { readDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -64,14 +66,14 @@ function extractInterviewSteps(
 
 export function useWebsocket() {
   const [t] = useTranslation();
+  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } =
+    useContext(AppContext);
   const {
-    setDisplayRegistrationMessage,
-    setUpdatingExpectedNodes,
     setGeneratingReport,
-    setMessageUpperLimit,
     setMessageLowerLimit,
+    setMessageUpperLimit,
     setDisplayedConfidenceLevelProceedWarning,
-  } = useContext(AppContext);
+  } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
   const {
     setConnected,

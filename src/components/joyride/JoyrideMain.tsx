@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import Joyride, { CallBackProps, STATUS } from "react-joyride";
 import { JoyrideContext } from "../../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../../context/JoyrideStore.tsx";
+import { useJoyrideStore } from "../../context/JoyrideStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useTranslation } from "react-i18next";
 import SendImage from "../buttons/SendImage.tsx";
@@ -22,6 +22,10 @@ const baseSlide = {
 };
 
 const KEY_FINISHED = "tourFinished_20241214";
+
+function isFinished() {
+  return window.localStorage.getItem(KEY_FINISHED) === "true";
+}
 
 export default function JoyrideMain() {
   const showIntroDialogue = useShowIntroDialogue();
@@ -57,7 +61,7 @@ export default function JoyrideMain() {
 
   useEffect(() => {
     if (
-      window.localStorage.getItem(KEY_FINISHED) !== "true" &&
+      !isFinished() &&
       initChatInputRef &&
       initQuestionRef &&
       navbarRef &&
@@ -200,6 +204,10 @@ export default function JoyrideMain() {
       });
     }
   }, [initChatInputRef, initQuestionRef, navbarRef, initSendButtonRef]);
+
+  if (isFinished()) {
+    return null;
+  }
 
   return (
     <Joyride

@@ -10,17 +10,14 @@ import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 export default function MainPanel() {
-  const {
-    currentMessage,
-    messages,
-    sending,
-    expectedNodes,
-    isLast,
-    generatingReport,
-    displayConfidenceLevelProceedWarning,
-  } = useContext(AppContext);
+  const { currentMessage, messages, sending, expectedNodes, isLast } =
+    useContext(AppContext);
+  const { generatingReport, displayConfidenceLevelProceedWarning } =
+    useAppStore(useShallow((state) => ({ ...state })));
   const message = messages[currentMessage];
   if (!message)
     return (

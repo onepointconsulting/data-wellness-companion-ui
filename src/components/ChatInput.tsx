@@ -5,7 +5,7 @@ import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.tsx";
+import { useJoyrideStore } from "../context/JoyrideStore.ts";
 import { useShallow } from "zustand/react/shallow";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {

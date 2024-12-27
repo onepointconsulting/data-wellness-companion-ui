@@ -2,7 +2,7 @@ import { Message } from "../model/message.ts";
 import { useContext, useEffect, useState } from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.tsx";
+import { useJoyrideStore } from "../context/JoyrideStore.ts";
 
 const STEP_MILLI_SECONDS = 25;
 

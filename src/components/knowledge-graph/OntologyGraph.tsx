@@ -10,6 +10,8 @@ import { DarkModeContext } from "../../context/DarkModeContext.tsx";
 import { Edge, Node, Ontology, Relationship } from "../../model/ontology.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import ImportantTopics from "./ImportantTopics.tsx";
+import { useAppStore } from "../../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function softmax(arr: { [key: string]: number }): { [key: string]: number } {
   if (!arr || Object.keys(arr).length === 0) return {};
@@ -110,7 +112,8 @@ const DEFAULT_IMPORTANCE_LEVEL = 2;
 
 export default function OntologyGraph() {
   const { dark } = useContext(DarkModeContext);
-  const { ontology, ontologyOpen } = useContext(AppContext);
+  const { ontology } = useContext(AppContext);
+  const { ontologyOpen } = useAppStore(useShallow((state) => ({ ...state })));
   const { t } = useTranslation();
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");

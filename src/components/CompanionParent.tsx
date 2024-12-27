@@ -13,10 +13,25 @@ import getIntroSlides from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
 import JoyrideContextProvider from "../context/JoyrideContext.tsx";
+import { useAppStore } from "../context/AppStore.ts";
+import { hasSeenIntro } from "../lib/sessionFunctions.ts";
+import { useShallow } from "zustand/react/shallow";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
-  const { setStartSession, seenIntro, setSeenIntro } = useContext(AppContext);
+  const { setStartSession } = useContext(AppContext);
+  const { seenIntro, setSeenIntro } = useAppStore(
+    useShallow((state) => ({
+      seenIntro: state.seenIntro,
+      setSeenIntro: state.setSeenIntro,
+    })),
+  );
+
+  useEffect(() => {
+    if (seenIntro) {
+      hasSeenIntro();
+    }
+  }, [seenIntro]);
 
   useChatHistory();
 

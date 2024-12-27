@@ -17,6 +17,8 @@ import Transcript from "./Transcript.tsx";
 import { Confidence } from "../../model/confidence.ts";
 import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
 import MarkdownAccordion from "./MarkdownAccordion.tsx";
+import { useAppStore } from "../../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -77,7 +79,10 @@ function extractReasoning(reportData: any): Confidence {
  */
 export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
-  const { setOntology, ontologyOpen, setOntologyOpen } = useContext(AppContext);
+  const { setOntology } = useContext(AppContext);
+  const { ontologyOpen, setOntologyOpen } = useAppStore(
+    useShallow((state) => ({ ...state })),
+  );
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
   const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
@@ -102,6 +107,8 @@ export default function FinalReport({ message }: { message: Message }) {
         });
     }
   }, [sessionId, setOntology, ontologyOpen]);
+
+  const recommendationsTitle = "Suggested courses of action";
 
   return (
     <div className="final-report">
@@ -132,9 +139,12 @@ export default function FinalReport({ message }: { message: Message }) {
         </div>
       )}
       <MarkdownAccordion
-        title="Suggested courses of action"
+        title={recommendationsTitle}
         items={advices}
-        defaultOpen={true}
+        defaultOpen={
+          window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
+          null
+        }
       />
       <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
       <MarkdownAccordion

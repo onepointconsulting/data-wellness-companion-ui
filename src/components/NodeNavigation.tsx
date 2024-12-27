@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.tsx";
+import { useJoyrideStore } from "../context/JoyrideStore.ts";
 
 function selectLastNodeCss(
   covered: boolean,

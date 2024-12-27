@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { ChatContext } from "../../context/ChatContext.tsx";
 import { getSessionId, switchSession } from "../../lib/websocketFunctions.ts";
 import { decodeTime } from "ulid";
+import { useAppStore } from "../../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 const finishedFilter = (session: Session) => session.finished;
 
@@ -48,11 +50,11 @@ function adaptSessionHistory(sessionHistory: Session[]): Session[] {
  */
 export default function SessionSwitch() {
   const { socket } = useContext(ChatContext);
-  const {
-    selectedHistoricalSession,
-    setSelectedHistoricalSession,
-    setOntologyOpen,
-  } = useContext(AppContext);
+  const { selectedHistoricalSession, setSelectedHistoricalSession } =
+    useContext(AppContext);
+  const { setOntologyOpen } = useAppStore(
+    useShallow((state) => ({ setOntologyOpen: state.setOntologyOpen })),
+  );
   const { t } = useTranslation();
   const sessionHistory = getSessionHistory();
 
