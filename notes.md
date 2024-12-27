@@ -18,3 +18,12 @@
 
 - Inconsistent confidence levels
   Remove the dot on email was sent.
+
+2024-12-27
+
+- Install KB server for Dev
+- remove Usage instructions
+- Good instead of High (Done)
+- Privacy policy and Terms and Conditions in About dialogue
+- Add consent statement to Email report popup (Done)
+- Hyperlink the logo on welcome screen

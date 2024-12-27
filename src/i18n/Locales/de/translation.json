@@ -17,6 +17,7 @@
   "confidence_outstanding": "Hervorragend",
   "Confidence level": "Vertrauensniveau",
   "confidence-level-warning": "Es tut mir leid, dass das Konfidenzniveau immer noch {{confidence}} beträgt. Ich bin mir bewusst, dass wir bereits mit {{steps}} Fragen fertig sind. Möchten Sie weitere Fragen hinzufügen? Alternativ können Sie den Bericht auch jetzt erstellen.",
+  "consent-email": "Mit dem Absenden dieses Formulars erkläre ich mich damit einverstanden, dass Onepoint Consulting Ltd meine personenbezogenen Daten zu Berichtszwecken verarbeitet.",
   "Contact us": "Kontaktieren Sie uns",
   "Copied!": "Kopiert!",
   "Copy links to clipboard": "Links in die Zwischenablage kopieren",

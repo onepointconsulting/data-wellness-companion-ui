@@ -36,7 +36,7 @@ export const ChatContext = createContext<ConfigState>({
   websocketUrl: "ws://localhost:8080",
   reportUrl: "http://localhost:8080",
   socket: { current: null },
-  chatType: ChatType.DIVERGING,
+  chatType: ChatType.TO_THE_POINT,
   setChatType: (_) => {},
 });
 
