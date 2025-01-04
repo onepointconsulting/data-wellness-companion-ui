@@ -17,3 +17,9 @@ export type Message = {
   clarification: string | undefined;
   confidence?: Confidence;
 };
+
+export type RegenerateMessage = {
+  session_id: string;
+  new_question: string,
+  suggestions: string[]
+}

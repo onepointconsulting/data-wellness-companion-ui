@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.ts";
+import Regenerate from "./buttons/Regenerate.tsx";
 
 const STEP_MILLI_SECONDS = 25;
 
@@ -48,7 +49,7 @@ export default function Question({
     <>
       <div className="question container" ref={questionRef}>
         <div className="dark:text-gray-100">
-          {messageText} <LightBulb />
+          {messageText} <LightBulb /> <Regenerate />
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext.tsx";
-import { ChatContext } from "../../context/ChatContext.tsx";
-import { Message } from "../../model/message.ts";
-import { sendClarifyQuestion } from "../../lib/websocketFunctions.ts";
-import { FaHourglassHalf } from "react-icons/fa";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+import {useContext, useEffect} from "react";
+import {AppContext} from "../../context/AppContext.tsx";
+import {ChatContext} from "../../context/ChatContext.tsx";
+import {Message} from "../../model/message.ts";
+import {sendClarifyQuestion} from "../../lib/websocketFunctions.ts";
+import {FaHourglassHalf} from "react-icons/fa";
+import {IoIosInformationCircleOutline} from "react-icons/io";
 
 /**
  * The light bulb icon that can be used to get a clarification.
@@ -26,10 +26,9 @@ export default function LightBulb() {
 
   useEffect(() => {
     setClarificationClicked(false);
-  }, [currentMessage]);
+  }, [currentMessage, messages]);
 
-  function onClarify(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
+  function onClarify() {
     const question = message.question;
     setClarificationClicked(true);
     sendClarifyQuestion(socket.current, question);
@@ -46,9 +45,9 @@ export default function LightBulb() {
         !clarificationClicked &&
         !isRecommendation && (
           <div className="question-mark-icon">
-            <a href="#" onClick={onClarify}>
+            <button onClick={onClarify}>
               <IoIosInformationCircleOutline className="question-mark-icon-svg" />
-            </a>
+            </button>
           </div>
         )}
       {missesClarification && clarificationClicked && isLast && (
