@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import SendImage from "../buttons/SendImage.tsx";
 import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
 import ConfidenceLevels from "./ConfidenceLevels.tsx";
-import {AppContext} from "../../context/AppContext.tsx";
+import { AppContext } from "../../context/AppContext.tsx";
 import { ErrorBoundary } from "react-error-boundary";
 
 const baseSlide = {
@@ -49,7 +49,7 @@ export default function JoyrideMain() {
   );
   const { questionRef, chatInputRef, hamburgerMenu, navbarRef, sendButtonRef } =
     useContext(JoyrideContext);
-  const { currentMessage } = useContext(AppContext)
+  const { currentMessage } = useContext(AppContext);
   const { run, steps } = joyrideState;
 
   const handleJoyrideCallback = (data: CallBackProps) => {
@@ -213,27 +213,27 @@ export default function JoyrideMain() {
   }
 
   return (
-      <ErrorBoundary fallback={<></>}>
-        <Joyride
-          callback={handleJoyrideCallback}
-          continuous={true}
-          locale={{
-            back: t("Instruction: Back"),
-            nextLabelWithProgress: t("Instruction: Next ({step} of {steps})"),
-            skip: t("Instruction: Skip"),
-          }}
-          run={run}
-          scrollToFirstStep
-          showProgress
-          showSkipButton
-          steps={steps}
-          styles={{
-            options: {
-              zIndex: 10000,
-              primaryColor: "#3698DC",
-            },
-          }}
-        />
-      </ErrorBoundary>
+    <ErrorBoundary fallback={<></>}>
+      <Joyride
+        callback={handleJoyrideCallback}
+        continuous={true}
+        locale={{
+          back: t("Instruction: Back"),
+          nextLabelWithProgress: t("Instruction: Next ({step} of {steps})"),
+          skip: t("Instruction: Skip"),
+        }}
+        run={run}
+        scrollToFirstStep
+        showProgress
+        showSkipButton
+        steps={steps}
+        styles={{
+          options: {
+            zIndex: 10000,
+            primaryColor: "#3698DC",
+          },
+        }}
+      />
+    </ErrorBoundary>
   );
 }
