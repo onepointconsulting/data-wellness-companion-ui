@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 
 export default function Regenerate() {
     const [t] = useTranslation();
-    const {sending, setSending, messages, isLast} = useContext(AppContext)
+    const {sending, setSending, currentMessage, isLast} = useContext(AppContext)
     const {socket} = useContext(ChatContext);
 
     function onRegenerate() {
@@ -15,7 +15,7 @@ export default function Regenerate() {
         sendRegenerateMessage(socket.current)
     }
 
-    if (!isLast && messages.length === 1) {
+    if (!isLast || currentMessage === 0) {
         return null
     }
 
