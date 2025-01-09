@@ -14,7 +14,7 @@ export default function useSessionRestart({
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
   const { socket, reportUrl } = useContext(ChatContext);
-  const { messages, setDisplayRegistrationMessage } = useContext(AppContext);
+  const { setDisplayRegistrationMessage } = useContext(AppContext);
 
   const restartFunction = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -30,7 +30,6 @@ export default function useSessionRestart({
         func(e);
         setSelectedHistoricalSession(null);
         restartCompanion(
-          messages,
           socket,
           setDisplayRegistrationMessage,
           setChatText,

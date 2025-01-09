@@ -17,7 +17,6 @@ export default function RestartDialogue() {
   const { socket, reportUrl } = useContext(ChatContext);
   const { t } = useTranslation();
   const {
-    messages,
     setDisplayRegistrationMessage,
     setChatText,
     setSelectedHistoricalSession,
@@ -26,7 +25,6 @@ export default function RestartDialogue() {
   function onOk() {
     setSelectedHistoricalSession(null);
     restartCompanion(
-      messages,
       socket,
       setDisplayRegistrationMessage,
       setChatText,

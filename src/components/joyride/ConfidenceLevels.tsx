@@ -17,7 +17,7 @@ const CONFIDENCE_LEVELS = [
     label: "Instruction: Medium confidence",
   },
   {
-    image: "high-confidence.svg",
+    image: "good-confidence.svg",
     alt: "Instruction: High confidence",
     label: "Instruction: High confidence – right time to make recommendations",
   },

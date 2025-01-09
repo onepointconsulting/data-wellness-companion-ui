@@ -27,3 +27,14 @@
 - Privacy policy and Terms and Conditions in About dialogue
 - Add consent statement to Email report popup (Done)
 - Hyperlink the logo on welcome screen
+
+
+2024-01-09
+
+- Remove progress bar before report generation
+- Remove last progress bar item linked to report
+- Clear report accordion state after session restart
+- Remove hint that is displayed whilst loading
+- Remove pointer and hover from previous questions at the corner
+- Message that step is not editable should not be duplicated
+- Create degree of confidence component

@@ -4,6 +4,7 @@ import { Props } from "./commonModel.ts";
 import { useNavigate } from "react-router-dom";
 import { Confidence } from "../model/confidence.ts";
 import { Ontology } from "../model/ontology.ts";
+import useSessionHistory from "../hooks/useSessionHistory.ts";
 
 interface AppState {
   expectedNodes: number;
@@ -125,6 +126,8 @@ export const AppContextProvider = ({ children }: Props) => {
   });
 
   const navigate = useNavigate();
+
+  useSessionHistory(messages);
 
   const isLast = currentMessage === messages.length - 1;
   const isFinalMessage = currentMessage === expectedNodes - 1;

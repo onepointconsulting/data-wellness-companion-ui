@@ -1,5 +1,4 @@
 import { Session } from "../model/session.ts";
-import { Message } from "../model/message.ts";
 
 export const SESSION_KEY = "session";
 
@@ -13,12 +12,7 @@ export function saveSession(session: Session) {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
 }
 
-export function clearSession(messages: Message[]) {
-  const currentSession = getSession();
-  if (currentSession) {
-    const hasFinalReport = messages.some((message) => message.final_report);
-    appendToSessionHistory(currentSession, hasFinalReport);
-  }
+export function clearSession() {
   localStorage.removeItem(SESSION_KEY);
 }
 
@@ -65,7 +59,7 @@ function saveSessionHistory(sessionHistory: Session[]) {
   localStorage.setItem(SESSION_HISTORY_KEY, JSON.stringify(sessionHistory));
 }
 
-function appendToSessionHistory(
+export function appendToSessionHistory(
   currentSession: Session,
   hasFinalReport: boolean,
 ) {
@@ -75,11 +69,7 @@ function appendToSessionHistory(
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        if (
-          !sessionHistoryObj.find(
-            (session: any) => session.id === currentSession.id,
-          )
-        ) {
+        if (!sessionHistoryObj.map((session) => session.id).find(id => id === currentSession.id)) {
           // Only insert if it's not already in the history
           sessionHistoryObj.push(currentSession);
           saveSessionHistory(sessionHistoryObj);

@@ -16,7 +16,7 @@ function LanguageDropDown({
   const { connected, setChatText, setSelectedHistoricalSession } =
     useContext(AppContext);
   const { socket, reportUrl } = useContext(ChatContext);
-  const { messages, setDisplayRegistrationMessage } = useContext(AppContext);
+  const { setDisplayRegistrationMessage } = useContext(AppContext);
 
   const onClickLanguageChange = (e: any) => {
     if (!connected) {
@@ -32,7 +32,6 @@ function LanguageDropDown({
       setToggleLanguage(false);
       setSelectedHistoricalSession(null);
       restartCompanion(
-        messages,
         socket,
         setDisplayRegistrationMessage,
         setChatText,
