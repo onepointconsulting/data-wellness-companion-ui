@@ -1,10 +1,10 @@
-import {IntroContext, IntroSlide} from "./IntroContext.tsx";
-import {useContext} from "react";
+import { IntroContext, IntroSlide } from "./IntroContext.tsx";
+import { useContext } from "react";
 import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
 import Progress from "./Progress.tsx";
-import {useTranslation} from "react-i18next";
-import {setAutoStart, setTourFinished} from "../../lib/joyrideFunctions.ts";
+import { useTranslation } from "react-i18next";
+import { setAutoStart, setTourFinished } from "../../lib/joyrideFunctions.ts";
 
 export function IntroSlides({
   showIntro,
@@ -56,18 +56,28 @@ export function IntroSlides({
                   <p dangerouslySetInnerHTML={{ __html: slide.explanation }} />
                 </div>
                 {/* Conditional buttons */}
-                {currentSlide === slides.length - 2 &&
-                    <button className="border-button intro-button"
-                            onClick={() => {
-                              setAutoStart(true)
-                              setSeenIntro(true)
-                            }}>{t("Take the tour")}</button>}
-                {currentSlide === slides.length - 1 &&
-                    <button className="border-button intro-button"
-                      onClick={() => {
-                        setSeenIntro(true)
-                        setTourFinished()
-                      }}>{t("Generate report")}</button>}
+                {currentSlide === slides.length - 2 && (
+                  <button
+                    className="border-button intro-button"
+                    onClick={() => {
+                      setAutoStart(true);
+                      setSeenIntro(true);
+                    }}
+                  >
+                    {t("Take the tour")}
+                  </button>
+                )}
+                {currentSlide === slides.length - 1 && (
+                  <button
+                    className="border-button intro-button"
+                    onClick={() => {
+                      setSeenIntro(true);
+                      setTourFinished();
+                    }}
+                  >
+                    {t("Generate report")}
+                  </button>
+                )}
               </div>
             </div>
 
