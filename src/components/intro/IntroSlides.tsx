@@ -1,31 +1,39 @@
 import { IntroContext, IntroSlide } from "./IntroContext.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
 import Progress from "./Progress.tsx";
 import { useTranslation } from "react-i18next";
-import { setAutoStart, setTourFinished } from "../../lib/joyrideFunctions.ts";
+import { setAutoStart } from "../../lib/joyrideFunctions.ts";
+import { IoMdClose } from "react-icons/io";
 
 export function IntroSlides({
   showIntro,
-  setSeenIntro,
   imageNode,
-  closeIcon,
   slides,
+  lastButtonText,
+  closeFunction,
 }: {
   showIntro: boolean;
-  setSeenIntro: (b: boolean) => void;
   imageNode: React.ReactNode;
-  closeIcon: React.ReactNode;
   slides: IntroSlide[] | null;
+  lastButtonText: string;
+  closeFunction: () => void;
 }) {
   const [t] = useTranslation();
-  const { currentSlide, setCurrentSlide } = useContext(IntroContext);
-  if (slides == null || slides.length < 1) {
+  const { currentSlide, setCurrentSlide, introSlides, setIntroSlides } =
+    useContext(IntroContext);
+  useEffect(() => {
+    if (slides) {
+      setCurrentSlide(0);
+      setIntroSlides(slides);
+    }
+  }, [slides, setIntroSlides]);
+  if (introSlides == null || introSlides.length < 1) {
     return null;
   }
 
-  const slide = slides[currentSlide];
+  const slide = introSlides[currentSlide];
   const subTitle = slide.subtitle;
 
   return (
@@ -34,12 +42,9 @@ export function IntroSlides({
         {/* Header */}
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
-          {currentSlide === slides.length - 1 && (
-            <div
-              className="intro-header-close"
-              onClick={() => setSeenIntro(true)}
-            >
-              {closeIcon}
+          {currentSlide === introSlides.length - 1 && (
+            <div className="intro-header-close" onClick={() => closeFunction()}>
+              <IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />
             </div>
           )}
         </section>
@@ -56,26 +61,23 @@ export function IntroSlides({
                   <p dangerouslySetInnerHTML={{ __html: slide.explanation }} />
                 </div>
                 {/* Conditional buttons */}
-                {currentSlide === slides.length - 2 && (
+                {currentSlide === introSlides.length - 2 && (
                   <button
                     className="border-button intro-button"
                     onClick={() => {
                       setAutoStart(true);
-                      setSeenIntro(true);
+                      closeFunction();
                     }}
                   >
                     {t("Take the tour")}
                   </button>
                 )}
-                {currentSlide === slides.length - 1 && (
+                {currentSlide === introSlides.length - 1 && (
                   <button
                     className="border-button intro-button"
-                    onClick={() => {
-                      setSeenIntro(true);
-                      setTourFinished();
-                    }}
+                    onClick={() => closeFunction()}
                   >
-                    {t("Generate report")}
+                    {t(lastButtonText)}
                   </button>
                 )}
               </div>
@@ -91,11 +93,13 @@ export function IntroSlides({
           </section>
 
           {/* Progress */}
-          <Progress
-            slides={slides}
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-          />
+          {introSlides.length > 1 && (
+            <Progress
+              slides={introSlides}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+            />
+          )}
         </div>
       </section>
     </section>

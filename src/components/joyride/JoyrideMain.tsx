@@ -203,6 +203,7 @@ export default function JoyrideMain() {
             placement: "center",
             target: "body",
             title: t("Instruction: More on D-Well"),
+            locale: { last: t("Finish") },
           },
         ],
       });

@@ -1,4 +1,5 @@
 import { Session } from "../model/session.ts";
+import {getSessionId} from "./websocketFunctions.ts";
 
 export const SESSION_KEY = "session";
 
@@ -7,6 +8,8 @@ export const SESSION_HISTORY_KEY = "history";
 export const SEEN_INTRO_KEY = "seenIntro";
 
 const SEEN_INTRO_VALUE = "true";
+
+export const COMPLETION_POPUP_KEY_PREFIX = "completionPopup_";
 
 export function saveSession(session: Session) {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
@@ -98,4 +101,19 @@ export function hasSeenIntro() {
 
 export function forgetSeenIntro() {
   localStorage.removeItem(SEEN_INTRO_KEY);
+}
+
+export function setCompletionPopupDisplayed(displayed: boolean) {
+  const sessionId = getSessionId()
+  if(sessionId) {
+    localStorage.setItem(COMPLETION_POPUP_KEY_PREFIX + sessionId, `${displayed}`);
+  }
+}
+
+export function isCompletionPopupDisplayed(): boolean {
+  const sessionId = getSessionId()
+  if(!sessionId) {
+    return false
+  }
+  return localStorage.getItem(COMPLETION_POPUP_KEY_PREFIX + sessionId) === "true"
 }

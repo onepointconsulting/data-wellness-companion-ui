@@ -156,7 +156,7 @@
 }
 
 .intro-button {
-  @apply text-base lg:text-xl;
+  @apply text-base lg:text-xl min-w-[170px];
 }
 
 #root .final-report-pdf a,

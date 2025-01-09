@@ -1,8 +1,9 @@
 import i18next from "../i18n/i18n.tsx";
+import { IntroSlide } from "../components/intro/IntroContext.tsx";
 
 const { t } = i18next;
 
-export function getClustreSlides() {
+export function getClustreSlides(): IntroSlide[] {
   return [
     {
       title: t("Welcome"),
@@ -19,6 +20,18 @@ export function getClustreSlides() {
       video: null,
     },
     {
+      title: t("Clustre: optional-goodies"),
+      subtitle: t("empty"),
+      explanation: t("Clustre: intro-optional-goodies"),
+      image: "./tour/slide3.png",
+      video: null,
+    },
+  ];
+}
+
+export function getClustreCompletionSlides(): IntroSlide[] {
+  return [
+    {
       title: t("Clustre: thank you"),
       subtitle: t("empty"),
       explanation: t("Clustre: intro-thank-you"),
@@ -28,7 +41,7 @@ export function getClustreSlides() {
   ];
 }
 
-export default function getIntroSlides() {
+export default function getIntroSlides(): IntroSlide[] {
   return [
     {
       title: t("Welcome"),

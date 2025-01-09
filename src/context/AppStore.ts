@@ -22,6 +22,8 @@ interface AppStoreState {
   setDisplayedConfidenceLevelProceedWarning: (
     displayedConfidenceLevelProceedWarning: boolean,
   ) => void;
+  showCompletionPopup: boolean;
+  setShowCompletionPopup: (seenCompletionPopup: boolean) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -61,5 +63,11 @@ export const useAppStore = create<AppStoreState>((set) => ({
     set((state) => ({
       ...state,
       displayedConfidenceLevelProceedWarning,
+    })),
+  showCompletionPopup: false,
+  setShowCompletionPopup: (showCompletionPopup) =>
+    set((state) => ({
+      ...state,
+      showCompletionPopup,
     })),
 }));
