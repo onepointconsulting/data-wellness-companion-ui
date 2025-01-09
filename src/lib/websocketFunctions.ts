@@ -77,9 +77,7 @@ export function sendClientMessage(
   safeEmit(socket, WEBSOCKET_COMMAND.CLIENT_MESSAGE, getSessionId(), answer);
 }
 
-export function sendRegenerateMessage(
-    socket: Socket<any, any> | null
-) {
+export function sendRegenerateMessage(socket: Socket<any, any> | null) {
   safeEmit(socket, WEBSOCKET_COMMAND.REGENERATE_QUESTION, getSessionId());
 }
 

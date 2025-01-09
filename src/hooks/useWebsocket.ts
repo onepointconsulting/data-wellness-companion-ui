@@ -1,18 +1,23 @@
-import {useContext, useEffect} from "react";
-import {ChatContext, readChatTYpeFromLS} from "../context/ChatContext.tsx";
-import {io} from "socket.io-client";
-import {AppContext} from "../context/AppContext.tsx";
-import {sendStartSession} from "../lib/websocketFunctions.ts";
-import {saveSession} from "../lib/sessionFunctions.ts";
-import {WEBSOCKET_SERVER_COMMAND} from "../model/websocketCommands.ts";
-import {Message} from "../model/message.ts";
-import {toast} from "../../@/components/ui/use-toast.ts";
+import { useContext, useEffect } from "react";
+import { ChatContext, readChatTYpeFromLS } from "../context/ChatContext.tsx";
+import { io } from "socket.io-client";
+import { AppContext } from "../context/AppContext.tsx";
+import { sendStartSession } from "../lib/websocketFunctions.ts";
+import { saveSession } from "../lib/sessionFunctions.ts";
+import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
+import { Message } from "../model/message.ts";
+import { toast } from "../../@/components/ui/use-toast.ts";
 import i18next from "i18next";
-import {useTranslation} from "react-i18next";
-import {GlobalProperties, Property, ServerMessage, SingleMessage,} from "../model/serverMessage.ts";
-import {readDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
-import {useAppStore} from "../context/AppStore.ts";
-import {useShallow} from "zustand/react/shallow";
+import { useTranslation } from "react-i18next";
+import {
+  GlobalProperties,
+  Property,
+  ServerMessage,
+  SingleMessage,
+} from "../model/serverMessage.ts";
+import { readDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -142,12 +147,12 @@ export function useWebsocket() {
 
     function onRegenerateMessage(value: string) {
       const serverMessages = JSON.parse(value);
-      if(serverMessages["error"]) {
+      if (serverMessages["error"]) {
         console.error("Failed to regenerate question.");
-        const errorMessage = serverMessages["error"]
+        const errorMessage = serverMessages["error"];
         toast({
           title: t("Error"),
-          description: errorMessage
+          description: errorMessage,
         });
       } else {
         const messages = adaptServerMessages(serverMessages);
@@ -186,7 +191,10 @@ export function useWebsocket() {
     socket.current.on(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.SERVER_MESSAGE, onServerMessage);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION, onExtendSession);
-    socket.current.on(WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION, onRegenerateMessage);
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
+      onRegenerateMessage,
+    );
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
 
     return () => {
@@ -204,7 +212,10 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.EXTEND_SESSION,
         onExtendSession,
       );
-      socket.current?.off(WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION, onRegenerateMessage);
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
+        onRegenerateMessage,
+      );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
     };
   }, []);

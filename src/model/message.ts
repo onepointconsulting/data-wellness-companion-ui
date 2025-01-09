@@ -20,6 +20,6 @@ export type Message = {
 
 export type RegenerateMessage = {
   session_id: string;
-  new_question: string,
-  suggestions: string[]
-}
+  new_question: string;
+  suggestions: string[];
+};
