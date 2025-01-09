@@ -69,7 +69,11 @@ export function appendToSessionHistory(
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        if (!sessionHistoryObj.map((session) => session.id).find(id => id === currentSession.id)) {
+        if (
+          !sessionHistoryObj
+            .map((session) => session.id)
+            .find((id) => id === currentSession.id)
+        ) {
           // Only insert if it's not already in the history
           sessionHistoryObj.push(currentSession);
           saveSessionHistory(sessionHistoryObj);

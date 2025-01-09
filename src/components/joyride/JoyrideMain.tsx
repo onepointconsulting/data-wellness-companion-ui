@@ -1,33 +1,15 @@
-import { useContext, useEffect } from "react";
-import Joyride, { CallBackProps, STATUS } from "react-joyride";
-import { JoyrideContext } from "../../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../../context/JoyrideStore.ts";
-import { useShallow } from "zustand/react/shallow";
-import { useTranslation } from "react-i18next";
+import {useContext, useEffect} from "react";
+import Joyride, {CallBackProps, STATUS} from "react-joyride";
+import {JoyrideContext} from "../../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../../context/JoyrideStore.ts";
+import {useShallow} from "zustand/react/shallow";
+import {useTranslation} from "react-i18next";
 import SendImage from "../buttons/SendImage.tsx";
 import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
 import ConfidenceLevels from "./ConfidenceLevels.tsx";
-import { AppContext } from "../../context/AppContext.tsx";
-import { ErrorBoundary } from "react-error-boundary";
-
-const baseSlide = {
-  disableBeacon: false,
-  disableOverlayClose: false,
-  hideCloseButton: false,
-  hideFooter: false,
-  spotlightClicks: true,
-  styles: {
-    options: {
-      zIndex: 10000,
-    },
-  },
-};
-
-const KEY_FINISHED = "tourFinished_20241214";
-
-function isFinished() {
-  return window.localStorage.getItem(KEY_FINISHED) === "true";
-}
+import {AppContext} from "../../context/AppContext.tsx";
+import {ErrorBoundary} from "react-error-boundary";
+import {isAutoStart, isFinished, setAutoStart, setTourFinished} from "../../lib/joyrideFunctions.ts";
 
 export default function JoyrideMain() {
   const showIntroDialogue = useShowIntroDialogue();
@@ -58,9 +40,24 @@ export default function JoyrideMain() {
 
     if (finishedStatuses.includes(status)) {
       setJoyrideState({ ...joyrideState, run: false });
-      window.localStorage.setItem(KEY_FINISHED, "true");
+      setAutoStart(false)
+      setTourFinished()
     }
   };
+
+  const baseSlide = {
+    disableBeacon: isAutoStart(),
+    disableOverlayClose: false,
+    hideCloseButton: false,
+    hideFooter: false,
+    spotlightClicks: true,
+    styles: {
+      options: {
+        zIndex: 10000,
+      },
+    },
+  };
+
 
   useEffect(() => {
     if (

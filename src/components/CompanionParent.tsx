@@ -9,12 +9,12 @@ import useConfidence from "../hooks/useConfidence.ts";
 import { IntroSlides } from "./intro/IntroSlides.tsx";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
-import getIntroSlides from "../intro/slides.tsx";
+import { getClustreSlides } from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
 import JoyrideContextProvider from "../context/JoyrideContext.tsx";
 import { useAppStore } from "../context/AppStore.ts";
-import { hasSeenIntro } from "../lib/sessionFunctions.ts";
+import { getSeenIntro, hasSeenIntro } from "../lib/sessionFunctions.ts";
 import { useShallow } from "zustand/react/shallow";
 
 export default function CompanionParent() {
@@ -37,7 +37,7 @@ export default function CompanionParent() {
 
   useEffect(() => {
     setStartSession(true);
-    setSeenIntro(true);
+    setSeenIntro(getSeenIntro());
   }, []);
 
   // Establish a websocket connection
@@ -48,7 +48,13 @@ export default function CompanionParent() {
   const imageAlt = t("D-Well logo");
 
   const imageNodeFunc = () => {
-    return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;
+    return (
+      <img
+        className="w-[75%] md:w-[80%]"
+        src="logos/clustre_onepoint.png"
+        alt={imageAlt}
+      />
+    );
   };
 
   return (
@@ -58,7 +64,7 @@ export default function CompanionParent() {
         setSeenIntro={setSeenIntro}
         imageNode={imageNodeFunc()}
         closeIcon={<IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />}
-        slides={getIntroSlides()}
+        slides={getClustreSlides()}
       />
       {seenIntro && (
         <JoyrideContextProvider>

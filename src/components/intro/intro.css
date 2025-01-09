@@ -5,7 +5,7 @@
 
 .intro-main-container {
   @apply p-4 mx-auto lg:p-8;
-  max-width: 1280px;
+  max-width: 1400px;
 }
 
 .intro-header {
@@ -20,16 +20,21 @@
   @apply fill-gray-500;
 }
 
+.intro-body-wrapper {
+  @apply flex flex-col pt-4 2xl:justify-center;
+  min-height: calc(100vh - 167px);
+}
+
 .intro-body {
-  @apply flex flex-col items-center lg:grid lg:grid-cols-2 lg:pt-8 lg:min-h-[506px];
+  @apply flex flex-col items-center lg:grid lg:grid-cols-2 lg:min-h-[40vh];
 }
 
 .intro-body-left {
-  @apply flex flex-col justify-between w-full h-full mt-8 lg:pr-12 lg:mt-0;
+  @apply flex flex-col justify-between items-start w-full h-full mt-8 lg:pr-12 lg:mt-0;
 }
 
 .intro-body-right {
-  @apply relative w-full bg-transparent shadow-2xl h-fit;
+  @apply relative w-full bg-transparent h-full pt-[2em];
 }
 
 .gray-back {
@@ -41,7 +46,7 @@
 }
 
 #root .intro-body .intro-body-left > div > h1 {
-  @apply text-[2rem] md:text-[3.5rem] text-[#a6a6a6] dark:text-gray-200 font-medium !ml-0;
+  @apply text-[2rem] md:text-[2.5rem] 2xl:text-[3.5rem] text-[#a6a6a6] dark:text-gray-200 font-medium !ml-0;
 }
 
 #root .intro-body-left .explanation {
@@ -49,7 +54,7 @@
 }
 
 #root .intro-body-left .explanation > p {
-  @apply text-lg leading-relaxed lg:text-[1.75rem] text-[#a6a6a6] dark:text-gray-200;
+  @apply text-[1.25rem] leading-relaxed 2xl:text-[1.5rem] text-[#a6a6a6] dark:text-gray-200;
 }
 
 .explanation > h2 {
@@ -57,14 +62,14 @@
 }
 /* Progress */
 .intro-main-container .progress {
-  @apply flex flex-row px-1 pt-8 pb-4;
+  @apply flex flex-row justify-center px-1 pt-8 pb-4;
 }
 .intro-main-container .progress .progress-item {
-  @apply bg-[#d9d9d9] rounded-[8px] mr-[15px] w-4 h-4;
+  @apply bg-[#d9d9d9] rounded-[8px] mx-[15px] w-4 h-4;
 }
 
 .intro-main-container .progress .progress-item.hightlighted {
-  @apply bg-[#4a4a4a];
+  @apply bg-[#3982d1];
 }
 
 .intro-main-container .progress .progress-item.visited {

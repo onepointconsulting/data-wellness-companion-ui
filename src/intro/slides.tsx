@@ -2,6 +2,32 @@ import i18next from "../i18n/i18n.tsx";
 
 const { t } = i18next;
 
+export function getClustreSlides() {
+  return [
+    {
+      title: t("Welcome"),
+      subtitle: t("empty"),
+      explanation: t("Clustre: intro-welcome"),
+      image: "./tour/slide1.png",
+      video: null,
+    },
+    {
+      title: t("Clustre: nutshell"),
+      subtitle: t("empty"),
+      explanation: t("Clustre: intro-nutshell"),
+      image: "./tour/slide2.png",
+      video: null,
+    },
+    {
+      title: t("Clustre: thank you"),
+      subtitle: t("empty"),
+      explanation: t("Clustre: intro-thank-you"),
+      image: "./tour/slide3.png",
+      video: null,
+    },
+  ];
+}
+
 export default function getIntroSlides() {
   return [
     {

@@ -7,9 +7,8 @@ export default function useSessionHistory(messages: Message[]) {
     const currentSession = getSession();
     if (currentSession) {
       const hasFinalReport = messages.some((message) => message.final_report);
-      if(hasFinalReport) {
-          debugger
-          appendToSessionHistory(currentSession, hasFinalReport);
+      if (hasFinalReport) {
+        appendToSessionHistory(currentSession, hasFinalReport);
       }
     }
   }, [messages]);

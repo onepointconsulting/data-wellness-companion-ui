@@ -28,7 +28,6 @@
 - Add consent statement to Email report popup (Done)
 - Hyperlink the logo on welcome screen
 
-
 2024-01-09
 
 - Remove progress bar before report generation

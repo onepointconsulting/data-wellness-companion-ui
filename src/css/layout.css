@@ -152,7 +152,11 @@
 #root .final-report-pdf,
 .final-report-email,
 .border-button {
-  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2;
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] border-solid dark:border-gray-100 p-2;
+}
+
+.intro-button {
+  @apply text-base lg:text-xl
 }
 
 #root .final-report-pdf a,
