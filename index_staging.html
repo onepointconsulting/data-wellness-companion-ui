@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onepoint D-Well™</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Onepoint D-Well™" />
+    <meta
+      property="og:description"
+      content="Onepoint D-Well™: The Data Wellness AI Companion, guides you through questions that help you gain deeper insights into your data. It is powered by Generative AI and the Onepoint Data & Analytics Body of Knowledge™"
+    />
+    <meta property="og:url" content="https://d-well.onepointltd.ai/" />
+    <meta
+      property="og:image"
+      content="https://d-well.onepointltd.ai/logo.svg"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Onepoint D-Well" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="D-Well" />
+    <meta
+      name="twitter:description"
+      content="Onepoint D-Well™: The Data Wellness AI Companion, guides you through questions that help you gain deeper insights into your data. It is powered by Generative AI and the Onepoint Data & Analytics Body of Knowledge™"
+    />
+    <meta
+      name="twitter:image"
+      content="https://d-well.onepointltd.ai/logo.svg"
+    />
+
+    <script>
+      const server = "176.34.128.143";
+      const port = 8083;
+      window.dataWellnessConfig = {
+        websocketUrl: `ws://${server}:${port}`,
+        reportUrl: `http://${server}:${port}`,
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
