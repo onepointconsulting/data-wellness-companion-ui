@@ -1,8 +1,8 @@
-import {useContext, useEffect, useRef} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {sendClientMessage} from "../lib/websocketFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {useTranslation} from "react-i18next";
+import { useContext, useEffect, useRef } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { sendClientMessage } from "../lib/websocketFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {

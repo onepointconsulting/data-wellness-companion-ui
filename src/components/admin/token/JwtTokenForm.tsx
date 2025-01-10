@@ -25,8 +25,14 @@ const inputStyle = `flex h-10 w-full rounded-md border-2 border-input bg-backgro
 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-[#0084d7]
 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-800 dark:text-gray-300 dark:placeholder-gray-500`;
 
-const dwellTemplate = "https://d-well.onepointltd.ai/0?id=";
-const dwiseTemplate = "https://d-wise.onepointltd.ai/index.html?id=";
+const baseUrl =
+  location.host.includes("localhost") ||
+  location.host.includes("127.0.0.1") ||
+  location.host.includes("0.0.0.0")
+    ? "https://d-well.onepointltd.ai"
+    : `${location.protocol}//${location.host}`;
+const dwellTemplate = `${baseUrl}/0?id=`;
+const dwiseTemplate = `${baseUrl}/index.html?id=`;
 
 const generationModeId = "generationMode";
 

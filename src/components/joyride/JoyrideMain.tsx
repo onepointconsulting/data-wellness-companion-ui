@@ -19,19 +19,14 @@ import {
 export default function JoyrideMain() {
   const showIntroDialogue = useShowIntroDialogue();
   const [t] = useTranslation();
-  const {
-    joyrideState,
-    setJoyrideState,
-    initQuestionRef,
-  } = useJoyrideStore(
+  const { joyrideState, setJoyrideState, initQuestionRef } = useJoyrideStore(
     useShallow((state) => ({
       joyrideState: state.joyrideState,
       setJoyrideState: state.setJoyrideState,
       initQuestionRef: state.initQuestionRef,
     })),
   );
-  const { questionRef, navbarRef } =
-    useContext(JoyrideContext);
+  const { questionRef, navbarRef } = useContext(JoyrideContext);
   const { currentMessage } = useContext(AppContext);
   const { run, steps } = joyrideState;
 
@@ -60,11 +55,7 @@ export default function JoyrideMain() {
   };
 
   useEffect(() => {
-    if (
-      !isFinished() &&
-      initQuestionRef &&
-      navbarRef
-    ) {
+    if (!isFinished() && initQuestionRef && navbarRef) {
       setJoyrideState({
         run: true,
         sidebarOpen: true,

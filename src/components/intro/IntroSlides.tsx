@@ -24,13 +24,13 @@ export function IntroSlides({
   imageNode,
   slides,
   closeFunction,
-    hasCloseButton = true
+  hasCloseButton = true,
 }: {
   showIntro: boolean;
   imageNode: React.ReactNode;
   slides: IntroSlide[] | null;
   closeFunction: () => void;
-  hasCloseButton: boolean
+  hasCloseButton: boolean;
 }) {
   const [t] = useTranslation();
   const { currentSlide, setCurrentSlide, introSlides, setIntroSlides } =
@@ -54,7 +54,7 @@ export function IntroSlides({
         {/* Header */}
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
-          {hasCloseButton && <CloseButton closeFunction={closeFunction}/>}
+          {hasCloseButton && <CloseButton closeFunction={closeFunction} />}
         </section>
 
         <div className="intro-body-wrapper">
