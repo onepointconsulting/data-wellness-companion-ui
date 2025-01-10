@@ -54,7 +54,7 @@
 }
 
 #root .intro-body-left .explanation > p {
-  @apply text-[1.25rem] leading-relaxed 2xl:text-[1.5rem] text-[#a6a6a6] dark:text-gray-200;
+  @apply text-[1.25rem] leading-relaxed 2xl:text-[1.5rem] text-slate-900 dark:text-gray-200;
 }
 
 .explanation > h2 {

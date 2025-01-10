@@ -30,10 +30,23 @@
 
 2024-01-09
 
-- Remove progress bar before report generation
+- Remove progress bar before report generation (Done)
 - Remove last progress bar item linked to report
 - Clear report accordion state after session restart
 - Remove hint that is displayed whilst loading
 - Remove pointer and hover from previous questions at the corner
 - Message that step is not editable should not be duplicated
 - Create degree of confidence component
+
+2024-01-10
+
+- Remove step of free consultation and menu in Joyride (Done)
+- All buttons blue on hover (Done)
+- All popup text black (Done)
+- "Explore another area of interest". Use regenerate button (Done)
+- Remove pdf button in report and move buttons to the left and new button on the right. (Done)
+- Remove usage instructions (Done)
+- REmove operation options and language from menu (Done)
+- Remove usage instructions from about (Done)
+- Introduce a back or next button. (Done)
+- Talk to Blessy and Ulka

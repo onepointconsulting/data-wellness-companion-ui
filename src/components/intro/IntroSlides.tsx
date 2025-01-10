@@ -6,16 +6,31 @@ import Progress from "./Progress.tsx";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 
+function CloseButton({ closeFunction }: { closeFunction: () => void }) {
+  const { currentSlide, introSlides } = useContext(IntroContext);
+  if (currentSlide === introSlides.length - 1) {
+    return (
+      <div className="intro-header-close" onClick={() => closeFunction()}>
+        <IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 export function IntroSlides({
   showIntro,
   imageNode,
   slides,
   closeFunction,
+    hasCloseButton = true
 }: {
   showIntro: boolean;
   imageNode: React.ReactNode;
   slides: IntroSlide[] | null;
   closeFunction: () => void;
+  hasCloseButton: boolean
 }) {
   const [t] = useTranslation();
   const { currentSlide, setCurrentSlide, introSlides, setIntroSlides } =
@@ -39,11 +54,7 @@ export function IntroSlides({
         {/* Header */}
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
-          {currentSlide === introSlides.length - 1 && (
-            <div className="intro-header-close" onClick={() => closeFunction()}>
-              <IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />
-            </div>
-          )}
+          {hasCloseButton && <CloseButton closeFunction={closeFunction}/>}
         </section>
 
         <div className="intro-body-wrapper">

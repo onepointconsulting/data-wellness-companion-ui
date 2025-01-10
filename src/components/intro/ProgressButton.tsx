@@ -12,9 +12,10 @@ export default function ProgressButton({
   disabled: boolean;
 }) {
   const [t] = useTranslation();
+  const title = t(translationKey)
   return (
-    <button onClick={handlerFunc} disabled={disabled}>
-      <img src={imgPath} alt={t(translationKey)} className="h-12" />
+    <button onClick={handlerFunc} disabled={disabled} className="disabled:opacity-40 dark:brightness-200">
+      <img src={imgPath} alt={title} title={title} className="h-12" />
     </button>
   );
 }

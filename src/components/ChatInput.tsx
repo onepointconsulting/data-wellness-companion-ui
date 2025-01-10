@@ -1,12 +1,9 @@
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { sendClientMessage } from "../lib/websocketFunctions.ts";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { useTranslation } from "react-i18next";
+import {useContext, useEffect, useRef} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {sendClientMessage} from "../lib/websocketFunctions.ts";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {useTranslation} from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
-import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.ts";
-import { useShallow } from "zustand/react/shallow";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -33,17 +30,8 @@ export default function ChatInput() {
     currentMessage,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
-  const { chatInputRef, sendButtonRef } = useContext(JoyrideContext);
-  const { setInitChatInputRef, setSendButtonRef } = useJoyrideStore(
-    useShallow((state) => ({ ...state })),
-  );
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
-
-  useEffect(() => {
-    setInitChatInputRef();
-    setSendButtonRef();
-  }, []);
 
   useEffect(() => {
     if (
@@ -89,7 +77,7 @@ export default function ChatInput() {
 
   return (
     <>
-      <div className="chat-container" ref={chatInputRef}>
+      <div className="chat-container">
         <div className="mt-4 ml-1">{usageExplanation}</div>
         <div className="chat-input">
           <textarea
@@ -111,7 +99,7 @@ export default function ChatInput() {
               }}
               disabled={!enoughText(chatText) || sending}
               className="disabled:opacity-10"
-              ref={sendButtonRef}
+              id="send-button"
             >
               {!updatingConfidence && (
                 <SendImage enoughText={enoughText(chatText)} />

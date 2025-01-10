@@ -9,7 +9,7 @@ import {
 import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
 
 export default function useShowCompletionPopup() {
-  const { messages, currentMessage } = useContext(AppContext);
+  const { messages, isReport, currentMessage } = useContext(AppContext);
   const { setShowCompletionPopup, messageLowerLimit } = useAppStore(
     useShallow((state) => ({
       setShowCompletionPopup: state.setShowCompletionPopup,
@@ -18,12 +18,14 @@ export default function useShowCompletionPopup() {
   );
 
   useEffect(() => {
+    if (isReport) {
+      setCompletionPopupDisplayed(true);
+    }
     if (
       messagesOverLowerLimit(messages, messageLowerLimit) &&
       !isCompletionPopupDisplayed()
     ) {
       setShowCompletionPopup(true);
-      setCompletionPopupDisplayed(true);
     }
-  }, [messages, currentMessage, messageLowerLimit]);
+  }, [messages, currentMessage, messageLowerLimit, isReport]);
 }

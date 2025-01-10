@@ -1,21 +1,21 @@
-import { useWebsocket } from "../hooks/useWebsocket.ts";
+import {useWebsocket} from "../hooks/useWebsocket.ts";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
 import useChatHistory from "../hooks/useChatHistory.ts";
 import useConfidence from "../hooks/useConfidence.ts";
-import { IntroSlides } from "./intro/IntroSlides.tsx";
-import { useTranslation } from "react-i18next";
-import { getClustreSlides } from "../intro/slides.tsx";
+import {IntroSlides} from "./intro/IntroSlides.tsx";
+import {useTranslation} from "react-i18next";
+import {getClustreSlides} from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
 import JoyrideContextProvider from "../context/JoyrideContext.tsx";
-import { useAppStore } from "../context/AppStore.ts";
-import { useShallow } from "zustand/react/shallow";
+import {useAppStore} from "../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
 import useSeenIntro from "../hooks/useSeenIntro.ts";
 import useShowCompletionPopup from "../hooks/useShowCompletionPopup.ts";
 import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
-import { IntroSlide } from "./intro/IntroContext.tsx";
+import {IntroSlide} from "./intro/IntroContext.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -79,6 +79,7 @@ export default function CompanionParent() {
         imageNode={imageNodeFunc()}
         slides={getClustreSlides()}
         closeFunction={() => setSeenIntro(true)}
+        hasCloseButton={true}
       />
       {showCompletionPopup && (
         <IntroSlides
@@ -86,6 +87,7 @@ export default function CompanionParent() {
           imageNode={imageNodeFunc()}
           slides={getClustreCompletionSlides()}
           closeFunction={() => setShowCompletionPopup(false)}
+          hasCloseButton={false}
         />
       )}
       {seenIntro && !showCompletionPopup && (

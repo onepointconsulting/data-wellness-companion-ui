@@ -22,19 +22,15 @@ export default function JoyrideMain() {
   const {
     joyrideState,
     setJoyrideState,
-    initChatInputRef,
     initQuestionRef,
-    initSendButtonRef,
   } = useJoyrideStore(
     useShallow((state) => ({
       joyrideState: state.joyrideState,
       setJoyrideState: state.setJoyrideState,
-      initChatInputRef: state.initChatInputRef,
       initQuestionRef: state.initQuestionRef,
-      initSendButtonRef: state.initSendButtonRef,
     })),
   );
-  const { questionRef, chatInputRef, hamburgerMenu, navbarRef, sendButtonRef } =
+  const { questionRef, navbarRef } =
     useContext(JoyrideContext);
   const { currentMessage } = useContext(AppContext);
   const { run, steps } = joyrideState;
@@ -66,10 +62,8 @@ export default function JoyrideMain() {
   useEffect(() => {
     if (
       !isFinished() &&
-      initChatInputRef &&
       initQuestionRef &&
-      navbarRef &&
-      initSendButtonRef
+      navbarRef
     ) {
       setJoyrideState({
         run: true,
@@ -98,7 +92,7 @@ export default function JoyrideMain() {
               </div>
             ),
             ...baseSlide,
-            target: chatInputRef?.current!,
+            target: ".chat-container",
             title: t("Instruction: Chat field"),
           },
           {
@@ -114,7 +108,7 @@ export default function JoyrideMain() {
             ),
             placement: "auto",
             ...baseSlide,
-            target: sendButtonRef?.current!,
+            target: "#send-button",
             title: t("Instruction: Send button"),
           },
           {
@@ -131,26 +125,6 @@ export default function JoyrideMain() {
             placement: "top",
             target: ".suggestions",
             title: t("Instruction: Suggested answers"),
-          },
-          {
-            content: (
-              <div className="text-left">
-                {t(
-                  "Instruction: Open the menu to access to access the following functions:",
-                )}
-                <ul className="menu-instructions">
-                  <li>{t("Instruction: Restart the application")}</li>
-                  <li>{t("Instruction: Help")}</li>
-                  <li>{t("Instruction: Contact Us")}</li>
-                  <li>{t("Instruction: Switch languages")}</li>
-                  <li>{t("Instruction: Night mode")}</li>
-                  <li>...</li>
-                </ul>
-              </div>
-            ),
-            ...baseSlide,
-            target: hamburgerMenu?.current!,
-            title: t("Instruction: Menu"),
           },
           {
             content: (
@@ -176,18 +150,6 @@ export default function JoyrideMain() {
           {
             content: (
               <div className="text-left">
-                {t(
-                  "Instruction: If you are interested in a free consultation, please click here",
-                )}
-              </div>
-            ),
-            ...baseSlide,
-            target: "#free-consultation",
-            title: t("Instruction: Free consultation"),
-          },
-          {
-            content: (
-              <div className="text-left">
                 {t("Instruction: For more informations on D-Well check the")}{" "}
                 <br />
                 <a
@@ -208,7 +170,7 @@ export default function JoyrideMain() {
         ],
       });
     }
-  }, [initChatInputRef, initQuestionRef, navbarRef, initSendButtonRef]);
+  }, [initQuestionRef, navbarRef]);
 
   if (isFinished() || currentMessage > 0) {
     return null;

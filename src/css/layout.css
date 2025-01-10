@@ -142,7 +142,7 @@
 }
 
 #root .final-report-download {
-  @apply flex flex-row items-center justify-center md:justify-end pb-8;
+  @apply flex flex-row items-center justify-between pb-8;
 }
 
 #root .final-report-download svg {
@@ -156,11 +156,12 @@
 #root .final-report-pdf,
 .final-report-email,
 .border-button {
-  @apply flex flex-row items-center justify-center border border-[#4a4a4a] border-solid dark:border-gray-100 p-2;
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] border-solid dark:border-gray-100 p-2
+    hover:bg-[#0084d717] dark:hover:bg-[#0084d717];
 }
 
 .intro-button {
-  @apply text-base lg:text-xl min-w-[170px];
+  @apply text-base lg:text-xl min-w-[170px] hover:bg-[#0084d717] dark:hover:bg-[#0084d717];
 }
 
 #root .final-report-pdf a,

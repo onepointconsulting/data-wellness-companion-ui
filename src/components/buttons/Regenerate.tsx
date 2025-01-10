@@ -34,7 +34,7 @@ export default function Regenerate() {
           </button>
         </div>
       )}
-      {sending && (
+      {sending && false && (
         <div className="question-mark-icon">
           <FaHourglassHalf className="hour-glass" />
         </div>

@@ -1,6 +1,5 @@
 import { Message } from "../../model/message.ts";
-import { BsFileEarmarkPdf } from "react-icons/bs";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { MdOutlineAlternateEmail, MdOutlineReplay } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "../../context/ChatContext.tsx";
@@ -8,7 +7,6 @@ import { getSession } from "../../lib/sessionFunctions.ts";
 import { showDialogue } from "../../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "../dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
 import OntologyGraph from "../knowledge-graph/OntologyGraph.tsx";
 import { Ontology } from "../../model/ontology.ts";
 import { AppContext } from "../../context/AppContext.tsx";
@@ -19,6 +17,7 @@ import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
 import MarkdownAccordion from "./MarkdownAccordion.tsx";
 import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -85,12 +84,13 @@ export default function FinalReport({ message }: { message: Message }) {
   );
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
-  const reportPdf = `${reportUrl}/pdf/${sessionId}?language=${i18next?.language}`;
   const reportData = JSON.parse(message.question);
   const confidence = extractReasoning(reportData);
   const advices = reportData["advices"] as string[];
   const whatToAvoid = reportData["what_you_should_avoid"] as string[];
   const benefits = reportData["positive_outcomes"] as string[];
+
+  const { processPopup } = useShowStartDialogue();
 
   useEffect(() => {
     if (sessionId && ontologyOpen) {
@@ -115,27 +115,31 @@ export default function FinalReport({ message }: { message: Message }) {
       <OntologyGraph />
       {sessionId && (
         <div className="final-report-download">
-          <ReportLink
-            click={() => setOntologyOpen(!ontologyOpen)}
-            title={t("Knowledge graph")}
-            clazzName="final-report-pdf"
-          >
-            <PiGraphLight />
-          </ReportLink>
-          <ReportLink
-            click={showEmailDialogue}
-            title={t("Send report as email")}
-            clazzName="final-report-email"
-          >
-            <MdOutlineAlternateEmail />
-          </ReportLink>
-          <ReportLink
-            click={(_e) => (location.href = reportPdf)}
-            title={t("Download PDF")}
-            clazzName="final-report-pdf"
-          >
-            <BsFileEarmarkPdf />
-          </ReportLink>
+          <div className="flex">
+            <ReportLink
+              click={() => setOntologyOpen(!ontologyOpen)}
+              title={t("Knowledge graph")}
+              clazzName="final-report-pdf"
+            >
+              <PiGraphLight />
+            </ReportLink>
+            <ReportLink
+              click={showEmailDialogue}
+              title={t("Send report as email")}
+              clazzName="final-report-email"
+            >
+              <MdOutlineAlternateEmail />
+            </ReportLink>
+          </div>
+          <div>
+            <ReportLink
+              click={processPopup()}
+              title={t("Explore another area of interest")}
+              clazzName="final-report-email"
+            >
+              <MdOutlineReplay />
+            </ReportLink>
+          </div>
         </div>
       )}
       <MarkdownAccordion

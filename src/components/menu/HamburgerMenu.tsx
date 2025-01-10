@@ -1,11 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import StartButton from "./StartButton.tsx";
-import InfoButton from "./InfoButton.tsx";
 import ContactUsButton from "./ContactUsButton.tsx";
-import LanguageSwitch from "./LanguageSwitch.tsx";
 import DarkModeButton from "./DarkModeButton.tsx";
-import SessionSwitch from "./SessionSwitch.tsx";
-import ChatModeButton from "./ChatModeButton.tsx";
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
 import { JoyrideContext } from "../../context/JoyrideContext.tsx";
@@ -68,13 +64,9 @@ export default function HamburgerMenu() {
       {open && (
         <menu ref={menuRef} className="animate-fade-down">
           <StartButton />
-          <InfoButton />
           <ContactUsButton />
-          <SessionSwitch />
           <hr className="mt-6 mb-6 h-[1px] bg-black dark:bg-gray-100 w-full" />
           <DarkModeButton />
-          <LanguageSwitch />
-          <ChatModeButton />
         </menu>
       )}
     </div>

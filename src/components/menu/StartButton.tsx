@@ -1,31 +1,8 @@
-import { RESTART_DIALOGUE_ID } from "../dialogue/RestartDialogue.tsx";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext.tsx";
-import { showDialogue } from "../../lib/dialogFunctions.ts";
-import { useTranslation } from "react-i18next";
-import { toast } from "../../../@/components/ui/use-toast.ts";
 import MenuItemTemplate from "./MenuItemTemplate.tsx";
+import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
 
 export default function StartButton() {
-  const { t } = useTranslation();
-  const { connected } = useContext(AppContext);
-
-  function showStartDialogue() {
-    showDialogue(RESTART_DIALOGUE_ID);
-  }
-
-  function processPopup() {
-    return !connected
-      ? () => {
-          toast({
-            title: t("You are disconnected."),
-            description: t(
-              "You are disconnected. The Data Wellness Companion needs to be connected to restart.",
-            ),
-          });
-        }
-      : showStartDialogue;
-  }
+  const { processPopup } = useShowStartDialogue();
 
   return (
     <>
