@@ -52,7 +52,7 @@ export default function LightBulb() {
         )}
       {missesClarification && clarificationClicked && isLast && (
         <div className="question-mark-icon">
-          <FaHourglassHalf className="question-mark-icon-svg" />
+          <FaHourglassHalf className="hour-glass" />
         </div>
       )}
     </>

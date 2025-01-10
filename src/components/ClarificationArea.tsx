@@ -63,7 +63,7 @@ export default function ClarificationArea() {
   return (
     <div className="clarification">
       {updatingExpectedNodes && "updatingExpectedNodes"}
-      {updatingExpectedNodes && <FaHourglassHalf />}
+      {updatingExpectedNodes && <FaHourglassHalf className="hour-glass" />}
       {message.clarification && (
         <section
           ref={clarificationRef}

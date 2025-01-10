@@ -22,7 +22,7 @@ export default function Regenerate() {
 
   return (
     <>
-      {!sending && (
+      {!sending && false && (
         <div className="question-mark-icon ml-[-11px] mt-[1px]">
           <button onClick={onRegenerate}>
             <img
@@ -36,7 +36,7 @@ export default function Regenerate() {
       )}
       {sending && (
         <div className="question-mark-icon">
-          <FaHourglassHalf className="question-mark-icon-svg" />
+          <FaHourglassHalf className="hour-glass" />
         </div>
       )}
     </>

@@ -85,37 +85,41 @@ export default function ChatInput() {
     }
   }
 
+  const usageExplanation = `${t(currentMessage === 0 ? "placeholder-start" : "placeholder-normal")}...`;
+
   return (
-    <div className="chat-container" ref={chatInputRef}>
-      <div className="chat-input">
-        <textarea
-          className="chat-textarea"
-          aria-invalid="false"
-          autoComplete="false"
-          id="chat-input"
-          value={chatText}
-          onChange={(e) => setChatText(e.target.value)}
-          placeholder={`${t(currentMessage === 0 ? "placeholder-start" : "placeholder-normal")}...`}
-          onKeyUp={sendEnterMessage}
-          disabled={sending || !connected}
-          ref={textAreaRef}
-        />
-        {connected && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              sendMessage();
-            }}
-            disabled={!enoughText(chatText) || sending}
-            className="disabled:opacity-10"
-            ref={sendButtonRef}
-          >
-            {!updatingConfidence && (
-              <SendImage enoughText={enoughText(chatText)} />
-            )}
-          </button>
-        )}
+    <>
+      <div className="chat-container" ref={chatInputRef}>
+        <div className="mt-4 ml-1">{usageExplanation}</div>
+        <div className="chat-input">
+          <textarea
+            className="chat-textarea"
+            aria-invalid="false"
+            autoComplete="false"
+            id="chat-input"
+            value={chatText}
+            onChange={(e) => setChatText(e.target.value)}
+            onKeyUp={sendEnterMessage}
+            disabled={sending || !connected}
+            ref={textAreaRef}
+          />
+          {connected && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                sendMessage();
+              }}
+              disabled={!enoughText(chatText) || sending}
+              className="disabled:opacity-10"
+              ref={sendButtonRef}
+            >
+              {!updatingConfidence && (
+                <SendImage enoughText={enoughText(chatText)} />
+              )}
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

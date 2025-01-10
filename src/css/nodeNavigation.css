@@ -42,6 +42,10 @@
   @apply !w-8 !h-8 !fill-[#0084d7] dark:!fill-white relative top-1;
 }
 
+.hour-glass {
+  @apply !w-8 !h-8;
+}
+
 /*.node {*/
 /*  width: 30px;*/
 /*  height: 30px;*/
