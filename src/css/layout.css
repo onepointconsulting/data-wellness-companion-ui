@@ -52,10 +52,14 @@
   @apply border-[#0084d7] text-[#0084d7] bg-[#0084d717] dark:bg-[#0084d717];
 }
 
+#root .suggestion.has-report {
+  @apply cursor-text
+}
+
 #root .suggestion.has-report .suggestion-text,
 #root .suggestion.has-report .suggestion-title,
 .not-editable-warning {
-  @apply text-gray-400 dark:text-gray-400 cursor-text;
+  @apply text-gray-400 dark:text-gray-400;
 }
 
 #root .not-editable-warning {

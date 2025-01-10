@@ -1,5 +1,5 @@
 import { Session } from "../model/session.ts";
-import {getSessionId} from "./websocketFunctions.ts";
+import { getSessionId } from "./websocketFunctions.ts";
 
 export const SESSION_KEY = "session";
 
@@ -104,16 +104,21 @@ export function forgetSeenIntro() {
 }
 
 export function setCompletionPopupDisplayed(displayed: boolean) {
-  const sessionId = getSessionId()
-  if(sessionId) {
-    localStorage.setItem(COMPLETION_POPUP_KEY_PREFIX + sessionId, `${displayed}`);
+  const sessionId = getSessionId();
+  if (sessionId) {
+    localStorage.setItem(
+      COMPLETION_POPUP_KEY_PREFIX + sessionId,
+      `${displayed}`,
+    );
   }
 }
 
 export function isCompletionPopupDisplayed(): boolean {
-  const sessionId = getSessionId()
-  if(!sessionId) {
-    return false
+  const sessionId = getSessionId();
+  if (!sessionId) {
+    return false;
   }
-  return localStorage.getItem(COMPLETION_POPUP_KEY_PREFIX + sessionId) === "true"
+  return (
+    localStorage.getItem(COMPLETION_POPUP_KEY_PREFIX + sessionId) === "true"
+  );
 }

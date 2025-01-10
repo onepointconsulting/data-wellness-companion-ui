@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.ts";
-import {useAppStore} from "../context/AppStore.ts";
-import {useShallow} from "zustand/react/shallow";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function selectLastNodeCss(
   covered: boolean,
@@ -69,15 +69,16 @@ function SingleNode({ i }: { i: number }) {
 export default function NodeNavigation() {
   const { expectedNodes, isLast, isReport } = useContext(AppContext);
   const { navbarRef } = useContext(JoyrideContext);
-  const { generatingReport } =
-      useAppStore(useShallow((state) => ({ generatingReport: state.generatingReport })));
+  const { generatingReport } = useAppStore(
+    useShallow((state) => ({ generatingReport: state.generatingReport })),
+  );
   const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef);
 
   useEffect(() => {
     setNavbarRef();
   }, []);
 
-  if (isLast && isReport || generatingReport) {
+  if ((isLast && isReport) || generatingReport) {
     return <></>;
   }
 
