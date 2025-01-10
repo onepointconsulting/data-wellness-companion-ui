@@ -53,7 +53,7 @@
 }
 
 #root .suggestion.has-report {
-  @apply cursor-text
+  @apply cursor-text;
 }
 
 #root .suggestion.has-report .suggestion-text,

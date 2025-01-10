@@ -6,10 +6,7 @@ import useChatHistory from "../hooks/useChatHistory.ts";
 import useConfidence from "../hooks/useConfidence.ts";
 import { IntroSlides } from "./intro/IntroSlides.tsx";
 import { useTranslation } from "react-i18next";
-import {
-  getClustreCompletionSlides,
-  getClustreSlides,
-} from "../intro/slides.tsx";
+import { getClustreSlides } from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
 import JoyrideContextProvider from "../context/JoyrideContext.tsx";
@@ -17,6 +14,8 @@ import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import useSeenIntro from "../hooks/useSeenIntro.ts";
 import useShowCompletionPopup from "../hooks/useShowCompletionPopup.ts";
+import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
+import { IntroSlide } from "./intro/IntroContext.tsx";
 
 export default function CompanionParent() {
   const [t] = useTranslation();
@@ -45,6 +44,22 @@ export default function CompanionParent() {
 
   useShowCompletionPopup();
 
+  const { giveMeReportNow } = useGiveMeReportNow();
+
+  function getClustreCompletionSlides(): IntroSlide[] {
+    return [
+      {
+        title: t("Clustre: thank you"),
+        subtitle: t("empty"),
+        explanation: t("Clustre: intro-thank-you"),
+        image: "./tour/slide3.png",
+        video: null,
+        buttonText: "Generate report",
+        buttonOnclick: () => giveMeReportNow(),
+      },
+    ];
+  }
+
   const imageAlt = t("D-Well logo");
 
   const imageNodeFunc = () => {
@@ -63,7 +78,6 @@ export default function CompanionParent() {
         showIntro={!seenIntro}
         imageNode={imageNodeFunc()}
         slides={getClustreSlides()}
-        lastButtonText="Clustre: lets-go"
         closeFunction={() => setSeenIntro(true)}
       />
       {showCompletionPopup && (
@@ -71,7 +85,6 @@ export default function CompanionParent() {
           showIntro={showCompletionPopup}
           imageNode={imageNodeFunc()}
           slides={getClustreCompletionSlides()}
-          lastButtonText="Generate report"
           closeFunction={() => setShowCompletionPopup(false)}
         />
       )}

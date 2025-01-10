@@ -4,20 +4,17 @@ import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
 import Progress from "./Progress.tsx";
 import { useTranslation } from "react-i18next";
-import { setAutoStart } from "../../lib/joyrideFunctions.ts";
 import { IoMdClose } from "react-icons/io";
 
 export function IntroSlides({
   showIntro,
   imageNode,
   slides,
-  lastButtonText,
   closeFunction,
 }: {
   showIntro: boolean;
   imageNode: React.ReactNode;
   slides: IntroSlide[] | null;
-  lastButtonText: string;
   closeFunction: () => void;
 }) {
   const [t] = useTranslation();
@@ -61,23 +58,18 @@ export function IntroSlides({
                   <p dangerouslySetInnerHTML={{ __html: slide.explanation }} />
                 </div>
                 {/* Conditional buttons */}
-                {currentSlide === introSlides.length - 2 && (
+
+                {slide.buttonText && (
                   <button
                     className="border-button intro-button"
                     onClick={() => {
-                      setAutoStart(true);
+                      if (slide.buttonOnclick) {
+                        slide.buttonOnclick();
+                      }
                       closeFunction();
                     }}
                   >
-                    {t("Take the tour")}
-                  </button>
-                )}
-                {currentSlide === introSlides.length - 1 && (
-                  <button
-                    className="border-button intro-button"
-                    onClick={() => closeFunction()}
-                  >
-                    {t(lastButtonText)}
+                    {t(slide.buttonText)}
                   </button>
                 )}
               </div>

@@ -7,6 +7,8 @@ export interface IntroSlide {
   explanation: string;
   image: string | null;
   video: string | null;
+  buttonText: string | null;
+  buttonOnclick: (() => void) | null;
 }
 
 interface IntroState {
