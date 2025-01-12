@@ -13,7 +13,7 @@ import JoyrideContextProvider from "../context/JoyrideContext.tsx";
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import useSeenIntro from "../hooks/useSeenIntro.ts";
-import useShowCompletionPopup from "../hooks/useShowCompletionPopup.ts";
+import useShowCompletionDialogue from "../hooks/useShowCompletionDialogue.ts";
 import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
 import { IntroSlide } from "./intro/IntroContext.tsx";
 
@@ -42,7 +42,7 @@ export default function CompanionParent() {
 
   useConfidence();
 
-  useShowCompletionPopup();
+  useShowCompletionDialogue();
 
   const { giveMeReportNow } = useGiveMeReportNow();
 

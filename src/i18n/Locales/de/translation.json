@@ -57,6 +57,7 @@
   "explanation 5 lightbulb": "Wenn Sie auf das Glühbirnensymbol klicken, wird eine Erklärung zur aktuellen Frage angezeigt.",
   "explanation 6 session": "Wenn Sie die Sitzung verlängern möchten, können Sie auf das Verlängerungssymbol klicken, um die Sitzung um einen Schritt zu verlängern. Bitte beachten Sie, dass die Sitzung nicht über 14 Schritte hinaus verlängert werden kann.",
   "explanation 7 end": "Wenn Sie am Ende Ihrer Sitzung angekommen sind, sehen Sie einen Bericht mit den vorgeschlagenen Maßnahmen. An diesem Punkt können Sie die Sitzung mit dem Startsymbol neu starten.",
+  "Explore another area of interest": "Entdecken Sie ein anderes Interessengebiet",
   "Failed to fetch knowledge graph": "Abrufen des Wissensgraphen fehlgeschlagen",
   "Failed to fetch knowledge graph. Try again later": "Abrufen des Wissensgraphen fehlgeschlagen. Versuchen Sie es später erneut",
   "Farsi": "Farsi",

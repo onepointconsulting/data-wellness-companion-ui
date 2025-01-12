@@ -18,6 +18,10 @@
   @apply w-8 h-8 fill-[#539bd9] bg-white relative left-1;
 }
 
+.node.last-node {
+  @apply opacity-10
+}
+
 .node-finished {
   @apply bg-[#0084d7];
 }

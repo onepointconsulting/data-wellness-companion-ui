@@ -26,7 +26,7 @@ export default function MainPanel() {
       </div>
     );
   const displayReportGenerationMessage =
-    currentMessage === expectedNodes - 2 || generatingReport;
+    currentMessage === expectedNodes - 1 || generatingReport;
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
     displayConfidenceLevelProceedWarning && isLast;

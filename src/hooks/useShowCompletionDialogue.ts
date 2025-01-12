@@ -8,7 +8,7 @@ import {
 } from "../lib/sessionFunctions.ts";
 import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
 
-export default function useShowCompletionPopup() {
+export default function useShowCompletionDialogue() {
   const { messages, isReport, currentMessage } = useContext(AppContext);
   const { setShowCompletionPopup, messageLowerLimit } = useAppStore(
     useShallow((state) => ({

@@ -58,6 +58,7 @@
   "explanation 5 lightbulb": "If you are not sure about the meaning of any question you can click on the light bulb to get an explanation.",
   "explanation 6 session": "If you want to extend the session, you can click on the extension icon to extend the session by one step. Please note that the session cannot be extended beyond 14 steps.",
   "explanation 7 end": "When you have arrived at the end of your session, you will see a report with the suggested course of action. At this stage you can restart the session using the start icon.",
+  "Explore another area of interest": "Explore another area of interest",
   "Failed to fetch knowledge graph": "Failed to fetch knowledge graph",
   "Failed to fetch knowledge graph. Try again later": "Failed to fetch knowledge graph. Try again later",
   "fake-suggestion-1": "Low-quality data can lead to incorrect insights and poor decision-making.",

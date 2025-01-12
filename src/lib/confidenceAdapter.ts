@@ -13,5 +13,5 @@ export function messagesOverLowerLimit(
   messages: Message[],
   messageLowerLimit: number,
 ) {
-  return messages.length >= messageLowerLimit - 1;
+  return messages.length >= messageLowerLimit;
 }
