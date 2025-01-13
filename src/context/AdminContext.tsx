@@ -4,6 +4,7 @@ import { Props } from "./commonModel.ts";
 export enum PageType {
   JWT_TOKEN = "jwtToken",
   REPORTS = "reports",
+  GLOBAL_CONFIG = "globalConfig"
 }
 
 interface AdminState {

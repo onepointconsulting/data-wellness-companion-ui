@@ -109,11 +109,6 @@ export default function JoyrideMain() {
             target: "body",
             title: t("Instruction: confidence-level"),
             locale: { last: t("Finish") },
-            styles: {
-              tooltip: {
-                width: "80vw",
-              },
-            },
           },
           {
             content: (
@@ -133,12 +128,7 @@ export default function JoyrideMain() {
             placement: "center",
             target: "body",
             title: t("Instruction: personalized-report"),
-            locale: { last: t("Finish") },
-            styles: {
-              tooltip: {
-                width: "80vw",
-              },
-            },
+            locale: { last: t("Finish") }
           },
         ],
       });
