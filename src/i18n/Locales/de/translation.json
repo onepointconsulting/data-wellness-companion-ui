@@ -105,7 +105,7 @@
   "Instruction: Thinking": "Denkt gerade",
   "Instruction: Thinking – cannot predict much": "Denkt gerade - kann noch nicht viel sagen",
   "Instruction: Use this button to submit your response.": "Über diese Schaltfläche können Sie Ihre Antwort absenden.",
-  "Instruction: You can use any suggested answers in this section. You can also select one and edit it or you can combined multiple selected answers too.": "Sie können alle in diesem Abschnitt vorgeschlagenen Antworten verwenden. Sie können auch eine auswählen und bearbeiten oder mehrere ausgewählte Antworten kombinieren.",
+  "Instruction: suggested-answer-text": "Sie können alle in diesem Abschnitt vorgeschlagenen Antworten verwenden. Sie können auch eine auswählen und bearbeiten oder mehrere ausgewählte Antworten kombinieren.",
   "Instruction: You will see a smiley on top of this bar with the internal confidence levels of the tool": "Oben in dieser Leiste wird ein Smiley mit den internen Konfidenzniveaus des Tools angezeigt.",
   "Interview Steps Updated": "Interview-Schritte aktualisiert",
   "interview-steps-updated": "Die Interviewschritte wurden auf {{sessionSteps}} Schritte aktualisiert.",

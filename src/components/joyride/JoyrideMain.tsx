@@ -107,10 +107,25 @@ export default function JoyrideMain() {
               <>
                 <div className="text-left">
                   {t(
-                    "Instruction: You can use any suggested answers in this section. You can also select one and edit it or you can combined multiple selected answers too.",
+                    "Instruction: suggested-answer-text",
                   )}
                 </div>
               </>
+            ),
+            ...baseSlide,
+            placement: "top",
+            target: ".suggestions",
+            title: t("Instruction: Suggested answers"),
+          },
+          {
+            content: (
+                <>
+                  <div className="text-left">
+                    {t(
+                        "Instruction: suggested-answer-text",
+                    )}
+                  </div>
+                </>
             ),
             ...baseSlide,
             placement: "top",
