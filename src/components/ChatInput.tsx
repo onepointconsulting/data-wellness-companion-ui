@@ -73,15 +73,26 @@ export default function ChatInput() {
     }
   }
 
-  const usageExplanation = `${t(currentMessage === 0 ? "placeholder-start" : "placeholder-normal")}...`;
-
   return (
     <>
       <div className="chat-container">
-        <div
-          className="flex flex-row mt-4 ml-1"
-          dangerouslySetInnerHTML={{ __html: usageExplanation }}
-        />
+        {currentMessage === 0 && (
+          <div className="flex flex-row flex-wrap mt-4 ml-1 border-2 border-solid border-gray-200 p-3">
+            {Array.from({ length: 3 }, (_, i) => i).map((i) => {
+              return (
+                <div
+                  className="w-full"
+                  dangerouslySetInnerHTML={{
+                    __html: t("placeholder-start-" + (i + 1)),
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
+        {currentMessage > 0 && (
+          <div className="w-full" dangerouslySetInnerHTML={{__html: t("placeholder-normal")}}/>
+        )}
         <div className="chat-input">
           <textarea
             className="chat-textarea"

@@ -128,7 +128,7 @@ export default function JoyrideMain() {
             placement: "center",
             target: "body",
             title: t("Instruction: personalized-report"),
-            locale: { last: t("Finish") }
+            locale: { last: t("Finish") },
           },
         ],
       });
