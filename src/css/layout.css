@@ -13,7 +13,7 @@
 }
 
 #root .header {
-  @apply min-h-14 mt-10 pt-2 md:pt-3 pb-2 flex items-center;
+  @apply min-h-14 pt-2 md:pt-3 pb-2 flex items-center;
 }
 
 #root .header-container {
