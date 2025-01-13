@@ -60,14 +60,16 @@ export default function ClarificationArea() {
 
   if (currentMessage === 0 || message.final_report) return null;
 
+  const expandContractClass = showClarification ? "expanded" : "contracted"
+
   return (
-    <div className="clarification">
+    <div className={`clarification ${expandContractClass}`}>
       {updatingExpectedNodes && "updatingExpectedNodes"}
       {updatingExpectedNodes && <FaHourglassHalf className="hour-glass" />}
       {message.clarification && (
         <section
           ref={clarificationRef}
-          className={`clarification-main relative ${showClarification ? "expanded" : "contracted"}`}
+          className={`clarification-main relative ${expandContractClass}`}
         >
           <MarkdownComponent content={message.clarification} />
           <div className="clarification-contract">

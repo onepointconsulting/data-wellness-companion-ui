@@ -1,10 +1,9 @@
-import { Message } from "../model/message.ts";
-import { useContext, useEffect, useState } from "react";
+import {Message} from "../model/message.ts";
+import {useContext, useEffect, useState} from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
-import { JoyrideContext } from "../context/JoyrideContext.tsx";
-import { useJoyrideStore } from "../context/JoyrideStore.ts";
+import {JoyrideContext} from "../context/JoyrideContext.tsx";
+import {useJoyrideStore} from "../context/JoyrideStore.ts";
 import Regenerate from "./buttons/Regenerate.tsx";
-import BackAndForward from "./BackAndForward.tsx";
 
 const STEP_MILLI_SECONDS = 25;
 
@@ -55,7 +54,7 @@ export default function Question({
               {messageText}
               <span className="px-1" /> <LightBulb /> <Regenerate />
             </div>
-            <BackAndForward />
+            {/*<BackAndForward />*/}
           </div>
         </div>
       </div>
