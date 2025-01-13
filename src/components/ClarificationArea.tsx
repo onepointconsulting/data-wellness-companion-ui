@@ -60,7 +60,7 @@ export default function ClarificationArea() {
 
   if (currentMessage === 0 || message.final_report) return null;
 
-  const expandContractClass = showClarification ? "expanded" : "contracted"
+  const expandContractClass = showClarification ? "expanded" : "contracted";
 
   return (
     <div className={`clarification ${expandContractClass}`}>

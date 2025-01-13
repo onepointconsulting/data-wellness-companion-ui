@@ -78,7 +78,10 @@ export default function ChatInput() {
   return (
     <>
       <div className="chat-container">
-        <div className="flex flex-row mt-4 ml-1" dangerouslySetInnerHTML={{__html: usageExplanation}} />
+        <div
+          className="flex flex-row mt-4 ml-1"
+          dangerouslySetInnerHTML={{ __html: usageExplanation }}
+        />
         <div className="chat-input">
           <textarea
             className="chat-textarea"

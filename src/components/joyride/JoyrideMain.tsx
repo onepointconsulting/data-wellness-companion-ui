@@ -106,9 +106,7 @@ export default function JoyrideMain() {
             content: (
               <>
                 <div className="text-left">
-                  {t(
-                    "Instruction: suggested-answer-text",
-                  )}
+                  {t("Instruction: suggested-answer-text")}
                 </div>
               </>
             ),
@@ -119,13 +117,11 @@ export default function JoyrideMain() {
           },
           {
             content: (
-                <>
-                  <div className="text-left">
-                    {t(
-                        "Instruction: suggested-answer-text",
-                    )}
-                  </div>
-                </>
+              <>
+                <div className="text-left">
+                  {t("Instruction: suggested-answer-text")}
+                </div>
+              </>
             ),
             ...baseSlide,
             placement: "top",

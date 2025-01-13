@@ -1,8 +1,8 @@
-import {Message} from "../model/message.ts";
-import {useContext, useEffect, useState} from "react";
+import { Message } from "../model/message.ts";
+import { useContext, useEffect, useState } from "react";
 import LightBulb from "./buttons/LightBulb.tsx";
-import {JoyrideContext} from "../context/JoyrideContext.tsx";
-import {useJoyrideStore} from "../context/JoyrideStore.ts";
+import { JoyrideContext } from "../context/JoyrideContext.tsx";
+import { useJoyrideStore } from "../context/JoyrideStore.ts";
 import Regenerate from "./buttons/Regenerate.tsx";
 
 const STEP_MILLI_SECONDS = 25;
