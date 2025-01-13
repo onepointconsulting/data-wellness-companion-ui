@@ -11,10 +11,10 @@ export default function ReportConfidenceLevel({
   const { t } = useTranslation();
   return (
     <AccordionText title={"D-Well confidence degree"}>
-      <p className="pb-1 font-sans">
-        <code>{confidenceAdapter(t, confidence)}</code>
+      <p className="pb-1 text-lg">
+        <code className="text-lg">{confidenceAdapter(t, confidence)}</code>
       </p>
-      <p className="pb-1 font-sans">{confidence.reasoning}</p>
+      <p className="pb-1 text-lg">{confidence.reasoning}</p>
     </AccordionText>
   );
 }

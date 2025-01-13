@@ -1,5 +1,5 @@
 #root h1 {
-  @apply text-2xl md:text-3xl font-bold mt-1 ml-2;
+  @apply text-2xl;
 }
 
 #root h2 {

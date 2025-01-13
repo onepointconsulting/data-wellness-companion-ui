@@ -28,25 +28,25 @@ export function AccordionText({
   }
 
   return (
-    <div className="md:mt-1 md:ml-2 text-gray-900 markdown-body">
-      <div className="flex cursor-pointer" onClick={onOpen}>
+    <div className="">
+      <div className="flex cursor-pointer justify-between items-center p-5 border-b border-[#0084d7]" onClick={onOpen}>
+      <h1>{t(title)}</h1>
         <svg
           height="20"
           width="20"
           xmlns="http://www.w3.org/2000/svg"
-          className="mt-3 mr-2 min-w-5"
+          className=""
         >
           <polygon
             points="1,1 1,19 19,10"
-            style={{ fill: "white", stroke: "#6599d4", strokeWidth: 2 }}
+            style={{ fill: "white", stroke: "#0084d7", strokeWidth: 2 }}
             transform={`rotate(${open ? 90 : 0}, 10, 10)`}
             className="accordion-icon"
           />
         </svg>
-        <h1>{t(title)}</h1>
       </div>
       <ol
-        className={`mb-3 ml-5 space-y-1 text-gray-500 list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
+        className={`mt-5 space-y-1 text-gray-500 list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
       >
         {children}
       </ol>
