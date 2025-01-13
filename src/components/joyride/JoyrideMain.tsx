@@ -4,8 +4,6 @@ import { JoyrideContext } from "../../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../../context/JoyrideStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useTranslation } from "react-i18next";
-import SendImage from "../buttons/SendImage.tsx";
-import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
 import ConfidenceLevels from "./ConfidenceLevels.tsx";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ErrorBoundary } from "react-error-boundary";
@@ -17,7 +15,6 @@ import {
 } from "../../lib/joyrideFunctions.ts";
 
 export default function JoyrideMain() {
-  const showIntroDialogue = useShowIntroDialogue();
   const [t] = useTranslation();
   const { joyrideState, setJoyrideState, initQuestionRef } = useJoyrideStore(
     useShallow((state) => ({
@@ -76,34 +73,6 @@ export default function JoyrideMain() {
           },
           {
             content: (
-              <div className="text-left">
-                {t(
-                  "Instruction: The text area that you can use to reply to the questions.",
-                )}
-              </div>
-            ),
-            ...baseSlide,
-            target: ".chat-container",
-            title: t("Instruction: Chat field"),
-          },
-          {
-            content: (
-              <>
-                <div className="text-left">
-                  {t("Instruction: Use this button to submit your response.")}
-                </div>
-                <div className="flex justify-center mt-3">
-                  <SendImage enoughText={true} />
-                </div>
-              </>
-            ),
-            placement: "auto",
-            ...baseSlide,
-            target: "#send-button",
-            title: t("Instruction: Send button"),
-          },
-          {
-            content: (
               <>
                 <div className="text-left">
                   {t("Instruction: suggested-answer-text")}
@@ -119,55 +88,57 @@ export default function JoyrideMain() {
             content: (
               <>
                 <div className="text-left">
-                  {t("Instruction: suggested-answer-text")}
+                  {t("Instruction: monitor-progress-description")}
                 </div>
-              </>
-            ),
-            ...baseSlide,
-            placement: "top",
-            target: ".suggestions",
-            title: t("Instruction: Suggested answers"),
-          },
-          {
-            content: (
-              <>
-                <div className="text-left">
-                  {t(
-                    "Instruction: Navigate between questions using the progress bar.",
-                  )}
-                </div>
-                <div className="text-left">
-                  {t(
-                    "Instruction: You will see a smiley on top of this bar with the internal confidence levels of the tool",
-                  )}
-                </div>
-                <ConfidenceLevels />
               </>
             ),
             ...baseSlide,
             placement: "bottom",
             target: navbarRef?.current!,
-            title: t("Instruction: Progress bar"),
+            title: t("Instruction: monitor-progress"),
           },
           {
             content: (
               <div className="text-left">
-                {t("Instruction: For more informations on D-Well check the")}{" "}
-                <br />
-                <a
-                  href="#"
-                  onClick={showIntroDialogue}
-                  className="default-link"
-                >
-                  {t("D-Well Tour")}
-                </a>
+                {t("Instruction: confidence-level-description")}{" "}
+                <ConfidenceLevels />
               </div>
             ),
             ...baseSlide,
             placement: "center",
             target: "body",
-            title: t("Instruction: More on D-Well"),
+            title: t("Instruction: confidence-level"),
             locale: { last: t("Finish") },
+            styles: {
+              tooltip: {
+                width: "80vw",
+              },
+            },
+          },
+          {
+            content: (
+              <div className="text-left">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: t("Instruction: personalized-report-description"),
+                  }}
+                />
+                <img
+                  src="./screenshots/report-screenshot.png"
+                  alt={t("Instruction: personalized-report")}
+                />
+              </div>
+            ),
+            ...baseSlide,
+            placement: "center",
+            target: "body",
+            title: t("Instruction: personalized-report"),
+            locale: { last: t("Finish") },
+            styles: {
+              tooltip: {
+                width: "80vw",
+              },
+            },
           },
         ],
       });
