@@ -64,11 +64,7 @@ export default function CompanionParent() {
 
   const imageNodeFunc = () => {
     return (
-      <img
-        className="w-96"
-        src="logos/clustre_onepoint.png"
-        alt={imageAlt}
-      />
+      <img className="w-96" src="logos/clustre_onepoint.png" alt={imageAlt} />
     );
   };
 
