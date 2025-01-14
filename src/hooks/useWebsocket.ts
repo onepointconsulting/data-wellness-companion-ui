@@ -172,10 +172,6 @@ export function useWebsocket() {
     function onExtendSession(sessionSteps: number) {
       if (sessionSteps > 0) {
         setExpectedNodes(sessionSteps);
-        toast({
-          title: t("Interview steps updated"),
-          description: t("interview-steps-updated", { sessionSteps }),
-        });
       } else {
         toast({
           title: t("Interview steps update failed"),

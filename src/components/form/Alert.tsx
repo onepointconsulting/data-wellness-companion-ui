@@ -11,7 +11,6 @@ export default function Alert({
       className="flex items-center p-4 mb-4 mx-5 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
       role="alert"
     >
-      ,
       <svg
         className="flex-shrink-0 w-4 h-4"
         aria-hidden="true"

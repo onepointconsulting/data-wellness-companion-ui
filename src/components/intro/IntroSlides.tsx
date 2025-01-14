@@ -40,7 +40,7 @@ export function IntroSlides({
       setCurrentSlide(0);
       setIntroSlides(slides);
     }
-  }, [slides, setIntroSlides]);
+  }, [slides, setIntroSlides, setCurrentSlide]);
   if (introSlides == null || introSlides.length < 1) {
     return null;
   }

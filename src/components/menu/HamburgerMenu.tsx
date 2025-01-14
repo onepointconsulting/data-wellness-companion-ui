@@ -6,6 +6,7 @@ import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 
 import { JoyrideContext } from "../../context/JoyrideContext.tsx";
 import SessionSwitch from "./SessionSwitch.tsx";
+import TermsButton from "./TermsButton.tsx";
 
 /**
  * The Hamburger menu component.
@@ -66,6 +67,7 @@ export default function HamburgerMenu() {
         <menu ref={menuRef} className="animate-fade-down">
           <StartButton />
           <ContactUsButton />
+          <TermsButton />
           <SessionSwitch />
           <hr className="mt-6 mb-6 h-[1px] bg-black dark:bg-gray-100 w-full" />
           <DarkModeButton />

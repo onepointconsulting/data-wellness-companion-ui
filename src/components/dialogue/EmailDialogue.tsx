@@ -118,7 +118,7 @@ export default function EmailDialogue() {
       </DialogueHeader>
       <div className="email-dialogue-content">
         {t(
-          "Please enter your name and email address so we can send you the report.",
+          "Please enter your name and email address so we can send you the report."
         )}
       </div>
       <div className="email-dialogue-form">
