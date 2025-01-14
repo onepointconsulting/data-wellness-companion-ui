@@ -91,7 +91,10 @@ export default function ChatInput() {
           </div>
         )}
         {currentMessage > 0 && (
-          <div className="w-full" dangerouslySetInnerHTML={{__html: t("placeholder-normal")}}/>
+          <div
+            className="w-full"
+            dangerouslySetInnerHTML={{ __html: t("placeholder-normal") }}
+          />
         )}
         <div className="chat-input">
           <textarea
