@@ -65,11 +65,11 @@
   @apply flex flex-row justify-center px-1 pt-8 pb-4;
 }
 .intro-main-container .progress .progress-item {
-  @apply bg-[#d9d9d9] rounded-[8px] mx-[15px] w-4 h-4;
+  @apply bg-[#a6a6a6] rounded-[8px] mx-[15px] w-4 h-4;
 }
 
 .intro-main-container .progress .progress-item.hightlighted {
-  @apply bg-[#3982d1];
+  @apply bg-[#0084d7];
 }
 
 .intro-main-container .progress .progress-item.visited {

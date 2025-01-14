@@ -77,7 +77,7 @@ export default function ChatInput() {
     <>
       <div className="chat-container">
         {currentMessage === 0 && (
-          <div className="flex flex-row flex-wrap mt-4 ml-1 border-2 border-solid border-gray-200 p-3">
+          <div className="flex flex-row flex-wrap my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] gap-4 p-3">
             {Array.from({ length: 3 }, (_, i) => i).map((i) => {
               return (
                 <div
@@ -91,10 +91,7 @@ export default function ChatInput() {
           </div>
         )}
         {currentMessage > 0 && (
-          <div
-            className="w-full"
-            dangerouslySetInnerHTML={{ __html: t("placeholder-normal") }}
-          />
+          <div className="w-full my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] gap-4 p-3" dangerouslySetInnerHTML={{__html: t("placeholder-normal")}}/>
         )}
         <div className="chat-input">
           <textarea

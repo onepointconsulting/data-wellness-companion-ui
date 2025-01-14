@@ -60,12 +60,12 @@ export default function CompanionParent() {
     ];
   }
 
-  const imageAlt = t("D-Well logo");
+  const imageAlt = t("Clustre-Onepoint logo");
 
   const imageNodeFunc = () => {
     return (
       <img
-        className="w-[75%] md:w-[80%]"
+        className="w-96"
         src="logos/clustre_onepoint.png"
         alt={imageAlt}
       />
