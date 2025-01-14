@@ -8,8 +8,8 @@
   @apply dark:!bg-gray-800 dark:!text-gray-100;
 }
 
-#root {
-  font-family: "Lato", sans-serif;
+#root, code {
+  font-family: "Lato", sans-serif !important;
 }
 
 #root .header {
@@ -31,7 +31,7 @@
 }
 
 #root .question {
-  @apply text-2xl md:text-4xl mt-4 mb-8 flex flex-row px-0 text-[#4a4a4a];
+  @apply text-2xl md:text-4xl mt-8 mb-8 flex flex-row px-0 text-[#4a4a4a];
 }
 
 #root .question svg,
@@ -122,7 +122,7 @@
 }
 
 #root .final-report h1 {
-  @apply text-[#0084d7] dark:text-gray-100;
+  @apply text-[#7d7d7d] dark:text-gray-100;
 }
 
 #root .final-report li {
@@ -152,7 +152,7 @@
 #root .final-report-pdf,
 .final-report-email,
 .border-button {
-  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2;
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2 hover:border-[#0084d7] hover:text-[#0084d7];
 }
 
 #root .final-report-pdf a,

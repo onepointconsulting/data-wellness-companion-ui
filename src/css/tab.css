@@ -1,5 +1,5 @@
 .tab-main {
-  @apply flex flex-wrap justify-start pt-10;
+  @apply flex flex-wrap justify-start pt-10 text-lg;
 }
 
 .tab-item-active {  
@@ -7,5 +7,5 @@
 }
 
 .tab-item-inactive {
-  @apply bg-white border-b-[3px] border-[#b9b9b9] dark:bg-slate-700 px-7 py-5 cursor-pointer;
+  @apply bg-white border-b-[3px] border-[#b9b9b9] dark:bg-slate-700 px-7 py-5 cursor-pointer text-[#7d7d7d];
 }

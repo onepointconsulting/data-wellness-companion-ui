@@ -20,17 +20,17 @@ export default function MarkdownAccordion({
         components={{
           ul: ({ ...props }) => (
             <ul
-              className="ml-5 space-y-4 text-[#4d4d4d] list-disc"
+              className="ml-1 text-black list-disc"
               {...props}
             />
           ),
           ol: ({ ...props }) => (
             <ol
-              className="mx-4 my-3 space-y-4 text-[#4d4d4d] list-decimal"
+              className="mx-4 my-3 space-y-4 text-black list-decimal"
               {...props}
             />
           ),
-          li: ({ ...props }) => <li className="mt-0" {...props} />,
+          li: ({ ...props }) => <li className="mb-4" {...props} />,
           p: ({ ...props }) => <p className="pb-1" {...props} />,
           a: ({ children, ...props }) => (
             <a

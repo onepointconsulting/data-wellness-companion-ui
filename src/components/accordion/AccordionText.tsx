@@ -38,15 +38,15 @@ export function AccordionText({
           className=""
         >
           <polygon
-            points="1,1 1,19 19,10"
-            style={{ fill: "white", stroke: "#0084d7", strokeWidth: 2 }}
-            transform={`rotate(${open ? 90 : 0}, 10, 10)`}
+            points="1,1 1,19 12,10"
+            style={{ fill: "#a6a6a6", stroke: "#a6a6a6", strokeWidth: 2 }}
+            transform={`rotate(${open ? -90 : 90}, 10, 10)`}
             className="accordion-icon"
           />
         </svg>
       </div>
       <ol
-        className={`mt-5 space-y-1 text-gray-500 list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
+        className={`m-5 space-y-1 text-black list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
       >
         {children}
       </ol>
