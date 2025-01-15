@@ -4,11 +4,14 @@ import { useContext } from "react";
 import { AdminContext, PageType } from "../../context/AdminContext.tsx";
 import { AuthenticationContext } from "../../context/AuthenticationContext.tsx";
 import { useTranslation } from "react-i18next";
+import GlobalConfigForm from "./global/GlobalConfigForm.tsx";
 
 function displayPage(page: PageType) {
   switch (page) {
     case PageType.JWT_TOKEN:
       return <JwtTokenForm />;
+    case PageType.GLOBAL_CONFIG:
+      return <GlobalConfigForm />;
     default:
       return <ReportForm />;
   }

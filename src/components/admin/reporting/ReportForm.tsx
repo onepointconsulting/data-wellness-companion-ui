@@ -3,17 +3,16 @@ import { useContext, useReducer } from "react";
 import { reportInitialState, reportReducer } from "./reportReducer.ts";
 import { ChatContext } from "../../../context/ChatContext.tsx";
 import AdminContainer from "../AdminContainer.tsx";
-import Spinner from "../../Spinner.tsx";
 import FormContainer from "../FormContainer.tsx";
 import Field from "../token/Field.tsx";
-import AdminMessage from "../AdminMessage.tsx";
 import {
   generateReport,
   handleError,
   handleJson,
   ReportData,
-} from "../apiClient.ts";
+} from "../../../lib/admin/apiClient.ts";
 import { MessageType } from "../model.ts";
+import handleSubmission from "../../../lib/formSubmission.ts";
 
 const supportedLanguages = ["en", "de"];
 
@@ -22,8 +21,7 @@ export default function ReportForm() {
   const [state, dispatch] = useReducer(reportReducer, reportInitialState);
   const { reportUrl } = useContext(ChatContext);
 
-  function onSubmit(e: React.MouseEvent<HTMLInputElement>) {
-    e.preventDefault();
+  function onSubmit() {
     dispatch({ type: "sending" });
     const reportData: ReportData = {
       reportUrl,
@@ -48,15 +46,17 @@ export default function ReportForm() {
   }
 
   return (
-    <AdminContainer title="Generate Email Report">
-      {state.processing && <Spinner size={12} />}
-      {state.message && (
-        <AdminMessage message={state.message} messageType={state.messageType} />
-      )}
+    <AdminContainer
+      title="Generate Email Report"
+      processing={state.processing}
+      message={state.message}
+      messageType={state.messageType}
+    >
       <FormContainer
-        onSubmit={onSubmit}
+        onSubmit={handleSubmission(onSubmit)}
         onReset={() => dispatch({ type: "reset" })}
-        isDisabled={() => state.disabled}
+        disabled={state.disabled}
+        hasReset={true}
       >
         <Field label="Emails">
           <textarea

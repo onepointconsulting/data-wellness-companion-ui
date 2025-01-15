@@ -23,6 +23,12 @@ const menuItems: MenuItem[] = [
     link: "/admin/reports",
     page: PageType.REPORTS,
   },
+  {
+    key: "Global Configuration",
+    title: "Global Configuration",
+    link: "/admin/global",
+    page: PageType.GLOBAL_CONFIG,
+  },
 ];
 
 function Separator() {

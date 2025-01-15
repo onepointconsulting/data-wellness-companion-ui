@@ -1,13 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useContext, useReducer } from "react";
 import { ChatContext } from "../../../context/ChatContext.tsx";
-import Spinner from "../../Spinner.tsx";
 import {
   generateJwtToken,
   generateJwtTokenBatch,
   handleError,
   handleJson,
-} from "../apiClient.ts";
+} from "../../../lib/admin/apiClient.ts";
 import Field from "./Field.tsx";
 import {
   Action,
@@ -19,7 +18,7 @@ import {
 import { MessageType } from "../model.ts";
 import AdminContainer from "../AdminContainer.tsx";
 import FormContainer from "../FormContainer.tsx";
-import AdminMessage from "../AdminMessage.tsx";
+import handleSubmission from "../../../lib/formSubmission.ts";
 
 const inputStyle = `flex h-10 w-full rounded-md border-2 border-input bg-background px-3 py-2 text-base ring-offset-background
 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-[#0084d7]
@@ -119,15 +118,13 @@ export default function JwtTokenForm() {
   const [state, dispatch] = useReducer(tokenReducer, initialState);
   const { reportUrl } = useContext(ChatContext);
 
-  function onSubmit(e: React.MouseEvent<HTMLInputElement>) {
-    e.preventDefault();
+  function onSubmit() {
     const { name, email } = state;
     dispatch({ type: "generating" });
     if (state.generationMode == GenerationMode.SINGLE) {
       generateJwtToken({ reportUrl, name, email })
         .then((response) => handleJson(response))
         .then((data) => {
-          console.log("Success:", data); // Handle the response data
           dispatch({ type: "generated", generatedToken: data.token });
         })
         .catch((error) => handleError(error, dispatch));
@@ -177,16 +174,18 @@ export default function JwtTokenForm() {
   }
 
   return (
-    <AdminContainer title="JWT Token Generation">
-      {state.processing && <Spinner size={12} />}
-      {state.message && (
-        <AdminMessage message={state.message} messageType={state.messageType} />
-      )}
+    <AdminContainer
+      title="JWT Token Generation"
+      processing={state.processing}
+      message={state.message}
+      messageType={state.messageType}
+    >
       <TokenResult state={state} dispatch={dispatch} />
       <FormContainer
-        onSubmit={onSubmit}
+        onSubmit={handleSubmission(onSubmit)}
         onReset={() => dispatch({ type: "reset" })}
-        isDisabled={isDisabled}
+        disabled={isDisabled()}
+        hasReset={true}
       >
         <Field label="Name">
           <input
