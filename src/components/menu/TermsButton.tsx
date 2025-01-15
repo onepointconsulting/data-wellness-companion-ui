@@ -9,7 +9,7 @@ export default function TermsButton() {
   return (
     <MenuItemTemplate
       title="Terms"
-      func={() => window.open("./terms/Terms_of_Use_for_Onepoint_D-Well_v1.0.pdf", "_blank")}
+      func={() => window.open("https://www.onepointltd.com/wp-content/uploads/2025/01/Terms-of-Use-for-Onepoint-D-Well-v2.0.pdf", "_blank")}
     >
       <InfoImage />
     </MenuItemTemplate>
