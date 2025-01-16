@@ -1,6 +1,4 @@
 import { useWebsocket } from "../hooks/useWebsocket.ts";
-import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext.tsx";
 import RestartDialogue from "./dialogue/RestartDialogue.tsx";
 import EmailDialogue from "./dialogue/EmailDialogue.tsx";
 import InfoDialogue from "./dialogue/InfoDialogue.tsx";
@@ -8,59 +6,74 @@ import useChatHistory from "../hooks/useChatHistory.ts";
 import useConfidence from "../hooks/useConfidence.ts";
 import { IntroSlides } from "./intro/IntroSlides.tsx";
 import { useTranslation } from "react-i18next";
-import { IoMdClose } from "react-icons/io";
-import getIntroSlides from "../intro/slides.tsx";
+import { getCompletionSlides, getIntroSlides } from "../intro/slides.tsx";
 import ConfidenceDialogue from "./dialogue/ConfidenceDialogue.tsx";
 import MainApp from "./MainApp.tsx";
 import JoyrideContextProvider from "../context/JoyrideContext.tsx";
 import { useAppStore } from "../context/AppStore.ts";
-import { hasSeenIntro } from "../lib/sessionFunctions.ts";
 import { useShallow } from "zustand/react/shallow";
+import useSeenIntro from "../hooks/useSeenIntro.ts";
+import useShowCompletionDialogue from "../hooks/useShowCompletionDialogue.ts";
+import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
+
+const COMPLETION_POPUP = false;
 
 export default function CompanionParent() {
   const [t] = useTranslation();
-  const { setStartSession } = useContext(AppContext);
-  const { seenIntro, setSeenIntro } = useAppStore(
+  const {
+    seenIntro,
+    setSeenIntro,
+    showCompletionPopup,
+    setShowCompletionPopup,
+  } = useAppStore(
     useShallow((state) => ({
       seenIntro: state.seenIntro,
       setSeenIntro: state.setSeenIntro,
+      showCompletionPopup: state.showCompletionPopup,
+      setShowCompletionPopup: state.setShowCompletionPopup,
     })),
   );
 
-  useEffect(() => {
-    if (seenIntro) {
-      hasSeenIntro();
-    }
-  }, [seenIntro]);
+  useSeenIntro();
 
   useChatHistory();
-
-  useEffect(() => {
-    setStartSession(true);
-    setSeenIntro(true);
-  }, []);
 
   // Establish a websocket connection
   useWebsocket();
 
   useConfidence();
 
-  const imageAlt = t("D-Well logo");
+  useShowCompletionDialogue();
+
+  const { giveMeReportNow } = useGiveMeReportNow();
+
+  const imageAlt = t("Clustre-Onepoint logo");
 
   const imageNodeFunc = () => {
-    return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;
+    return <img className="w-96" src="logo.svg" alt={imageAlt} />;
   };
+
+  const completionPopup = showCompletionPopup && COMPLETION_POPUP;
 
   return (
     <>
       <IntroSlides
         showIntro={!seenIntro}
-        setSeenIntro={setSeenIntro}
         imageNode={imageNodeFunc()}
-        closeIcon={<IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />}
         slides={getIntroSlides()}
+        closeFunction={() => setSeenIntro(true)}
+        hasCloseButton={true}
       />
-      {seenIntro && (
+      {completionPopup && (
+        <IntroSlides
+          showIntro={showCompletionPopup}
+          imageNode={imageNodeFunc()}
+          slides={getCompletionSlides(giveMeReportNow)}
+          closeFunction={() => setShowCompletionPopup(false)}
+          hasCloseButton={false}
+        />
+      )}
+      {seenIntro && !completionPopup && (
         <JoyrideContextProvider>
           <RestartDialogue />
           <EmailDialogue />

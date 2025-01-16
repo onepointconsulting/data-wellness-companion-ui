@@ -11,6 +11,8 @@ export enum ChatType {
   TO_THE_POINT = "to_the_point",
 }
 
+export const DEFAULT_CHAT_TYPE = ChatType.TO_THE_POINT;
+
 export function toChatType(value: string): ChatType {
   const validChatTypes = Object.values(ChatType) as string[];
   return validChatTypes.includes(value)
@@ -36,7 +38,7 @@ export const ChatContext = createContext<ConfigState>({
   websocketUrl: "ws://localhost:8080",
   reportUrl: "http://localhost:8080",
   socket: { current: null },
-  chatType: ChatType.TO_THE_POINT,
+  chatType: DEFAULT_CHAT_TYPE,
   setChatType: (_) => {},
 });
 
@@ -45,7 +47,7 @@ export function readChatTYpeFromLS(): ChatType {
   if (!!savedChatType) {
     return toChatType(savedChatType);
   }
-  return ChatType.DIVERGING;
+  return DEFAULT_CHAT_TYPE;
 }
 
 export const ConfigContextProvider = ({ children }: Props) => {

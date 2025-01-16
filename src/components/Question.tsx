@@ -49,7 +49,14 @@ export default function Question({
     <>
       <div className="question container" ref={questionRef}>
         <div className="dark:text-gray-100">
-          {messageText} <LightBulb /> <Regenerate />
+          <div className="flex">
+            <div className="flex-1">
+              {messageText}
+              <span className="px-1" /> <LightBulb />
+            </div>
+            {/*<BackAndForward />*/}
+          </div>
+          <Regenerate />
         </div>
       </div>
     </>

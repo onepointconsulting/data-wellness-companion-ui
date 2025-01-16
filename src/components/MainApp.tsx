@@ -32,7 +32,7 @@ export default function MainApp() {
         </div>
       </div>
       <div className="container">
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-8">
           <div className="w-full">
             {displayRegistrationMessage ? (
               <RegistrationMessage />

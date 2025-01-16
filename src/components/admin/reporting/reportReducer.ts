@@ -1,14 +1,12 @@
 import { MessageType } from "../model.ts";
+import FormProperties from "../model/formProperties.ts";
 
-export interface ReportState {
+export interface ReportState extends FormProperties {
   emailsStr: string;
   emails: string[];
   emailsValid: boolean;
   tokenStr: string;
   tokens: string[];
-  processing: boolean;
-  message: string;
-  messageType?: MessageType;
   disabled: boolean;
   language: string;
 }

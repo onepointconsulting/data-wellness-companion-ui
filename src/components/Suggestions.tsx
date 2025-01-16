@@ -124,7 +124,7 @@ export default function Suggestions({ message }: { message: Message }) {
 
   return (
     <>
-      {isSuggestionDeactivated && (
+      {isSuggestionDeactivated && !sending && (
         <div className="not-editable-warning">
           {t("previous-question-note")}
         </div>

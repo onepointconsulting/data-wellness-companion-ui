@@ -69,19 +69,15 @@ export function useWebsocket() {
   const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } =
     useContext(AppContext);
   const {
+    setExpectedNodes,
     setGeneratingReport,
     setMessageLowerLimit,
     setMessageUpperLimit,
     setDisplayedConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
-  const {
-    setConnected,
-    setMessages,
-    setCurrentMessageHistory,
-    setSending,
-    setExpectedNodes,
-  } = useContext(AppContext);
+  const { setConnected, setMessages, setCurrentMessageHistory, setSending } =
+    useContext(AppContext);
 
   useEffect(() => {
     socket.current = io(websocketUrl);
@@ -172,10 +168,6 @@ export function useWebsocket() {
     function onExtendSession(sessionSteps: number) {
       if (sessionSteps > 0) {
         setExpectedNodes(sessionSteps);
-        toast({
-          title: t("Interview steps updated"),
-          description: t("interview-steps-updated", { sessionSteps }),
-        });
       } else {
         toast({
           title: t("Interview steps update failed"),

@@ -4,7 +4,7 @@ import { useShallow } from "zustand/react/shallow";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
 
-const tabs = ["Q&A", "Final Report"];
+const tabs = ["Questions", "Final Report"];
 
 export default function NavigationTab({ children }: { children: ReactNode }) {
   const [t] = useTranslation();

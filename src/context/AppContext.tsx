@@ -7,8 +7,6 @@ import { Ontology } from "../model/ontology.ts";
 import useSessionHistory from "../hooks/useSessionHistory.ts";
 
 interface AppState {
-  expectedNodes: number;
-  setExpectedNodes: (expectedNodes: number) => void;
   messages: Message[];
   setMessages: (messages: Message[]) => void;
   startSession: boolean;
@@ -24,9 +22,7 @@ interface AppState {
   chatText: string;
   setChatText: (chatText: string) => void;
   readonly isLast: boolean;
-  readonly isBeforeReport: boolean;
   readonly isReport: boolean;
-  readonly isFinalMessage: boolean;
   readonly isSuggestionDeactivated: boolean;
   displayRegistrationMessage: boolean;
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
@@ -53,10 +49,8 @@ export const DEFAULT_EXPECTED_NODES = 6;
 
 function createAppState(): AppState {
   const messages: Message[] = [];
-  const expectedNodes = DEFAULT_EXPECTED_NODES;
 
   return {
-    expectedNodes,
     messages,
     startSession: false,
     connected: false,
@@ -69,12 +63,9 @@ function createAppState(): AppState {
     setCurrentMessage: (_) => {},
     setSelectedSuggestion: (_) => {},
     setSending: (_) => {},
-    setExpectedNodes: (_) => {},
     setChatText: (_) => {},
     isLast: true,
-    isFinalMessage: false,
     isReport: false,
-    isBeforeReport: false,
     isSuggestionDeactivated: false,
     displayRegistrationMessage: false,
     setDisplayRegistrationMessage: (_) => {},
@@ -107,7 +98,6 @@ export const AppContextProvider = ({ children }: Props) => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>();
   const [sending, setSending] = useState(false);
-  const [expectedNodes, setExpectedNodes] = useState(DEFAULT_EXPECTED_NODES);
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
@@ -130,8 +120,6 @@ export const AppContextProvider = ({ children }: Props) => {
   useSessionHistory(messages);
 
   const isLast = currentMessage === messages.length - 1;
-  const isFinalMessage = currentMessage === expectedNodes - 1;
-  const isBeforeReport = currentMessage === expectedNodes - 2;
   const isReport =
     messages?.length > 0 && messages[messages.length - 1].final_report;
 
@@ -146,8 +134,6 @@ export const AppContextProvider = ({ children }: Props) => {
     <AppContext.Provider
       value={{
         ...initial,
-        expectedNodes,
-        setExpectedNodes,
         connected,
         setConnected,
         startSession,
@@ -163,8 +149,6 @@ export const AppContextProvider = ({ children }: Props) => {
         chatText,
         setChatText,
         isLast,
-        isFinalMessage,
-        isBeforeReport,
         isReport,
         isSuggestionDeactivated,
         displayRegistrationMessage,

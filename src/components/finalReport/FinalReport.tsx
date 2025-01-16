@@ -1,6 +1,6 @@
 import { Message } from "../../model/message.ts";
 import { BsFileEarmarkPdf } from "react-icons/bs";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { MdOutlineAlternateEmail, MdOutlineReplay } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "../../context/ChatContext.tsx";
@@ -19,6 +19,8 @@ import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
 import MarkdownAccordion from "./MarkdownAccordion.tsx";
 import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
+import { ReportLink } from "../buttons/ReportLink.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -39,29 +41,6 @@ async function fetchOntology(
     };
   }
   return await res.json();
-}
-
-function ReportLink({
-  click,
-  clazzName,
-  title,
-  children,
-}: {
-  click: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-  clazzName: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={clazzName}>
-      <a href="#" onClick={click} title={title}>
-        {children}
-      </a>
-      <a href="#" onClick={click} className="hidden md:block">
-        {title}
-      </a>
-    </div>
-  );
 }
 
 function extractReasoning(reportData: any): Confidence {
@@ -92,6 +71,8 @@ export default function FinalReport({ message }: { message: Message }) {
   const whatToAvoid = reportData["what_you_should_avoid"] as string[];
   const benefits = reportData["positive_outcomes"] as string[];
 
+  const { processPopup } = useShowStartDialogue();
+
   useEffect(() => {
     if (sessionId && ontologyOpen) {
       fetchOntology(sessionId, reportUrl)
@@ -112,7 +93,43 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      
+      <OntologyGraph />
+      {sessionId && (
+        <div className="final-report-download">
+          <div className="flex">
+            <ReportLink
+              click={() => setOntologyOpen(!ontologyOpen)}
+              title={t("Knowledge graph")}
+              clazzName="final-report-pdf"
+            >
+              <PiGraphLight />
+            </ReportLink>
+            <ReportLink
+              click={showEmailDialogue}
+              title={t("Send report as email")}
+              clazzName="final-report-email"
+            >
+              <MdOutlineAlternateEmail />
+            </ReportLink>
+            <ReportLink
+              click={(_e) => (location.href = reportPdf)}
+              title={t("Download PDF")}
+              clazzName="final-report-pdf"
+            >
+              <BsFileEarmarkPdf />
+            </ReportLink>
+          </div>
+          <div>
+            <ReportLink
+              click={processPopup()}
+              title={t("Explore another area of interest")}
+              clazzName="final-report-email"
+            >
+              <MdOutlineReplay />
+            </ReportLink>
+          </div>
+        </div>
+      )}
       <MarkdownAccordion
         title={recommendationsTitle}
         items={advices}
@@ -128,32 +145,6 @@ export default function FinalReport({ message }: { message: Message }) {
       />
       <ReportConfidenceLevel confidence={confidence} />
       <Transcript />
-      {sessionId && (
-        <div className="final-report-download">
-          <ReportLink
-            click={() => setOntologyOpen(!ontologyOpen)}
-            title={t("Knowledge graph")}
-            clazzName="final-report-pdf"
-          >
-            <PiGraphLight />
-          </ReportLink>
-          <ReportLink
-            click={showEmailDialogue}
-            title={t("Send report as email")}
-            clazzName="final-report-email"
-          >
-            <MdOutlineAlternateEmail />
-          </ReportLink>
-          <ReportLink
-            click={(_e) => (location.href = reportPdf)}
-            title={t("Download PDF")}
-            clazzName="final-report-pdf"
-          >
-            <BsFileEarmarkPdf />
-          </ReportLink>
-        </div>
-      )}
-      <OntologyGraph />
     </div>
   );
 }

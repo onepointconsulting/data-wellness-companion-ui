@@ -10,14 +10,19 @@ import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
-import { useAppStore } from "../context/AppStore.ts";
+import {
+  isDisplayReportGenerationMessage,
+  useAppStore,
+} from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 
 export default function MainPanel() {
-  const { currentMessage, messages, sending, expectedNodes, isLast } =
-    useContext(AppContext);
-  const { generatingReport, displayConfidenceLevelProceedWarning } =
-    useAppStore(useShallow((state) => ({ ...state })));
+  const { currentMessage, messages, sending, isLast } = useContext(AppContext);
+  const {
+    expectedNodes,
+    generatingReport,
+    displayConfidenceLevelProceedWarning,
+  } = useAppStore(useShallow((state) => ({ ...state })));
   const message = messages[currentMessage];
   if (!message)
     return (
@@ -25,8 +30,11 @@ export default function MainPanel() {
         <Spinner />
       </div>
     );
-  const displayReportGenerationMessage =
-    currentMessage === expectedNodes - 2 || generatingReport;
+  const displayReportGenerationMessage = isDisplayReportGenerationMessage(
+    currentMessage,
+    expectedNodes,
+    generatingReport,
+  );
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
     displayConfidenceLevelProceedWarning && isLast;

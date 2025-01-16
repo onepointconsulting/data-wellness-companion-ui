@@ -28,10 +28,9 @@
 - Add consent statement to Email report popup (Done)
 - Hyperlink the logo on welcome screen
 
-
 2024-01-09
 
-- Remove progress bar before report generation
+- Remove progress bar before report generation (Done)
 - Remove last progress bar item linked to report
 - Clear report accordion state after session restart
 - Remove hint that is displayed whilst loading

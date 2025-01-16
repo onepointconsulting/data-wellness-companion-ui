@@ -4,6 +4,11 @@ import { useTranslation } from "react-i18next";
 import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.ts";
+import {
+  isDisplayReportGenerationMessage,
+  useAppStore,
+} from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
 
 function selectLastNodeCss(
   covered: boolean,
@@ -34,10 +39,12 @@ function selectLastNodeCss(
  * @constructor
  */
 function SingleNode({ i }: { i: number }) {
-  const { expectedNodes, isFinalMessage } = useContext(AppContext);
-  const [t] = useTranslation();
   const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
+  const { expectedNodes } = useAppStore(useShallow((state) => ({ ...state })));
+  const isFinalMessage = currentMessage === expectedNodes - 1;
+  const [t] = useTranslation();
+
   const length = messages.length;
   const covered = length > i;
 
@@ -65,16 +72,32 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { expectedNodes, isLast, isReport } = useContext(AppContext);
+  const { currentMessage, isLast, isReport, sending } = useContext(AppContext);
+  const { expectedNodes } = useAppStore(
+    useShallow((state) => ({ expectedNodes: state.expectedNodes })),
+  );
   const { navbarRef } = useContext(JoyrideContext);
+  const { generatingReport, displayConfidenceLevelProceedWarning } =
+    useAppStore(useShallow((state) => ({ ...state })));
   const setNavbarRef = useJoyrideStore((state) => state.setNavbarRef);
 
   useEffect(() => {
     setNavbarRef();
   }, []);
 
-  if (isLast && isReport) {
-    return <></>;
+  const displayReportGenerationMessage = isDisplayReportGenerationMessage(
+    currentMessage,
+    expectedNodes,
+    generatingReport,
+  );
+
+  if (
+    (isLast && isReport) ||
+    generatingReport ||
+    displayConfidenceLevelProceedWarning ||
+    displayReportGenerationMessage && sending
+  ) {
+    return null;
   }
 
   return (

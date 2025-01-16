@@ -24,11 +24,11 @@ export default function useConfidence() {
     setConfidence,
     updatingConfidence,
     setUpdatingConfidence,
-    expectedNodes,
     currentMessage,
     setUpdatingExpectedNodes,
   } = useContext(AppContext);
   const {
+    expectedNodes,
     messageLowerLimit,
     messageUpperLimit,
     displayedConfidenceLevelProceedWarning,
@@ -102,7 +102,7 @@ export default function useConfidence() {
         !messages[messages.length - 1]?.final_report
       ) {
         // Shorten the session.
-        sendExtendSession(socket.current, currentMessage + 2);
+        sendExtendSession(socket.current, currentMessage + 1);
       }
     }
   }, [confidence, currentMessage, messageLowerLimit, messages]);

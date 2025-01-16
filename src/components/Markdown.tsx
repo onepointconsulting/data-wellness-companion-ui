@@ -14,13 +14,13 @@ export default function MarkdownComponent({ content }: { content: string }) {
       components={{
         ul: ({ ...props }) => (
           <ul
-            className="ml-5 space-y-3 list-disc"
+            className="mb-3 ml-5 space-y-1 text-gray-500 list-disc gray-color"
             {...props}
           />
         ),
         ol: ({ ...props }) => (
           <ol
-            className="mx-4 my-3 space-y-3 list-decimal"
+            className="mx-4 my-3 space-y-3 text-gray-500 list-decimal gray-color"
             {...props}
           />
         ),
@@ -28,7 +28,7 @@ export default function MarkdownComponent({ content }: { content: string }) {
         p: ({ ...props }) => <p className="pb-4" {...props} />,
         a: ({ children, ...props }) => (
           <a
-            className="pb-4 underline sm:pb-2"
+            className="pb-4 font-sans underline sm:pb-2"
             {...props}
             target="_blank"
           >

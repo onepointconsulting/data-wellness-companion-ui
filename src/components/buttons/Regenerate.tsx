@@ -4,6 +4,9 @@ import { ChatContext } from "../../context/ChatContext.tsx";
 import { FaHourglassHalf } from "react-icons/fa";
 import { sendRegenerateMessage } from "../../lib/websocketFunctions.ts";
 import { useTranslation } from "react-i18next";
+import { MdOutlineReplay } from "react-icons/md";
+
+import { ReportLink } from "./ReportLink.tsx";
 
 export default function Regenerate() {
   const [t] = useTranslation();
@@ -21,24 +24,21 @@ export default function Regenerate() {
   }
 
   return (
-    <>
-      {!sending && (
-        <div className="question-mark-icon ml-[-11px] mt-[1px]">
-          <button onClick={onRegenerate}>
-            <img
-              src="./regenerate.svg"
-              alt={t("Regenerate")}
-              title={t("Regenerate")}
-              className="h-10 w-10"
-            />
-          </button>
-        </div>
-      )}
-      {sending && (
+    <div className="flex items-start justify-end">
+      {sending && false && (
         <div className="question-mark-icon">
-          <FaHourglassHalf className="question-mark-icon-svg" />
+          <FaHourglassHalf className="hour-glass" />
         </div>
       )}
-    </>
+      {!sending && (
+        <ReportLink
+          click={onRegenerate}
+          title={t("Regenerate")}
+          clazzName="final-report-email !mr-3 mt-3"
+        >
+          <MdOutlineReplay className="!fill-gray-900 dark:!fill-gray-100" />
+        </ReportLink>
+      )}
+    </div>
   );
 }

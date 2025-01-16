@@ -1,17 +1,15 @@
 import { MessageType } from "../model.ts";
+import FormProperties from "../model/formProperties.ts";
 
 export enum GenerationMode {
   SINGLE = "single",
   BULK = "bulk",
 }
 
-export interface State {
+export interface State extends FormProperties {
   name: string;
   email: string;
   generatedToken?: string;
-  message?: string;
-  messageType?: MessageType;
-  processing: boolean;
   copied: boolean;
   generationAmount: number;
   generationMode: GenerationMode;
@@ -35,6 +33,7 @@ export const initialState: State = {
   copied: false,
   generationAmount: 1,
   generationMode: GenerationMode.SINGLE,
+  message: "",
 };
 
 export function tokenReducer(state: State, action: Action): State {

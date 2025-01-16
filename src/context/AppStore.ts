@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { DEFAULT_EXPECTED_NODES } from "./AppContext.tsx";
 
 const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
 const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
@@ -22,6 +23,10 @@ interface AppStoreState {
   setDisplayedConfidenceLevelProceedWarning: (
     displayedConfidenceLevelProceedWarning: boolean,
   ) => void;
+  showCompletionPopup: boolean;
+  setShowCompletionPopup: (seenCompletionPopup: boolean) => void;
+  expectedNodes: number;
+  setExpectedNodes: (expectedNodes: number) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -62,4 +67,21 @@ export const useAppStore = create<AppStoreState>((set) => ({
       ...state,
       displayedConfidenceLevelProceedWarning,
     })),
+  showCompletionPopup: false,
+  setShowCompletionPopup: (showCompletionPopup) =>
+    set((state) => ({
+      ...state,
+      showCompletionPopup,
+    })),
+  expectedNodes: DEFAULT_EXPECTED_NODES,
+  setExpectedNodes: (expectedNodes: number) =>
+    set((state) => ({ ...state, expectedNodes })),
 }));
+
+export function isDisplayReportGenerationMessage(
+  currentMessage: number,
+  expectedNodes: number,
+  generatingReport: boolean,
+) {
+  return currentMessage === expectedNodes - 1 || generatingReport;
+}

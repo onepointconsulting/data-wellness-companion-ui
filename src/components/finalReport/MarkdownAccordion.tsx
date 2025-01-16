@@ -15,26 +15,26 @@ export default function MarkdownAccordion({
   return (
     <AccordionText title={title} defaultOpen={defaultOpen}>
       <Markdown
-        className={`text-gray-900 markdown-body`}
+        className={`mt-1 text-gray-900 markdown-body`}
         remarkPlugins={[remarkGfm]}
         components={{
           ul: ({ ...props }) => (
             <ul
-              className="ml-1 text-black list-disc"
+              className="mb-3 ml-5 space-y-1 text-gray-500 list-disc gray-color"
               {...props}
             />
           ),
           ol: ({ ...props }) => (
             <ol
-              className="mx-4 my-3 space-y-4 text-black list-decimal"
+              className="mx-4 my-3 space-y-3 text-gray-500 list-decimal gray-color"
               {...props}
             />
           ),
-          li: ({ ...props }) => <li className="mb-4" {...props} />,
-          p: ({ ...props }) => <p className="pb-1" {...props} />,
+          li: ({ ...props }) => <li className="mt-0" {...props} />,
+          p: ({ ...props }) => <p className="pb-1 font-sans" {...props} />,
           a: ({ children, ...props }) => (
             <a
-              className="pb-4 underline sm:pb-2"
+              className="pb-4 font-sans underline sm:pb-2"
               {...props}
               target="_blank"
             >

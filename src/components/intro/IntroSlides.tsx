@@ -1,69 +1,51 @@
 import { IntroContext, IntroSlide } from "./IntroContext.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./intro.css";
 import VideoIframe from "./VideoIFrame.tsx";
+import Progress from "./Progress.tsx";
+import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 
-function Progress({
-  slides,
-  currentSlide,
-  setCurrentSlide,
-}: {
-  slides: IntroSlide[];
-  currentSlide: number;
-  setCurrentSlide: (n: number) => void;
-}) {
-  return (
-    <div className="progress">
-      {slides.map((_, index) => {
-        const visited = index < currentSlide;
-        return (
-          <div
-            key={`intro-slide-${index}`}
-            className={`progress-item ${index === currentSlide ? "hightlighted" : ""} ${visited ? "visited" : ""}`}
-            onClick={() => visited && setCurrentSlide(index)}
-          ></div>
-        );
-      })}
-    </div>
-  );
+function CloseButton({ closeFunction }: { closeFunction: () => void }) {
+  const { currentSlide, introSlides } = useContext(IntroContext);
+  if (currentSlide === introSlides.length - 1) {
+    return (
+      <div className="intro-header-close" onClick={() => closeFunction()}>
+        <IoMdClose className="w-10 h-10 lg:w-16 lg:h-16" />
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export function IntroSlides({
   showIntro,
-  setSeenIntro,
   imageNode,
-  closeIcon,
   slides,
+  closeFunction,
+  hasCloseButton = true,
 }: {
   showIntro: boolean;
-  setSeenIntro: (b: boolean) => void;
   imageNode: React.ReactNode;
-  closeIcon: React.ReactNode;
   slides: IntroSlide[] | null;
+  closeFunction: () => void;
+  hasCloseButton: boolean;
 }) {
-  const { currentSlide, setCurrentSlide } = useContext(IntroContext);
-  if (slides == null || slides.length < 1) {
+  const [t] = useTranslation();
+  const { currentSlide, setCurrentSlide, introSlides, setIntroSlides } =
+    useContext(IntroContext);
+  useEffect(() => {
+    if (slides) {
+      setCurrentSlide(0);
+      setIntroSlides(slides);
+    }
+  }, [slides, setIntroSlides, setCurrentSlide]);
+  if (introSlides == null || introSlides.length < 1) {
     return null;
   }
 
-  function onNext() {
-    if (!!slides) {
-      if (currentSlide < slides.length - 1) {
-        const newCurrentSlide = currentSlide + 1;
-        setCurrentSlide(newCurrentSlide);
-      } else {
-        setSeenIntro(true);
-      }
-    }
-  }
-
-  function showVideo(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    e.preventDefault();
-    setCurrentSlide(0);
-  }
-
-  const slide = slides[currentSlide];
-  const isLast = currentSlide === slides.length - 1;
+  const slide = introSlides[currentSlide];
   const subTitle = slide.subtitle;
 
   return (
@@ -72,15 +54,10 @@ export function IntroSlides({
         {/* Header */}
         <section className="intro-header">
           <div className="intro-header-image">{imageNode}</div>
-          <div
-            className="intro-header-close"
-            onClick={() => setSeenIntro(true)}
-          >
-            {closeIcon}
-          </div>
+          {hasCloseButton && <CloseButton closeFunction={closeFunction} />}
         </section>
 
-        <div className="flex flex-col min-h-screen pt-4 2xl:justify-center lg:pt-12 2xl:pt-0 2xl:-mt-16">
+        <div className="intro-body-wrapper">
           {/* Body */}
           <section className="intro-body">
             {/* Left */}
@@ -89,14 +66,28 @@ export function IntroSlides({
                 <h1>{slide.title}</h1>
                 <div className="explanation">
                   {!!subTitle && <h2>{subTitle}</h2>}
-                  <p>{slide.explanation}</p>
+                  <p dangerouslySetInnerHTML={{ __html: slide.explanation }} />
                 </div>
+                {/* Conditional buttons */}
+
+                {slide.buttonText && (
+                  <button
+                    className="border-button intro-button"
+                    onClick={() => {
+                      if (slide.buttonOnclick) {
+                        slide.buttonOnclick();
+                      }
+                      closeFunction();
+                    }}
+                  >
+                    {t(slide.buttonText)}
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Right */}
             <div className="intro-body-right">
-              <div className="gray-back"></div>
               {!!slide.video && <VideoIframe videoUrl={slide.video} />}
               {slide.image && !slide.video && (
                 <img src={slide.image ? slide.image : ""} alt="D-Well app" />
@@ -105,31 +96,13 @@ export function IntroSlides({
           </section>
 
           {/* Progress */}
-          <Progress
-            slides={slides}
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-          />
-
-          <div className="flex items-center">
-            <section className="intro-footer">
-              <button
-                className={`intro-next ${isLast ? "!justify-center" : ""}`}
-                onClick={onNext}
-              >
-                <div>{isLast ? "Get started" : "Next"}</div>
-                {!isLast && <div>&#x2192;</div>}
-              </button>
-
-              {currentSlide > 0 && (
-                <div className="intro-next-extras">
-                  <a href="#" onClick={showVideo}>
-                    Watch tutorial video
-                  </a>
-                </div>
-              )}
-            </section>
-          </div>
+          {introSlides.length > 1 && (
+            <Progress
+              slides={introSlides}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+            />
+          )}
         </div>
       </section>
     </section>

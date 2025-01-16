@@ -1,4 +1,4 @@
-import { MessageType } from "./model.ts";
+import { MessageType } from "../../components/admin/model.ts";
 
 interface JwtTokenData {
   reportUrl: string;
@@ -50,6 +50,21 @@ export async function generateReport(reportData: ReportData) {
     tokens,
     language,
   });
+}
+
+export async function globalProperties(baseUrl: string) {
+  return fetch(`${baseUrl}/global_configuration`);
+}
+
+export async function updateGlobalProperties(
+  baseUrl: string,
+  globalProperties: object,
+) {
+  return processPost(
+    baseUrl,
+    "protected/update_global_configuration",
+    globalProperties,
+  );
 }
 
 export function handleJson(response: Response) {
