@@ -95,7 +95,7 @@ export default function NodeNavigation() {
     (isLast && isReport) ||
     generatingReport ||
     displayConfidenceLevelProceedWarning ||
-    displayReportGenerationMessage && sending
+    (displayReportGenerationMessage && sending)
   ) {
     return null;
   }
