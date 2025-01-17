@@ -5,6 +5,7 @@ export enum PageType {
   JWT_TOKEN = "jwtToken",
   REPORTS = "reports",
   GLOBAL_CONFIG = "globalConfig",
+  QUESTIONS = "questions",
 }
 
 interface AdminState {

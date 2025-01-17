@@ -1,10 +1,11 @@
 import JwtTokenForm from "./token/JwtTokenForm.tsx";
 import ReportForm from "./reporting/ReportForm.tsx";
-import { useContext } from "react";
-import { AdminContext, PageType } from "../../context/AdminContext.tsx";
-import { AuthenticationContext } from "../../context/AuthenticationContext.tsx";
-import { useTranslation } from "react-i18next";
+import {useContext} from "react";
+import {AdminContext, PageType} from "../../context/AdminContext.tsx";
+import {AuthenticationContext} from "../../context/AuthenticationContext.tsx";
+import {useTranslation} from "react-i18next";
 import GlobalConfigForm from "./global/GlobalConfigForm.tsx";
+import QuestionsForm from "./questions/QuestionsForm.tsx";
 
 function displayPage(page: PageType) {
   switch (page) {
@@ -12,6 +13,8 @@ function displayPage(page: PageType) {
       return <JwtTokenForm />;
     case PageType.GLOBAL_CONFIG:
       return <GlobalConfigForm />;
+    case PageType.QUESTIONS:
+      return <QuestionsForm />
     default:
       return <ReportForm />;
   }

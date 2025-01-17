@@ -1,20 +1,14 @@
-import { useTranslation } from "react-i18next";
-import { useContext, useReducer } from "react";
-import { reportInitialState, reportReducer } from "./reportReducer.ts";
-import { ChatContext } from "../../../context/ChatContext.tsx";
+import {useTranslation} from "react-i18next";
+import {useContext, useReducer} from "react";
+import {reportInitialState, reportReducer} from "./reportReducer.ts";
+import {ChatContext} from "../../../context/ChatContext.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import FormContainer from "../FormContainer.tsx";
 import Field from "../token/Field.tsx";
-import {
-  generateReport,
-  handleError,
-  handleJson,
-  ReportData,
-} from "../../../lib/admin/apiClient.ts";
-import { MessageType } from "../model.ts";
+import {generateReport, handleError, handleJson, ReportData,} from "../../../lib/admin/apiClient.ts";
+import {MessageType} from "../model.ts";
 import handleSubmission from "../../../lib/formSubmission.ts";
-
-const supportedLanguages = ["en", "de"];
+import {supportedLanguages} from "../model/languages.ts";
 
 export default function ReportForm() {
   const [t] = useTranslation();

@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { useContext } from "react";
-import { AdminContext, PageType } from "../../context/AdminContext.tsx";
-import { AuthenticationContext } from "../../context/AuthenticationContext.tsx";
+import {useTranslation} from "react-i18next";
+import {useContext} from "react";
+import {AdminContext, PageType} from "../../context/AdminContext.tsx";
+import {AuthenticationContext} from "../../context/AuthenticationContext.tsx";
 
 type MenuItem = {
   key: string;
@@ -28,6 +28,12 @@ const menuItems: MenuItem[] = [
     title: "Global Configuration",
     link: "/admin/global",
     page: PageType.GLOBAL_CONFIG,
+  },
+  {
+    key: "Questions",
+    title: "Questions",
+    link: "/admin/questions",
+    page: PageType.QUESTIONS,
   },
 ];
 

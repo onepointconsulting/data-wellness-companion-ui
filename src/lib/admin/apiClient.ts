@@ -67,6 +67,18 @@ export async function updateGlobalProperties(
   );
 }
 
+export async function getQuestions(baseUrl: string, language: string) {
+  return fetch(`${baseUrl}/questions/${language}`);
+}
+
+export async function updateQuestion(baseUrl: string, questionUpdate: object) {
+  return processPost(
+      baseUrl,
+      "protected/questions/update",
+      questionUpdate,
+  );
+}
+
 export function handleJson(response: Response) {
   if (!response.ok) {
     throw new Error("Network response was not ok");
