@@ -1,26 +1,20 @@
 import { useTranslation } from "react-i18next";
-import { useContext, useEffect, useReducer } from "react";
+import {Fragment, useContext, useEffect} from "react";
 import { ChatContext } from "../../../context/ChatContext.tsx";
-import {
-  initialQuestionsConfigState,
-  questionsReducer,
-  QuestionSuggestion,
-} from "./questionsReducer.ts";
+import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 import FormContainer from "../FormContainer.tsx";
 import Field from "../token/Field.tsx";
 import {
+  getQuestions,
   handleError,
   handleJson,
-  getQuestions,
   updateQuestion,
 } from "../../../lib/admin/apiClient.ts";
-import {
-  supportedLanguages,
-  supportedLanguagesLabels,
-} from "../model/languages.ts";
 import { MessageType } from "../model.ts";
+import LanguageDropDown from "./LanguageDropDown.tsx";
+import { Suggestion } from "../../../model/message.ts";
 
 const QUESTION_MIN_LENGTH = 4;
 const QUESTION_MAX_LENGTH = 1024;
@@ -28,10 +22,7 @@ const QUESTION_MAX_LENGTH = 1024;
 export default function QuestionsForm() {
   const [t] = useTranslation();
   const { reportUrl } = useContext(ChatContext);
-  const [state, dispatch] = useReducer(
-    questionsReducer,
-    initialQuestionsConfigState,
-  );
+  const { state, dispatch } = useContext(QuestionsContext);
 
   useEffect(() => {
     getQuestions(reportUrl, state.language)
@@ -58,6 +49,7 @@ export default function QuestionsForm() {
     const questionUpdate = state.questionSuggestions.map((qs) => ({
       id: qs.id,
       question: qs.question,
+        suggestions: qs.suggestions
     }));
     dispatch({ type: "processing" });
     updateQuestion(reportUrl, questionUpdate)
@@ -83,6 +75,30 @@ export default function QuestionsForm() {
       .catch((error) => handleError(error, dispatch));
   }
 
+  function onSuggestionsTitleChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    suggestion: Suggestion,
+    questionId: number,
+  ) {
+    dispatch({
+      type: "setSuggestion",
+      questionId,
+      suggestion: { ...suggestion, title: e.target.value },
+    });
+  }
+
+  function onSuggestionsMainTextChange(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    suggestion: Suggestion,
+    questionId: number,
+  ) {
+    dispatch({
+      type: "setSuggestion",
+      questionId,
+      suggestion: { ...suggestion, main_text: e.target.value },
+    });
+  }
+
   function isDisabled() {
     return !state.questionSuggestions.every(
       (qs) =>
@@ -104,42 +120,65 @@ export default function QuestionsForm() {
         disabled={isDisabled()}
         hasReset={false}
       >
-        <Field label={t("Select language")}>
-          <select
-            className="admin-input"
-            onChange={(e) =>
-              dispatch({ type: "setLanguage", language: e.target.value })
-            }
-          >
-            {supportedLanguages.map((language, i) => (
-              <option key={`lang_${i}`} value={language}>
-                {t(supportedLanguagesLabels[language] ?? language)}
-              </option>
-            ))}
-          </select>
-        </Field>
+        <LanguageDropDown />
         {state.questionSuggestions.map((questionSuggestion, i) => {
+          const questionLabel = "Question";
           return (
-            <Field label={t("Question") + ` ${i + 1}`} key={`question_${i}`}>
-              <input
-                type="text"
-                autoFocus={true}
-                className="admin-input"
-                placeholder={t("Messages lower limit")}
-                value={questionSuggestion.question}
-                onChange={(e) => {
-                  dispatch({
-                    type: "setQuestion",
-                    questionSuggestion: {
-                      question: e.target.value,
-                      id: questionSuggestion.id,
-                      suggestions: [...questionSuggestion.suggestions],
-                    },
-                    index: i,
-                  });
-                }}
-              />
-            </Field>
+            <Fragment key={`question_${i}`}>
+              <h3 className="ml-3 pt-4">{t(questionLabel)} {i + 1}</h3>
+              <Field label={questionLabel}>
+                <input
+                  type="text"
+                  className="admin-input"
+                  placeholder={t(questionLabel)}
+                  value={questionSuggestion.question}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "setQuestion",
+                      questionSuggestion: {
+                        question: e.target.value,
+                        id: questionSuggestion.id,
+                        suggestions: [...questionSuggestion.suggestions],
+                      },
+                      index: i,
+                    });
+                  }}
+                />
+              </Field>
+              <div className="container suggestions animate-fade-down">
+                {questionSuggestion.suggestions.map((suggestion, j) => {
+                  const suggestionLabel = t("Suggestion") + ` ${j + 1}`;
+                  return (
+                    <div className="suggestion group items-center" key={`question_${i}_suggestion_${j}`}>
+                      <input
+                        type="text"
+                        className="admin-input"
+                        placeholder={suggestionLabel}
+                        value={suggestion.title}
+                        onChange={(e) =>
+                          onSuggestionsTitleChange(
+                            e,
+                            suggestion,
+                            questionSuggestion.id,
+                          )
+                        }
+                      />
+                      <textarea
+                        className="admin-input h-32"
+                        onChange={(e) =>
+                          onSuggestionsMainTextChange(
+                            e,
+                            suggestion,
+                            questionSuggestion.id,
+                          )
+                        }
+                        value={suggestion.main_text}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </Fragment>
           );
         })}
       </FormContainer>

@@ -6,6 +6,7 @@ import { AuthenticationContext } from "../../context/AuthenticationContext.tsx";
 import { useTranslation } from "react-i18next";
 import GlobalConfigForm from "./global/GlobalConfigForm.tsx";
 import QuestionsForm from "./questions/QuestionsForm.tsx";
+import { QuestionsContextProvider } from "./questions/questionsReducer.tsx";
 
 function displayPage(page: PageType) {
   switch (page) {
@@ -14,7 +15,11 @@ function displayPage(page: PageType) {
     case PageType.GLOBAL_CONFIG:
       return <GlobalConfigForm />;
     case PageType.QUESTIONS:
-      return <QuestionsForm />;
+      return (
+        <QuestionsContextProvider>
+          <QuestionsForm />
+        </QuestionsContextProvider>
+      );
     default:
       return <ReportForm />;
   }

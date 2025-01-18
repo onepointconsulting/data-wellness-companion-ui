@@ -15,7 +15,7 @@
 }
 
 .admin-menu > .hamburger-menu > menu {
-  @apply right-0
+  @apply right-0;
 }
 
 .hamburger-menu > menu {

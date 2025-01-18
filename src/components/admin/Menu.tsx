@@ -42,11 +42,14 @@ function Separator() {
   return <span className="dark:text-gray-200">|</span>;
 }
 
-function Logout({isHamburger}: {isHamburger: boolean}) {
+function Logout({ isHamburger }: { isHamburger: boolean }) {
   const [t] = useTranslation();
   const { logout } = useContext(AuthenticationContext);
   return (
-    <li key={`menuItem_${menuItems.length}`} className={`${isHamburger ? "my-2" : ""}`}>
+    <li
+      key={`menuItem_${menuItems.length}`}
+      className={`${isHamburger ? "my-2" : ""}`}
+    >
       <a
         href="#"
         className="px-2 default-link"
@@ -61,7 +64,7 @@ function Logout({isHamburger}: {isHamburger: boolean}) {
   );
 }
 
-function MenuItems({isHamburger}: {isHamburger: boolean}) {
+function MenuItems({ isHamburger }: { isHamburger: boolean }) {
   const [t] = useTranslation();
   const { page, setPage } = useContext(AdminContext);
 
@@ -81,7 +84,7 @@ function MenuItems({isHamburger}: {isHamburger: boolean}) {
           >
             {t(menuItem.key)}
           </a>
-          {!isHamburger && <Separator/>}
+          {!isHamburger && <Separator />}
         </li>
       ))}
     </>
@@ -93,13 +96,13 @@ export default function Menu() {
     <>
       <div className="admin-menu flex justify-end mt-4 lg:hidden">
         <HamburgerWrapper>
-          <MenuItems isHamburger={true}/>
-          <Logout isHamburger={true}/>
+          <MenuItems isHamburger={true} />
+          <Logout isHamburger={true} />
         </HamburgerWrapper>
       </div>
       <menu className="hidden lg:flex justify-end pt-3">
-        <MenuItems isHamburger={false}/>
-        <Logout isHamburger={false}/>
+        <MenuItems isHamburger={false} />
+        <Logout isHamburger={false} />
       </menu>
     </>
   );

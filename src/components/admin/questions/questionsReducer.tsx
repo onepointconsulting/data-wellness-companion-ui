@@ -1,5 +1,7 @@
 import FormProperties from "../model/formProperties.ts";
 import { MessageType } from "../model.ts";
+import { createContext, Dispatch, ReactNode, useReducer } from "react";
+import { Suggestion } from "../../../model/message.ts";
 
 export interface QuestionsConfigState extends FormProperties {
   questionSuggestions: QuestionSuggestion[];
@@ -10,15 +12,6 @@ export interface QuestionSuggestion {
   id: number;
   question: string;
   suggestions: Suggestion[];
-}
-
-interface Suggestion {
-  id: number;
-  img_src: string;
-  img_alt: string;
-  title: string;
-  main_text: string;
-  svg_image: string;
 }
 
 export const initialQuestionsConfigState: QuestionsConfigState = {
@@ -45,7 +38,6 @@ export type QuestionsAction =
       type: "setSuggestion";
       suggestion: Suggestion;
       questionId: number;
-      suggestionId: number;
     }
   | { type: "setMessage"; message: string; messageType: MessageType };
 
@@ -85,7 +77,7 @@ export function questionsReducer(
       }
       const foundQuestion = state.questionSuggestions[foundQuestionIndex];
       const foundSuggestionIndex = foundQuestion.suggestions.findIndex(
-        (s) => s.id === action.suggestionId,
+        (s) => s.id === action.suggestion.id,
       );
       if (foundSuggestionIndex === -1) {
         return state; // No changes made
@@ -125,3 +117,29 @@ export function questionsReducer(
       };
   }
 }
+
+export interface QuestionsState {
+  state: QuestionsConfigState;
+  dispatch: Dispatch<QuestionsAction>;
+}
+
+export const QuestionsContext = createContext<QuestionsState>({
+  state: initialQuestionsConfigState,
+  dispatch: () => null,
+});
+
+export const QuestionsContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [state, dispatch] = useReducer(
+    questionsReducer,
+    initialQuestionsConfigState,
+  );
+  return (
+    <QuestionsContext.Provider value={{ state, dispatch }}>
+      {children}
+    </QuestionsContext.Provider>
+  );
+};

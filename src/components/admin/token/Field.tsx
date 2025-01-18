@@ -10,7 +10,7 @@ export default function Field({
 }) {
   const [t] = useTranslation();
   return (
-    <div className="flex flex-wrap mt-8">
+    <div className="flex flex-wrap mt-4">
       <div className="w-full md:w-2/12 md:text-right pr-2 md:mt-2 dark:text-gray-100">
         {t(label)}:
       </div>
