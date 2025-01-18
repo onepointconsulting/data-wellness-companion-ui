@@ -1,20 +1,15 @@
-import { useTranslation } from "react-i18next";
-import { Fragment, useContext, useEffect } from "react";
-import { ChatContext } from "../../../context/ChatContext.tsx";
-import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
+import {useTranslation} from "react-i18next";
+import {Fragment, useContext, useEffect} from "react";
+import {ChatContext} from "../../../context/ChatContext.tsx";
+import {QuestionsContext, QuestionSuggestion} from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 import FormContainer from "../FormContainer.tsx";
-import Field from "../token/Field.tsx";
-import {
-  getQuestions,
-  handleError,
-  handleJson,
-  updateQuestion,
-} from "../../../lib/admin/apiClient.ts";
-import { MessageType } from "../model.ts";
+import {getQuestions, handleError, handleJson, updateQuestion,} from "../../../lib/admin/apiClient.ts";
+import {MessageType} from "../model.ts";
 import LanguageDropDown from "./LanguageDropDown.tsx";
-import { Suggestion } from "../../../model/message.ts";
+import {Suggestion} from "../../../model/message.ts";
+import QuestionField from "./QuestionField.tsx";
 
 const QUESTION_MIN_LENGTH = 4;
 const QUESTION_MAX_LENGTH = 1024;
@@ -128,25 +123,7 @@ export default function QuestionsForm() {
               <h3 className="ml-3 pt-4">
                 {t(questionLabel)} {i + 1}
               </h3>
-              <Field label={questionLabel}>
-                <input
-                  type="text"
-                  className="admin-input"
-                  placeholder={t(questionLabel)}
-                  value={questionSuggestion.question}
-                  onChange={(e) => {
-                    dispatch({
-                      type: "setQuestion",
-                      questionSuggestion: {
-                        question: e.target.value,
-                        id: questionSuggestion.id,
-                        suggestions: [...questionSuggestion.suggestions],
-                      },
-                      index: i,
-                    });
-                  }}
-                />
-              </Field>
+              <QuestionField i={i} questionSuggestion={questionSuggestion} />
               <div className="container suggestions animate-fade-down">
                 {questionSuggestion.suggestions.map((suggestion, j) => {
                   const suggestionLabel = t("Suggestion") + ` ${j + 1}`;
@@ -155,6 +132,7 @@ export default function QuestionsForm() {
                       className="suggestion group items-center"
                       key={`question_${i}_suggestion_${j}`}
                     >
+                      {suggestion.svg_image && <div dangerouslySetInnerHTML={{__html: suggestion.svg_image}}/>}
                       <input
                         type="text"
                         className="admin-input"
