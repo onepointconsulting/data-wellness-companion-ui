@@ -72,11 +72,7 @@ export async function getQuestions(baseUrl: string, language: string) {
 }
 
 export async function updateQuestion(baseUrl: string, questionUpdate: object) {
-  return processPost(
-      baseUrl,
-      "protected/questions/update",
-      questionUpdate,
-  );
+  return processPost(baseUrl, "protected/questions/update", questionUpdate);
 }
 
 export function handleJson(response: Response) {

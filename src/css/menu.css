@@ -2,12 +2,20 @@
   @apply relative z-10;
 }
 
+.admin-menu > .hamburger-menu > div > svg {
+  @apply cursor-pointer mr-0;
+}
+
 .hamburger-menu > div > svg {
   @apply cursor-pointer mr-6;
 }
 
 .hamburger-menu > div > svg > path {
   @apply dark:!fill-gray-100;
+}
+
+.admin-menu > .hamburger-menu > menu {
+  @apply right-0
 }
 
 .hamburger-menu > menu {

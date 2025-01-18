@@ -1,12 +1,12 @@
-export const DEFAULT_LANGUAGE = "en"
+export const DEFAULT_LANGUAGE = "en";
 
 export const supportedLanguages = [DEFAULT_LANGUAGE, "de"];
 
 interface Map {
-    [key: string]: string | undefined
+  [key: string]: string | undefined;
 }
 
 export const supportedLanguagesLabels: Map = {
-    "en": "English",
-    "de": "German"
-}
+  en: "English",
+  de: "German",
+};
