@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {Fragment, useContext, useEffect} from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { ChatContext } from "../../../context/ChatContext.tsx";
 import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
@@ -49,7 +49,7 @@ export default function QuestionsForm() {
     const questionUpdate = state.questionSuggestions.map((qs) => ({
       id: qs.id,
       question: qs.question,
-        suggestions: qs.suggestions
+      suggestions: qs.suggestions,
     }));
     dispatch({ type: "processing" });
     updateQuestion(reportUrl, questionUpdate)
@@ -125,7 +125,9 @@ export default function QuestionsForm() {
           const questionLabel = "Question";
           return (
             <Fragment key={`question_${i}`}>
-              <h3 className="ml-3 pt-4">{t(questionLabel)} {i + 1}</h3>
+              <h3 className="ml-3 pt-4">
+                {t(questionLabel)} {i + 1}
+              </h3>
               <Field label={questionLabel}>
                 <input
                   type="text"
@@ -149,7 +151,10 @@ export default function QuestionsForm() {
                 {questionSuggestion.suggestions.map((suggestion, j) => {
                   const suggestionLabel = t("Suggestion") + ` ${j + 1}`;
                   return (
-                    <div className="suggestion group items-center" key={`question_${i}_suggestion_${j}`}>
+                    <div
+                      className="suggestion group items-center"
+                      key={`question_${i}_suggestion_${j}`}
+                    >
                       <input
                         type="text"
                         className="admin-input"
