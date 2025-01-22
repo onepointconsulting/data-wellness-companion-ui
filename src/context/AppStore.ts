@@ -36,7 +36,7 @@ export const useAppStore = create<AppStoreState>((set) => ({
   generatingReport: false,
   setGeneratingReport: (generatingReport: boolean) =>
     set((state) => ({ ...state, generatingReport })),
-  seenIntro: false,
+  seenIntro: true,
   setSeenIntro: (seenIntro: boolean) =>
     set((state) => ({ ...state, seenIntro })),
   messageLowerLimit: DEFAULT_MESSAGE_LOWER_LIMIT,
