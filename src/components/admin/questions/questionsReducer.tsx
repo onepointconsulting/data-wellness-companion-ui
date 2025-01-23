@@ -6,6 +6,7 @@ import { Suggestion } from "../../../model/message.ts";
 export interface QuestionsConfigState extends FormProperties {
   questionSuggestions: QuestionSuggestion[];
   editSuggestion: Suggestion | null;
+  editQuestion: QuestionSuggestion | null;
   language: string;
 }
 
@@ -20,6 +21,7 @@ export const initialQuestionsConfigState: QuestionsConfigState = {
   processing: false,
   questionSuggestions: [],
   editSuggestion: null,
+  editQuestion: null,
   language: "en",
 };
 
@@ -42,13 +44,45 @@ export type QuestionsAction =
       questionId: number;
     }
   | { type: "setMessage"; message: string; messageType: MessageType }
-    | { type: "editSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion };
+    | { type: "editSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion }
+    | { type: "saveSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion };
 
 function findQuestionIndex(
   questionSuggestions: QuestionSuggestion[],
   id: number,
 ) {
   return questionSuggestions.findIndex((q) => q.id === id);
+}
+
+function findSuggestionIndex(foundQuestion: QuestionSuggestion, suggestion: Suggestion): number {
+  return foundQuestion.suggestions.findIndex((s) => s.id === suggestion.id)
+}
+
+function rebuildQuestion(state: QuestionsConfigState, questionId: number, suggestion: Suggestion) {
+  const foundQuestionIndex = findQuestionIndex(state.questionSuggestions, questionId);
+  if (foundQuestionIndex === -1) {
+    return state; // No changes made
+  }
+  const foundQuestion = state.questionSuggestions[foundQuestionIndex];
+  const foundSuggestionIndex = findSuggestionIndex(foundQuestion, suggestion)
+  if (foundSuggestionIndex === -1) {
+    return state; // No changes made
+  }
+  const updatedSuggestions = [
+    ...foundQuestion.suggestions.slice(0, foundSuggestionIndex),
+    { ...suggestion },
+    ...foundQuestion.suggestions.slice(foundSuggestionIndex + 1),
+  ];
+  const updatedQuestion = {
+    ...foundQuestion,
+    suggestions: updatedSuggestions,
+  };
+  const updatedQuestions = [
+    ...state.questionSuggestions.slice(0, foundQuestionIndex),
+    updatedQuestion,
+    ...state.questionSuggestions.slice(foundQuestionIndex + 1),
+  ];
+  return { ...state, questionSuggestions: updatedQuestions };
 }
 
 export function questionsReducer(
@@ -70,37 +104,8 @@ export function questionsReducer(
         processing: false,
       };
     }
-    case "setSuggestion": {
-      const foundQuestionIndex = findQuestionIndex(
-        state.questionSuggestions,
-        action.questionId,
-      );
-      if (foundQuestionIndex === -1) {
-        return state; // No changes made
-      }
-      const foundQuestion = state.questionSuggestions[foundQuestionIndex];
-      const foundSuggestionIndex = foundQuestion.suggestions.findIndex(
-        (s) => s.id === action.suggestion.id,
-      );
-      if (foundSuggestionIndex === -1) {
-        return state; // No changes made
-      }
-      const updatedSuggestions = [
-        ...foundQuestion.suggestions.slice(0, foundSuggestionIndex),
-        { ...action.suggestion },
-        ...foundQuestion.suggestions.slice(foundSuggestionIndex + 1),
-      ];
-      const updatedQuestion = {
-        ...foundQuestion,
-        suggestions: updatedSuggestions,
-      };
-      const updatedQuestions = [
-        ...state.questionSuggestions.slice(0, foundQuestionIndex),
-        updatedQuestion,
-        ...state.questionSuggestions.slice(foundQuestionIndex + 1),
-      ];
-      return { ...state, questionSuggestions: updatedQuestions };
-    }
+    case "setSuggestion":
+      return rebuildQuestion(state, action.questionId, action.suggestion)
     case "setQuestionSuggestions":
       return {
         ...state,
@@ -124,6 +129,9 @@ export function questionsReducer(
         editSuggestion: action.editSuggestion,
         editQuestion: action.editQuestion
       }
+    case "saveSuggestionSvg": {
+      return rebuildQuestion(state, action.editQuestion.id, action.editSuggestion)
+    }
   }
 }
 

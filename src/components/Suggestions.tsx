@@ -11,7 +11,7 @@ function adaptSuggestion(suggestion: Suggestion) {
 }
 
 function SuggestionImage({ suggestion }: { suggestion: Suggestion }) {
-  if (!!suggestion.svg_image) {
+  if (suggestion.svg_image) {
     return <span dangerouslySetInnerHTML={{ __html: suggestion.svg_image }} />;
   }
   return (
@@ -61,20 +61,19 @@ export function SuggestionTemplate({
         ${isActive(chatText, suggestion, messages, currentMessage, message) ? "active" : ""} ${isSuggestionDeactivated ? "has-report" : ""}`}
       onClick={handleSuggestion}
     >
-      {suggestion.img_src && (
-        <div className="suggestion-img">
-          <a href={suggestion.title} onClick={handleSuggestion}>
-            <SuggestionImage suggestion={suggestion} />
-          </a>
-          <div className="suggestion-title">
-            {suggestion.title && (
-              <>
-                <b>{suggestion.title}</b>{" "}
-              </>
-            )}
-          </div>
+
+      <div className="suggestion-img">
+        {(suggestion.img_src || suggestion.svg_image) && <a href={suggestion.title} onClick={handleSuggestion}>
+          <SuggestionImage suggestion={suggestion}/>
+        </a>}
+        <div className="suggestion-title">
+          {suggestion.title && (
+            <>
+              <b>{suggestion.title}</b>{" "}
+            </>
+          )}
         </div>
-      )}
+      </div>
       <div className="duration-200 suggestion-text">
         <div>{suggestion.main_text}</div>
       </div>
