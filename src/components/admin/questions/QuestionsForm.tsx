@@ -1,20 +1,16 @@
-import { useTranslation } from "react-i18next";
-import { Fragment, useContext, useEffect } from "react";
-import { ChatContext } from "../../../context/ChatContext.tsx";
-import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
+import {useTranslation} from "react-i18next";
+import {Fragment, useContext, useEffect} from "react";
+import {ChatContext} from "../../../context/ChatContext.tsx";
+import {QuestionsContext, QuestionSuggestion} from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 import FormContainer from "../FormContainer.tsx";
-import {
-  getQuestions,
-  handleError,
-  handleJson,
-  updateQuestion,
-} from "../../../lib/admin/apiClient.ts";
-import { MessageType } from "../model.ts";
+import {getQuestions, handleError, handleJson, updateQuestion,} from "../../../lib/admin/apiClient.ts";
+import {MessageType} from "../model.ts";
 import LanguageDropDown from "./LanguageDropDown.tsx";
-import { Suggestion } from "../../../model/message.ts";
 import QuestionField from "./QuestionField.tsx";
+import QuestionTile from "./QuestionTile.tsx";
+import ImageSvgDialogue from "../dialogue/ImageSvgDialogue.tsx";
 
 const QUESTION_MIN_LENGTH = 4;
 const QUESTION_MAX_LENGTH = 1024;
@@ -75,30 +71,6 @@ export default function QuestionsForm() {
       .catch((error) => handleError(error, dispatch));
   }
 
-  function onSuggestionsTitleChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    suggestion: Suggestion,
-    questionId: number,
-  ) {
-    dispatch({
-      type: "setSuggestion",
-      questionId,
-      suggestion: { ...suggestion, title: e.target.value },
-    });
-  }
-
-  function onSuggestionsMainTextChange(
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    suggestion: Suggestion,
-    questionId: number,
-  ) {
-    dispatch({
-      type: "setSuggestion",
-      questionId,
-      suggestion: { ...suggestion, main_text: e.target.value },
-    });
-  }
-
   function isDisabled() {
     return !state.questionSuggestions.every(
       (qs) =>
@@ -114,6 +86,7 @@ export default function QuestionsForm() {
       message={state.message}
       messageType={state.messageType}
     >
+      <ImageSvgDialogue />
       <FormContainer
         onReset={() => {}}
         onSubmit={handleSubmission(onSubmit)}
@@ -131,45 +104,7 @@ export default function QuestionsForm() {
               <QuestionField i={i} questionSuggestion={questionSuggestion} />
               <div className="container suggestions animate-fade-down">
                 {questionSuggestion.suggestions.map((suggestion, j) => {
-                  const suggestionLabel = t("Suggestion") + ` ${j + 1}`;
-                  return (
-                    <div
-                      className="suggestion group items-center"
-                      key={`question_${i}_suggestion_${j}`}
-                    >
-                      {suggestion.svg_image && (
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: suggestion.svg_image,
-                          }}
-                        />
-                      )}
-                      <input
-                        type="text"
-                        className="admin-input"
-                        placeholder={suggestionLabel}
-                        value={suggestion.title}
-                        onChange={(e) =>
-                          onSuggestionsTitleChange(
-                            e,
-                            suggestion,
-                            questionSuggestion.id,
-                          )
-                        }
-                      />
-                      <textarea
-                        className="admin-input h-32"
-                        onChange={(e) =>
-                          onSuggestionsMainTextChange(
-                            e,
-                            suggestion,
-                            questionSuggestion.id,
-                          )
-                        }
-                        value={suggestion.main_text}
-                      />
-                    </div>
-                  );
+                  return <QuestionTile questionSuggestion={questionSuggestion} suggestion={suggestion} j={j} key={`question_${i}_suggestion_${j}`} />
                 })}
               </div>
             </Fragment>

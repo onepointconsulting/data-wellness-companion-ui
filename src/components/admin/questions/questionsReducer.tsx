@@ -5,6 +5,7 @@ import { Suggestion } from "../../../model/message.ts";
 
 export interface QuestionsConfigState extends FormProperties {
   questionSuggestions: QuestionSuggestion[];
+  editSuggestion: Suggestion | null;
   language: string;
 }
 
@@ -18,6 +19,7 @@ export const initialQuestionsConfigState: QuestionsConfigState = {
   message: "",
   processing: false,
   questionSuggestions: [],
+  editSuggestion: null,
   language: "en",
 };
 
@@ -39,7 +41,8 @@ export type QuestionsAction =
       suggestion: Suggestion;
       questionId: number;
     }
-  | { type: "setMessage"; message: string; messageType: MessageType };
+  | { type: "setMessage"; message: string; messageType: MessageType }
+    | { type: "editSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion };
 
 function findQuestionIndex(
   questionSuggestions: QuestionSuggestion[],
@@ -115,6 +118,12 @@ export function questionsReducer(
         messageType: action.messageType,
         processing: false,
       };
+    case "editSuggestionSvg":
+      return {
+        ...state,
+        editSuggestion: action.editSuggestion,
+        editQuestion: action.editQuestion
+      }
   }
 }
 
