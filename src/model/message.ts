@@ -16,6 +16,7 @@ export type Message = {
   suggestions: Suggestion[];
   clarification: string | undefined;
   confidence?: Confidence;
+  question_id: string | undefined
 };
 
 export type RegenerateMessage = {

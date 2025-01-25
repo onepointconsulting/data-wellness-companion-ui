@@ -47,7 +47,7 @@ export default function CompanionParent() {
 
   const { giveMeReportNow } = useGiveMeReportNow();
 
-  const imageAlt = t("Clustre-Onepoint logo");
+  const imageAlt = t("logo-alt");
 
   const imageNodeFunc = () => {
     return <img className="w-96" src="logo.svg" alt={imageAlt} />;

@@ -48,7 +48,7 @@ export default function Question({
   return (
     <>
       <div className="question container" ref={questionRef}>
-        <div className="dark:text-gray-100">
+        <div className="dark:text-gray-100 w-full">
           <div className="flex">
             <div className="flex-1">
               {messageText}

@@ -26,6 +26,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
       answer: message.answer,
       final_report: message.final_report,
       clarification: message.clarification ?? "",
+      question_id: message.question_id,
       suggestions: message.suggestions.map((suggestion: any) => ({
         id: suggestion.id,
         img_alt: suggestion.img_alt,

@@ -10,7 +10,7 @@ import { ReportLink } from "./ReportLink.tsx";
 
 export default function Regenerate() {
   const [t] = useTranslation();
-  const { sending, setSending, currentMessage, isLast } =
+  const { sending, setSending, currentMessage, messages, isLast } =
     useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
@@ -19,7 +19,7 @@ export default function Regenerate() {
     sendRegenerateMessage(socket.current);
   }
 
-  if (!isLast || currentMessage === 0) {
+  if (!isLast || currentMessage === 0 || messages[currentMessage]?.question_id) {
     return null;
   }
 
@@ -34,7 +34,7 @@ export default function Regenerate() {
         <ReportLink
           click={onRegenerate}
           title={t("Regenerate")}
-          clazzName="final-report-email !mr-3 mt-3"
+          clazzName="final-report-email mt-3"
         >
           <MdOutlineReplay className="!fill-gray-900 dark:!fill-gray-100" />
         </ReportLink>

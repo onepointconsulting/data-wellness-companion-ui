@@ -43,16 +43,15 @@ export default function QuestionTile({questionSuggestion, suggestion, j}: {quest
         <div
             className="suggestion group items-center"
         >
-            {suggestion.svg_image && (
-                <div className="flex">
-                    <div
-                        dangerouslySetInnerHTML={{
-                            __html: suggestion.svg_image,
-                        }}
-                    />
-                    <button className="final-report-email" onClick={onEditSvg}>{t("Edit")}</button>
-                </div>
-            )}
+
+            <div className="flex">
+                {suggestion.svg_image && <div
+                    dangerouslySetInnerHTML={{
+                        __html: suggestion.svg_image,
+                    }}
+                />}
+                <button className={`final-report-email ${!suggestion.svg_image ? "!-ml-0" : ""}`} onClick={onEditSvg}>{t("Edit image")}</button>
+            </div>
             <input
                 type="text"
                 className="admin-input"

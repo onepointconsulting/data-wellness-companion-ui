@@ -5,7 +5,6 @@ import SessionSwitch from "./SessionSwitch.tsx";
 import TermsButton from "./TermsButton.tsx";
 import HamburgerWrapper from "./HamburgerWrapper.tsx";
 import InfoButton from "./InfoButton.tsx";
-import LanguageSwitch from "./LanguageSwitch.tsx";
 import ChatModeButton from "./ChatModeButton.tsx";
 
 /**
@@ -22,7 +21,6 @@ export default function HamburgerMenu() {
       <SessionSwitch />
       <hr className="mt-6 mb-6 h-[1px] bg-black dark:bg-gray-100 w-full" />
       <DarkModeButton />
-      <LanguageSwitch />
       <ChatModeButton />
     </HamburgerWrapper>
   );

@@ -14,7 +14,7 @@ export default function MainApp() {
   const [t] = useTranslation();
   const { displayRegistrationMessage } = useContext(AppContext);
 
-  const imageAlt = t("D-Well logo");
+  const imageAlt = t("logo-alt");
 
   const imageNodeFunc = () => {
     return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;

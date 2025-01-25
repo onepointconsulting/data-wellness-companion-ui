@@ -12,7 +12,7 @@ export default function OnepointInfo() {
         {t("Company name")}
       </a>{" "}
       {t(
-        "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data.",
+        "assistant-explanation",
       )}
       <br />
       {t(

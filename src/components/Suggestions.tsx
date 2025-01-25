@@ -66,13 +66,9 @@ export function SuggestionTemplate({
         {(suggestion.img_src || suggestion.svg_image) && <a href={suggestion.title} onClick={handleSuggestion}>
           <SuggestionImage suggestion={suggestion}/>
         </a>}
-        <div className="suggestion-title">
-          {suggestion.title && (
-            <>
-              <b>{suggestion.title}</b>{" "}
-            </>
-          )}
-        </div>
+        {suggestion.title && <div className="suggestion-title">
+          <b>{suggestion.title}</b>{" "}
+        </div>}
       </div>
       <div className="duration-200 suggestion-text">
         <div>{suggestion.main_text}</div>
