@@ -16,7 +16,7 @@
   @apply relative top-0.5;
 }
 
-.send-button path {
+#send-button path {
   @apply dark:fill-gray-200;
 }
 

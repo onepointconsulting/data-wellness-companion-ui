@@ -1,9 +1,11 @@
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { sendClientMessage } from "../lib/websocketFunctions.ts";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { useTranslation } from "react-i18next";
+import {useContext, useEffect, useRef} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {sendClientMessage} from "../lib/websocketFunctions.ts";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {useTranslation} from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
+import useSpeechRecognition from "../hooks/useSpeechRecognition.ts";
+import {MdHeadset} from "react-icons/md";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -29,6 +31,7 @@ export default function ChatInput() {
     updatingConfidence,
     currentMessage,
   } = useContext(AppContext);
+  const {onToggleVoice, deactivateVoice, voiceOn, hasSpeechRecognition} = useSpeechRecognition()
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
@@ -63,6 +66,7 @@ export default function ChatInput() {
   }
 
   function sendEnterMessage(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    deactivateVoice()
     if (!e.shiftKey && e.key === "Enter" && chatText.length > 0) {
       sendMessage();
       // resetHeight();
@@ -98,6 +102,9 @@ export default function ChatInput() {
           />
         )}
         <div className="chat-input">
+          {connected && hasSpeechRecognition && (
+              <button className={`disabled:opacity-10 mr-2 ${voiceOn ? 'text-green-700' : ''}`} onClick={onToggleVoice} disabled={sending || !connected}><MdHeadset className="h-10 w-10"/></button>
+          )}
           <textarea
             className="chat-textarea"
             aria-invalid="false"

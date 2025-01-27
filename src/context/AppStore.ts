@@ -27,6 +27,8 @@ interface AppStoreState {
   setShowCompletionPopup: (seenCompletionPopup: boolean) => void;
   expectedNodes: number;
   setExpectedNodes: (expectedNodes: number) => void;
+  voiceOn: boolean;
+  setVoiceOn: (seenCompletionPopup: boolean) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -76,6 +78,9 @@ export const useAppStore = create<AppStoreState>((set) => ({
   expectedNodes: DEFAULT_EXPECTED_NODES,
   setExpectedNodes: (expectedNodes: number) =>
     set((state) => ({ ...state, expectedNodes })),
+  voiceOn: false,
+  setVoiceOn: (voiceOn: boolean) =>
+      set((state) => ({ ...state, voiceOn }))
 }));
 
 export function isDisplayReportGenerationMessage(
