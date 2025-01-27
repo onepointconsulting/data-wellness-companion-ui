@@ -44,8 +44,16 @@ export type QuestionsAction =
       questionId: number;
     }
   | { type: "setMessage"; message: string; messageType: MessageType }
-    | { type: "editSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion }
-    | { type: "saveSuggestionSvg"; editSuggestion: Suggestion, editQuestion: QuestionSuggestion };
+  | {
+      type: "editSuggestionSvg";
+      editSuggestion: Suggestion;
+      editQuestion: QuestionSuggestion;
+    }
+  | {
+      type: "saveSuggestionSvg";
+      editSuggestion: Suggestion;
+      editQuestion: QuestionSuggestion;
+    };
 
 function findQuestionIndex(
   questionSuggestions: QuestionSuggestion[],
@@ -54,17 +62,27 @@ function findQuestionIndex(
   return questionSuggestions.findIndex((q) => q.id === id);
 }
 
-function findSuggestionIndex(foundQuestion: QuestionSuggestion, suggestion: Suggestion): number {
-  return foundQuestion.suggestions.findIndex((s) => s.id === suggestion.id)
+function findSuggestionIndex(
+  foundQuestion: QuestionSuggestion,
+  suggestion: Suggestion,
+): number {
+  return foundQuestion.suggestions.findIndex((s) => s.id === suggestion.id);
 }
 
-function rebuildQuestion(state: QuestionsConfigState, questionId: number, suggestion: Suggestion) {
-  const foundQuestionIndex = findQuestionIndex(state.questionSuggestions, questionId);
+function rebuildQuestion(
+  state: QuestionsConfigState,
+  questionId: number,
+  suggestion: Suggestion,
+) {
+  const foundQuestionIndex = findQuestionIndex(
+    state.questionSuggestions,
+    questionId,
+  );
   if (foundQuestionIndex === -1) {
     return state; // No changes made
   }
   const foundQuestion = state.questionSuggestions[foundQuestionIndex];
-  const foundSuggestionIndex = findSuggestionIndex(foundQuestion, suggestion)
+  const foundSuggestionIndex = findSuggestionIndex(foundQuestion, suggestion);
   if (foundSuggestionIndex === -1) {
     return state; // No changes made
   }
@@ -105,7 +123,7 @@ export function questionsReducer(
       };
     }
     case "setSuggestion":
-      return rebuildQuestion(state, action.questionId, action.suggestion)
+      return rebuildQuestion(state, action.questionId, action.suggestion);
     case "setQuestionSuggestions":
       return {
         ...state,
@@ -127,10 +145,14 @@ export function questionsReducer(
       return {
         ...state,
         editSuggestion: action.editSuggestion,
-        editQuestion: action.editQuestion
-      }
+        editQuestion: action.editQuestion,
+      };
     case "saveSuggestionSvg": {
-      return rebuildQuestion(state, action.editQuestion.id, action.editSuggestion)
+      return rebuildQuestion(
+        state,
+        action.editQuestion.id,
+        action.editSuggestion,
+      );
     }
   }
 }

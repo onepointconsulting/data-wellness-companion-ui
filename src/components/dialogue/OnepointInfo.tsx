@@ -11,9 +11,7 @@ export default function OnepointInfo() {
       >
         {t("Company name")}
       </a>{" "}
-      {t(
-        "assistant-explanation",
-      )}
+      {t("assistant-explanation")}
       <br />
       {t(
         "It will go through a series of questions and then will provide you with a report with recommendations at the end.",

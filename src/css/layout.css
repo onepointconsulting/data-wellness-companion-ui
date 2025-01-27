@@ -31,7 +31,7 @@
 }
 
 #root .question.container {
-  @apply ml-3 pr-2
+  @apply ml-3 pr-2;
 }
 
 #root .question {

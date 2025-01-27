@@ -1,12 +1,17 @@
-import {useTranslation} from "react-i18next";
-import {Fragment, useContext, useEffect} from "react";
-import {ChatContext} from "../../../context/ChatContext.tsx";
-import {QuestionsContext, QuestionSuggestion} from "./questionsReducer.tsx";
+import { useTranslation } from "react-i18next";
+import { Fragment, useContext, useEffect } from "react";
+import { ChatContext } from "../../../context/ChatContext.tsx";
+import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 import FormContainer from "../FormContainer.tsx";
-import {getQuestions, handleError, handleJson, updateQuestion,} from "../../../lib/admin/apiClient.ts";
-import {MessageType} from "../model.ts";
+import {
+  getQuestions,
+  handleError,
+  handleJson,
+  updateQuestion,
+} from "../../../lib/admin/apiClient.ts";
+import { MessageType } from "../model.ts";
 import LanguageDropDown from "./LanguageDropDown.tsx";
 import QuestionField from "./QuestionField.tsx";
 import QuestionTile from "./QuestionTile.tsx";
@@ -104,7 +109,14 @@ export default function QuestionsForm() {
               <QuestionField i={i} questionSuggestion={questionSuggestion} />
               <div className="container suggestions animate-fade-down">
                 {questionSuggestion.suggestions.map((suggestion, j) => {
-                  return <QuestionTile questionSuggestion={questionSuggestion} suggestion={suggestion} j={j} key={`question_${i}_suggestion_${j}`} />
+                  return (
+                    <QuestionTile
+                      questionSuggestion={questionSuggestion}
+                      suggestion={suggestion}
+                      j={j}
+                      key={`question_${i}_suggestion_${j}`}
+                    />
+                  );
                 })}
               </div>
             </Fragment>

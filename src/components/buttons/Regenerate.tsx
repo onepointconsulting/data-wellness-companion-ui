@@ -19,7 +19,11 @@ export default function Regenerate() {
     sendRegenerateMessage(socket.current);
   }
 
-  if (!isLast || currentMessage === 0 || messages[currentMessage]?.question_id) {
+  if (
+    !isLast ||
+    currentMessage === 0 ||
+    messages[currentMessage]?.question_id
+  ) {
     return null;
   }
 

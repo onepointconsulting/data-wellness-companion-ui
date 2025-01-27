@@ -61,14 +61,17 @@ export function SuggestionTemplate({
         ${isActive(chatText, suggestion, messages, currentMessage, message) ? "active" : ""} ${isSuggestionDeactivated ? "has-report" : ""}`}
       onClick={handleSuggestion}
     >
-
       <div className="suggestion-img">
-        {(suggestion.img_src || suggestion.svg_image) && <a href={suggestion.title} onClick={handleSuggestion}>
-          <SuggestionImage suggestion={suggestion}/>
-        </a>}
-        {suggestion.title && <div className="suggestion-title">
-          <b>{suggestion.title}</b>{" "}
-        </div>}
+        {(suggestion.img_src || suggestion.svg_image) && (
+          <a href={suggestion.title} onClick={handleSuggestion}>
+            <SuggestionImage suggestion={suggestion} />
+          </a>
+        )}
+        {suggestion.title && (
+          <div className="suggestion-title">
+            <b>{suggestion.title}</b>{" "}
+          </div>
+        )}
       </div>
       <div className="duration-200 suggestion-text">
         <div>{suggestion.main_text}</div>
