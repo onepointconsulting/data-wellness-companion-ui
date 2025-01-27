@@ -6,9 +6,13 @@ import { useShallow } from "zustand/react/shallow";
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const isSecureContext = window.location.href.startsWith("https://") || window.location.href.includes("localhost");
+const isSecureContext =
+  window.location.href.startsWith("https://") ||
+  window.location.href.includes("localhost") ||
+  window.location.href.includes("127.0.0.1");
 
-const recognition = SpeechRecognition && isSecureContext ? new SpeechRecognition() : null;
+const recognition =
+  SpeechRecognition && isSecureContext ? new SpeechRecognition() : null;
 if (recognition) {
   recognition.continuous = true;
   recognition.lang = "en-GB";
@@ -25,51 +29,24 @@ export default function useSpeechRecognition() {
     try {
       setVoiceListening(false);
       recognition?.stop();
-    } catch(e) {
-      console.error(`Failed to stop ${e}`)
+    } catch (e) {
+      console.error(`Failed to stop ${e}`);
     }
   }
-
-  useEffect(() => {
-    if (recognition) {
-      recognition.onspeechstart = () => {
-        setVoiceListening(true);
-      };
-      recognition.onspeechend = () => {
-        setVoiceListening(false);
-      };
-      recognition.onresult = (event) => {
-        let newText = "";
-        for (const resultList of event.results) {
-          for (const word of resultList) {
-            newText += word.transcript;
-          }
-        }
-        setChatText(newText);
-      };
-    }
-    return () => {
-      if (recognition) {
-        recognition.onspeechstart = null;
-        recognition.onspeechend = null;
-        recognition.onresult = null;
-      }
-    };
-  }, []);
 
   useEffect(() => {
     if (voiceOn) {
       try {
         recognition?.start();
-      } catch(e) {
-        console.error(`Failed to start ${e}`)
+      } catch (e) {
+        console.error(`Failed to stop ${e}`);
       }
     } else {
-      stop()
+      stop();
     }
     return () => {
-      stop()
-    }
+      stop();
+    };
   }, [voiceOn]);
 
   useEffect(() => {
@@ -93,7 +70,23 @@ export default function useSpeechRecognition() {
     }
   }
 
-
+  if (recognition) {
+    recognition.onspeechstart = () => {
+      setVoiceListening(true);
+    };
+    recognition.onspeechend = () => {
+      setVoiceListening(false);
+    };
+    recognition.onresult = (event) => {
+      let newText = "";
+      for (const resultList of event.results) {
+        for (const word of resultList) {
+          newText += word.transcript;
+        }
+      }
+      setChatText(newText);
+    };
+  }
 
   return {
     onToggleVoice,
