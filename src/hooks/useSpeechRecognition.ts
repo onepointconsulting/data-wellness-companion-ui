@@ -6,7 +6,9 @@ import { useShallow } from "zustand/react/shallow";
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const recognition = SpeechRecognition && window.location.href.startsWith("https://") ? new SpeechRecognition() : null;
+const isSecureContext = window.location.href.startsWith("https://") || window.location.href.includes("localhost");
+
+const recognition = SpeechRecognition && isSecureContext ? new SpeechRecognition() : null;
 if (recognition) {
   recognition.continuous = true;
   recognition.lang = "en-GB";
@@ -17,14 +19,56 @@ if (recognition) {
 export default function useSpeechRecognition() {
   const { voiceOn, setVoiceOn, setVoiceListening, voiceListening } =
     useAppStore(useShallow((state) => ({ ...state })));
-  const { messages, setChatText } = useContext(AppContext);
+  const { messages, sending, setChatText } = useContext(AppContext);
+
+  function stop() {
+    try {
+      setVoiceListening(false);
+      recognition?.stop();
+    } catch(e) {
+      console.error(`Failed to stop ${e}`)
+    }
+  }
+
+  useEffect(() => {
+    if (recognition) {
+      recognition.onspeechstart = () => {
+        setVoiceListening(true);
+      };
+      recognition.onspeechend = () => {
+        setVoiceListening(false);
+      };
+      recognition.onresult = (event) => {
+        let newText = "";
+        for (const resultList of event.results) {
+          for (const word of resultList) {
+            newText += word.transcript;
+          }
+        }
+        setChatText(newText);
+      };
+    }
+    return () => {
+      if (recognition) {
+        recognition.onspeechstart = null;
+        recognition.onspeechend = null;
+        recognition.onresult = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (voiceOn) {
-      recognition?.start();
+      try {
+        recognition?.start();
+      } catch(e) {
+        console.error(`Failed to start ${e}`)
+      }
     } else {
-      setVoiceListening(false);
-      recognition?.stop();
+      stop()
+    }
+    return () => {
+      stop()
     }
   }, [voiceOn]);
 
@@ -32,7 +76,7 @@ export default function useSpeechRecognition() {
     setVoiceOn(false);
     setChatText("");
     setVoiceListening(false);
-  }, [messages]);
+  }, [messages, sending]);
 
   function onToggleVoice(e: React.MouseEvent<HTMLButtonElement>) {
     if (recognition) {
@@ -49,23 +93,7 @@ export default function useSpeechRecognition() {
     }
   }
 
-  if (recognition) {
-    recognition.onspeechstart = () => {
-      setVoiceListening(true);
-    };
-    recognition.onspeechend = () => {
-      setVoiceListening(false);
-    };
-    recognition.onresult = (event) => {
-      let newText = "";
-      for (const resultList of event.results) {
-        for (const word of resultList) {
-          newText += word.transcript;
-        }
-      }
-      setChatText(newText);
-    };
-  }
+
 
   return {
     onToggleVoice,
