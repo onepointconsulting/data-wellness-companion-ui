@@ -6,7 +6,7 @@ import { useShallow } from "zustand/react/shallow";
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+const recognition = SpeechRecognition && window.location.href.startsWith("https://") ? new SpeechRecognition() : null;
 if (recognition) {
   recognition.continuous = true;
   recognition.lang = "en-GB";
