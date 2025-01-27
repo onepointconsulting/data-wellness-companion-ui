@@ -15,16 +15,15 @@ if (recognition) {
 }
 
 export default function useSpeechRecognition() {
-  const { voiceOn, setVoiceOn, setVoiceListening, voiceListening } = useAppStore(
-    useShallow((state) => ({ ...state })),
-  );
+  const { voiceOn, setVoiceOn, setVoiceListening, voiceListening } =
+    useAppStore(useShallow((state) => ({ ...state })));
   const { messages, setChatText } = useContext(AppContext);
 
   useEffect(() => {
     if (voiceOn) {
       recognition?.start();
     } else {
-      setVoiceListening(false)
+      setVoiceListening(false);
       recognition?.stop();
     }
   }, [voiceOn]);
@@ -32,7 +31,7 @@ export default function useSpeechRecognition() {
   useEffect(() => {
     setVoiceOn(false);
     setChatText("");
-    setVoiceListening(false)
+    setVoiceListening(false);
   }, [messages]);
 
   function onToggleVoice(e: React.MouseEvent<HTMLButtonElement>) {
@@ -52,11 +51,11 @@ export default function useSpeechRecognition() {
 
   if (recognition) {
     recognition.onspeechstart = () => {
-      setVoiceListening(true)
-    }
+      setVoiceListening(true);
+    };
     recognition.onspeechend = () => {
-      setVoiceListening(false)
-    }
+      setVoiceListening(false);
+    };
     recognition.onresult = (event) => {
       let newText = "";
       for (const resultList of event.results) {
@@ -73,6 +72,6 @@ export default function useSpeechRecognition() {
     deactivateVoice,
     voiceOn,
     hasSpeechRecognition: !!recognition,
-    voiceListening
+    voiceListening,
   };
 }

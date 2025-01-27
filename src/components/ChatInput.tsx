@@ -31,8 +31,13 @@ export default function ChatInput() {
     updatingConfidence,
     currentMessage,
   } = useContext(AppContext);
-  const { onToggleVoice, deactivateVoice, voiceOn, hasSpeechRecognition, voiceListening } =
-    useSpeechRecognition();
+  const {
+    onToggleVoice,
+    deactivateVoice,
+    voiceOn,
+    hasSpeechRecognition,
+    voiceListening,
+  } = useSpeechRecognition();
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
@@ -104,7 +109,7 @@ export default function ChatInput() {
         <div className="chat-input">
           {connected && hasSpeechRecognition && (
             <button
-              className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening? "animate-pulse" : ""}`}
+              className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
               onClick={onToggleVoice}
               disabled={sending || !connected}
             >
@@ -118,7 +123,7 @@ export default function ChatInput() {
             id="chat-input"
             value={chatText}
             onChange={(e) => {
-              setChatText(e.target.value)
+              setChatText(e.target.value);
               deactivateVoice();
             }}
             onKeyUp={sendEnterMessage}

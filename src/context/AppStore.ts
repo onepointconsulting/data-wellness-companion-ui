@@ -83,7 +83,8 @@ export const useAppStore = create<AppStoreState>((set) => ({
   voiceOn: false,
   setVoiceOn: (voiceOn: boolean) => set((state) => ({ ...state, voiceOn })),
   voiceListening: false,
-  setVoiceListening:(voiceListening: boolean) => set((state) => ({ ...state, voiceListening })),
+  setVoiceListening: (voiceListening: boolean) =>
+    set((state) => ({ ...state, voiceListening })),
 }));
 
 export function isDisplayReportGenerationMessage(
