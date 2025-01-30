@@ -16,6 +16,27 @@ function enoughText(chatText: string) {
   return chatText?.length > 2;
 }
 
+function VoiceButton() {
+  const {
+    sending,
+    connected,
+  } = useContext(AppContext);
+  const {
+    onToggleVoice,
+    voiceOn,
+    voiceListening,
+  } = useSpeechRecognition();
+  return (
+      <button
+          className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
+          onClick={onToggleVoice}
+          disabled={sending || !connected}
+      >
+        <MdHeadset className="h-10 w-10"/>
+      </button>
+  )
+}
+
 /**
  * Chat input field to be used in this application.
  * @constructor
@@ -32,11 +53,8 @@ export default function ChatInput() {
     currentMessage,
   } = useContext(AppContext);
   const {
-    onToggleVoice,
     deactivateVoice,
-    voiceOn,
     hasSpeechRecognition,
-    voiceListening,
   } = useSpeechRecognition();
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -107,15 +125,7 @@ export default function ChatInput() {
           />
         )}
         <div className="chat-input">
-          {connected && hasSpeechRecognition && (
-            <button
-              className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
-              onClick={onToggleVoice}
-              disabled={sending || !connected}
-            >
-              <MdHeadset className="h-10 w-10" />
-            </button>
-          )}
+          {connected && hasSpeechRecognition && <VoiceButton />}
           <textarea
             className="chat-textarea"
             aria-invalid="false"
