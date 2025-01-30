@@ -54,25 +54,27 @@ export function SuggestionTemplate({
 }) {
   const { chatText, currentMessage, messages, isSuggestionDeactivated } =
     useContext(AppContext);
+  const hasImage = suggestion.img_src || suggestion.svg_image
+  const hasTitle = suggestion.title
   return (
     <div
       key={`suggestion_${i}`}
-      className={`suggestion group items-center 
+      className={`suggestion group 
         ${isActive(chatText, suggestion, messages, currentMessage, message) ? "active" : ""} ${isSuggestionDeactivated ? "has-report" : ""}`}
       onClick={handleSuggestion}
     >
-      <div className="suggestion-img">
-        {(suggestion.img_src || suggestion.svg_image) && (
-          <a href={suggestion.title} onClick={handleSuggestion}>
-            <SuggestionImage suggestion={suggestion} />
-          </a>
+      {(hasImage || hasTitle) && <div className="suggestion-img">
+        {hasImage && (
+            <a href={suggestion.title} onClick={handleSuggestion}>
+              <SuggestionImage suggestion={suggestion}/>
+            </a>
         )}
-        {suggestion.title && (
-          <div className="suggestion-title">
-            <b>{suggestion.title}</b>{" "}
-          </div>
+        {hasTitle && (
+            <div className="suggestion-title">
+              <b>{suggestion.title}</b>{" "}
+            </div>
         )}
-      </div>
+      </div>}
       <div className="duration-200 suggestion-text">
         <div>{suggestion.main_text}</div>
       </div>
