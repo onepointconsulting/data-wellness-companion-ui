@@ -93,7 +93,21 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      <OntologyGraph />
+      <MarkdownAccordion
+          title={recommendationsTitle}
+          items={advices}
+          defaultOpen={
+              window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
+              null
+          }
+      />
+      <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
+      <MarkdownAccordion
+          title="Benefits (If you follow the advice)"
+          items={benefits}
+      />
+      <ReportConfidenceLevel confidence={confidence} />
+      <Transcript />
       {sessionId && (
         <div className="final-report-download">
           <div className="flex">
@@ -130,21 +144,7 @@ export default function FinalReport({ message }: { message: Message }) {
           </div>
         </div>
       )}
-      <MarkdownAccordion
-        title={recommendationsTitle}
-        items={advices}
-        defaultOpen={
-          window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
-          null
-        }
-      />
-      <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
-      <MarkdownAccordion
-        title="Benefits (If you follow the advice)"
-        items={benefits}
-      />
-      <ReportConfidenceLevel confidence={confidence} />
-      <Transcript />
+      <OntologyGraph />
     </div>
   );
 }

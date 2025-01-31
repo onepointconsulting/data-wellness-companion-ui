@@ -50,7 +50,7 @@ export default function ConfidenceHint({ className }: { className?: string }) {
   const rating = confidence?.rating;
   const hide = !rating || currentMessage === 0;
   return (
-    <div className={`min-h-14 ${className ?? ""}`}>
+    <div className={`mt-12 min-h-14 ${className ?? ""}`}>
       {!hide && updatingConfidence && (
         <div className={`flex flex-row justify-end`}>
           <FaHourglassHalf className="w-6 h-6 fill-gray-400" />
