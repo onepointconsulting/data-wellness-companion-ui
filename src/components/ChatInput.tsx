@@ -17,24 +17,17 @@ function enoughText(chatText: string) {
 }
 
 function VoiceButton() {
-  const {
-    sending,
-    connected,
-  } = useContext(AppContext);
-  const {
-    onToggleVoice,
-    voiceOn,
-    voiceListening,
-  } = useSpeechRecognition();
+  const { sending, connected } = useContext(AppContext);
+  const { onToggleVoice, voiceOn, voiceListening } = useSpeechRecognition();
   return (
-      <button
-          className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
-          onClick={onToggleVoice}
-          disabled={sending || !connected}
-      >
-        <MdHeadset className="h-10 w-10"/>
-      </button>
-  )
+    <button
+      className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
+      onClick={onToggleVoice}
+      disabled={sending || !connected}
+    >
+      <MdHeadset className="h-10 w-10" />
+    </button>
+  );
 }
 
 /**
@@ -52,10 +45,7 @@ export default function ChatInput() {
     updatingConfidence,
     currentMessage,
   } = useContext(AppContext);
-  const {
-    deactivateVoice,
-    hasSpeechRecognition,
-  } = useSpeechRecognition();
+  const { deactivateVoice, hasSpeechRecognition } = useSpeechRecognition();
   const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
