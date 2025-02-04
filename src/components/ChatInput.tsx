@@ -25,7 +25,7 @@ function VoiceButton() {
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
-      <MdMicNone className="h-10 w-10 fill-[#4a4a4a] dark:!fill-gray-700" />
+      <MdMicNone className="h-10 w-10 fill-[#4a4a4a]" />
     </button>
   );
 }
@@ -110,7 +110,7 @@ export default function ChatInput() {
         )}
         {currentMessage > 0 && !sending && (
           <div
-            className="w-full my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] gap-4 p-3"
+            className="w-full my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3"
             dangerouslySetInnerHTML={{ __html: t("placeholder-normal") }}
           />
         )}
