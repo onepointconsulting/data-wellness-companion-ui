@@ -6,7 +6,7 @@ export default function Transcript() {
   const { messages } = useContext(AppContext);
   return (
     <AccordionText title={"Transcript"}>
-      <ol className="text-black list-decimal gray-color">
+      <ol className="text-[#4a4a4a] list-decimal ml-1">
         {messages
           .filter((message) => !message.final_report)
           .map((message, i) => (

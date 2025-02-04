@@ -10,22 +10,28 @@ import { confidenceAdapter } from "../lib/confidenceAdapter.ts";
 import { saveDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import { ReactNode } from "react";
+import { MdAdd, MdOutlineArticle } from "react-icons/md";
 
 function DecisionButtons({
   label,
   onClick,
+  icon: Icon,
 }: {
   label: string;
   onClick: () => void;
+  icon: ReactNode;
 }) {
   const [t] = useTranslation();
   return (
     <div
-      className="border-button w-full md:flex-1 cursor-pointer"
+      className="border-button gap-2 cursor-pointer"
       onClick={onClick}
     >
+      {Icon}
       {t(label)}
     </div>
+    
   );
 }
 
@@ -71,8 +77,8 @@ export default function ConfidenceLevelWarning() {
   }
 
   return (
-    <div className="px-2 py-2">
-      <p>
+    <div className="">
+      <p className="text-xl color-[#4a4a4a] mt-8">
         <Trans
           key="confidence-level-warning"
           i18nKey="confidence-level-warning"
@@ -83,14 +89,16 @@ export default function ConfidenceLevelWarning() {
           }}
         />
       </p>
-      <div className="flex flex-wrap pt-12">
+      <div className="flex flex-wrap pt-12 gap-6">
         <DecisionButtons
           label={"Add more questions"}
           onClick={addMoreQuestions}
+          icon={<MdAdd className="w-8 h-8" />}
         />
         <DecisionButtons
           label={"Generate report now"}
           onClick={giveMeReportNow}
+          icon={<MdOutlineArticle className="w-8 h-8" />}
         />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { ChatContext } from "../../context/ChatContext.tsx";
 import { FaHourglassHalf } from "react-icons/fa";
 import { sendRegenerateMessage } from "../../lib/websocketFunctions.ts";
 import { useTranslation } from "react-i18next";
-import { MdOutlineReplay } from "react-icons/md";
+import { MdRestartAlt } from "react-icons/md";
 
 import { ReportLink } from "./ReportLink.tsx";
 
@@ -40,7 +40,7 @@ export default function Regenerate() {
           title={t("Regenerate")}
           clazzName="final-report-email mt-3"
         >
-          <MdOutlineReplay className="!fill-gray-900 dark:!fill-gray-100" />
+          <MdRestartAlt  className="!fill-[#4a4a4a] dark:!fill-gray-100" />
         </ReportLink>
       )}
     </div>

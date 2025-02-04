@@ -39,14 +39,14 @@ export function AccordionText({
         >
           <polygon
               points="1,1 1,19 12,10"
-              style={{fill: "#a6a6a6", stroke: "#0084d7", strokeWidth: 2}}
+              style={{fill: "#a6a6a600", stroke: "#0084d7", strokeWidth: 2}}
               transform={`rotate(${open ? -90 : 90}, 10, 10)`}
               className="accordion-icon"
           />
         </svg>
       </div>
       <ol
-          className={`m-5 space-y-1 text-black list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
+          className={`space-y-1 text-black list-decimal gray-color overflow-hidden accordion-body ${open ? "max-h-[1600px]" : "max-h-[0px]"}`}
       >
         {children}
       </ol>

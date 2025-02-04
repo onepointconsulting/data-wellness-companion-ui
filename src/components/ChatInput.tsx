@@ -1,11 +1,11 @@
-import {useContext, useEffect, useRef} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {sendClientMessage} from "../lib/websocketFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {useTranslation} from "react-i18next";
+import { useContext, useEffect, useRef } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { sendClientMessage } from "../lib/websocketFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 import useSpeechRecognition from "../hooks/useSpeechRecognition.ts";
-import {MdMic} from "react-icons/md";
+import { MdMicNone } from "react-icons/md";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -25,7 +25,7 @@ function VoiceButton() {
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
-      <MdMic className="h-10 w-10 fill-gray-450" />
+      <MdMicNone className="h-10 w-10 fill-[#4a4a4a]" />
     </button>
   );
 }
