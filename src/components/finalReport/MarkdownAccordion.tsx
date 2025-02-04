@@ -19,10 +19,7 @@ export default function MarkdownAccordion({
         remarkPlugins={[remarkGfm]}
         components={{
           ul: ({ ...props }) => (
-            <ul
-              className="ml-1 text-[#4a4a4a] list-disc"
-              {...props}
-            />
+            <ul className="ml-1 text-[#4a4a4a] list-disc" {...props} />
           ),
           ol: ({ ...props }) => (
             <ol
@@ -33,11 +30,7 @@ export default function MarkdownAccordion({
           li: ({ ...props }) => <li className="mb-4" {...props} />,
           p: ({ ...props }) => <p className="pb-1" {...props} />,
           a: ({ children, ...props }) => (
-            <a
-              className="pb-4 underline sm:pb-2"
-              {...props}
-              target="_blank"
-            >
+            <a className="pb-4 underline sm:pb-2" {...props} target="_blank">
               {children}
             </a>
           ),

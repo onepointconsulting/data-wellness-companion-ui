@@ -32,11 +32,11 @@
     />
 
     <script>
-      const server = "176.34.128.143";
-      const port = 8083;
+      const server = "staging-dwell@onepointltd.ai";
+      const port = 443;
       window.dataWellnessConfig = {
-        websocketUrl: `ws://${server}:${port}`,
-        reportUrl: `http://${server}:${port}`,
+        websocketUrl: `wss://${server}:${port}`,
+        reportUrl: `https://${server}:${port}`,
       };
     </script>
   </head>

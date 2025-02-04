@@ -94,17 +94,17 @@ export default function FinalReport({ message }: { message: Message }) {
   return (
     <div className="final-report">
       <MarkdownAccordion
-          title={recommendationsTitle}
-          items={advices}
-          defaultOpen={
-              window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
-              null
-          }
+        title={recommendationsTitle}
+        items={advices}
+        defaultOpen={
+          window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
+          null
+        }
       />
       <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
       <MarkdownAccordion
-          title="Benefits (If you follow the advice)"
-          items={benefits}
+        title="Benefits (If you follow the advice)"
+        items={benefits}
       />
       <ReportConfidenceLevel confidence={confidence} />
       <Transcript />
@@ -113,15 +113,14 @@ export default function FinalReport({ message }: { message: Message }) {
           <div className="flex">
             <ReportLink
               click={(e) => {
-                e.preventDefault()
-                setOntologyOpen(!ontologyOpen)
+                e.preventDefault();
+                setOntologyOpen(!ontologyOpen);
                 setTimeout(() => {
                   window.scrollTo({
                     top: document.body.scrollHeight,
-                    behavior: 'smooth'
+                    behavior: "smooth",
                   });
-                }, 1000)
-
+                }, 1000);
               }}
               title={t("Knowledge graph")}
               clazzName="final-report-pdf"

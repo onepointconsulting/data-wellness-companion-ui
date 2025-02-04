@@ -35,7 +35,9 @@ export default function ConfidenceDialogue() {
         onClose={() => onCloseDialogue(CONFIDENCE_DIALOGUE_ID)}
         className="!pl-3 !pr-0 !pt-0"
       >
-        <div className="text-lg font-bold text-[#4a4a4a]">{t("Confidence level")}</div>
+        <div className="text-lg font-bold text-[#4a4a4a]">
+          {t("Confidence level")}
+        </div>
       </DialogueHeader>
       <div className="flex flex-col items-start px-2.5">
         <div className="text-2xl font-bold pt-2 text-[#4a4a4a]">

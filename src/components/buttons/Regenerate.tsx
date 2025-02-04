@@ -40,7 +40,7 @@ export default function Regenerate() {
           title={t("Regenerate")}
           clazzName="final-report-email mt-3"
         >
-          <MdRestartAlt  className="!fill-[#4a4a4a] dark:!fill-gray-100" />
+          <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100" />
         </ReportLink>
       )}
     </div>

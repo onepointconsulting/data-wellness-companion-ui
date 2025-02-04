@@ -24,14 +24,10 @@ function DecisionButtons({
 }) {
   const [t] = useTranslation();
   return (
-    <div
-      className="border-button gap-2 cursor-pointer"
-      onClick={onClick}
-    >
+    <div className="border-button gap-2 cursor-pointer" onClick={onClick}>
       {Icon}
       {t(label)}
     </div>
-    
   );
 }
 

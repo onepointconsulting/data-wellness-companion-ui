@@ -10,13 +10,13 @@ export default function Transcript() {
         {messages
           .filter((message) => !message.final_report)
           .map((message, i) => (
-              <li className="mb-4" key={`qa_${i}`}>
-                  <p>
-                      <span className="italic">{message.question}</span>
-                      <br/>
-                      {message.answer}
-                  </p>
-              </li>
+            <li className="mb-4" key={`qa_${i}`}>
+              <p>
+                <span className="italic">{message.question}</span>
+                <br />
+                {message.answer}
+              </p>
+            </li>
           ))}
       </ol>
     </AccordionText>
