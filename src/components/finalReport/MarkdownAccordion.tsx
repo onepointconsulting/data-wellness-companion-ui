@@ -20,7 +20,7 @@ export default function MarkdownAccordion({
         components={{
           ul: ({ ...props }) => (
             <ul
-              className="ml-1 text-black list-disc"
+              className="ml-1 text-[#4a4a4a] list-disc"
               {...props}
             />
           ),

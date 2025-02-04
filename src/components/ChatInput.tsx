@@ -5,7 +5,7 @@ import { ChatContext } from "../context/ChatContext.tsx";
 import { useTranslation } from "react-i18next";
 import SendImage from "./buttons/SendImage.tsx";
 import useSpeechRecognition from "../hooks/useSpeechRecognition.ts";
-import { MdHeadset } from "react-icons/md";
+import { MdMicNone } from "react-icons/md";
 
 function adjustHeight(style: CSSStyleDeclaration, el: HTMLTextAreaElement) {
   style.height = `auto`;
@@ -25,7 +25,7 @@ function VoiceButton() {
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
-      <MdHeadset className="h-10 w-10" />
+      <MdMicNone className="h-10 w-10 fill-[#4a4a4a]" />
     </button>
   );
 }
