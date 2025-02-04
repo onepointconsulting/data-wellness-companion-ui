@@ -112,7 +112,17 @@ export default function FinalReport({ message }: { message: Message }) {
         <div className="final-report-download">
           <div className="flex">
             <ReportLink
-              click={() => setOntologyOpen(!ontologyOpen)}
+              click={(e) => {
+                e.preventDefault()
+                setOntologyOpen(!ontologyOpen)
+                setTimeout(() => {
+                  window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                  });
+                }, 1000)
+
+              }}
               title={t("Knowledge graph")}
               clazzName="final-report-pdf"
             >
