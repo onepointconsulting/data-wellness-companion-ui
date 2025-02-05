@@ -35,11 +35,7 @@ export default function Regenerate() {
         </div>
       )}
       {!sending && (
-        <ReportLink
-          click={onRegenerate}
-          title={t("Regenerate")}
-          clazzName="final-report-email mt-3"
-        >
+        <ReportLink click={onRegenerate} title={t("Regenerate")}>
           <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100" />
         </ReportLink>
       )}

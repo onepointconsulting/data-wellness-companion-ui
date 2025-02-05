@@ -29,7 +29,7 @@ function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
 
 async function fetchOntology(
   sessionId: string,
-  reportUrl: string,
+  reportUrl: string
 ): Promise<Ontology> {
   const res = await fetch(`${reportUrl}/ontology/${sessionId}`);
   if (!res.ok) {
@@ -60,7 +60,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
   const { setOntology } = useContext(AppContext);
   const { ontologyOpen, setOntologyOpen } = useAppStore(
-    useShallow((state) => ({ ...state })),
+    useShallow((state) => ({ ...state }))
   );
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;
@@ -110,7 +110,7 @@ export default function FinalReport({ message }: { message: Message }) {
       <Transcript />
       {sessionId && (
         <div className="final-report-download">
-          <div className="flex">
+          <div className="flex gap-4">
             <ReportLink
               click={(e) => {
                 e.preventDefault();
@@ -123,30 +123,25 @@ export default function FinalReport({ message }: { message: Message }) {
                 }, 1000);
               }}
               title={t("Knowledge graph")}
-              clazzName="final-report-pdf"
             >
               <PiGraphLight />
             </ReportLink>
             <ReportLink
               click={showEmailDialogue}
               title={t("Send report as email")}
-              clazzName="final-report-email"
             >
               <MdOutlineAlternateEmail />
             </ReportLink>
             <ReportLink
               click={(_e) => (location.href = reportPdf)}
               title={t("Download PDF")}
-              clazzName="final-report-pdf"
             >
               <BsFileEarmarkPdf />
             </ReportLink>
-          </div>
-          <div>
+
             <ReportLink
               click={processPopup()}
               title={t("Explore another area of interest")}
-              clazzName="final-report-email"
             >
               <MdOutlineReplay />
             </ReportLink>

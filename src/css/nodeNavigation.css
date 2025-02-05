@@ -1,5 +1,5 @@
 .node-container {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 
 .node {
@@ -31,7 +31,7 @@
 }
 
 .navigation-icon > img {
-  @apply max-w-none w-10 h-10;
+  @apply w-10 h-10 max-w-none;
 }
 
 .node-extra-icon-container {
@@ -47,7 +47,7 @@
 }
 
 .hour-glass {
-  @apply !w-8 !h-8;
+  @apply !w-8 !h-8 dark:!fill-white;
 }
 
 /*.node {*/
