@@ -130,7 +130,7 @@
   @apply dark:!fill-gray-100;
 }
 
-#root .chat-input button svg path[fill=none] {
+#root .chat-input button svg path[fill="none"] {
   @apply dark:!fill-none;
 }
 
