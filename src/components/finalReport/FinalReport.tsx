@@ -22,14 +22,14 @@ import { useShallow } from "zustand/react/shallow";
 import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
 import { ReportLink } from "../buttons/ReportLink.tsx";
 
-function showEmailDialogue(e: React.MouseEvent<HTMLAnchorElement>) {
+function showEmailDialogue(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault();
   showDialogue(EMAIL_DIALOGUE_ID);
 }
 
 async function fetchOntology(
   sessionId: string,
-  reportUrl: string
+  reportUrl: string,
 ): Promise<Ontology> {
   const res = await fetch(`${reportUrl}/ontology/${sessionId}`);
   if (!res.ok) {
@@ -60,7 +60,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
   const { setOntology } = useContext(AppContext);
   const { ontologyOpen, setOntologyOpen } = useAppStore(
-    useShallow((state) => ({ ...state }))
+    useShallow((state) => ({ ...state })),
   );
   const { reportUrl } = useContext(ChatContext);
   const sessionId = getSession()?.id;

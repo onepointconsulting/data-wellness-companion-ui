@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useRef} from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 import { JoyrideContext } from "../../context/JoyrideContext.tsx";
 
@@ -12,15 +12,18 @@ export default function HamburgerWrapper({
   const menuRef = useRef<HTMLMenuElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    if (
-      !menuRef.current?.contains(target) &&
-      !imgRef.current?.contains(target)
-    ) {
-      setOpen(false);
-    }
-  }, [setOpen]);
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        !menuRef.current?.contains(target) &&
+        !imgRef.current?.contains(target)
+      ) {
+        setOpen(false);
+      }
+    },
+    [setOpen],
+  );
 
   useEffect(() => {
     // Add event listener when the component mounts

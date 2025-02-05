@@ -3,7 +3,7 @@ export function ReportLink({
   title,
   children,
 }: {
-  click: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  click: (e: React.MouseEvent<HTMLButtonElement>) => void;
   title: string;
   children: React.ReactNode;
 }) {
