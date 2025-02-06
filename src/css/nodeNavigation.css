@@ -47,7 +47,7 @@
 }
 
 .hour-glass {
-  @apply !w-8 !h-8 dark:!fill-white;
+  @apply !w-5 !h-5 dark:!fill-white;
 }
 
 /*.node {*/

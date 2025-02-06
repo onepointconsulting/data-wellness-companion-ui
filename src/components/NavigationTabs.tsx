@@ -37,7 +37,7 @@ export default function NavigationTab({ children }: { children: ReactNode }) {
           {tabs.map((tab, i) => (
             <li
               key={`navtab_${i}`}
-              className={`tab-item-${activeTab !== i ? "in" : ""}active`}
+              className={`!w-40 tab-item-${activeTab !== i ? "in" : ""}active`}
               onClick={() => onSetActiveTab(i)}
             >
               {t(tab)}
