@@ -61,7 +61,7 @@ export default function QuestionTile({
           />
         )}
         <button
-          className={`final-report-email ${!suggestion.svg_image ? "!-ml-0" : ""}`}
+          className={`btn ${!suggestion.svg_image ? "!-ml-0" : ""}`}
           onClick={onEditSvg}
         >
           {t("Edit image")}
