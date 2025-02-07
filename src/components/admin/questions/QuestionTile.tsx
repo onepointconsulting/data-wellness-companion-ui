@@ -51,10 +51,11 @@ export default function QuestionTile({
   }
 
   return (
-    <div className="suggestion group items-center">
-      <div className="flex">
+    <div className="items-center suggestion group !p-2">
+      <div className="flex items-center justify-between w-full gap-2 px-1 my-1">
         {suggestion.svg_image && (
           <div
+            className="svg-admin"
             dangerouslySetInnerHTML={{
               __html: suggestion.svg_image,
             }}
@@ -67,22 +68,24 @@ export default function QuestionTile({
           {t("Edit image")}
         </button>
       </div>
-      <input
-        type="text"
-        className="admin-input"
-        placeholder={suggestionLabel}
-        value={suggestion.title}
-        onChange={(e) =>
-          onSuggestionsTitleChange(e, suggestion, questionSuggestion.id)
-        }
-      />
-      <textarea
-        className="admin-input h-32"
-        onChange={(e) =>
-          onSuggestionsMainTextChange(e, suggestion, questionSuggestion.id)
-        }
-        value={suggestion.main_text}
-      />
+      <div className="flex flex-col w-full gap-2">
+        <input
+          type="text"
+          className="admin-input"
+          placeholder={suggestionLabel}
+          value={suggestion.title}
+          onChange={(e) =>
+            onSuggestionsTitleChange(e, suggestion, questionSuggestion.id)
+          }
+        />
+        <textarea
+          className="h-32 admin-input"
+          onChange={(e) =>
+            onSuggestionsMainTextChange(e, suggestion, questionSuggestion.id)
+          }
+          value={suggestion.main_text}
+        />
+      </div>
     </div>
   );
 }

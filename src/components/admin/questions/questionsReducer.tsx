@@ -53,30 +53,52 @@ export type QuestionsAction =
       type: "saveSuggestionSvg";
       editSuggestion: Suggestion;
       editQuestion: QuestionSuggestion;
+    }
+  | {
+      type: "addSuggestion";
+      questionId: number;
     };
 
 function findQuestionIndex(
   questionSuggestions: QuestionSuggestion[],
-  id: number,
+  id: number
 ) {
   return questionSuggestions.findIndex((q) => q.id === id);
 }
 
 function findSuggestionIndex(
   foundQuestion: QuestionSuggestion,
-  suggestion: Suggestion,
+  suggestion: Suggestion
 ): number {
   return foundQuestion.suggestions.findIndex((s) => s.id === suggestion.id);
+}
+
+function rebuildQuestions(
+  foundQuestion: QuestionSuggestion,
+  updatedSuggestions: Suggestion[],
+  state: QuestionsConfigState,
+  foundQuestionIndex: number
+) {
+  const updatedQuestion: QuestionSuggestion = {
+    ...foundQuestion,
+    suggestions: updatedSuggestions,
+  };
+  const updatedQuestions = [
+    ...state.questionSuggestions.slice(0, foundQuestionIndex),
+    updatedQuestion,
+    ...state.questionSuggestions.slice(foundQuestionIndex + 1),
+  ];
+  return { ...state, questionSuggestions: updatedQuestions };
 }
 
 function rebuildQuestion(
   state: QuestionsConfigState,
   questionId: number,
-  suggestion: Suggestion,
+  suggestion: Suggestion
 ) {
   const foundQuestionIndex = findQuestionIndex(
     state.questionSuggestions,
-    questionId,
+    questionId
   );
   if (foundQuestionIndex === -1) {
     return state; // No changes made
@@ -91,21 +113,45 @@ function rebuildQuestion(
     { ...suggestion },
     ...foundQuestion.suggestions.slice(foundSuggestionIndex + 1),
   ];
-  const updatedQuestion = {
-    ...foundQuestion,
-    suggestions: updatedSuggestions,
+
+  return rebuildQuestions(
+    foundQuestion,
+    updatedSuggestions,
+    state,
+    foundQuestionIndex
+  );
+}
+
+function addSuggestion(state: QuestionsConfigState, questionId: number) {
+  const foundQuestionIndex = findQuestionIndex(
+    state.questionSuggestions,
+    questionId
+  );
+  if (foundQuestionIndex === -1) {
+    return state; // No changes made
+  }
+  const foundQuestion = state.questionSuggestions[foundQuestionIndex];
+  const newSuggestion = {
+    id: 0,
+    img_alt: "",
+    img_src: "",
+    title: "",
+    main_text: "",
+    svg_image: "",
   };
-  const updatedQuestions = [
-    ...state.questionSuggestions.slice(0, foundQuestionIndex),
-    updatedQuestion,
-    ...state.questionSuggestions.slice(foundQuestionIndex + 1),
-  ];
-  return { ...state, questionSuggestions: updatedQuestions };
+  const updatedSuggestions = [...foundQuestion.suggestions, newSuggestion];
+
+  return rebuildQuestions(
+    foundQuestion,
+    updatedSuggestions,
+    state,
+    foundQuestionIndex
+  );
 }
 
 export function questionsReducer(
   state: QuestionsConfigState,
-  action: QuestionsAction,
+  action: QuestionsAction
 ) {
   const { type } = action;
   switch (type) {
@@ -116,6 +162,7 @@ export function questionsReducer(
         action.questionSuggestion,
         ...state.questionSuggestions.slice(foundQuestionIndex + 1),
       ];
+
       return {
         ...state,
         questionSuggestions: updatedQuestions,
@@ -151,8 +198,13 @@ export function questionsReducer(
       return rebuildQuestion(
         state,
         action.editQuestion.id,
-        action.editSuggestion,
+        action.editSuggestion
       );
+    }
+
+    case "addSuggestion": {
+      const questionId = action.questionId;
+      return addSuggestion(state, questionId);
     }
   }
 }
@@ -174,7 +226,7 @@ export const QuestionsContextProvider = ({
 }) => {
   const [state, dispatch] = useReducer(
     questionsReducer,
-    initialQuestionsConfigState,
+    initialQuestionsConfigState
   );
   return (
     <QuestionsContext.Provider value={{ state, dispatch }}>

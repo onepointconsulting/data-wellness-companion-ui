@@ -1,5 +1,28 @@
 .admin-input {
-  @apply flex w-full rounded-md border-2 border-input bg-background px-3 py-2 text-base ring-offset-background
+  @apply flex w-full rounded border-2 border-input bg-background px-3 py-2 text-base ring-offset-background
     file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-[#0084d7]
     disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-800 dark:text-gray-300 dark:placeholder-gray-500;
+}
+
+.admin h1,
+.admin h2,
+.admin h3,
+.admin h4,
+.admin h5,
+.admin h6,
+.admin p,
+.admin span,
+.admin a,
+.admin ul,
+.admin ol,
+.admin li,
+.admin div,
+.admin input,
+.admin button,
+.admin textarea {
+  @apply dark:text-gray-100;
+}
+
+.svg-admin svg[fill="none"] {
+  @apply dark:stroke-gray-300 w-[2.45rem];
 }

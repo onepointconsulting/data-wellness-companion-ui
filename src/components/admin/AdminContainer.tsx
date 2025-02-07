@@ -21,11 +21,11 @@ export default function AdminContainer({
 }) {
   const [t] = useTranslation();
   return (
-    <div className="container mt-1 text-gray-900">
+    <div className="container mt-1 text-gray-900 admin">
       <HamburgerMenuContextProvider>
         <Menu />
       </HamburgerMenuContextProvider>
-      <h1 className="dark:text-gray-100 pt-6">{t(title)}</h1>
+      <h1 className="pt-6">{t(title)}</h1>
       {processing && <Spinner size={12} />}
       {message && <AdminMessage message={message} messageType={messageType} />}
       {children}
