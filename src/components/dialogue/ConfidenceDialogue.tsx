@@ -11,7 +11,7 @@ import { confidenceAdapter } from "../../lib/confidenceAdapter.ts";
 export const CONFIDENCE_DIALOGUE_ID = "confidence-dialogue";
 
 export function showConfidenceDialogue(
-  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
 ) {
   event.preventDefault();
   onCloseDialogue(CONFIDENCE_DIALOGUE_ID);
