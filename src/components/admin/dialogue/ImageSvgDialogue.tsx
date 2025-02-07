@@ -47,7 +47,10 @@ export default function ImageSvgDialogue() {
     >
       <DialogueHeader onClose={onClose}>
         {editSuggestion && (
-          <div dangerouslySetInnerHTML={{ __html: editSuggestion }} />
+          <div
+            className="svg-admin"
+            dangerouslySetInnerHTML={{ __html: editSuggestion }}
+          />
         )}
       </DialogueHeader>
       <form className="mx-6 my-4">
@@ -55,13 +58,13 @@ export default function ImageSvgDialogue() {
           <AdminMessage message={message} messageType={MessageType.SUCCESS} />
         )}
         <textarea
-          className="w-full min-h-64 p-2 my-2 border-2 border-gray-300"
+          className="w-full p-2 my-2 border-2 border-gray-300 min-h-64 dark:bg-gray-800 dark:text-gray-100"
           value={editSuggestion}
           onChange={(e) => setEditSuggestion(e.target.value)}
         />
         <div className="flex justify-end">
           <button
-            className="final-report-email w-24 !ml-0 !mr-2"
+            className="btn w-24 !ml-0 !mr-2"
             onClick={(e) => {
               e.preventDefault();
               onClose();
@@ -69,7 +72,7 @@ export default function ImageSvgDialogue() {
           >
             {t("Close")}
           </button>
-          <button className="final-report-email w-24 !mx-0" onClick={onSaveSvg}>
+          <button className="btn w-24 !mx-0" onClick={onSaveSvg}>
             {t("Save")}
           </button>
         </div>

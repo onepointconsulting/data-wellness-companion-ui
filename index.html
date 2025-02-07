@@ -53,14 +53,15 @@
     <!-- End Userback -->
 
     <script>
-      const server = "127.0.0.1";
-      const port = 8085;
+      const server = "staging-d-well.onepointltd.ai";
+      const port = 443;
       window.dataWellnessConfig = {
-        websocketUrl: `ws://${server}:${port}`,
-        reportUrl: `http://${server}:${port}`,
+        websocketUrl: `wss://${server}:${port}`,
+        reportUrl: `https://${server}:${port}`,
       };
     </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

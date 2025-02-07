@@ -192,5 +192,7 @@
   "Would you like to restart the companion?": "Would you like to restart the companion?",
   "You are disconnected. The Data Wellness Companion™ needs to be connected to restart.": "You are disconnected. The Data Wellness Companion™ needs to be connected to restart.",
   "You are disconnected.": "You are disconnected.",
-  "Your name:": "Your name:"
+  "Your name:": "Your name:",
+  "Add suggestion": "Add suggestion",
+  "Remove suggestion": "Remove suggestion"
 }

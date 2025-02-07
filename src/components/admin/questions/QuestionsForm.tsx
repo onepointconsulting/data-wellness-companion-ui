@@ -16,6 +16,7 @@ import LanguageDropDown from "./LanguageDropDown.tsx";
 import QuestionField from "./QuestionField.tsx";
 import QuestionTile from "./QuestionTile.tsx";
 import ImageSvgDialogue from "../dialogue/ImageSvgDialogue.tsx";
+import SuggestionButtons from "./SuggestionButtons.tsx";
 
 const QUESTION_MIN_LENGTH = 4;
 const QUESTION_MAX_LENGTH = 1024;
@@ -103,7 +104,7 @@ export default function QuestionsForm() {
           const questionLabel = "Question";
           return (
             <Fragment key={`question_${i}`}>
-              <h3 className="ml-3 pt-4">
+              <h3 className="pt-4 ml-3">
                 {t(questionLabel)} {i + 1}
               </h3>
               <QuestionField i={i} questionSuggestion={questionSuggestion} />
@@ -118,6 +119,8 @@ export default function QuestionsForm() {
                     />
                   );
                 })}
+                {/* Buttons */}
+                <SuggestionButtons questionId={questionSuggestion.id} />
               </div>
             </Fragment>
           );
