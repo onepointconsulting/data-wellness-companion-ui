@@ -131,8 +131,10 @@ function addSuggestion(state: QuestionsConfigState, questionId: number) {
     return state; // No changes made
   }
   const foundQuestion = state.questionSuggestions[foundQuestionIndex];
+  const lowest = foundQuestion.suggestions.map(s => s.id)
+      .reduce((a, id) => Math.min(a, id), Number.MAX_SAFE_INTEGER)
   const newSuggestion = {
-    id: 0,
+    id: lowest - 1,
     img_alt: "",
     img_src: "",
     title: "",
