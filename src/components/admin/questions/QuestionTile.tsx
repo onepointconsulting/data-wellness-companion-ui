@@ -20,7 +20,7 @@ export default function QuestionTile({
   function onSuggestionsTitleChange(
     e: React.ChangeEvent<HTMLInputElement>,
     suggestion: Suggestion,
-    questionId: number,
+    questionId: number
   ) {
     dispatch({
       type: "setSuggestion",
@@ -31,7 +31,7 @@ export default function QuestionTile({
   function onSuggestionsMainTextChange(
     e: React.ChangeEvent<HTMLTextAreaElement>,
     suggestion: Suggestion,
-    questionId: number,
+    questionId: number
   ) {
     dispatch({
       type: "setSuggestion",
@@ -50,6 +50,15 @@ export default function QuestionTile({
     showDialogue(IMAGE_SVG_DIALOGUE_ID);
   }
 
+  function removeSuggestion(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    dispatch({
+      type: "removeSuggestion",
+      questionId: questionSuggestion.id,
+      suggestionId: suggestion.id,
+    });
+  }
+
   return (
     <div className="items-center suggestion group !p-2">
       <div className="flex items-center justify-between w-full gap-2 px-1 my-1">
@@ -66,6 +75,13 @@ export default function QuestionTile({
           onClick={onEditSvg}
         >
           {t("Edit image")}
+        </button>
+        <button
+          onClick={removeSuggestion}
+          className="!cursor-pointer btn"
+          title={t("Remove suggestion")}
+        >
+          X
         </button>
       </div>
       <div className="flex flex-col w-full gap-2">

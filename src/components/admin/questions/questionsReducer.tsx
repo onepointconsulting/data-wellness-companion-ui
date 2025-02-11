@@ -57,6 +57,11 @@ export type QuestionsAction =
   | {
       type: "addSuggestion";
       questionId: number;
+    }
+  | {
+      type: "removeSuggestion";
+      suggestionId: number;
+      questionId: number;
     };
 
 function findQuestionIndex(
@@ -131,8 +136,9 @@ function addSuggestion(state: QuestionsConfigState, questionId: number) {
     return state; // No changes made
   }
   const foundQuestion = state.questionSuggestions[foundQuestionIndex];
-  const lowest = foundQuestion.suggestions.map(s => s.id)
-      .reduce((a, id) => Math.min(a, id), Number.MAX_SAFE_INTEGER)
+  const lowest = foundQuestion.suggestions
+    .map((s) => s.id)
+    .reduce((a, id) => Math.min(a, id), Number.MAX_SAFE_INTEGER);
   const newSuggestion = {
     id: lowest - 1,
     img_alt: "",
@@ -142,6 +148,43 @@ function addSuggestion(state: QuestionsConfigState, questionId: number) {
     svg_image: "",
   };
   const updatedSuggestions = [...foundQuestion.suggestions, newSuggestion];
+
+  return rebuildQuestions(
+    foundQuestion,
+    updatedSuggestions,
+    state,
+    foundQuestionIndex
+  );
+}
+
+function removeSuggestionFromQuestion(
+  state: QuestionsConfigState,
+  questionId: number,
+  suggestionId: number
+): QuestionsConfigState {
+  const foundQuestionIndex = findQuestionIndex(
+    state.questionSuggestions,
+    questionId
+  );
+
+  if (foundQuestionIndex === -1) {
+    return state; // No changes made
+  }
+
+  const foundQuestion = state.questionSuggestions[foundQuestionIndex];
+
+  const foundSuggestionIndex = foundQuestion.suggestions.findIndex(
+    (s) => s.id === suggestionId
+  );
+
+  if (foundSuggestionIndex === -1) {
+    return state; // No changes made
+  }
+
+  const updatedSuggestions = [
+    ...foundQuestion.suggestions.slice(0, foundSuggestionIndex),
+    ...foundQuestion.suggestions.slice(foundSuggestionIndex + 1),
+  ];
 
   return rebuildQuestions(
     foundQuestion,
@@ -207,6 +250,14 @@ export function questionsReducer(
     case "addSuggestion": {
       const questionId = action.questionId;
       return addSuggestion(state, questionId);
+    }
+
+    case "removeSuggestion": {
+      return removeSuggestionFromQuestion(
+        state,
+        action.questionId,
+        action.suggestionId
+      );
     }
   }
 }

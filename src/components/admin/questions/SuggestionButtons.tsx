@@ -10,7 +10,7 @@ export default function SuggestionButtons({
   const { t } = useTranslation();
   const { dispatch } = useContext(QuestionsContext);
 
-  function addSuggestion (e: React.MouseEvent<HTMLButtonElement>) {
+  function addSuggestion(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     console.log("addSuggestion", questionId);
     dispatch({
@@ -19,16 +19,11 @@ export default function SuggestionButtons({
     });
   }
 
-  function removeSuggestion(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault()
-  }
-
   return (
     <div className="flex gap-2">
       <button className="btn" onClick={addSuggestion}>
         {t("Add suggestion")}
       </button>
-      <button className="btn" onClick={removeSuggestion}>{t("Remove suggestion")}</button>
     </div>
   );
 }

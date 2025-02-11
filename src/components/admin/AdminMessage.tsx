@@ -13,7 +13,7 @@ export default function AdminMessage({
 }) {
   return (
     <div
-      className={`${messageTypeColor(messageType)} border border-gray-400 text-gray-700 px-4 py-3 rounded relative mt-4`}
+      className={`${messageTypeColor(messageType)} border border-gray-400 text-gray-700 dark:text-gray-100 px-4 py-3 dark:bg-gray-800 rounded relative mt-4`}
     >
       {message}
     </div>
