@@ -75,7 +75,7 @@ export const useAppStore = create<AppStoreState>((set) => ({
     })),
   expectedNodes: DEFAULT_EXPECTED_NODES,
   setExpectedNodes: (expectedNodes: number) =>
-    set((state) => ({ ...state, expectedNodes }))
+    set((state) => ({ ...state, expectedNodes })),
 }));
 
 export function isDisplayReportGenerationMessage(

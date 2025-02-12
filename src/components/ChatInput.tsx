@@ -25,7 +25,9 @@ function VoiceButton() {
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
-      <MdMicNone className={`h-10 w-10 fill-[#4a4a4a] ${voiceOn ? "fill-green-700" : ""}`} />
+      <MdMicNone
+        className={`h-10 w-10 fill-[#4a4a4a] ${voiceOn ? "fill-green-700" : ""}`}
+      />
     </button>
   );
 }

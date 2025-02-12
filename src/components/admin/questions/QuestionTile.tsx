@@ -20,7 +20,7 @@ export default function QuestionTile({
   function onSuggestionsTitleChange(
     e: React.ChangeEvent<HTMLInputElement>,
     suggestion: Suggestion,
-    questionId: number
+    questionId: number,
   ) {
     dispatch({
       type: "setSuggestion",
@@ -31,7 +31,7 @@ export default function QuestionTile({
   function onSuggestionsMainTextChange(
     e: React.ChangeEvent<HTMLTextAreaElement>,
     suggestion: Suggestion,
-    questionId: number
+    questionId: number,
   ) {
     dispatch({
       type: "setSuggestion",

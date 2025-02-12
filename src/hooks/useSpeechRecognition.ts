@@ -1,5 +1,5 @@
-import {useContext, useEffect, useState} from "react";
-import {AppContext} from "../context/AppContext.tsx";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext.tsx";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,15 +19,15 @@ if (recognition) {
 }
 
 export default function useSpeechRecognition() {
-  const [voiceOn, setVoiceOn] = useState(false)
-  const [voiceListening, setVoiceListening] = useState(false)
+  const [voiceOn, setVoiceOn] = useState(false);
+  const [voiceListening, setVoiceListening] = useState(false);
   const { messages, sending, setChatText } = useContext(AppContext);
-  console.log('useSpeechRecognition')
+  console.log("useSpeechRecognition");
 
   function stop() {
     try {
       setVoiceListening(false);
-      setVoiceOn(false)
+      setVoiceOn(false);
       recognition?.stop();
     } catch (e) {
       console.error(`Failed to stop ${e}`);
@@ -35,24 +35,24 @@ export default function useSpeechRecognition() {
   }
 
   useEffect(() => {
-    stop()
+    stop();
   }, [messages, sending]);
 
   function onToggleVoice(e: React.MouseEvent<HTMLButtonElement>) {
     if (recognition) {
       e.preventDefault();
       setVoiceOn(!voiceOn);
-      if(voiceOn) {
-        stop()
+      if (voiceOn) {
+        stop();
       } else {
-        recognition.start()
+        recognition.start();
       }
     }
   }
 
   function deactivateVoice() {
     if (recognition) {
-      stop()
+      stop();
     }
   }
 

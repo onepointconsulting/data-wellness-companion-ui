@@ -66,14 +66,14 @@ export type QuestionsAction =
 
 function findQuestionIndex(
   questionSuggestions: QuestionSuggestion[],
-  id: number
+  id: number,
 ) {
   return questionSuggestions.findIndex((q) => q.id === id);
 }
 
 function findSuggestionIndex(
   foundQuestion: QuestionSuggestion,
-  suggestion: Suggestion
+  suggestion: Suggestion,
 ): number {
   return foundQuestion.suggestions.findIndex((s) => s.id === suggestion.id);
 }
@@ -82,7 +82,7 @@ function rebuildQuestions(
   foundQuestion: QuestionSuggestion,
   updatedSuggestions: Suggestion[],
   state: QuestionsConfigState,
-  foundQuestionIndex: number
+  foundQuestionIndex: number,
 ) {
   const updatedQuestion: QuestionSuggestion = {
     ...foundQuestion,
@@ -99,11 +99,11 @@ function rebuildQuestions(
 function rebuildQuestion(
   state: QuestionsConfigState,
   questionId: number,
-  suggestion: Suggestion
+  suggestion: Suggestion,
 ) {
   const foundQuestionIndex = findQuestionIndex(
     state.questionSuggestions,
-    questionId
+    questionId,
   );
   if (foundQuestionIndex === -1) {
     return state; // No changes made
@@ -123,14 +123,14 @@ function rebuildQuestion(
     foundQuestion,
     updatedSuggestions,
     state,
-    foundQuestionIndex
+    foundQuestionIndex,
   );
 }
 
 function addSuggestion(state: QuestionsConfigState, questionId: number) {
   const foundQuestionIndex = findQuestionIndex(
     state.questionSuggestions,
-    questionId
+    questionId,
   );
   if (foundQuestionIndex === -1) {
     return state; // No changes made
@@ -153,18 +153,18 @@ function addSuggestion(state: QuestionsConfigState, questionId: number) {
     foundQuestion,
     updatedSuggestions,
     state,
-    foundQuestionIndex
+    foundQuestionIndex,
   );
 }
 
 function removeSuggestionFromQuestion(
   state: QuestionsConfigState,
   questionId: number,
-  suggestionId: number
+  suggestionId: number,
 ): QuestionsConfigState {
   const foundQuestionIndex = findQuestionIndex(
     state.questionSuggestions,
-    questionId
+    questionId,
   );
 
   if (foundQuestionIndex === -1) {
@@ -174,7 +174,7 @@ function removeSuggestionFromQuestion(
   const foundQuestion = state.questionSuggestions[foundQuestionIndex];
 
   const foundSuggestionIndex = foundQuestion.suggestions.findIndex(
-    (s) => s.id === suggestionId
+    (s) => s.id === suggestionId,
   );
 
   if (foundSuggestionIndex === -1) {
@@ -190,13 +190,13 @@ function removeSuggestionFromQuestion(
     foundQuestion,
     updatedSuggestions,
     state,
-    foundQuestionIndex
+    foundQuestionIndex,
   );
 }
 
 export function questionsReducer(
   state: QuestionsConfigState,
-  action: QuestionsAction
+  action: QuestionsAction,
 ) {
   const { type } = action;
   switch (type) {
@@ -243,7 +243,7 @@ export function questionsReducer(
       return rebuildQuestion(
         state,
         action.editQuestion.id,
-        action.editSuggestion
+        action.editSuggestion,
       );
     }
 
@@ -256,7 +256,7 @@ export function questionsReducer(
       return removeSuggestionFromQuestion(
         state,
         action.questionId,
-        action.suggestionId
+        action.suggestionId,
       );
     }
   }
@@ -279,7 +279,7 @@ export const QuestionsContextProvider = ({
 }) => {
   const [state, dispatch] = useReducer(
     questionsReducer,
-    initialQuestionsConfigState
+    initialQuestionsConfigState,
   );
   return (
     <QuestionsContext.Provider value={{ state, dispatch }}>
