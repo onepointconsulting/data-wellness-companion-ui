@@ -21,11 +21,11 @@ function VoiceButton() {
   const { onToggleVoice, voiceOn, voiceListening } = useSpeechRecognition();
   return (
     <button
-      className={`disabled:opacity-10 mr-2 ${voiceOn ? "text-green-700" : ""} ${voiceListening ? "animate-pulse" : ""}`}
+      className={`disabled:opacity-10 mr-2 ${voiceListening ? "animate-pulse" : ""}`}
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
-      <MdMicNone className="h-10 w-10 fill-[#4a4a4a]" />
+      <MdMicNone className={`h-10 w-10 fill-[#4a4a4a] ${voiceOn ? "fill-green-700" : ""}`} />
     </button>
   );
 }

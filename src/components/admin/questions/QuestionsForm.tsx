@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Fragment, useContext, useEffect } from "react";
+import {Fragment, useContext, useEffect, useState} from "react";
 import { ChatContext } from "../../../context/ChatContext.tsx";
 import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
@@ -25,6 +25,7 @@ export default function QuestionsForm() {
   const [t] = useTranslation();
   const { reportUrl } = useContext(ChatContext);
   const { state, dispatch } = useContext(QuestionsContext);
+  const [updateCounter, setUpdateCounter] = useState<number>(0)
 
   useEffect(() => {
     getQuestions(reportUrl, state.language)
@@ -45,7 +46,7 @@ export default function QuestionsForm() {
         });
       })
       .catch((error) => handleError(error, dispatch));
-  }, [state.language]);
+  }, [state.language, updateCounter]);
 
   function onSubmit() {
     const questionUpdate = state.questionSuggestions.map((qs) => ({
@@ -66,6 +67,7 @@ export default function QuestionsForm() {
             }),
             messageType: MessageType.SUCCESS,
           });
+          setUpdateCounter(updateCounter + 1)
         } else {
           dispatch({
             type: "setMessage",
