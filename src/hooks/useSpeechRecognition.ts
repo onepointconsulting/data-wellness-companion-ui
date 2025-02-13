@@ -1,7 +1,5 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { useAppStore } from "../context/AppStore.ts";
-import { useShallow } from "zustand/react/shallow";
+import {useContext, useEffect, useState} from "react";
+import {AppContext} from "../context/AppContext.tsx";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -16,18 +14,20 @@ const recognition =
 if (recognition) {
   recognition.continuous = true;
   recognition.lang = "en-GB";
-  recognition.interimResults = false;
+  recognition.interimResults = true;
   recognition.maxAlternatives = 1;
 }
 
 export default function useSpeechRecognition() {
-  const { voiceOn, setVoiceOn, setVoiceListening, voiceListening } =
-    useAppStore(useShallow((state) => ({ ...state })));
+  const [voiceOn, setVoiceOn] = useState(false)
+  const [voiceListening, setVoiceListening] = useState(false)
   const { messages, sending, setChatText } = useContext(AppContext);
+  console.log('useSpeechRecognition')
 
   function stop() {
     try {
       setVoiceListening(false);
+      setVoiceOn(false)
       recognition?.stop();
     } catch (e) {
       console.error(`Failed to stop ${e}`);
@@ -35,42 +35,34 @@ export default function useSpeechRecognition() {
   }
 
   useEffect(() => {
-    if (voiceOn) {
-      try {
-        recognition?.start();
-      } catch (e) {
-        console.error(`Failed to stop ${e}`);
-      }
-    } else {
-      stop();
-    }
-    return () => {
-      stop();
-    };
-  }, [voiceOn]);
-
-  useEffect(() => {
-    setVoiceOn(false);
-    setChatText("");
-    setVoiceListening(false);
+    stop()
   }, [messages, sending]);
 
   function onToggleVoice(e: React.MouseEvent<HTMLButtonElement>) {
     if (recognition) {
       e.preventDefault();
       setVoiceOn(!voiceOn);
+      if(voiceOn) {
+        stop()
+      } else {
+        recognition.start()
+      }
     }
   }
 
   function deactivateVoice() {
     if (recognition) {
-      if (voiceOn) {
-        setVoiceOn(!voiceOn);
-      }
+      stop()
     }
   }
 
   if (recognition) {
+    recognition.onaudiostart = () => {
+      setVoiceOn(true);
+    };
+    recognition.onaudioend = () => {
+      setVoiceOn(false);
+    };
     recognition.onspeechstart = () => {
       setVoiceListening(true);
     };
