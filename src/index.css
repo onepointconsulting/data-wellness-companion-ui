@@ -95,8 +95,8 @@ body {
 }
 
 .chat-description > div > svg > g > path {
-  @apply dark:!fill-white
+  @apply dark:!fill-white;
 }
 div > svg > g > path {
-  @apply dark:!fill-white
+  @apply dark:!fill-white;
 }
