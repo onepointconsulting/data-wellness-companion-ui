@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { DEFAULT_EXPECTED_NODES } from "./AppContext.tsx";
+import {ConsultantRating} from "../model/consultantRating.ts";
 
 const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
 const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
@@ -27,6 +28,12 @@ interface AppStoreState {
   setShowCompletionPopup: (seenCompletionPopup: boolean) => void;
   expectedNodes: number;
   setExpectedNodes: (expectedNodes: number) => void;
+  updatingSuggestedConsultants: boolean;
+  setUpdatingSuggestedConsultants: (updatingSuggestedConsultants: boolean) => void;
+  suggestedConsultantsError: string;
+  setSuggestedConsultantsError: (suggestedConsultantsError: string) => void;
+  consultantRatings: ConsultantRating[];
+  setConsultantRatings: (consultantRatings: ConsultantRating[]) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -76,6 +83,15 @@ export const useAppStore = create<AppStoreState>((set) => ({
   expectedNodes: DEFAULT_EXPECTED_NODES,
   setExpectedNodes: (expectedNodes: number) =>
     set((state) => ({ ...state, expectedNodes })),
+  updatingSuggestedConsultants: false,
+  setUpdatingSuggestedConsultants: (updatingSuggestedConsultants: boolean) =>
+    set((state) => ({...state, updatingSuggestedConsultants})),
+  suggestedConsultantsError: "",
+  setSuggestedConsultantsError: (suggestedConsultantsError: string) =>
+      set((state) => ({...state, suggestedConsultantsError})),
+  consultantRatings: [],
+  setConsultantRatings: (consultantRatings: ConsultantRating[]) =>
+      set((state) => ({...state, consultantRatings}))
 }));
 
 export function isDisplayReportGenerationMessage(

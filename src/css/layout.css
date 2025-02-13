@@ -163,7 +163,7 @@
 }
 
 #root .final-report-download svg {
-  @apply w-8 h-8 mr-2 md:w-10 md:h-10;
+  @apply w-8 h-8 md:mr-2 md:w-10 md:h-10;
 }
 
 #root .final-report-email svg {
