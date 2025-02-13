@@ -94,7 +94,7 @@ export default function ChatInput() {
     <>
       <div className="chat-container">
         {currentMessage === 0 && !sending && (
-          <div className="flex flex-row flex-wrap my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3">
+          <div className="flex flex-row flex-wrap my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3 chat-description">
             {Array.from({ length: 3 }, (_, i) => i).map((i) => {
               return (
                 <div
