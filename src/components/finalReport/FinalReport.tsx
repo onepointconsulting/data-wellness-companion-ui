@@ -27,6 +27,7 @@ import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
 import { ReportLink } from "../buttons/ReportLink.tsx";
 import { useSuggestConsultant } from "../../hooks/useSuggestConsultant.ts";
 import SuggestedConsultants from "../consultants/SuggestedConsultants.tsx";
+import useOntology from "../../hooks/useOntology.ts";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault();
@@ -65,9 +66,8 @@ function extractReasoning(reportData: any): Confidence {
 export default function FinalReport({ message }: { message: Message }) {
   const { t } = useTranslation();
   const { setOntology } = useContext(AppContext);
-  const { ontologyOpen, setOntologyOpen } = useAppStore(
-    useShallow((state) => ({ ...state })),
-  );
+  const { onOntologyOpenClick } = useOntology();
+  const { ontologyOpen } = useAppStore(useShallow((state) => ({ ...state })));
   const { reportUrl } = useContext(ChatContext);
   const { processPopup } = useShowStartDialogue();
   const { fetchSuggestedConsultants } = useSuggestConsultant();
@@ -119,16 +119,7 @@ export default function FinalReport({ message }: { message: Message }) {
         <div className="final-report-download">
           <div className="flex gap-4">
             <ReportLink
-              click={(e) => {
-                e.preventDefault();
-                setOntologyOpen(!ontologyOpen);
-                setTimeout(() => {
-                  window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: "smooth",
-                  });
-                }, 1000);
-              }}
+              click={onOntologyOpenClick}
               title={t("Knowledge graph")}
             >
               <PiGraphLight />

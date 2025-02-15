@@ -11,6 +11,9 @@ export function useSuggestConsultant() {
   const { t } = useTranslation();
   const { reportUrl } = useContext(ChatContext);
   const { messages } = useContext(AppContext);
+  const { setOntologyOpen } = useAppStore(
+    useShallow((state) => ({ ...state })),
+  );
   const {
     setUpdatingSuggestedConsultants,
     setSuggestedConsultantsError,
@@ -25,6 +28,7 @@ export function useSuggestConsultant() {
     e.preventDefault();
     const session = getSession();
     if (session) {
+      setOntologyOpen(false);
       setUpdatingSuggestedConsultants(true);
       setSuggestedConsultantsError("");
       setConsultantRatings([]);
