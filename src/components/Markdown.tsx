@@ -6,10 +6,10 @@ import remarkGfm from "remark-gfm";
  * @param message T
  * @constructor
  */
-export default function MarkdownComponent({ content }: { content: string }) {
+export default function MarkdownComponent({ content, className }: { content: string, className: string }) {
   return (
     <Markdown
-      className={`markdown-body`}
+      className={`markdown-body ${className}`}
       remarkPlugins={[remarkGfm]}
       components={{
         ul: ({ ...props }) => (

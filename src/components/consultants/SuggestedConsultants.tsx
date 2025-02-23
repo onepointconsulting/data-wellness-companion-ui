@@ -3,6 +3,7 @@ import { useShallow } from "zustand/react/shallow";
 import Spinner from "../Spinner.tsx";
 import { useTranslation } from "react-i18next";
 import Alert from "../form/Alert.tsx";
+import MarkdownComponent from "../Markdown.tsx";
 
 const CONSULTANT_LIMIT = 5;
 
@@ -31,7 +32,7 @@ export default function SuggestedConsultants() {
   return (
     <>
       <section>{t("consultants-explanation")}</section>
-      <section>
+      <section id="consultants-main">
         {consultantRatings.slice(0, CONSULTANT_LIMIT).map((rating, i) => {
           return (
             <div key={`rating_${i}`} className="mt-4 md:mt-8">
@@ -56,7 +57,7 @@ export default function SuggestedConsultants() {
                 <div className="w-full md:w-[20%] font-bold">
                   {t("Reasoning")}
                 </div>
-                <div className="w-full md:w-[80%]">{rating.reasoning}</div>
+                <MarkdownComponent content={rating.reasoning} className="w-full md:w-[80%]"/>
               </div>
             </div>
           );
