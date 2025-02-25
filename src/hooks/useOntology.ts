@@ -1,5 +1,6 @@
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import {scrollBottom} from "../lib/scrollFunctions.ts";
 
 export default function useOntology() {
   const { ontologyOpen, setOntologyOpen } = useAppStore(
@@ -13,12 +14,7 @@ export default function useOntology() {
 
   function toggleOntologyView() {
     setOntologyOpen(!ontologyOpen);
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-    }, 1000);
+    setTimeout(() => scrollBottom(), 1000);
   }
 
   function onOntologyOpenClick(e: React.MouseEvent<HTMLButtonElement>) {

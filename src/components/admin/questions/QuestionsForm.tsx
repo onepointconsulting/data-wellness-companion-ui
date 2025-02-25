@@ -97,7 +97,7 @@ export default function QuestionsForm() {
       <ImageSvgDialogue />
       <FormContainer
         onReset={() => {}}
-        onSubmit={handleSubmission(onSubmit)}
+        onSubmit={handleSubmission(onSubmit, true)}
         disabled={isDisabled()}
         hasReset={false}
       >

@@ -57,7 +57,10 @@ export default function SuggestedConsultants() {
                 <div className="w-full md:w-[20%] font-bold">
                   {t("Reasoning")}
                 </div>
-                <MarkdownComponent content={rating.reasoning} className="w-full md:w-[80%]"/>
+                <MarkdownComponent
+                  content={rating.reasoning}
+                  className="w-full md:w-[80%]"
+                />
               </div>
             </div>
           );
