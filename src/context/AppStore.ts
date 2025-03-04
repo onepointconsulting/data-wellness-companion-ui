@@ -36,6 +36,8 @@ interface AppStoreState {
   setSuggestedConsultantsError: (suggestedConsultantsError: string) => void;
   consultantRatings: ConsultantRating[];
   setConsultantRatings: (consultantRatings: ConsultantRating[]) => void;
+  showConsultantRatings: boolean;
+  setShowConsultantRatings: (showConsultantRatings: boolean) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -93,7 +95,14 @@ export const useAppStore = create<AppStoreState>((set) => ({
     set((state) => ({ ...state, suggestedConsultantsError })),
   consultantRatings: [],
   setConsultantRatings: (consultantRatings: ConsultantRating[]) =>
-    set((state) => ({ ...state, consultantRatings })),
+    set((state) => ({
+      ...state,
+      consultantRatings,
+      showConsultantRatings: consultantRatings?.length > 0,
+    })),
+  showConsultantRatings: false,
+  setShowConsultantRatings: (showConsultantRatings: boolean) =>
+    set((state) => ({ ...state, showConsultantRatings })),
 }));
 
 export function isDisplayReportGenerationMessage(

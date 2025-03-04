@@ -235,6 +235,19 @@
   @apply p-3 dark:text-gray-100;
 }
 
+.consultants-section {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.consultants-section.open {
+  max-height: 1500px;
+}
+
+.consultants-section.closed {
+  max-height: 0;
+}
+
 #consultants-main .markdown-body p {
   @apply p-0 py-1;
 }

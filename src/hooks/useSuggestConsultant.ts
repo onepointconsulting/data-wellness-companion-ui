@@ -15,6 +15,8 @@ export function useSuggestConsultant() {
     useShallow((state) => ({ ...state })),
   );
   const {
+    showConsultantRatings,
+    setShowConsultantRatings,
     consultantRatings,
     setUpdatingSuggestedConsultants,
     setSuggestedConsultantsError,
@@ -27,11 +29,11 @@ export function useSuggestConsultant() {
 
   function fetchSuggestedConsultants(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (consultantRatings?.length) {
-      setConsultantRatings([]);
+    const session = getSession();
+    if (consultantRatings.length) {
+      setShowConsultantRatings(!showConsultantRatings);
       return;
     }
-    const session = getSession();
     if (session) {
       setOntologyOpen(false);
       setUpdatingSuggestedConsultants(true);

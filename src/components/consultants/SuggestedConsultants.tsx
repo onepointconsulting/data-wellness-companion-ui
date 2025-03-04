@@ -10,6 +10,7 @@ const CONSULTANT_LIMIT = 5;
 export default function SuggestedConsultants() {
   const { t } = useTranslation();
   const {
+    showConsultantRatings,
     consultantRatings,
     updatingSuggestedConsultants,
     suggestedConsultantsError,
@@ -26,11 +27,10 @@ export default function SuggestedConsultants() {
       />
     );
   }
-  if (!consultantRatings || consultantRatings.length === 0) {
-    return null;
-  }
   return (
-    <>
+    <div
+      className={`consultants-section ${showConsultantRatings ? "open" : "closed"}`}
+    >
       <section>{t("consultants-explanation")}</section>
       <section id="consultants-main">
         {consultantRatings.slice(0, CONSULTANT_LIMIT).map((rating, i) => {
@@ -66,6 +66,6 @@ export default function SuggestedConsultants() {
           );
         })}
       </section>
-    </>
+    </div>
   );
 }
