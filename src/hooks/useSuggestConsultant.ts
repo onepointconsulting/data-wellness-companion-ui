@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
-import { ChatContext } from "../context/ChatContext.tsx";
-import { getSession } from "../lib/sessionFunctions.ts";
-import { useAppStore } from "../context/AppStore.ts";
-import { useShallow } from "zustand/react/shallow";
-import { useTranslation } from "react-i18next";
-import { ConsultantRating } from "../model/consultantRating.ts";
-import { AppContext } from "../context/AppContext.tsx";
+import {useContext, useEffect} from "react";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {getSession} from "../lib/sessionFunctions.ts";
+import {useAppStore} from "../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
+import {useTranslation} from "react-i18next";
+import {ConsultantRating} from "../model/consultantRating.ts";
+import {AppContext} from "../context/AppContext.tsx";
 
 export function useSuggestConsultant() {
   const { t } = useTranslation();
@@ -15,6 +15,7 @@ export function useSuggestConsultant() {
     useShallow((state) => ({ ...state })),
   );
   const {
+    consultantRatings,
     setUpdatingSuggestedConsultants,
     setSuggestedConsultantsError,
     setConsultantRatings,
@@ -26,6 +27,10 @@ export function useSuggestConsultant() {
 
   function fetchSuggestedConsultants(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    if(consultantRatings?.length) {
+      setConsultantRatings([])
+      return
+    }
     const session = getSession();
     if (session) {
       setOntologyOpen(false);
