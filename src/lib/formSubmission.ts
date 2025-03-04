@@ -1,11 +1,14 @@
-import {scrollTop} from "./scrollFunctions.ts";
+import { scrollTop } from "./scrollFunctions.ts";
 
-export default function handleSubmission(func: () => void, doScrollTop: boolean = false) {
+export default function handleSubmission(
+  func: () => void,
+  doScrollTop: boolean = false,
+) {
   return (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     func();
-    if(doScrollTop) {
-      debugger
+    if (doScrollTop) {
+      debugger;
       setTimeout(() => scrollTop(), 1000);
     }
   };

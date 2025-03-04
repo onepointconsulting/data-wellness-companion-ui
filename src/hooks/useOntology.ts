@@ -1,6 +1,6 @@
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
-import {scrollBottom} from "../lib/scrollFunctions.ts";
+import { scrollBottom } from "../lib/scrollFunctions.ts";
 
 export default function useOntology() {
   const { ontologyOpen, setOntologyOpen } = useAppStore(

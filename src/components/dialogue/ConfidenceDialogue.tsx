@@ -52,7 +52,10 @@ export default function ConfidenceDialogue() {
           )}
         </div>
         <div className="pt-2 text-base">
-          <MarkdownComponent content={confidence?.reasoning || ""} />
+          <MarkdownComponent
+            content={confidence?.reasoning || ""}
+            className=""
+          />
         </div>
       </div>
     </GenericDialogue>

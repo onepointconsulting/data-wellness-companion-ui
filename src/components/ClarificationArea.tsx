@@ -72,7 +72,7 @@ export default function ClarificationArea() {
           ref={clarificationRef}
           className={`clarification-main relative ${expandContractClass}`}
         >
-          <MarkdownComponent content={message.clarification} />
+          <MarkdownComponent content={message.clarification} className="" />
           <div className="clarification-contract">
             {showClarification && (
               <GrContract onClick={() => setShowClarification(false)} />
