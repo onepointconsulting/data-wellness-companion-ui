@@ -39,6 +39,10 @@ export type QuestionsAction =
       index: number;
     }
   | {
+      type: "addQuestion";
+      questionSuggestion: QuestionSuggestion;
+    }
+  | {
       type: "setSuggestion";
       suggestion: Suggestion;
       questionId: number;
@@ -258,6 +262,12 @@ export function questionsReducer(
         action.questionId,
         action.suggestionId,
       );
+    }
+    case "addQuestion": {
+      return {
+        ...state,
+        questionSuggestions: [...state.questionSuggestions, action.questionSuggestion]
+      }
     }
   }
 }

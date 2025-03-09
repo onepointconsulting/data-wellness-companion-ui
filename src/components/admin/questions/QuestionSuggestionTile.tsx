@@ -5,7 +5,7 @@ import { QuestionsContext, QuestionSuggestion } from "./questionsReducer.tsx";
 import { showDialogue } from "../../../lib/dialogFunctions.ts";
 import { IMAGE_SVG_DIALOGUE_ID } from "../dialogue/ImageSvgDialogue.tsx";
 
-export default function QuestionTile({
+export default function QuestionSuggestionTile({
   questionSuggestion,
   suggestion,
   j,

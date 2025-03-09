@@ -8,7 +8,6 @@ export default function handleSubmission(
     e.preventDefault();
     func();
     if (doScrollTop) {
-      debugger;
       setTimeout(() => scrollTop(), 1000);
     }
   };
