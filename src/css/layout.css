@@ -198,11 +198,11 @@
 }
 
 #root .registration-alert-container > div {
-  @apply bg-transparent
+  @apply bg-transparent;
 }
 
 #root .registration-alert-container > div h5 {
-  @apply dark:text-gray-200
+  @apply dark:text-gray-200;
 }
 
 #root .registration-alert-description {
