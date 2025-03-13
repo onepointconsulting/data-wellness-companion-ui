@@ -17,7 +17,10 @@ export default function SuggestedConsultants() {
     setSuggestedConsultantsError,
   } = useAppStore(useShallow((state) => ({ ...state })));
   if (updatingSuggestedConsultants) {
-    return <Spinner />;
+    return <>
+      <Spinner />
+      <div className="final-report-message mt-10 mb-2">{t("Finding suitable consultants")}</div>
+    </>;
   }
   if (suggestedConsultantsError) {
     return (

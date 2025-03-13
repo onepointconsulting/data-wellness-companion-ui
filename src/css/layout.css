@@ -197,6 +197,14 @@
   @apply w-full max-w-[1280px] mx-auto mt-5 mb-10;
 }
 
+#root .registration-alert-container > div {
+  @apply bg-transparent
+}
+
+#root .registration-alert-container > div h5 {
+  @apply dark:text-gray-200
+}
+
 #root .registration-alert-description {
   @apply text-lg;
 }

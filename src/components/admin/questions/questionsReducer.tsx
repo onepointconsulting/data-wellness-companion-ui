@@ -266,8 +266,11 @@ export function questionsReducer(
     case "addQuestion": {
       return {
         ...state,
-        questionSuggestions: [...state.questionSuggestions, action.questionSuggestion]
-      }
+        questionSuggestions: [
+          ...state.questionSuggestions,
+          action.questionSuggestion,
+        ],
+      };
     }
   }
 }

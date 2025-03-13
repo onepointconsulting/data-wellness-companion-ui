@@ -1,6 +1,6 @@
-import {useTranslation} from "react-i18next";
-import {Fragment, useContext} from "react";
-import {QuestionsContext} from "./questionsReducer.tsx";
+import { useTranslation } from "react-i18next";
+import { Fragment, useContext } from "react";
+import { QuestionsContext } from "./questionsReducer.tsx";
 import AdminContainer from "../AdminContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 import FormContainer from "../FormContainer.tsx";
@@ -17,7 +17,7 @@ const QUESTION_MAX_LENGTH = 1024;
 export default function QuestionsForm() {
   const [t] = useTranslation();
   const { state } = useContext(QuestionsContext);
-  const { addQuestion, onSubmit } = useQuestionsForm()
+  const { addQuestion, onSubmit } = useQuestionsForm();
 
   function isDisabled() {
     return !state.questionSuggestions.every(
@@ -36,13 +36,12 @@ export default function QuestionsForm() {
     >
       <ImageSvgDialogue />
       <FormContainer
-          onReset={() => {
-          }}
-          onSubmit={handleSubmission(onSubmit, true)}
-          disabled={isDisabled()}
-          hasReset={false}
+        onReset={() => {}}
+        onSubmit={handleSubmission(onSubmit, true)}
+        disabled={isDisabled()}
+        hasReset={false}
       >
-        <LanguageDropDown/>
+        <LanguageDropDown />
         <div className="flex justify-end mt-8">
           <button className="btn" onClick={addQuestion}>
             {t("Add question")}
@@ -51,15 +50,18 @@ export default function QuestionsForm() {
         {state.questionSuggestions.map((questionSuggestion, i) => {
           const questionLabel = "Question";
           return (
-              <Fragment key={`question_${i}`}>
-                <h3 className="pt-4 ml-3">
-                  {t(questionLabel)} {i + 1}
-                </h3>
-                <QuestionField i={i} questionSuggestion={questionSuggestion}/>
-                <QuestionSuggestions questionSuggestion={questionSuggestion} i={i}/>
-                {/* Buttons */}
-                <SuggestionButtons questionId={questionSuggestion.id}/>
-              </Fragment>
+            <Fragment key={`question_${i}`}>
+              <h3 className="pt-4 ml-3">
+                {t(questionLabel)} {i + 1}
+              </h3>
+              <QuestionField i={i} questionSuggestion={questionSuggestion} />
+              <QuestionSuggestions
+                questionSuggestion={questionSuggestion}
+                i={i}
+              />
+              {/* Buttons */}
+              <SuggestionButtons questionId={questionSuggestion.id} />
+            </Fragment>
           );
         })}
       </FormContainer>
