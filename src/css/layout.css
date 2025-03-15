@@ -43,7 +43,7 @@
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 gap-4 px-0 pt-4 mb-4 md:grid-cols-2 lg:grid-cols-4 lg:pt-5;
+  @apply grid grid-cols-1 gap-4 px-0 pt-4 mb-0 md:grid-cols-2 lg:grid-cols-4 lg:pt-5;
 }
 
 #root .suggestion {

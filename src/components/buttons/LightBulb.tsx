@@ -48,7 +48,7 @@ export default function LightBulb() {
         !sending &&
         !clarificationClicked &&
         !isRecommendation && (
-          <div className="question-mark-icon">
+          <div className="question-mark-icon relative top-0.5">
             <button onClick={onClarify}>
               <IoIosInformationCircleOutline className="question-mark-icon-svg" />
             </button>

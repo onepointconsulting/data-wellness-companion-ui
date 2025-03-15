@@ -28,7 +28,7 @@ export default function Regenerate() {
   }
 
   return (
-    <div className="flex items-start justify-end">
+    <div className="flex items-start justify-start mt-2">
       {sending && false && (
         <div className="question-mark-icon">
           <FaHourglassHalf className="hour-glass" />
