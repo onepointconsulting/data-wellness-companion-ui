@@ -15,6 +15,7 @@ import {
   useAppStore,
 } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import GiveMeReport from "./buttons/GiveMeReport.tsx";
 
 export default function MainPanel() {
   const { currentMessage, messages, sending, isLast } = useContext(AppContext);
@@ -60,6 +61,7 @@ export default function MainPanel() {
             <>
               <ClarificationArea />
               {isLast && <ChatInput />}
+              <GiveMeReport />
               <Suggestions message={message} />
             </>
           )}

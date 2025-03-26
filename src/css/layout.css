@@ -107,7 +107,7 @@
 }
 
 #root .chat-container {
-  @apply pb-5;
+  @apply pb-0;
 }
 
 #root .chat-input {

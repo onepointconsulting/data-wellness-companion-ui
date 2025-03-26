@@ -1,54 +1,33 @@
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext.tsx";
-import { Trans, useTranslation } from "react-i18next";
-import { ChatContext } from "../context/ChatContext.tsx";
-import {
-  generateReportNow,
-  sendExtendSession,
-} from "../lib/websocketFunctions.ts";
-import { confidenceAdapter } from "../lib/confidenceAdapter.ts";
-import { saveDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
-import { useAppStore } from "../context/AppStore.ts";
-import { useShallow } from "zustand/react/shallow";
-import { ReactNode } from "react";
-import { MdAdd, MdOutlineArticle } from "react-icons/md";
-
-function DecisionButtons({
-  label,
-  onClick,
-  icon: Icon,
-}: {
-  label: string;
-  onClick: () => void;
-  icon: ReactNode;
-}) {
-  const [t] = useTranslation();
-  return (
-    <div className="border-button gap-2 cursor-pointer" onClick={onClick}>
-      {Icon}
-      {t(label)}
-    </div>
-  );
-}
+import {useContext} from "react";
+import {AppContext} from "../context/AppContext.tsx";
+import {Trans, useTranslation} from "react-i18next";
+import {ChatContext} from "../context/ChatContext.tsx";
+import {sendExtendSession,} from "../lib/websocketFunctions.ts";
+import {confidenceAdapter} from "../lib/confidenceAdapter.ts";
+import {saveDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
+import {useAppStore} from "../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
+import {MdAdd, MdOutlineArticle} from "react-icons/md";
+import useGenerationReportNow from "../hooks/useGenerateReportNow.ts";
+import DecisionButtons from "./buttons/DecisionButton.tsx";
 
 export default function ConfidenceLevelWarning() {
   const [t] = useTranslation();
   const {
     messages,
     sending,
-    setSending,
     confidence,
     setUpdatingExpectedNodes,
   } = useContext(AppContext);
   const {
-    setGeneratingReport,
     messageUpperLimit,
     setDisplayConfidenceLevelProceedWarning,
     setDisplayedConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket } = useContext(ChatContext);
+  const { handleGiveMeReportNow } = useGenerationReportNow()
   if (sending) {
-    return <></>;
+    return null;
   }
 
   function setDisplayFlags() {
@@ -67,9 +46,7 @@ export default function ConfidenceLevelWarning() {
 
   function giveMeReportNow() {
     setDisplayFlags();
-    setSending(true);
-    setGeneratingReport(true);
-    generateReportNow(socket.current);
+    handleGiveMeReportNow()
   }
 
   return (

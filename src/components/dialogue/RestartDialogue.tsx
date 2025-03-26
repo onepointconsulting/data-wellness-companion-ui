@@ -6,6 +6,8 @@ import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import ButtonPanel from "./ButtonPanel.tsx";
 import restartCompanion from "../../lib/restartFunctions.ts";
 import DialogueHeader from "./DialogueHeader.tsx";
+import {useAppStore} from "../../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
 
 export const RESTART_DIALOGUE_ID = "restart-dialogue";
 
@@ -21,6 +23,7 @@ export default function RestartDialogue() {
     setChatText,
     setSelectedHistoricalSession,
   } = useContext(AppContext);
+  const { setDisplayConfidenceLevelProceedWarning } = useAppStore(useShallow((state) => ({ ...state })));
 
   function onOk() {
     setSelectedHistoricalSession(null);
@@ -29,6 +32,7 @@ export default function RestartDialogue() {
       setDisplayRegistrationMessage,
       setChatText,
       reportUrl,
+        setDisplayConfidenceLevelProceedWarning
     );
     onClose();
   }

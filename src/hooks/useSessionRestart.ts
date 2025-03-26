@@ -4,6 +4,8 @@ import { AppContext } from "../context/AppContext.tsx";
 import { ChatContext } from "../context/ChatContext.tsx";
 import { toast } from "../../@/components/ui/use-toast.ts";
 import restartCompanion from "../lib/restartFunctions.ts";
+import {useAppStore} from "../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
 
 export default function useSessionRestart({
   func,
@@ -15,6 +17,7 @@ export default function useSessionRestart({
     useContext(AppContext);
   const { socket, reportUrl } = useContext(ChatContext);
   const { setDisplayRegistrationMessage } = useContext(AppContext);
+  const { setDisplayConfidenceLevelProceedWarning } = useAppStore(useShallow((state) => ({ ...state })));
 
   const restartFunction = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -34,6 +37,7 @@ export default function useSessionRestart({
           setDisplayRegistrationMessage,
           setChatText,
           reportUrl,
+            setDisplayConfidenceLevelProceedWarning
         );
       }
     }

@@ -6,6 +6,8 @@ import restartCompanion from "../../lib/restartFunctions.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import { ChatContext } from "../../context/ChatContext.tsx";
 import { toast } from "../../../@/components/ui/use-toast.ts";
+import {useAppStore} from "../../context/AppStore.ts";
+import {useShallow} from "zustand/react/shallow";
 
 function LanguageDropDown({
   setToggleLanguage,
@@ -17,6 +19,7 @@ function LanguageDropDown({
     useContext(AppContext);
   const { socket, reportUrl } = useContext(ChatContext);
   const { setDisplayRegistrationMessage } = useContext(AppContext);
+  const { setDisplayConfidenceLevelProceedWarning } = useAppStore(useShallow((state) => ({ ...state })));
 
   const onClickLanguageChange = (e: any) => {
     if (!connected) {
@@ -36,6 +39,7 @@ function LanguageDropDown({
         setDisplayRegistrationMessage,
         setChatText,
         reportUrl,
+          setDisplayConfidenceLevelProceedWarning
       );
     }
   };
