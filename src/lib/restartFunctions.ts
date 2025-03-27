@@ -9,7 +9,9 @@ export default function restartCompanion(
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void,
   setChatText: (chatText: string) => void,
   reportUrl: string,
-  setDisplayConfidenceLevelProceedWarning: (displayRegistrationMessage: boolean) => void,
+  setDisplayConfidenceLevelProceedWarning: (
+    displayRegistrationMessage: boolean,
+  ) => void,
 ) {
   clearSession();
   sendStartSession({
@@ -20,5 +22,5 @@ export default function restartCompanion(
     chatType: readChatTYpeFromLS(),
   });
   setChatText("");
-  setDisplayConfidenceLevelProceedWarning(false)
+  setDisplayConfidenceLevelProceedWarning(false);
 }

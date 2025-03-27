@@ -32,27 +32,21 @@ function VoiceButton() {
   );
 }
 
-function SendButton({sendMessage}: { sendMessage: () => void }) {
-  const {
-    sending,
-    chatText,
-    updatingConfidence,
-  } = useContext(AppContext);
+function SendButton({ sendMessage }: { sendMessage: () => void }) {
+  const { sending, chatText, updatingConfidence } = useContext(AppContext);
   return (
-      <button
-          onClick={(e) => {
-            e.preventDefault();
-            sendMessage();
-          }}
-          disabled={!enoughText(chatText) || sending}
-          className="disabled:opacity-10"
-          id="send-button"
-      >
-        {!updatingConfidence && (
-            <SendImage enoughText={enoughText(chatText)}/>
-        )}
-      </button>
-  )
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        sendMessage();
+      }}
+      disabled={!enoughText(chatText) || sending}
+      className="disabled:opacity-10"
+      id="send-button"
+    >
+      {!updatingConfidence && <SendImage enoughText={enoughText(chatText)} />}
+    </button>
+  );
 }
 
 /**
@@ -69,8 +63,8 @@ export default function ChatInput() {
     setChatText,
     currentMessage,
   } = useContext(AppContext);
-  const {deactivateVoice, hasSpeechRecognition} = useSpeechRecognition();
-  const {socket} = useContext(ChatContext);
+  const { deactivateVoice, hasSpeechRecognition } = useSpeechRecognition();
+  const { socket } = useContext(ChatContext);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [t] = useTranslation();
 
@@ -154,9 +148,7 @@ export default function ChatInput() {
             disabled={sending || !connected}
             ref={textAreaRef}
           />
-          {connected && (
-            <SendButton sendMessage={sendMessage}/>
-          )}
+          {connected && <SendButton sendMessage={sendMessage} />}
         </div>
       </div>
     </>

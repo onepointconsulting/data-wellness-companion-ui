@@ -1,31 +1,27 @@
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.tsx";
-import {Trans, useTranslation} from "react-i18next";
-import {ChatContext} from "../context/ChatContext.tsx";
-import {sendExtendSession,} from "../lib/websocketFunctions.ts";
-import {confidenceAdapter} from "../lib/confidenceAdapter.ts";
-import {saveDisplayedConfidenceLevelProceedWarning} from "../lib/confidenceStateFunctions.ts";
-import {useAppStore} from "../context/AppStore.ts";
-import {useShallow} from "zustand/react/shallow";
-import {MdAdd, MdOutlineArticle} from "react-icons/md";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext.tsx";
+import { Trans, useTranslation } from "react-i18next";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { sendExtendSession } from "../lib/websocketFunctions.ts";
+import { confidenceAdapter } from "../lib/confidenceAdapter.ts";
+import { saveDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
+import { useAppStore } from "../context/AppStore.ts";
+import { useShallow } from "zustand/react/shallow";
+import { MdAdd, MdOutlineArticle } from "react-icons/md";
 import useGenerationReportNow from "../hooks/useGenerateReportNow.ts";
 import DecisionButtons from "./buttons/DecisionButton.tsx";
 
 export default function ConfidenceLevelWarning() {
   const [t] = useTranslation();
-  const {
-    messages,
-    sending,
-    confidence,
-    setUpdatingExpectedNodes,
-  } = useContext(AppContext);
+  const { messages, sending, confidence, setUpdatingExpectedNodes } =
+    useContext(AppContext);
   const {
     messageUpperLimit,
     setDisplayConfidenceLevelProceedWarning,
     setDisplayedConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket } = useContext(ChatContext);
-  const { handleGiveMeReportNow } = useGenerationReportNow()
+  const { handleGiveMeReportNow } = useGenerationReportNow();
   if (sending) {
     return null;
   }
@@ -46,7 +42,7 @@ export default function ConfidenceLevelWarning() {
 
   function giveMeReportNow() {
     setDisplayFlags();
-    handleGiveMeReportNow()
+    handleGiveMeReportNow();
   }
 
   return (
