@@ -9,16 +9,18 @@ import { AppContext } from "../../context/AppContext.tsx";
 
 export default function GiveMeReport() {
   const { messages, isSuggestionDeactivated } = useContext(AppContext);
-  const { messageLowerLimit } = useAppStore(
+  const { messageLowerLimit, displayedConfidenceLevelProceedWarning } = useAppStore(
     useShallow((state) => ({
       messageLowerLimit: state.messageLowerLimit,
+      displayedConfidenceLevelProceedWarning: state.displayedConfidenceLevelProceedWarning
     })),
   );
 
   const { handleGiveMeReportNow } = useGenerationReportNow();
 
   if (
-    !messagesOverLowerLimit(messages, messageLowerLimit + 1) ||
+      !displayedConfidenceLevelProceedWarning ||
+    !messagesOverLowerLimit(messages, messageLowerLimit) ||
     isSuggestionDeactivated
   ) {
     return null;

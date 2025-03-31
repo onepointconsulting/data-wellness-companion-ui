@@ -22,7 +22,6 @@ export default function useSpeechRecognition() {
   const [voiceOn, setVoiceOn] = useState(false);
   const [voiceListening, setVoiceListening] = useState(false);
   const { messages, sending, setChatText } = useContext(AppContext);
-  console.log("useSpeechRecognition");
 
   function stop() {
     try {
