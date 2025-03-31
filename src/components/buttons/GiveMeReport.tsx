@@ -6,10 +6,11 @@ import { useShallow } from "zustand/react/shallow";
 import { messagesOverLowerLimit } from "../../lib/confidenceAdapter.ts";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext.tsx";
-import {Message} from "../../model/message.ts";
+import { Message } from "../../model/message.ts";
 
 export default function GiveMeReport() {
-  const { messages, isSuggestionDeactivated, currentMessage} = useContext(AppContext);
+  const { messages, isSuggestionDeactivated, currentMessage } =
+    useContext(AppContext);
   const { messageLowerLimit, displayedConfidenceLevelProceedWarning } =
     useAppStore(
       useShallow((state) => ({
@@ -26,28 +27,31 @@ export default function GiveMeReport() {
     displayedConfidenceLevelProceedWarning,
   );
 
-  if(!messages) {
-      return null
+  if (!messages) {
+    return null;
   }
 
-    const message: Message = messages[currentMessage];
+  const message: Message = messages[currentMessage];
 
-  if(!message || !message.confidence?.rating) {
-      return null
+  if (!message || !message.confidence?.rating) {
+    return null;
   }
 
-    const overLimit = messagesOverLowerLimit(messages, messageLowerLimit - 2)
+  const overLimit = messagesOverLowerLimit(messages, messageLowerLimit - 2);
 
   if (
-    !overLimit &&
-    !displayedConfidenceLevelProceedWarning ||
+    (!overLimit && !displayedConfidenceLevelProceedWarning) ||
     isSuggestionDeactivated
   ) {
     return null;
   }
 
-  if(overLimit && !["high", "outstanding"].includes(message.confidence?.rating) && !displayedConfidenceLevelProceedWarning) {
-      return null
+  if (
+    overLimit &&
+    !["high", "outstanding"].includes(message.confidence?.rating) &&
+    !displayedConfidenceLevelProceedWarning
+  ) {
+    return null;
   }
 
   function giveMeReportNow() {
