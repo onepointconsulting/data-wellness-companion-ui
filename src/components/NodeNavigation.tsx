@@ -9,6 +9,7 @@ import {
   useAppStore,
 } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
+import {messagesOverLowerLimit} from "../lib/confidenceAdapter.ts";
 
 function selectLastNodeCss(
   covered: boolean,
@@ -41,7 +42,7 @@ function selectLastNodeCss(
 function SingleNode({ i }: { i: number }) {
   const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
-  const { expectedNodes } = useAppStore(useShallow((state) => ({ ...state })));
+  const { expectedNodes, messageLowerLimit } = useAppStore(useShallow((state) => ({ ...state })));
   const isFinalMessage = currentMessage === expectedNodes - 1;
   const [t] = useTranslation();
 
@@ -58,7 +59,7 @@ function SingleNode({ i }: { i: number }) {
   return (
     <>
       <div
-        className={`node ${selectLastNodeCss(covered, currentMessage === i, isLastNode, isFinalMessage)}`}
+        className={`node h-${messagesOverLowerLimit(messages, messageLowerLimit) ? '10': '[55px]'} ${selectLastNodeCss(covered, currentMessage === i, isLastNode, isFinalMessage)}`}
         onClick={(e) => i < length && handleClick(e)}
       >
         {currentMessage === i && (

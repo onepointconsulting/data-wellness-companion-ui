@@ -3,7 +3,7 @@
 }
 
 .node {
-  @apply relative bg-[#e8e8e8] h-[55px] w-[16px] mb-[3px];
+  @apply relative bg-[#e8e8e8] w-[16px] mb-[3px];
 }
 
 .node.active {
