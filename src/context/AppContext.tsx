@@ -5,16 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { Confidence } from "../model/confidence.ts";
 import { Ontology } from "../model/ontology.ts";
 import useSessionHistory from "../hooks/useSessionHistory.ts";
+import { FADE_IN_TIME } from "../lib/animConstants.ts";
 
 interface AppState {
   messages: Message[];
-  setMessages: (messages: Message[]) => void;
+  setMessages: (
+    messages: ((prevMessages: Message[]) => Message[]) | Message[],
+  ) => void;
   startSession: boolean;
   setStartSession: (startSession: boolean) => void;
   connected: boolean;
   setConnected: (connected: boolean) => void;
   currentMessage: number;
-  setCurrentMessage: (currentMessage: number) => void;
+  setCurrentMessage: (
+    currentMessage: ((prev: number) => number) | number,
+  ) => void;
   selectedSuggestion?: string;
   setSelectedSuggestion: (selectedSuggestion: string) => void;
   sending: boolean;
@@ -43,6 +48,8 @@ interface AppState {
   ) => void;
   ontology: Ontology;
   setOntology: (ontology: Ontology) => void;
+  contentVisible: boolean;
+  setContentVisible: (contentVisible: boolean) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -59,7 +66,7 @@ function createAppState(): AppState {
     chatText: "",
     setStartSession: (_) => {},
     setConnected: (_) => {},
-    setMessages: (_: Message[]) => {},
+    setMessages: (_) => {},
     setCurrentMessage: (_) => {},
     setSelectedSuggestion: (_) => {},
     setSending: (_) => {},
@@ -84,6 +91,8 @@ function createAppState(): AppState {
     setSelectedHistoricalSession: (_) => {},
     ontology: {} as Ontology,
     setOntology: (_) => {},
+    contentVisible: true,
+    setContentVisible: (_) => {},
   };
 }
 
@@ -114,6 +123,7 @@ export const AppContextProvider = ({ children }: Props) => {
     betweenness_centrality: {},
     connected_component_importance_dict: {},
   });
+  const [contentVisible, setContentVisible] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -123,9 +133,15 @@ export const AppContextProvider = ({ children }: Props) => {
   const isReport =
     messages?.length > 0 && messages[messages.length - 1].final_report;
 
-  function setCurrentMessageHistory(currentMessage: number) {
-    setCurrentMessage(currentMessage);
-    navigate(`/${currentMessage}${location.search}`);
+  function setCurrentMessageHistory(messageIndex: number) {
+    setContentVisible(false);
+    setTimeout(() => {
+      setCurrentMessage(() => {
+        setSending(false);
+        return messageIndex;
+      });
+      navigate(`/${messageIndex}${location.search}`);
+    }, FADE_IN_TIME);
   }
 
   const isSuggestionDeactivated = isReport || sending || !isLast;
@@ -168,6 +184,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setSelectedHistoricalSession,
         ontology,
         setOntology,
+        contentVisible,
+        setContentVisible,
       }}
     >
       {" "}

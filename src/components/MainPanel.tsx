@@ -1,5 +1,5 @@
 import { AppContext } from "../context/AppContext.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Question from "./Question.tsx";
 import Suggestions from "./Suggestions.tsx";
 import ChatInput from "./ChatInput.tsx";
@@ -16,14 +16,28 @@ import {
 } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import GiveMeReport from "./buttons/GiveMeReport.tsx";
+import { FADE_IN_TIME } from "../lib/animConstants.ts";
 
 export default function MainPanel() {
-  const { currentMessage, messages, sending, isLast } = useContext(AppContext);
+  const {
+    contentVisible,
+    setContentVisible,
+    currentMessage,
+    messages,
+    sending,
+    isLast,
+  } = useContext(AppContext);
   const {
     expectedNodes,
     generatingReport,
     displayConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setContentVisible(true), FADE_IN_TIME);
+    return () => clearTimeout(timeout);
+  }, [contentVisible]);
+
   const message = messages[currentMessage];
   if (!message)
     return (
@@ -44,7 +58,9 @@ export default function MainPanel() {
   if (!message.final_report) {
     return (
       <>
-        <div className="interaction-panel">
+        <div
+          className={`interaction-panel transition-opacity duration-300 ease-in-out ${contentVisible ? "opacity-100" : "opacity-0"}`}
+        >
           {displayChatRelatedElements && (
             <Question
               message={message}

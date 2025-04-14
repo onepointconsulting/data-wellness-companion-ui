@@ -245,15 +245,15 @@
 
 .consultants-section {
   overflow: hidden;
-  transition: max-height 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .consultants-section.open {
-  max-height: 1500px;
+  opacity: 1;
 }
 
 .consultants-section.closed {
-  max-height: 0;
+  opacity: 0;
 }
 
 #consultants-main .markdown-body p {

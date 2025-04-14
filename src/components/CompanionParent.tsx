@@ -15,6 +15,7 @@ import { useShallow } from "zustand/react/shallow";
 import useSeenIntro from "../hooks/useSeenIntro.ts";
 import useShowCompletionDialogue from "../hooks/useShowCompletionDialogue.ts";
 import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
+import { logoAdapter } from "../lib/logoAdapter.ts";
 
 const COMPLETION_POPUP = false;
 
@@ -50,7 +51,7 @@ export default function CompanionParent() {
   const imageAlt = t("logo-alt");
 
   const imageNodeFunc = () => {
-    return <img className="w-96" src="logo.svg" alt={imageAlt} />;
+    return <img className="w-96" src={logoAdapter()} alt={imageAlt} />;
   };
 
   const completionPopup = showCompletionPopup && COMPLETION_POPUP;

@@ -27,7 +27,7 @@ export default function NavigationTab({ children }: { children: ReactNode }) {
   function onSetActiveTab(index: number) {
     setActiveTab(index);
     const messagesLength = messages?.length;
-    setCurrentMessage(messagesLength - 2 + index);
+    setCurrentMessage(() => messagesLength - 2 + index);
   }
 
   return (

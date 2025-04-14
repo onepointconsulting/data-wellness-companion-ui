@@ -7,7 +7,7 @@ interface DarkState {
 }
 
 export const DarkModeContext = createContext<DarkState>({
-  dark: false,
+  dark: true,
   setDark: (_) => {},
 });
 

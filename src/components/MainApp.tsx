@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import JoyrideMain from "./joyride/JoyrideMain.tsx";
 import NavigationTab from "./NavigationTabs.tsx";
+import { logoAdapter } from "../lib/logoAdapter.ts";
 
 export default function MainApp() {
   const [t] = useTranslation();
@@ -17,7 +18,14 @@ export default function MainApp() {
   const imageAlt = t("logo-alt");
 
   const imageNodeFunc = () => {
-    return <img className="w-52 lg:w-72" src="logo.svg" alt={imageAlt} />;
+    return (
+      <img
+        className="w-52 lg:w-72"
+        id="logoImage"
+        src={logoAdapter()}
+        alt={imageAlt}
+      />
+    );
   };
 
   return (

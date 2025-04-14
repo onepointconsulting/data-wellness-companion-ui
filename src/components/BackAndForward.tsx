@@ -15,7 +15,9 @@ export default function BackAndForward() {
 
   function onNext() {
     if (!isNextDisabled()) {
-      setCurrentMessage(currentMessage + 1);
+      setCurrentMessage((prev) => {
+        return prev + 1;
+      });
     }
   }
 
@@ -25,7 +27,9 @@ export default function BackAndForward() {
 
   function onPrevious() {
     if (!isPreviousDisabled()) {
-      setCurrentMessage(currentMessage - 1);
+      setCurrentMessage((prev) => {
+        return prev - 1;
+      });
     }
   }
 

@@ -132,13 +132,14 @@ export function useWebsocket() {
     function onServerMessage(value: string) {
       const serverMessages = JSON.parse(value);
       const messages = adaptServerMessages(serverMessages);
-      setMessages(messages);
-      setCurrentMessageHistory(serverMessages.server_messages.length - 1);
+      setMessages(() => {
+        setCurrentMessageHistory(serverMessages.server_messages.length - 1);
+        return messages;
+      });
       const hasFinalReport = messages.some((message) => message.final_report);
       if (hasFinalReport) {
         setExpectedNodes(messages.length);
       }
-      setSending(false);
       setGeneratingReport(false);
     }
 

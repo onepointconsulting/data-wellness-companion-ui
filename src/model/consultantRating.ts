@@ -12,4 +12,6 @@ export type ConsultantRating = {
   reasoning: string;
   rating: Rating;
   score: number;
+  linkedin_photo_200: string | null;
+  linkedin_photo_400: string | null;
 };

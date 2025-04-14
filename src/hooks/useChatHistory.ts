@@ -8,7 +8,7 @@ export default function useChatHistory() {
   useEffect(() => {
     const locationIndex = location.pathname.split("/").pop();
     if (locationIndex) {
-      setCurrentMessage(parseInt(locationIndex));
+      setCurrentMessage(() => parseInt(locationIndex));
     }
   }, [location]);
 }
