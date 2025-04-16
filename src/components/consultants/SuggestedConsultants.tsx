@@ -23,7 +23,7 @@ function ConsultantCard({
           src={
             rating.linkedin_photo_400 ??
             rating.linkedin_photo_200 ??
-            "hypergility_logo_square.avif"
+            "res_ai_logo_square.avif"
           }
           className="w-full grayscale hover:grayscale-0 transition duration-300 ease-in-out"
         />
