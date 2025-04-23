@@ -31,11 +31,13 @@ export default function InfoDialogue() {
       <InfoSection>
         <OnepointInfo />
       </InfoSection>
-      <InfoSection>
-        <a className="default-link" href="#" onClick={showIntroDialogue}>
-          {t("Usage instructions")}
-        </a>
-      </InfoSection>
+      {!window?.dataWellnessConfig?.hideUsageInstructions && (
+        <InfoSection>
+          <a className="default-link" href="#" onClick={showIntroDialogue}>
+            {t("Usage instructions")}
+          </a>
+        </InfoSection>
+      )}
     </GenericDialogue>
   );
 }

@@ -119,7 +119,7 @@ export default function JoyrideMain() {
                   }}
                 />
                 <img
-                  src="./screenshots/report-screenshot.png"
+                  src="./screenshots/report-resai-screenshot.png"
                   alt={t("Instruction: personalized-report")}
                 />
               </div>

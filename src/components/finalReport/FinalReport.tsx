@@ -136,12 +136,14 @@ export default function FinalReport({ message }: { message: Message }) {
             >
               <BsFileEarmarkPdf />
             </ReportLink>
-            <ReportLink
-              click={fetchSuggestedConsultants}
-              title={t("Suggest consultants")}
-            >
-              <MdPerson3 />
-            </ReportLink>
+            {!window.dataWellnessConfig.hideConsultants && (
+              <ReportLink
+                click={fetchSuggestedConsultants}
+                title={t("Suggest consultants")}
+              >
+                <MdPerson3 />
+              </ReportLink>
+            )}
             <ReportLink
               click={processPopup()}
               title={t("Explore another area of interest")}
