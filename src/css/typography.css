@@ -12,7 +12,7 @@
 
 #root .markdown-body strong,
 #root .markdown-body code {
-  @apply bg-[#e6f3fb] px-2 rounded-lg font-normal dark:text-black;
+  @apply font-extrabold;
 }
 
 #root .markdown-body code {
