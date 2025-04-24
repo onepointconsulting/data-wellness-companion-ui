@@ -81,6 +81,10 @@ export function sendRegenerateMessage(socket: Socket<any, any> | null) {
   safeEmit(socket, WEBSOCKET_COMMAND.REGENERATE_QUESTION, getSessionId());
 }
 
+export function addMoreSuggestions(socket: Socket<any, any> | null, currentQuestion: string) {
+  safeEmit(socket, WEBSOCKET_COMMAND.ADD_MORE_SUGGESTIONS, getSessionId(), currentQuestion, i18next?.language);
+}
+
 export function sendClarifyQuestion(
   socket: Socket<any, any> | null,
   question: string,

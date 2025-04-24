@@ -1,7 +1,11 @@
 import { Message, Suggestion } from "../model/message.ts";
-import React, { useContext } from "react";
+import React, {useContext, useEffect} from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
+import {ReportButton} from "./buttons/ReportButton.tsx";
+import {MdRestartAlt} from "react-icons/md";
+import {addMoreSuggestions} from "../lib/websocketFunctions.ts";
+import {ChatContext} from "../context/ChatContext.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
   if (!suggestion.title) {
@@ -96,8 +100,16 @@ export default function Suggestions({ message }: { message: Message }) {
     chatText,
     currentMessage,
     sending,
+      setSending,
     isSuggestionDeactivated,
+    isLast,
+    setRegenerating
   } = useContext(AppContext);
+  const { socket } = useContext(ChatContext)
+
+  useEffect(() => {
+    setSelectedSuggestion("")
+  }, [currentMessage])
 
   function handleSelectedSuggestion(
     e: React.MouseEvent,
@@ -119,6 +131,17 @@ export default function Suggestions({ message }: { message: Message }) {
           setSelectedSuggestion(newText);
         }
       }
+    }
+  }
+
+  function handleGenerateMoreAnswers() {
+    const question = message.question
+    if(question) {
+      setSending((_) => {
+        setRegenerating(true)
+        return true
+      });
+      addMoreSuggestions(socket.current, question)
     }
   }
 
@@ -146,6 +169,11 @@ export default function Suggestions({ message }: { message: Message }) {
           );
         })}
       </div>
+      {currentMessage > 0 && isLast && !sending && <div className="flex flex-row justify-start -mt-3 mb-2">
+        <ReportButton click={handleGenerateMoreAnswers} title={t("Generate more answers")}>
+          <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8"/>
+        </ReportButton>
+      </div>}
     </>
   );
 }

@@ -6,6 +6,7 @@ export const WEBSOCKET_COMMAND = {
   EXTEND_SESSION: "extend_session",
   GENERATE_REPORT_NOW: "generate_report_now",
   REGENERATE_QUESTION: "regenerate_question",
+  ADD_MORE_SUGGESTIONS: "add_more_suggestions",
 };
 
 // Receive
@@ -17,5 +18,6 @@ export const WEBSOCKET_SERVER_COMMAND = {
   CLARIFICATION_TOKEN: "clarification_token",
   EXTEND_SESSION: "extend_session",
   REGENERATE_QUESTION: "regenerate_question",
+  ADD_MORE_SUGGESTIONS: "add_more_suggestions",
   ERROR: "error",
 };

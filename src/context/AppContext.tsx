@@ -23,7 +23,7 @@ interface AppState {
   selectedSuggestion?: string;
   setSelectedSuggestion: (selectedSuggestion: string) => void;
   sending: boolean;
-  setSending: (sending: boolean) => void;
+  setSending: (sending: ((sending: boolean) => boolean) | boolean) => void;
   chatText: string;
   setChatText: (chatText: string) => void;
   readonly isLast: boolean;
@@ -50,6 +50,8 @@ interface AppState {
   setOntology: (ontology: Ontology) => void;
   contentVisible: boolean;
   setContentVisible: (contentVisible: boolean) => void;
+  regenerating: boolean;
+  setRegenerating: (regenerating: boolean) => void;
 }
 
 export const DEFAULT_EXPECTED_NODES = 6;
@@ -93,6 +95,8 @@ function createAppState(): AppState {
     setOntology: (_) => {},
     contentVisible: true,
     setContentVisible: (_) => {},
+      regenerating: false,
+      setRegenerating: (_) => {},
   };
 }
 
@@ -107,6 +111,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>();
   const [sending, setSending] = useState(false);
+    const [regenerating, setRegenerating] = useState(false);
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
@@ -186,6 +191,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setOntology,
         contentVisible,
         setContentVisible,
+          regenerating,
+          setRegenerating
       }}
     >
       {" "}

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { ReportLink } from "./ReportLink.tsx";
+import { ReportButton } from "./ReportButton.tsx";
 
 export default function DecisionButtons({
   label,
@@ -13,8 +13,8 @@ export default function DecisionButtons({
 }) {
   const [t] = useTranslation();
   return (
-    <ReportLink click={onClick} title={t(label)} marginTop={0}>
+    <ReportButton click={onClick} title={t(label)}>
       {Icon}
-    </ReportLink>
+    </ReportButton>
   );
 }

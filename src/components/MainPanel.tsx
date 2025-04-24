@@ -26,6 +26,7 @@ export default function MainPanel() {
     messages,
     sending,
     isLast,
+      regenerating
   } = useContext(AppContext);
   const {
     expectedNodes,
@@ -49,12 +50,19 @@ export default function MainPanel() {
     currentMessage,
     expectedNodes,
     generatingReport,
+      regenerating
   );
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
     displayConfidenceLevelProceedWarning && isLast;
   const displayChatRelatedElements =
     displayChatAreaElements && !displayConfidenceLevelWarning;
+
+  function getSpinnerMessage(displayReportGenerationMessage: boolean, regenerating: boolean) {
+    return displayReportGenerationMessage ? "Generating report. This might take 2 to 3 minutes..." : regenerating ? "Regenerating" : ""
+  }
+
+
   if (!message.final_report) {
     return (
       <>
@@ -71,7 +79,7 @@ export default function MainPanel() {
           {!isLast && <QuestionAnswer message={message} />}
           <SpinnerArea
             sending={sending}
-            displayReportGenerationMessage={displayReportGenerationMessage}
+            message={getSpinnerMessage(displayReportGenerationMessage, regenerating)}
           />
           {displayChatRelatedElements && (
             <>

@@ -1,7 +1,7 @@
-export function ReportLink({
+export function ReportButton({
   click,
   title,
-  marginTop = 3,
+  marginTop = 2,
   children,
 }: {
   click: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -10,7 +10,7 @@ export function ReportLink({
   children: React.ReactNode;
 }) {
   return (
-    <button className={`mt-${marginTop} btn`} onClick={click}>
+    <button className={`pt-${marginTop} btn`} onClick={click}>
       <span title={title}>{children}</span>
       <span className="hidden md:block">{title}</span>
     </button>

@@ -109,6 +109,7 @@ export function isDisplayReportGenerationMessage(
   currentMessage: number,
   expectedNodes: number,
   generatingReport: boolean,
+  regenerating: boolean
 ) {
-  return currentMessage === expectedNodes - 1 || generatingReport;
+  return !regenerating && currentMessage === expectedNodes - 1 || generatingReport;
 }

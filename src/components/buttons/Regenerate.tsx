@@ -6,16 +6,19 @@ import { sendRegenerateMessage } from "../../lib/websocketFunctions.ts";
 import { useTranslation } from "react-i18next";
 import { MdRestartAlt } from "react-icons/md";
 
-import { ReportLink } from "./ReportLink.tsx";
+import { ReportButton } from "./ReportButton.tsx";
 
 export default function Regenerate() {
   const [t] = useTranslation();
-  const { sending, setSending, currentMessage, messages, isLast } =
+  const { sending, setSending, currentMessage, messages, isLast, setRegenerating } =
     useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
   function onRegenerate() {
-    setSending(true);
+    setSending((_) => {
+      setRegenerating(true)
+      return true
+    });
     sendRegenerateMessage(socket.current);
   }
 
@@ -35,9 +38,9 @@ export default function Regenerate() {
         </div>
       )}
       {!sending && (
-        <ReportLink click={onRegenerate} title={t("Regenerate")}>
+        <ReportButton click={onRegenerate} title={t("Regenerate")}>
           <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100" />
-        </ReportLink>
+        </ReportButton>
       )}
     </div>
   );

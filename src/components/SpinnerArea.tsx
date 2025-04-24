@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 
 export default function SpinnerArea({
   sending,
-  displayReportGenerationMessage,
+  message,
 }: {
   sending: boolean;
-  displayReportGenerationMessage: boolean;
+  message?: string;
 }) {
   const [t] = useTranslation();
   return (
@@ -16,9 +16,9 @@ export default function SpinnerArea({
           <div className="mt-6 mb-8">
             <Spinner />
           </div>
-          {displayReportGenerationMessage && (
+          {message && (
             <div className="final-report-message mt-10 mb-2">
-              {t("Generating report. This might take 2 to 3 minutes...")}
+              {t(message)}
             </div>
           )}
         </>

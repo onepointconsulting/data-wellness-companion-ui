@@ -75,7 +75,7 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { currentMessage, isLast, isReport, sending } = useContext(AppContext);
+  const { currentMessage, isLast, isReport, sending, regenerating } = useContext(AppContext);
   const { expectedNodes } = useAppStore(
     useShallow((state) => ({ expectedNodes: state.expectedNodes })),
   );
@@ -92,6 +92,7 @@ export default function NodeNavigation() {
     currentMessage,
     expectedNodes,
     generatingReport,
+      regenerating
   );
 
   if (

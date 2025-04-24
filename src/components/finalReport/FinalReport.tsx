@@ -24,7 +24,7 @@ import MarkdownAccordion from "./MarkdownAccordion.tsx";
 import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
-import { ReportLink } from "../buttons/ReportLink.tsx";
+import { ReportButton } from "../buttons/ReportButton.tsx";
 import { useSuggestConsultant } from "../../hooks/useSuggestConsultant.ts";
 import SuggestedConsultants from "../consultants/SuggestedConsultants.tsx";
 import useOntology from "../../hooks/useOntology.ts";
@@ -118,38 +118,38 @@ export default function FinalReport({ message }: { message: Message }) {
       {sessionId && (
         <div className="final-report-download">
           <div className="flex gap-4">
-            <ReportLink
+            <ReportButton
               click={onOntologyOpenClick}
               title={t("Knowledge graph")}
             >
               <PiGraphLight />
-            </ReportLink>
-            <ReportLink
+            </ReportButton>
+            <ReportButton
               click={showEmailDialogue}
               title={t("Send report as email")}
             >
               <MdOutlineAlternateEmail />
-            </ReportLink>
-            <ReportLink
+            </ReportButton>
+            <ReportButton
               click={(_e) => (location.href = reportPdf)}
               title={t("Download PDF")}
             >
               <BsFileEarmarkPdf />
-            </ReportLink>
+            </ReportButton>
             {!window.dataWellnessConfig.hideConsultants && (
-              <ReportLink
+              <ReportButton
                 click={fetchSuggestedConsultants}
                 title={t("Suggest consultants")}
               >
                 <MdPerson3 />
-              </ReportLink>
+              </ReportButton>
             )}
-            <ReportLink
+            <ReportButton
               click={processPopup()}
               title={t("Explore another area of interest")}
             >
               <MdOutlineReplay />
-            </ReportLink>
+            </ReportButton>
           </div>
         </div>
       )}

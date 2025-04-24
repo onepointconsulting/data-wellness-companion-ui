@@ -67,7 +67,7 @@ function extractInterviewSteps(
 
 export function useWebsocket() {
   const [t] = useTranslation();
-  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes } =
+  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes, setRegenerating } =
     useContext(AppContext);
   const {
     setExpectedNodes,
@@ -143,20 +143,51 @@ export function useWebsocket() {
       setGeneratingReport(false);
     }
 
-    function onRegenerateMessage(value: string) {
+    function baseRegenerateMessage(value: string, handleMessage: (value: any) => void) {
       const serverMessages = JSON.parse(value);
       if (serverMessages["error"]) {
-        console.error("Failed to regenerate question.");
+        console.error("Failed to regenerate.");
         const errorMessage = serverMessages["error"];
         toast({
           title: t("Error"),
           description: errorMessage,
         });
       } else {
+        handleMessage(serverMessages)
+      }
+      setSending((_) => {
+        setRegenerating(false)
+        return false
+      });
+    }
+
+    function onRegenerateMessage(value: string) {
+      baseRegenerateMessage(value, (serverMessages: any) => {
         const messages = adaptServerMessages(serverMessages);
         setMessages(messages);
-      }
-      setSending(false);
+      })
+    }
+
+    function onAddMoreSuggestions(value: string) {
+      baseRegenerateMessage(value, (serverMessages: any) => {
+        console.log("onAddMoreSuggestions", serverMessages)
+        setMessages(previousMessages => {
+          const newMessages = [...previousMessages]
+          const lastMessage = newMessages.slice(-1)[0]
+          const newSuggestions: any[] = serverMessages["possible_answers"].map((pa: any) => ({
+            "image_src": "",
+            "image_alt": "",
+            "main_text": pa["main_text"]
+          }))
+          lastMessage.suggestions = [...lastMessage.suggestions]
+          for(const newMessage of newSuggestions) {
+            if(lastMessage.suggestions.findIndex((pa) => pa.main_text === newMessage["main_text"]) === -1) {
+              lastMessage.suggestions.push(newMessage)
+            }
+          }
+          return newMessages
+        });
+      })
     }
 
     function onErrorMessage(value: string) {
@@ -189,7 +220,9 @@ export function useWebsocket() {
       WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
       onRegenerateMessage,
     );
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS, onAddMoreSuggestions)
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
+
 
     return () => {
       socket.current?.off(
@@ -210,6 +243,7 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
         onRegenerateMessage,
       );
+      socket.current?.off(WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS, onAddMoreSuggestions)
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
     };
   }, []);
