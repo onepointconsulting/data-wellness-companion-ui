@@ -3,7 +3,7 @@ import { BsFileEarmarkPdf } from "react-icons/bs";
 import {
   MdOutlineAlternateEmail,
   MdOutlineReplay,
-  MdPerson3,
+  MdOutlinePersonSearch,
 } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
 import { useContext, useEffect } from "react";
@@ -141,7 +141,7 @@ export default function FinalReport({ message }: { message: Message }) {
                 click={fetchSuggestedConsultants}
                 title={t("Suggest consultants")}
               >
-                <MdPerson3 />
+                <MdOutlinePersonSearch />
               </ReportButton>
             )}
             <ReportButton

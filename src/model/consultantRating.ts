@@ -1,9 +1,9 @@
 export enum Rating {
-  VERY_SUITABLE = "very suitable",
-  SUITABLE = "suitable",
-  MODERATELY_SUITABLE = "moderately suitable",
-  HARDLY_SUITABLE = "hardly suitable",
-  UNSUITABLE = "unsuitable",
+  VERY_SUITABLE = "Very suitable",
+  SUITABLE = "Suitable",
+  MODERATELY_SUITABLE = "Moderately suitable",
+  HARDLY_SUITABLE = "Hardly suitable",
+  UNSUITABLE = "Unsuitable",
 }
 
 export type ConsultantRating = {
