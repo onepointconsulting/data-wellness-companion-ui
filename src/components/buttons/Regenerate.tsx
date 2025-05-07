@@ -10,14 +10,20 @@ import { ReportButton } from "./ReportButton.tsx";
 
 export default function Regenerate() {
   const [t] = useTranslation();
-  const { sending, setSending, currentMessage, messages, isLast, setRegenerating } =
-    useContext(AppContext);
+  const {
+    sending,
+    setSending,
+    currentMessage,
+    messages,
+    isLast,
+    setRegenerating,
+  } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
   function onRegenerate() {
     setSending((_) => {
-      setRegenerating(true)
-      return true
+      setRegenerating(true);
+      return true;
     });
     sendRegenerateMessage(socket.current);
   }

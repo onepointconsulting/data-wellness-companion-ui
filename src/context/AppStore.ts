@@ -86,7 +86,9 @@ export const useAppStore = create<AppStoreState>((set) => ({
     })),
   expectedNodes: DEFAULT_EXPECTED_NODES,
   setExpectedNodes: (expectedNodes: number) =>
-    set((state) => ({ ...state, expectedNodes })),
+    set((state) => {
+      return { ...state, expectedNodes };
+    }),
   updatingSuggestedConsultants: false,
   setUpdatingSuggestedConsultants: (updatingSuggestedConsultants: boolean) =>
     set((state) => ({ ...state, updatingSuggestedConsultants })),
@@ -109,7 +111,9 @@ export function isDisplayReportGenerationMessage(
   currentMessage: number,
   expectedNodes: number,
   generatingReport: boolean,
-  regenerating: boolean
+  regenerating: boolean,
 ) {
-  return !regenerating && currentMessage === expectedNodes - 1 || generatingReport;
+  return (
+    (!regenerating && currentMessage === expectedNodes - 1) || generatingReport
+  );
 }

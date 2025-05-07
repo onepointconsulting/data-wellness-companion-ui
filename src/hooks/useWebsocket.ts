@@ -67,8 +67,11 @@ function extractInterviewSteps(
 
 export function useWebsocket() {
   const [t] = useTranslation();
-  const { setDisplayRegistrationMessage, setUpdatingExpectedNodes, setRegenerating } =
-    useContext(AppContext);
+  const {
+    setDisplayRegistrationMessage,
+    setUpdatingExpectedNodes,
+    setRegenerating,
+  } = useContext(AppContext);
   const {
     setExpectedNodes,
     setGeneratingReport,
@@ -143,7 +146,10 @@ export function useWebsocket() {
       setGeneratingReport(false);
     }
 
-    function baseRegenerateMessage(value: string, handleMessage: (value: any) => void) {
+    function baseRegenerateMessage(
+      value: string,
+      handleMessage: (value: any) => void,
+    ) {
       const serverMessages = JSON.parse(value);
       if (serverMessages["error"]) {
         console.error("Failed to regenerate.");
@@ -153,11 +159,11 @@ export function useWebsocket() {
           description: errorMessage,
         });
       } else {
-        handleMessage(serverMessages)
+        handleMessage(serverMessages);
       }
       setSending((_) => {
-        setRegenerating(false)
-        return false
+        setRegenerating(false);
+        return false;
       });
     }
 
@@ -165,29 +171,35 @@ export function useWebsocket() {
       baseRegenerateMessage(value, (serverMessages: any) => {
         const messages = adaptServerMessages(serverMessages);
         setMessages(messages);
-      })
+      });
     }
 
     function onAddMoreSuggestions(value: string) {
       baseRegenerateMessage(value, (serverMessages: any) => {
-        console.log("onAddMoreSuggestions", serverMessages)
-        setMessages(previousMessages => {
-          const newMessages = [...previousMessages]
-          const lastMessage = newMessages.slice(-1)[0]
-          const newSuggestions: any[] = serverMessages["possible_answers"].map((pa: any) => ({
-            "image_src": "",
-            "image_alt": "",
-            "main_text": pa["main_text"]
-          }))
-          lastMessage.suggestions = [...lastMessage.suggestions]
-          for(const newMessage of newSuggestions) {
-            if(lastMessage.suggestions.findIndex((pa) => pa.main_text === newMessage["main_text"]) === -1) {
-              lastMessage.suggestions.push(newMessage)
+        console.log("onAddMoreSuggestions", serverMessages);
+        setMessages((previousMessages) => {
+          const newMessages = [...previousMessages];
+          const lastMessage = newMessages.slice(-1)[0];
+          const newSuggestions: any[] = serverMessages["possible_answers"].map(
+            (pa: any) => ({
+              image_src: "",
+              image_alt: "",
+              main_text: pa["main_text"],
+            }),
+          );
+          lastMessage.suggestions = [...lastMessage.suggestions];
+          for (const newMessage of newSuggestions) {
+            if (
+              lastMessage.suggestions.findIndex(
+                (pa) => pa.main_text === newMessage["main_text"],
+              ) === -1
+            ) {
+              lastMessage.suggestions.push(newMessage);
             }
           }
-          return newMessages
+          return newMessages;
         });
-      })
+      });
     }
 
     function onErrorMessage(value: string) {
@@ -220,9 +232,11 @@ export function useWebsocket() {
       WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
       onRegenerateMessage,
     );
-    socket.current.on(WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS, onAddMoreSuggestions)
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS,
+      onAddMoreSuggestions,
+    );
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
-
 
     return () => {
       socket.current?.off(
@@ -243,7 +257,10 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.REGENERATE_QUESTION,
         onRegenerateMessage,
       );
-      socket.current?.off(WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS, onAddMoreSuggestions)
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.ADD_MORE_SUGGESTIONS,
+        onAddMoreSuggestions,
+      );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
     };
   }, []);

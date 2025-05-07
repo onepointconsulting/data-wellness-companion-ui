@@ -27,7 +27,7 @@ function selectLastNodeCss(
   if (isLastNode) {
     css.push("last-node");
     if (isFinalMessage) {
-      css.push("!bg-opacity-0");
+      css.push("!bg-opacity-30");
     }
   }
   return css.join(" ");
@@ -75,7 +75,8 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { currentMessage, isLast, isReport, sending, regenerating } = useContext(AppContext);
+  const { currentMessage, isLast, isReport, sending, regenerating } =
+    useContext(AppContext);
   const { expectedNodes } = useAppStore(
     useShallow((state) => ({ expectedNodes: state.expectedNodes })),
   );
@@ -92,7 +93,7 @@ export default function NodeNavigation() {
     currentMessage,
     expectedNodes,
     generatingReport,
-      regenerating
+    regenerating,
   );
 
   if (

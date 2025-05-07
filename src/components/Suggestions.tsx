@@ -1,11 +1,11 @@
 import { Message, Suggestion } from "../model/message.ts";
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
-import {ReportButton} from "./buttons/ReportButton.tsx";
-import {MdRestartAlt} from "react-icons/md";
-import {addMoreSuggestions} from "../lib/websocketFunctions.ts";
-import {ChatContext} from "../context/ChatContext.tsx";
+import { ReportButton } from "./buttons/ReportButton.tsx";
+import { MdRestartAlt } from "react-icons/md";
+import { addMoreSuggestions } from "../lib/websocketFunctions.ts";
+import { ChatContext } from "../context/ChatContext.tsx";
 
 function adaptSuggestion(suggestion: Suggestion) {
   if (!suggestion.title) {
@@ -100,16 +100,17 @@ export default function Suggestions({ message }: { message: Message }) {
     chatText,
     currentMessage,
     sending,
-      setSending,
+    setSending,
     isSuggestionDeactivated,
     isLast,
-    setRegenerating
+    setRegenerating,
+    messages,
   } = useContext(AppContext);
-  const { socket } = useContext(ChatContext)
+  const { socket } = useContext(ChatContext);
 
   useEffect(() => {
-    setSelectedSuggestion("")
-  }, [currentMessage])
+    setSelectedSuggestion("");
+  }, [currentMessage]);
 
   function handleSelectedSuggestion(
     e: React.MouseEvent,
@@ -135,17 +136,27 @@ export default function Suggestions({ message }: { message: Message }) {
   }
 
   function handleGenerateMoreAnswers() {
-    const question = message.question
-    if(question) {
+    const question = message.question;
+    if (question) {
       setSending((_) => {
-        setRegenerating(true)
-        return true
+        setRegenerating(true);
+        setSelectedSuggestion("");
+        return true;
       });
-      addMoreSuggestions(socket.current, question)
+      addMoreSuggestions(socket.current, question);
     }
   }
 
   if (!message.suggestions || message.suggestions.length === 0) return null;
+
+  console.log(
+    "currentMessage > 0 && isLast && !sending messages.length currentMessage",
+    currentMessage > 0,
+    isLast,
+    !sending,
+    messages.length,
+    currentMessage,
+  );
 
   return (
     <>
@@ -169,11 +180,16 @@ export default function Suggestions({ message }: { message: Message }) {
           );
         })}
       </div>
-      {currentMessage > 0 && isLast && !sending && <div className="flex flex-row justify-start -mt-3 mb-2">
-        <ReportButton click={handleGenerateMoreAnswers} title={t("Generate more answers")}>
-          <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8"/>
-        </ReportButton>
-      </div>}
+      {currentMessage > 0 && isLast && !sending && (
+        <div className="flex flex-row justify-start -mt-3 mb-2">
+          <ReportButton
+            click={handleGenerateMoreAnswers}
+            title={t("Generate more answers")}
+          >
+            <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8" />
+          </ReportButton>
+        </div>
+      )}
     </>
   );
 }

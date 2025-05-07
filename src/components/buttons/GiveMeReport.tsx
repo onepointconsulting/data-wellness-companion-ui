@@ -41,10 +41,11 @@ export default function GiveMeReport() {
 
   console.info("overLimit", overLimit);
 
-  if (
-    (!overLimit && !displayedConfidenceLevelProceedWarning) ||
-    isSuggestionDeactivated
-  ) {
+  if (!overLimit) {
+    return null;
+  }
+
+  if (!displayedConfidenceLevelProceedWarning || isSuggestionDeactivated) {
     return null;
   }
 

@@ -99,7 +99,8 @@ export default function useConfidence() {
         currentMessage + 1 >= messageLowerLimit &&
         messages &&
         messages.length &&
-        !messages[messages.length - 1]?.final_report
+        !messages[messages.length - 1]?.final_report &&
+        currentMessage === messages.length - 1 // Only do this when you are on the last message
       ) {
         // Shorten the session.
         sendExtendSession(socket.current, currentMessage + 1);

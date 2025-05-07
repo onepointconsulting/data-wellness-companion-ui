@@ -95,8 +95,8 @@ function createAppState(): AppState {
     setOntology: (_) => {},
     contentVisible: true,
     setContentVisible: (_) => {},
-      regenerating: false,
-      setRegenerating: (_) => {},
+    regenerating: false,
+    setRegenerating: (_) => {},
   };
 }
 
@@ -111,7 +111,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>();
   const [sending, setSending] = useState(false);
-    const [regenerating, setRegenerating] = useState(false);
+  const [regenerating, setRegenerating] = useState(false);
   const [chatText, setChatText] = useState("");
   const [displayRegistrationMessage, setDisplayRegistrationMessage] =
     useState(false);
@@ -191,8 +191,8 @@ export const AppContextProvider = ({ children }: Props) => {
         setOntology,
         contentVisible,
         setContentVisible,
-          regenerating,
-          setRegenerating
+        regenerating,
+        setRegenerating,
       }}
     >
       {" "}

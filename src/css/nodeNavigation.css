@@ -19,7 +19,7 @@
 }
 
 .node.last-node {
-  @apply opacity-10;
+  @apply opacity-50;
 }
 
 .node.h-\[55px\] {

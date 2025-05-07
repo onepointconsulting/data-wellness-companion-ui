@@ -17,9 +17,7 @@ export default function SpinnerArea({
             <Spinner />
           </div>
           {message && (
-            <div className="final-report-message mt-10 mb-2">
-              {t(message)}
-            </div>
+            <div className="final-report-message mt-10 mb-2">{t(message)}</div>
           )}
         </>
       )}
