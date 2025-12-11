@@ -1,4 +1,5 @@
 import { ulid, decodeTime } from "ulid";
+import {expect, test} from '@jest/globals'
 
 test("ulidDecodeTime", () => {
   const ulidstr = ulid();
@@ -12,7 +13,7 @@ test("ulidDecodeTimeFail", () => {
   const oldUuid = "abd737e8-3f26-410d-bb3d-a8b952799ebc";
   try {
     decodeTime(oldUuid);
-    fail("Should have thrown an error");
+    expect(false).toBe(true);
   } catch (e) {
     expect(e).toBeTruthy();
   }

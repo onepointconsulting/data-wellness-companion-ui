@@ -1,0 +1,1 @@
+copy index_d_well.html index.html
