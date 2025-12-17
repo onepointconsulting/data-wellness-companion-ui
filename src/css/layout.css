@@ -1,15 +1,16 @@
+
 #root {
-  @apply flex flex-col
-  bg-gradient-to-b from-[#ffffff] from-15% to-[#edf7fc] dark:from-slate-700 dark:to-slate-800 dark:bg-slate-700
-  min-h-screen;
+  @apply flex flex-col min-h-screen;
+  background: linear-gradient(to bottom, #ffffff 15%, #edf7fc 100%);
+}
+
+.dark #root {
+  background: #1F1925 !important;
+  color: #f3f4f6;
 }
 
 #root {
-  @apply dark:!bg-gray-800 dark:!text-gray-100;
-}
-
-#root {
-  font-family: "Lato", sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 #root .header {
@@ -47,17 +48,17 @@
 }
 
 #root .suggestion {
-  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#4a4a4a] hover:text-[#0084d7]
-    border border-[#a6a6a6] hover:border-[#0084d7] transition duration-200 gap-0;
+  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
+    border border-[#636565]  rounded-sm  dark:hover:border-[#fafffe] hover:scale-105 transition duration-300 hover:underline ease-in-out;
 }
 
 #root .suggestion.active {
-  @apply border-[#0084d7] text-[#0084d7] bg-[#0084d717] dark:bg-[#0084d717];
+  @apply border-[#9A19FF] text-[#f4f6f7]  dark:text-[#fafffe] bg-[#9A19FF] dark:bg-[#9A19FF];
 }
 
 #root .suggestion.active .suggestion-title,
 #root .suggestion.active .suggestion-text {
-  @apply !text-[#0084d7];
+  @apply !text-[#fafffe];
 }
 
 #root .suggestion.has-report {
@@ -265,7 +266,7 @@
 }
 
 #root .confidence-text code {
-  font-family: "Lato", sans-serif;
+  font-family: 'Manrope', sans-serif;
   @apply text-xl;
 }
 

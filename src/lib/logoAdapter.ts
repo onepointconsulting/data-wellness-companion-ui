@@ -2,8 +2,8 @@ const bodyElement = window?.document?.querySelector("body");
 
 export function logoAdapter() {
   return bodyElement?.classList.contains("dark")
-    ? "res_ai_logo_dark.png"
-    : "res_ai_logo.png";
+  ? "res-ai-light.png"
+  : "res-ai-dark.png"
 }
 
 // Create a new MutationObserver instance

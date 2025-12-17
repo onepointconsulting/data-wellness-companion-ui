@@ -157,7 +157,7 @@ export default function Suggestions({ message }: { message: Message }) {
     messages.length,
     currentMessage,
   );
-
+    
   return (
     <>
       {isSuggestionDeactivated && !sending && (

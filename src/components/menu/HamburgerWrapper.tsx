@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useRef } from "react";
+// ...existing code...
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 import { JoyrideContext } from "../../context/JoyrideContext.tsx";
 
@@ -35,9 +36,11 @@ export default function HamburgerWrapper({
     };
   }, [handleClickOutside]);
 
+  // ...existing code...
   return (
     <div className="hamburger-menu" ref={hamburgerMenu}>
       <div ref={imgRef}>
+        {/* Hamburger icon remains unchanged */}
         <svg
           width="27"
           height="30"

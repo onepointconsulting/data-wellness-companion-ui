@@ -4,7 +4,7 @@ dialog::backdrop {
 
 .companion-dialogue,
 .email-dialogue {
-  @apply w-11/12 md:w-1/2 bg-white shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-gray-700 dark:text-white;
+  @apply w-11/12 md:w-1/2 bg-white shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-[#1F1925] dark:text-white;
 }
 
 .companion-dialogue-content,

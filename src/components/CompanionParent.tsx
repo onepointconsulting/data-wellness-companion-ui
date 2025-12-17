@@ -51,7 +51,7 @@ export default function CompanionParent() {
   const imageAlt = t("logo-alt");
 
   const imageNodeFunc = () => {
-    return <img className="w-96" src={logoAdapter()} alt={imageAlt} />;
+    return <img className="w-52 lg:w-60" src={logoAdapter()} alt={imageAlt} />;
   };
 
   const completionPopup = showCompletionPopup && COMPLETION_POPUP;

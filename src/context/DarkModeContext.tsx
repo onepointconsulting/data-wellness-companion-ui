@@ -12,14 +12,28 @@ export const DarkModeContext = createContext<DarkState>({
 });
 
 export const DarkModeContextProvider = ({ children }: Props) => {
-  const [dark, setDark] = useState<boolean>(false);
+  const [dark, setDarkState] = useState<boolean>(false);
+
   useEffect(() => {
     const isDark = window.localStorage["dark"] === "true";
-    setDark(isDark);
+    setDarkState(isDark);
     if (isDark) {
       document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
     }
   }, []);
+
+  const setDark = (value: boolean) => {
+    setDarkState(value);
+    window.localStorage["dark"] = value ? "true" : "false";
+    if (value) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  };
+
   return (
     <DarkModeContext.Provider value={{ dark, setDark }}>
       {children}
