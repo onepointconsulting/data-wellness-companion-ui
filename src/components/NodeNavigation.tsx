@@ -66,7 +66,7 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img src="./navigation-icon.svg" alt={t("navigation icon")} />
+            <img src="icons/res-ai-favicon.png" alt={t("navigation icon")} />
           </div>
         )}
       </div>

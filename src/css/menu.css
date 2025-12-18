@@ -19,7 +19,11 @@
 }
 
 .hamburger-menu > menu {
-  @apply flex flex-col items-start absolute right-5 top-[30px] md:top-[35px] w-80 py-6 px-8 rounded-lg border shadow-muted bg-white dark:bg-gray-700 dark:text-white;
+  @apply flex flex-col items-start absolute right-5 top-[30px] md:top-[35px] w-80 py-2 px-8 rounded-lg border border-[#1d1d1d] shadow-muted bg-[#fafffe] dark:text-[#fafffe] dark:border-[#fafffe];
+}
+
+.dark .hamburger-menu > menu {
+  background-color: #1f1925 !important;
 }
 
 .hamburger-menu > menu img {
@@ -31,7 +35,7 @@
 }
 
 .menu-item {
-  @apply flex flex-row cursor-pointer w-full hover:bg-gray-50 dark:hover:bg-gray-600 py-4;
+  @apply w-full  flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-[#38333d] transition-colors duration-200 cursor-pointer;
 }
 
 .menu-item svg {
@@ -43,7 +47,7 @@
 }
 
 .menu-select {
-  @apply py-1 border-b border-black w-full;
+  @apply py-1 border-b border-gray-300 dark:border-gray-100 w-full;
 }
 
 .menu-instructions li {

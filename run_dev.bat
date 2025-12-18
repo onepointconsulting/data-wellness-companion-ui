@@ -1,2 +1,2 @@
 call yarn build
-yarn dev
+call yarn dev

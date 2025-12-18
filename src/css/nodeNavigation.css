@@ -3,19 +3,19 @@
 }
 
 .node {
-  @apply relative bg-[#e8e8e8] w-[16px] mb-[3px];
+  @apply relative bg-[#E6E5E6] w-[16px] mb-[3px];
 }
 
 .node.active {
-  @apply bg-[#539bd9] text-white cursor-pointer;
+  @apply bg-[#8F00FF] text-white cursor-pointer;
 }
 
 .node.active.current {
-  @apply bg-[#4DC48D] text-white cursor-none;
+  @apply bg-[#E8CCFF] text-white cursor-none;
 }
 
 .node.last-node svg {
-  @apply w-8 h-8 fill-[#539bd9] bg-white relative left-1;
+  @apply w-8 h-8 fill-[#8F00FF] bg-white relative left-1;
 }
 
 .node.last-node {
@@ -27,7 +27,7 @@
 }
 
 .node-finished {
-  @apply bg-[#0084d7];
+  @apply bg-[#8F00FF];
 }
 
 .navigation-icon {
@@ -47,7 +47,7 @@
 }
 
 .question-mark-icon .question-mark-icon-svg {
-  @apply !w-8 !h-8 !fill-[#0084d7] dark:!fill-white relative top-1;
+  @apply !w-8 !h-8 !fill-[#8F00FF] dark:!fill-white relative top-1;
 }
 
 .hour-glass {
