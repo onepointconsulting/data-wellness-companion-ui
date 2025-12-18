@@ -19,7 +19,7 @@
 }
 
 .hamburger-menu > menu {
-  @apply flex flex-col items-start absolute right-5 top-[30px] md:top-[35px] w-80 py-6 px-8 rounded-lg border border-[#1d1d1d] shadow-muted bg-[#fafffe] dark:text-[#fafffe];
+  @apply flex flex-col items-start absolute right-5 top-[30px] md:top-[35px] w-80 py-2 px-8 rounded-lg border border-[#1d1d1d] shadow-muted bg-[#fafffe] dark:text-[#fafffe] dark:border-[#fafffe];
 }
 
 

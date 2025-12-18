@@ -43,7 +43,7 @@ export default function RestartDialogue() {
     <dialog
       data-model={true}
       id={RESTART_DIALOGUE_ID}
-      className="companion-dialogue"
+      className="companion-dialogue w-11/12 md:w-1/2 bg-[#fafffe] shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-[#1F1925] dark:text-[#fafffe]"
     >
       <DialogueHeader onClose={onClose}>
          <svg
@@ -63,13 +63,13 @@ export default function RestartDialogue() {
           />
         </svg>
       </DialogueHeader>
-      <div className="companion-dialogue-content">
+      <div className="companion-dialogue-content px-8 pt-4 pb-6">
         <section className="mt-4">
           <p>{t("Would you like to restart the companion?")}</p>
         </section>
       </div>
 
-      <ButtonPanel onOk={onOk} okText={t("ok")} disabled={false} />
+      <ButtonPanel onOk={onOk} okText={t("Restart")} disabled={false} />
     </dialog>
   );
 }
