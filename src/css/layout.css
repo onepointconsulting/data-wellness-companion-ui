@@ -48,8 +48,8 @@
 }
 
 #root .suggestion {
-  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
-    border border-[#636565]  rounded-sm  dark:hover:border-[#fafffe] hover:scale-105 transition duration-300 hover:underline ease-in-out;
+  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d]  dark:text-[#fafffe] 
+    border border-[#636565]  rounded-sm  dark:hover:border-[#fafffe] hover:scale-105 transition duration-300  ease-in-out;
 }
 
 #root .suggestion.active {
