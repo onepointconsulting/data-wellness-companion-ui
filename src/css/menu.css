@@ -50,7 +50,7 @@
 }
 
 .menu-select {
-  @apply py-1 border-b border-black w-full;
+  @apply py-1 border-b border-gray-300 dark:border-gray-100 w-full;
 }
 
 .menu-instructions li {
