@@ -2,22 +2,22 @@ import { useTranslation } from "react-i18next";
 
 const CONFIDENCE_LEVELS = [
   {
-    image: "thinking.svg",
+    image: "sad.svg",
     alt: "Instruction: Thinking",
     label: "Instruction: Thinking – cannot predict much",
   },
   {
-    image: "low-confidence.svg",
+    image: "low.svg",
     alt: "Instruction: Low confidence",
     label: "Instruction: Low confidence",
   },
   {
-    image: "medium-confidence.svg",
+    image: "medium.svg",
     alt: "Instruction: Medium confidence",
     label: "Instruction: Medium confidence",
   },
   {
-    image: "good-confidence.svg",
+    image: "good.svg",
     alt: "Instruction: High confidence",
     label: "Instruction: High confidence – right time to make recommendations",
   },

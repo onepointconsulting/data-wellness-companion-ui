@@ -13,14 +13,14 @@ ADVICE_DICTIONARY.set("low", "advice-proceed-with-questions");
 
 const IMAGE_MAP = new Map();
 
-IMAGE_MAP.set("outstanding", "good-confidence.svg");
-IMAGE_MAP.set("high", "good-confidence.svg");
-IMAGE_MAP.set("medium", "medium-confidence.svg");
-IMAGE_MAP.set("mediocre", "thinking.svg");
+IMAGE_MAP.set("outstanding", "good.svg");
+IMAGE_MAP.set("high", "good.svg");
+IMAGE_MAP.set("medium", "medium.svg");
+IMAGE_MAP.set("mediocre", "sad.svg");
 // IMAGE_MAP.set("outstanding", "thinking.svg");
 
 function chooseImage(rating: string) {
-  return IMAGE_MAP.get(rating) ?? "thinking.svg";
+  return IMAGE_MAP.get(rating) ?? "sad.svg";
 }
 
 export function ConfidenceImage({
