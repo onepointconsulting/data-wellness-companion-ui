@@ -10,6 +10,7 @@ import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
+import ThinkingMsgSpinner from "./ThinkingMsgSpinner.tsx";
 import {
   isDisplayReportGenerationMessage,
   useAppStore,
@@ -50,7 +51,7 @@ export default function MainPanel() {
     currentMessage,
     expectedNodes,
     generatingReport,
-    regenerating,
+    regenerating
   );
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
@@ -60,7 +61,7 @@ export default function MainPanel() {
 
   function getSpinnerMessage(
     displayReportGenerationMessage: boolean,
-    regenerating: boolean,
+    regenerating: boolean
   ) {
     return displayReportGenerationMessage
       ? "Generating report. This might take 2 to 3 minutes..."
@@ -83,13 +84,14 @@ export default function MainPanel() {
             />
           )}
           {!isLast && <QuestionAnswer message={message} />}
-          <SpinnerArea
-            sending={sending}
-            message={getSpinnerMessage(
-              displayReportGenerationMessage,
-              regenerating,
-            )}
-          />
+          {displayReportGenerationMessage ? (
+            <ThinkingMsgSpinner />
+          ) : (
+            <SpinnerArea
+              sending={sending}
+              message={getSpinnerMessage(false, regenerating)}
+            />
+          )}
           {displayChatRelatedElements && (
             <>
               <ClarificationArea />

@@ -14,6 +14,7 @@
   "Close": "Close",
   "Company name": "Onepoint",
   "Confidence level": "Confidence level",
+  "Connecting to Responsible AI Engine": "Connecting to Responsible AI Engine",
   "confidence-level-warning": "I am sorry, the confidence level is still <bold>{{confidence}}</bold>. I am conscious we are already up to {{steps}} questions. <br />Do you want to add more questions? Alternatively, you can generate the report now.",
   "confidence_high": "Good",
   "confidence_low": "Very low",

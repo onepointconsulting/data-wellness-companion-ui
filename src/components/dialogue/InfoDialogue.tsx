@@ -3,7 +3,6 @@ import onCloseDialogue from "../../lib/dialogFunctions.ts";
 import OnepointInfo from "./OnepointInfo.tsx";
 import GenericDialogue from "./GenericDialogue.tsx";
 import DialogueHeader from "./DialogueHeader.tsx";
-import InfoIcon from "./InfoIcon.tsx";
 import useShowIntroDialogue from "../../hooks/useShowIntroDialogue.ts";
 
 export const INFO_DIALOGUE_ID = "info-dialogue";
@@ -26,7 +25,7 @@ export default function InfoDialogue() {
         onClose={() => onCloseDialogue(INFO_DIALOGUE_ID)}
         className="!pl-3 !pr-0 !pt-0"
       >
-        <InfoIcon name="info_dialogue" />
+        <img src="./icons/about-icon.png" alt="Info" className="w-12 h-12" />
       </DialogueHeader>
       <InfoSection>
         <OnepointInfo />
