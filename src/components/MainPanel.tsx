@@ -84,7 +84,7 @@ export default function MainPanel() {
             />
           )}
           {!isLast && <QuestionAnswer message={message} />}
-          {displayReportGenerationMessage ? (
+          {displayReportGenerationMessage && sending ? (
             <ThinkingMsgSpinner />
           ) : (
             <SpinnerArea

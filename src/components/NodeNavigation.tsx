@@ -75,7 +75,7 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { currentMessage, isLast, isReport, sending, regenerating } =
+  const { currentMessage, isLast, isReport, sending, regenerating, displayRegistrationMessage } =
     useContext(AppContext);
   const { expectedNodes } = useAppStore(
     useShallow((state) => ({ expectedNodes: state.expectedNodes })),
@@ -88,6 +88,10 @@ export default function NodeNavigation() {
   useEffect(() => {
     setNavbarRef();
   }, []);
+
+  if (displayRegistrationMessage) {
+    return null;
+  }
 
   const displayReportGenerationMessage = isDisplayReportGenerationMessage(
     currentMessage,
