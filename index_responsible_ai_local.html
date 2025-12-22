@@ -53,11 +53,11 @@
     <!-- End Userback -->
 
     <script>
-      const server = "responsible-ai.onepointltd.ai";
-      const port = 443;
+      const server = "127.0.0.1";
+      const port = 8085;
       window.dataWellnessConfig = {
-        websocketUrl: `wss://${server}:${port}`,
-        reportUrl: `https://${server}:${port}`,
+        websocketUrl: `ws://${server}:${port}`,
+        reportUrl: `http://${server}:${port}`,
         hideUsageInstructions: true,
         hideConsultants: false,
         imageFolder: "res-ai",
