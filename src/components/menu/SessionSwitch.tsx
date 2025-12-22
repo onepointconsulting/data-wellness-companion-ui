@@ -34,8 +34,8 @@ function adaptSessionHistory(sessionHistory: Session[]): Session[] {
   const uniques: Session[] = Object.values(
     sessionHistory.reduce(
       (acc, session) => ({ ...acc, ...{ [session.id]: session } }),
-      {},
-    ),
+      {}
+    )
   );
 
   return uniques
@@ -53,7 +53,7 @@ export default function SessionSwitch() {
   const { selectedHistoricalSession, setSelectedHistoricalSession } =
     useContext(AppContext);
   const { setOntologyOpen } = useAppStore(
-    useShallow((state) => ({ setOntologyOpen: state.setOntologyOpen })),
+    useShallow((state) => ({ setOntologyOpen: state.setOntologyOpen }))
   );
   const { t } = useTranslation();
   const sessionHistory = getSessionHistory();
@@ -70,7 +70,7 @@ export default function SessionSwitch() {
   function onChange(e: ChangeEvent<HTMLSelectElement>) {
     if (!!e.target.value) {
       const session = sessionHistory.find(
-        (session) => session.id === e.target.value,
+        (session) => session.id === e.target.value
       );
       if (!!session) {
         setSelectedHistoricalSession(session.id);
@@ -84,24 +84,27 @@ export default function SessionSwitch() {
     return <></>;
   }
   return (
-    <MenuSelectorBase
-      image={<GoHistory />}
-      select={
-        <select
-          className="menu-select"
-          value={selectedHistoricalSession || ""}
-          onChange={onChange}
-        >
-          <option value={""}>{t("No session")}</option>
-          {adaptSessionHistory(sessionHistory).map((session, i) => {
-            return (
-              <option key={`session_switch_${i}`} value={session.id}>
-                {timestampAdapter(session)}
-              </option>
-            );
-          })}
-        </select>
-      }
-    />
+    <>
+      <MenuSelectorBase
+        image={<GoHistory />}
+        select={
+          <select
+            className="menu-select"
+            value={selectedHistoricalSession || ""}
+            onChange={onChange}
+          >
+            <option value={""}>{t("No session")}</option>
+            {adaptSessionHistory(sessionHistory).map((session, i) => {
+              return (
+                <option key={`session_switch_${i}`} value={session.id}>
+                  {timestampAdapter(session)}
+                </option>
+              );
+            })}
+          </select>
+        }
+      />
+      <hr className="my-4 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+    </>
   );
 }

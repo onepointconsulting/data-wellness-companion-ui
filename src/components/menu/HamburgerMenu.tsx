@@ -24,7 +24,6 @@ export default function HamburgerMenu() {
       {window.dataWellnessConfig.termsLink && <TermsButton />}
 
       <SessionSwitch />
-      <hr className="my-4 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
       <DarkModeButton />
       <hr className="my-4 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
 
