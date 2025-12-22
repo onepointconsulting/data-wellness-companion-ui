@@ -3,7 +3,7 @@
 }
 
 .button-ok {
-  @apply border border-solid border-[#0084d7] hover:border-[#a3a6a9] px-5 py-2.5 text-base font-medium text-[#0084d7] hover:text-[#055D94] focus:ring-4 focus:outline-none focus:ring-blue-300
+  @apply border border-solid border-[#8F00FF] hover:border-[#a3a6a9] px-5 py-2.5 text-base font-medium text-[#8F00FF] hover:text-[#8F00FF] focus:ring-4 focus:outline-none focus:ring-blue-300
         text-center uppercase w-20 disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
