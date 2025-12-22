@@ -3,7 +3,7 @@
 }
 
 .tab-item-active {
-  @apply border-b-[3px] border-[#0084d7] text-[#0084d7] dark:border-[#efefef] bg-white dark:bg-slate-700 dark:text-[white] px-7 py-5;
+  @apply border-b-[3px] border-[#8F00FF] text-[#8F00FF] dark:border-[#efefef] bg-white dark:bg-slate-700 dark:text-[white] px-7 py-5;
 }
 
 .tab-item-inactive {
