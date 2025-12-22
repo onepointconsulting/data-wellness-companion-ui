@@ -35,7 +35,7 @@ export default function MenuSelectorBase({
   return (
     <div className="menu-item">
       <div className="w-12">{image}</div>
-      <div className="pl-2 flex-grow pr-6">{select}</div>
+      <div className="pl-2 flex-grow pr-0">{select}</div>
     </div>
   );
 }
