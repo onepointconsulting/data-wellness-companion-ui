@@ -101,12 +101,12 @@ export default function IntroDialogue() {
           />
           <p>
             {t("explanation 5 lightbulb", { toolName: toolName })}{" "}
-            <FaRegLightbulb className="inline fill-[#0084d7] w-6 h-6" />
+            <FaRegLightbulb className="inline fill-[#8F00FF] w-6 h-6" />
           </p>
           <br />
           <p>
             {t("explanation 6 session")}{" "}
-            <VscExtensions className="inline fill-[#0084d7] w-6 h-6" />
+            <VscExtensions className="inline fill-[#8F00FF] w-6 h-6" />
           </p>
           <br />
           <p>

@@ -67,7 +67,7 @@ export default function MainPanel() {
       ? "Generating report. This might take 2 to 3 minutes..."
       : regenerating
         ? "Regenerating"
-        : "";
+        : "Analyzing your response...";
   }
 
   if (!message.final_report) {
@@ -84,7 +84,7 @@ export default function MainPanel() {
             />
           )}
           {!isLast && <QuestionAnswer message={message} />}
-          {displayReportGenerationMessage && sending  ? (
+          {displayReportGenerationMessage && sending ? (
             <ThinkingMsgSpinner />
           ) : (
             <SpinnerArea
