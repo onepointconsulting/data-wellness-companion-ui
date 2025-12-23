@@ -21,7 +21,7 @@ export default function JoyrideMain() {
       joyrideState: state.joyrideState,
       setJoyrideState: state.setJoyrideState,
       initQuestionRef: state.initQuestionRef,
-    })),
+    }))
   );
   const { questionRef, navbarRef } = useContext(JoyrideContext);
   const { currentMessage } = useContext(AppContext);
@@ -62,7 +62,7 @@ export default function JoyrideMain() {
             content: (
               <div className="text-left">
                 {t(
-                  "Instruction: The initial question to start the conversation",
+                  "Instruction: The initial question to start the conversation"
                 )}
               </div>
             ),
@@ -157,7 +157,7 @@ export default function JoyrideMain() {
         styles={{
           options: {
             zIndex: 10000,
-            primaryColor: "#3698DC",
+            primaryColor: "#8F00FF ",
           },
         }}
       />
