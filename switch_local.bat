@@ -1,1 +1,1 @@
-copy index_d_well.html index.html
+copy index_responsible_ai_local.html index.html
