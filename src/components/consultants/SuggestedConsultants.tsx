@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import Alert from "../form/Alert.tsx";
 import MarkdownComponent from "../Markdown.tsx";
 import { ConsultantRating, Rating } from "../../model/consultantRating.ts";
+import { useContext } from "react";
+import { ChatContext } from "../../context/ChatContext.tsx";
 
 const CONSULTANT_LIMIT = 5;
 
@@ -16,6 +18,7 @@ function ConsultantCard({
   rating: ConsultantRating;
 }) {
   const { t } = useTranslation();
+  const { reportUrl } = useContext(ChatContext);
   return (
     <div
       key={`rating_${i}`}
@@ -24,9 +27,7 @@ function ConsultantCard({
       <div className="w-full">
         <img
           src={
-            rating.linkedin_photo_400 ??
-            rating.linkedin_photo_200 ??
-            "res-ai/res_ai_logo_square.avif"
+            `${reportUrl}/consultant/image/${rating.email}`
           }
           className="w-full grayscale hover:grayscale-0 transition duration-300 ease-in-out"
         />
@@ -34,7 +35,7 @@ function ConsultantCard({
       <div className="flex flex-wrap border-b-2 py-2 justify-between">
         <h3 className="!text-[1.5rem]">{rating.analyst_name}</h3>
         <a
-          href={rating.analyst_linkedin_url}
+          href={rating.analyst_linkedin_url ?? ""}
           target="_blank"
           className="underline"
         >
