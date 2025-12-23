@@ -20,7 +20,7 @@ function LanguageDropDown({
   const { socket, reportUrl } = useContext(ChatContext);
   const { setDisplayRegistrationMessage } = useContext(AppContext);
   const { setDisplayConfidenceLevelProceedWarning } = useAppStore(
-    useShallow((state) => ({ ...state })),
+    useShallow((state) => ({ ...state }))
   );
 
   const onClickLanguageChange = (e: any) => {
@@ -28,7 +28,7 @@ function LanguageDropDown({
       toast({
         title: t("You are disconnected."),
         description: t(
-          "The Data Wellness Companion needs to be connected to change the language.",
+          "The Data Wellness Companion needs to be connected to change the language."
         ),
       });
     } else {
@@ -41,7 +41,7 @@ function LanguageDropDown({
         setDisplayRegistrationMessage,
         setChatText,
         reportUrl,
-        setDisplayConfidenceLevelProceedWarning,
+        setDisplayConfidenceLevelProceedWarning
       );
     }
   };
@@ -49,10 +49,10 @@ function LanguageDropDown({
   return (
     <div className="absolute w-max h-auto p-2 bg-white shadow-2xl rounded-[5px] top-16 flex flex-col gap-8 cursor-auto">
       <span className="text-gray-600">{t("Select language")}</span>
-      <div className="absolute w-8 h-8 bg-[#0084d7] top-12 left-[38%] rotate-[225deg] z-0"></div>
+      <div className="absolute w-8 h-8 bg-[#8F00FF] top-12 left-[38%] rotate-[225deg] z-0"></div>
       {/* select */}
       <select
-        className="p-2 bg-[#0084d7] rounded-[2px] z-50 text-white"
+        className="p-2 bg-[#8F00FF] rounded-[2px] z-50 text-white"
         name="language"
         id="language"
         onChange={onClickLanguageChange}

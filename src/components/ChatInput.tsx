@@ -21,7 +21,7 @@ function VoiceButton() {
   const { onToggleVoice, voiceOn, voiceListening } = useSpeechRecognition();
   return (
     <button
-      className={`disabled:opacity-10 mr-2 ${voiceListening ? "animate-pulse" : ""}`}
+      className={`voice-button disabled:opacity-10 mr-2 ${voiceListening ? "animate-pulse" : ""}`}
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
