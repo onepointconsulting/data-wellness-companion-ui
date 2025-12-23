@@ -48,8 +48,7 @@
 #root .suggestion {
   @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
     border border-[#636565] rounded-sm dark:hover:border-[#fafffe] hover:scale-105 transition duration-300 ease-in-out
-    min-w-0 w-full break-all overflow-hidden whitespace-normal;
-  overflow-wrap: anywhere;
+    min-w-0 w-full overflow-hidden whitespace-normal;
 }
 
 #root .suggestion.active {
@@ -100,12 +99,11 @@
 } */
 
 #root .suggestion .suggestion-title {
-  @apply w-full pb-2 pl-2 dark:text-gray-100 break-all;
+  @apply w-full pb-2 pl-2 dark:text-gray-100;
 }
 
 #root .suggestion .suggestion-text {
-  @apply flex items-start justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100 break-all;
-  overflow-wrap: anywhere;
+  @apply flex items-start justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100;
 }
 
 #root .chat-container {
