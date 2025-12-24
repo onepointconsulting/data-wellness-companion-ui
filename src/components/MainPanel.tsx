@@ -1,5 +1,5 @@
 import { AppContext } from "../context/AppContext.tsx";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Question from "./Question.tsx";
 import Suggestions from "./Suggestions.tsx";
 import ChatInput from "./ChatInput.tsx";
@@ -19,6 +19,16 @@ import { useShallow } from "zustand/react/shallow";
 import GiveMeReport from "./buttons/GiveMeReport.tsx";
 import { FADE_IN_TIME } from "../lib/animConstants.ts";
 
+const ANALYZING_MESSAGES = [
+  "Analyzing your response...",
+  "Processing your input...",
+  "Thinking about your answer...",
+  "Generating insights...",
+  "Reviewing the information...",
+  "Evaluating your data...",
+  "Preparing the next step...",
+];
+
 export default function MainPanel() {
   const {
     contentVisible,
@@ -34,6 +44,16 @@ export default function MainPanel() {
     generatingReport,
     displayConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
+  const [currentAnalyzingMessage, setCurrentAnalyzingMessage] = useState(
+    ANALYZING_MESSAGES[0]
+  );
+
+  useEffect(() => {
+    if (sending) {
+      const randomIndex = Math.floor(Math.random() * ANALYZING_MESSAGES.length);
+      setCurrentAnalyzingMessage(ANALYZING_MESSAGES[randomIndex]);
+    }
+  }, [sending]);
 
   useEffect(() => {
     const timeout = setTimeout(() => setContentVisible(true), FADE_IN_TIME);
@@ -67,7 +87,7 @@ export default function MainPanel() {
       ? "Generating report. This might take 2 to 3 minutes..."
       : regenerating
         ? "Regenerating"
-        : "Analyzing your response...";
+        : currentAnalyzingMessage;
   }
 
   if (!message.final_report) {
