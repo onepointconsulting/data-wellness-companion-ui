@@ -204,5 +204,12 @@
   "You are disconnected.": "You are disconnected.",
   "Your name:": "Your name:",
   "Add suggestion": "Add suggestion",
-  "Remove suggestion": "Remove suggestion"
+  "Remove suggestion": "Remove suggestion",
+  "analyzing-1": "Analyzing your response...",
+  "analyzing-2": "Processing your input...",
+  "analyzing-3": "Thinking about your answer...",
+  "analyzing-4": "Generating insights...",
+  "analyzing-5": "Reviewing the information...",
+  "analyzing-6": "Evaluating your data...",
+  "analyzing-7": "Preparing the next step..."
 }

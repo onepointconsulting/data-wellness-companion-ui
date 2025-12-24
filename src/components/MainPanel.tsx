@@ -1,5 +1,6 @@
 import { AppContext } from "../context/AppContext.tsx";
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Question from "./Question.tsx";
 import Suggestions from "./Suggestions.tsx";
 import ChatInput from "./ChatInput.tsx";
@@ -20,16 +21,17 @@ import GiveMeReport from "./buttons/GiveMeReport.tsx";
 import { FADE_IN_TIME } from "../lib/animConstants.ts";
 
 const ANALYZING_MESSAGES = [
-  "Analyzing your response...",
-  "Processing your input...",
-  "Thinking about your answer...",
-  "Generating insights...",
-  "Reviewing the information...",
-  "Evaluating your data...",
-  "Preparing the next step...",
+  "analyzing-1",
+  "analyzing-2",
+  "analyzing-3",
+  "analyzing-4",
+  "analyzing-5",
+  "analyzing-6",
+  "analyzing-7",
 ];
 
 export default function MainPanel() {
+  const [t] = useTranslation();
   const {
     contentVisible,
     setContentVisible,
@@ -84,10 +86,10 @@ export default function MainPanel() {
     regenerating: boolean
   ) {
     return displayReportGenerationMessage
-      ? "Generating report. This might take 2 to 3 minutes..."
+      ? t("Generating report. This might take 2 to 3 minutes...")
       : regenerating
-        ? "Regenerating"
-        : currentAnalyzingMessage;
+        ? t("Regenerating")
+        : t(currentAnalyzingMessage);
   }
 
   if (!message.final_report) {
