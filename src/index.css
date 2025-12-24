@@ -24,13 +24,13 @@ body {
 
 @layer base {
   :root {
-    --background: 168 100% 99%;
+    --background: 168, 100%, 99%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
+    --card: 168, 100%, 99%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 100%;
+    --popover: 168, 100%, 99%;
     --popover-foreground: 222.2 84% 4.9%;
 
     --primary: 222.2 47.4% 11.2%;
@@ -59,10 +59,10 @@ body {
     --background: 282 17% 13%; /* #1F1925 in HSL */
     --foreground: 210 40% 98%;
 
-    --card: 168 100% 99%;
+    --card: 282 17% 13%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 168 100% 99%;
+    --popover: 282 17% 13%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;

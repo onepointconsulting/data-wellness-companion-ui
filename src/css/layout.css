@@ -38,16 +38,17 @@
 
 #root .question svg,
 #root .question-answer svg {
-  @apply block min-w-8 h-8 fill-[#0084d7];
+  @apply block min-w-8 h-8 fill-[#8F00FF];
 }
 
 #root .suggestions {
-  @apply grid grid-cols-1 gap-4 px-0 pt-4 mb-0 md:grid-cols-2 lg:grid-cols-4 lg:pt-5;
+  @apply grid grid-cols-1 gap-4 px-0 pt-4 mb-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:pt-5;
 }
 
 #root .suggestion {
-  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d]  dark:text-[#fafffe] 
-    border border-[#636565]  rounded-sm  dark:hover:border-[#fafffe] hover:scale-105 transition duration-300  ease-in-out;
+  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
+    border border-[#636565] rounded-sm dark:hover:border-[#fafffe] hover:scale-105 transition duration-300 ease-in-out
+    min-w-0 w-full overflow-hidden whitespace-normal;
 }
 
 #root .suggestion.active {
@@ -90,7 +91,7 @@
 }
 
 #root .suggestion.active .suggestion-img path {
-  @apply fill-[#0084d7];
+  @apply fill-[#8F00FF];
 }
 
 /* #root .suggestion.active .suggestion-img a[href="Data silos"] path {
@@ -102,7 +103,7 @@
 }
 
 #root .suggestion .suggestion-text {
-  @apply flex items-center justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100;
+  @apply flex items-start justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100;
 }
 
 #root .chat-container {
@@ -111,13 +112,13 @@
 
 #root .chat-input {
   @apply w-full px-4 flex flex-row items-center justify-start
-    rounded-lg bg-white border-[1px] border-[#4a4a4a] dark:border-[#a4a4a4] focus-within:outline 
-    focus-within:outline-1 focus-within:outline-[#8F00FF] focus-visible:border-none my-5 lg:my-4 dark:bg-gray-800;
+    rounded-lg bg-[#fafffe] border-[1px] border-[#4a4a4a] dark:border-[#a4a4a4] focus-within:outline 
+    focus-within:outline-1 focus-within:outline-[#8F00FF] focus-visible:border-none my-5 lg:my-4 dark:bg-[#1F1925];
 }
 
 #root .chat-input textarea.chat-textarea {
   @apply lg:mx-0 resize-none w-full outline-none
-    flex items-center justify-center !h-auto my-2 py-3 dark:bg-gray-800 dark:text-white dark:border-gray-800 dark:placeholder-gray-300;
+    flex items-center justify-center !h-auto my-2 py-3 dark:bg-[#1F1925] dark:text-white dark:border-[#1F1925] dark:placeholder-gray-300;
   field-sizing: content;
 }
 
@@ -125,7 +126,11 @@
   @apply flex w-8 h-8 cursor-pointer;
 }
 
-#root .chat-input button svg path {
+#root .chat-input button svg.send-button path {
+  @apply fill-[#8F00FF] dark:!fill-gray-100;
+}
+
+#root .chat-input .voice-button svg path {
   @apply dark:!fill-gray-100;
 }
 
@@ -134,7 +139,7 @@
 }
 
 #root .question-answer {
-  @apply text-base lg:text-lg py-5 text-[#4a4a4a] dark:text-gray-200;
+  @apply text-base lg:text-lg  py-5 text-[#4a4a4a] dark:text-gray-200;
 }
 
 #root .final-report {
@@ -172,11 +177,11 @@
 #root .final-report-pdf,
 .final-report-email,
 .border-button {
-  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2 hover:border-[#0084d7] hover:text-[#0084d7];
+  @apply flex flex-row items-center justify-center border border-[#4a4a4a] dark:border-gray-100 p-2 hover:border-[#8F00FF] hover:text-[#8F00FF];
 }
 
 .intro-button {
-  @apply text-base lg:text-xl min-w-[170px] hover:bg-[#0084d717] dark:hover:bg-[#0084d717];
+  @apply text-base lg:text-xl min-w-[170px] hover:bg-[#8F00FF17] dark:hover:bg-[#8F00FF17];
 }
 
 #root .final-report-pdf a,
@@ -217,7 +222,7 @@
 }
 
 #root .clarification svg {
-  @apply min-w-7 h-7 fill-[#0084d7] text-[#0084d7] mr-1;
+  @apply min-w-7 h-7 fill-[#8F00FF] text-[#8F00FF] mr-1;
 }
 
 #root .deactivated-icon svg {
@@ -234,7 +239,7 @@
 }
 
 #root .clarification-main .markdown-body {
-  @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a] dark:bg-gray-800 dark:text-white dark:border-gray-800;
+  @apply bg-white p-8 border-2 border-solid border-[#f6f6f6] text-[#4a4a4a] dark:bg-[#1F1925] dark:text-white dark:border-[#1F1925];
 }
 
 #root .clarification-main .markdown-body p,

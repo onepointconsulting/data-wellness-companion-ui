@@ -69,7 +69,7 @@
 }
 
 .intro-main-container .progress .progress-item.hightlighted {
-  @apply bg-[#0084d7];
+  @apply bg-[#8F00FF];
 }
 
 .intro-main-container .progress .progress-item.visited {

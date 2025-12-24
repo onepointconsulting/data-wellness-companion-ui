@@ -50,9 +50,9 @@ export default function MainApp() {
               </NavigationTab>
             )}
           </div>
-          <div>
+          {!displayRegistrationMessage && <div>
             <NodeNavigation />
-          </div>
+          </div>}
         </div>
       </div>
       <Toaster />

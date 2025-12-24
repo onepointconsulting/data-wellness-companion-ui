@@ -24,5 +24,5 @@
 }
 
 a.default-link {
-  @apply underline text-[#0084d7] hover:text-[#0084d7] visited:text-[#0084d7] outline-0 dark:text-gray-200 dark:hover:text-gray-50;
+  @apply underline text-[#8F00FF] hover:text-[#8F00FF] visited:text-[#8F00FF] outline-0 dark:text-gray-200 dark:hover:text-gray-50;
 }

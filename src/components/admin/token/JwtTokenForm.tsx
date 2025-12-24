@@ -21,7 +21,7 @@ import FormContainer from "../FormContainer.tsx";
 import handleSubmission from "../../../lib/formSubmission.ts";
 
 const inputStyle = `flex h-10 w-full rounded-md border-2 border-input bg-background px-3 py-2 text-base ring-offset-background
-file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-[#0084d7]
+file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-[#8F00FF]
 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-800 dark:text-gray-300 dark:placeholder-gray-500`;
 
 const baseUrl =

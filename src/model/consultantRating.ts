@@ -8,7 +8,8 @@ export enum Rating {
 
 export type ConsultantRating = {
   analyst_name: string;
-  analyst_linkedin_url: string;
+  analyst_linkedin_url: string | null;
+  email: string;
   reasoning: string;
   rating: Rating;
   score: number;
