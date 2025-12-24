@@ -15,7 +15,7 @@ function selectLastNodeCss(
   covered: boolean,
   current: boolean,
   isLastNode: boolean,
-  isFinalMessage: boolean,
+  isFinalMessage: boolean
 ) {
   const css = [];
   if (covered) {
@@ -43,7 +43,7 @@ function SingleNode({ i }: { i: number }) {
   const { messages, currentMessage, setCurrentMessageHistory } =
     useContext(AppContext);
   const { expectedNodes, messageLowerLimit } = useAppStore(
-    useShallow((state) => ({ ...state })),
+    useShallow((state) => ({ ...state }))
   );
   const isFinalMessage = currentMessage === expectedNodes - 1;
   const [t] = useTranslation();
@@ -66,7 +66,7 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img src="icons/res-ai-favicon.png" alt={t("navigation icon")} />
+            <img src="res-ai/favicon.png" alt={t("navigation icon")} />
           </div>
         )}
       </div>
@@ -78,7 +78,7 @@ export default function NodeNavigation() {
   const { currentMessage, isLast, isReport, sending, regenerating } =
     useContext(AppContext);
   const { expectedNodes } = useAppStore(
-    useShallow((state) => ({ expectedNodes: state.expectedNodes })),
+    useShallow((state) => ({ expectedNodes: state.expectedNodes }))
   );
   const { navbarRef } = useContext(JoyrideContext);
   const { generatingReport, displayConfidenceLevelProceedWarning } =
@@ -93,7 +93,7 @@ export default function NodeNavigation() {
     currentMessage,
     expectedNodes,
     generatingReport,
-    regenerating,
+    regenerating
   );
 
   if (
