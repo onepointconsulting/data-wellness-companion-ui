@@ -30,7 +30,7 @@ export function AccordionText({
   return (
     <div className="">
       <div
-        className="flex cursor-pointer justify-between items-center p-5 border-b border-[#8F00FF]"
+        className="flex cursor-pointer justify-between items-center p-5 border-b border-[#8F00FF] dark:border-[#F3F4F6]"
         onClick={onOpen}
       >
         <h1>{t(title)}</h1>
@@ -38,11 +38,15 @@ export function AccordionText({
           height="20"
           width="20"
           xmlns="http://www.w3.org/2000/svg"
-          className=""
+          className="text-[#8F00FF] dark:text-[#F3F4F6]"
         >
           <polygon
             points="1,1 1,19 12,10"
-            style={{ fill: "#a6a6a600", stroke: "#8F00FF", strokeWidth: 2 }}
+            style={{
+              fill: "#a6a6a600",
+              stroke: "currentColor",
+              strokeWidth: 2,
+            }}
             transform={`rotate(${open ? -90 : 90}, 10, 10)`}
             className="accordion-icon"
           />

@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/res-ai/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/res-ai/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsible AI Companion™</title>
 
@@ -53,11 +53,11 @@
     <!-- End Userback -->
 
     <script>
-      const server = "responsible-ai.onepointltd.ai";
-      const port = 443;
+      const server = "127.0.0.1";
+      const port = 8085;
       window.dataWellnessConfig = {
-        websocketUrl: `wss://${server}:${port}`,
-        reportUrl: `https://${server}:${port}`,
+        websocketUrl: `ws://${server}:${port}`,
+        reportUrl: `http://${server}:${port}`,
         hideUsageInstructions: true,
         hideConsultants: false,
         // termsLink: "https://www.onepointltd.com/wp-content/uploads/2025/01/Terms-of-Use-for-Onepoint-D-Well-v2.0.pdf"
