@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { DEFAULT_EXPECTED_NODES } from "./AppContext.tsx";
 import { ConsultantRating } from "../model/consultantRating.ts";
+import { DeepResearchStatus } from "../model/deep-research.ts";
 
 const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
 const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
@@ -38,6 +39,8 @@ interface AppStoreState {
   setConsultantRatings: (consultantRatings: ConsultantRating[]) => void;
   showConsultantRatings: boolean;
   setShowConsultantRatings: (showConsultantRatings: boolean) => void;
+  deepResearchStatus: DeepResearchStatus;
+  setDeepResearchStatus: (deepResearchStatus: DeepResearchStatus) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -105,6 +108,9 @@ export const useAppStore = create<AppStoreState>((set) => ({
   showConsultantRatings: false,
   setShowConsultantRatings: (showConsultantRatings: boolean) =>
     set((state) => ({ ...state, showConsultantRatings })),
+  deepResearchStatus: { status: "", advice: "" },
+  setDeepResearchStatus: (deepResearchStatus: DeepResearchStatus) =>
+    set((state) => ({ ...state, deepResearchStatus })),
 }));
 
 export function isDisplayReportGenerationMessage(

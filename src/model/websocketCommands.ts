@@ -7,6 +7,7 @@ export const WEBSOCKET_COMMAND = {
   GENERATE_REPORT_NOW: "generate_report_now",
   REGENERATE_QUESTION: "regenerate_question",
   ADD_MORE_SUGGESTIONS: "add_more_suggestions",
+  GENERATE_DEEP_RESEARCH: "generate_deep_research",
 };
 
 // Receive
@@ -20,4 +21,6 @@ export const WEBSOCKET_SERVER_COMMAND = {
   REGENERATE_QUESTION: "regenerate_question",
   ADD_MORE_SUGGESTIONS: "add_more_suggestions",
   ERROR: "error",
+  DEEP_RESEARCH_UPDATE: "deep_research_update",
+  DEEP_RESEARCH_COMPLETE: "deep_research_complete",
 };

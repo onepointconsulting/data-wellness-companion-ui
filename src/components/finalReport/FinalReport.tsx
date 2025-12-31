@@ -20,7 +20,7 @@ import { toast } from "../../../@/components/ui/use-toast.ts";
 import Transcript from "./Transcript.tsx";
 import { Confidence } from "../../model/confidence.ts";
 import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
-import MarkdownAccordion from "./MarkdownAccordion.tsx";
+import MarkdownAccordion, { MarkdownAccordionIterable } from "./MarkdownAccordion.tsx";
 import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
@@ -68,7 +68,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const { setOntology } = useContext(AppContext);
   const { onOntologyOpenClick } = useOntology();
   const { ontologyOpen } = useAppStore(useShallow((state) => ({ ...state })));
-  const { reportUrl } = useContext(ChatContext);
+  const { reportUrl, socket } = useContext(ChatContext);
   const { processPopup } = useShowStartDialogue();
   const { fetchSuggestedConsultants } = useSuggestConsultant();
 
@@ -100,13 +100,14 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      <MarkdownAccordion
+      <MarkdownAccordionIterable
         title={recommendationsTitle}
         items={advices}
         defaultOpen={
           window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
           null
         }
+        socket={socket?.current}
       />
       <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
       <MarkdownAccordion
