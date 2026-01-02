@@ -1,15 +1,14 @@
-
 #root {
   @apply flex flex-col min-h-screen;
 }
 
 .dark #root {
-  background: #1F1925 !important;
+  background: #1f1925 !important;
   color: #f3f4f6;
 }
 
 #root {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 #root .header {
@@ -270,7 +269,7 @@
 }
 
 #root .confidence-text code {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   @apply text-xl;
 }
 

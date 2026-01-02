@@ -1,5 +1,5 @@
 import { ulid, decodeTime } from "ulid";
-import {expect, test} from '@jest/globals'
+import { expect, test } from "@jest/globals";
 
 test("ulidDecodeTime", () => {
   const ulidstr = ulid();

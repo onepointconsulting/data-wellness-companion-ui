@@ -9,7 +9,9 @@ interface SpeechRecognition extends EventTarget {
   onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
   onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | null;
   onspeechend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onresult:
+    | ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any)
+    | null;
   start(): void;
   stop(): void;
 }

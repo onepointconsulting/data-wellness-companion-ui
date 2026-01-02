@@ -46,7 +46,7 @@ export default function RestartDialogue() {
       className="companion-dialogue w-11/12 md:w-1/2 bg-[#fafffe] shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-[#1F1925] dark:text-[#fafffe]"
     >
       <DialogueHeader onClose={onClose}>
-         <svg
+        <svg
           width="54"
           height="54"
           viewBox="0 0 54 54"

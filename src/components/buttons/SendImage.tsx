@@ -6,7 +6,7 @@ function pulsatingText(
   enoughText: boolean,
   sending: boolean,
   connected: boolean,
-  updatingConfidence: boolean
+  updatingConfidence: boolean,
 ): string {
   if (!sending && connected && !updatingConfidence) {
     if (enoughText) {
