@@ -52,7 +52,7 @@ export default function ConfidenceHint({ className }: { className?: string }) {
   return (
     <div className={`mt-12 min-h-14 ${className ?? ""}`}>
       {!hide && updatingConfidence && (
-        <div className={`flex flex-row justify-end`}>
+        <div className={`flex flex-row justify-center`}>
           <FaHourglassHalf className="w-6 h-6 fill-gray-400" />
         </div>
       )}
