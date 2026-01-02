@@ -63,7 +63,7 @@
   "Final Report": "Final Report",
   "Finding suitable consultants": "Finding suitable consultants. Please wait ...",
   "Full screen mode": "Full screen mode",
-  "Generating deep research...": "Generating deep research...",
+  "Generating deep research...": "Generating deep research... Last updated: {{lastUpdated}}",
   "Generate Email Report": "Generate Email Report",
   "Generate more answers": "Generate more answers",
   "Generate report now": "Generate report now",
