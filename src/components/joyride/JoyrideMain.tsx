@@ -119,7 +119,7 @@ export default function JoyrideMain() {
                   }}
                 />
                 <img
-                  src="./res-ai/report.png"
+                  src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/report-header.png`}
                   alt={t("Instruction: personalized-report")}
                 />
               </div>
