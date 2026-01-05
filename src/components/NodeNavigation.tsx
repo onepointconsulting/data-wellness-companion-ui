@@ -66,7 +66,10 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img src="/favicon.png" alt={t("navigation icon")} />
+            <img
+              src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/favicon.png`}
+              alt={t("navigation icon")}
+            />
           </div>
         )}
       </div>
