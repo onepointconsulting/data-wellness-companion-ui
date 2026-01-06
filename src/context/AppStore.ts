@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { DEFAULT_EXPECTED_NODES } from "./AppContext.tsx";
 import { ConsultantRating } from "../model/consultantRating.ts";
-import { DeepResearchOutput, DeepResearchOutputMap, DeepResearchOutputs, DeepResearchStatus } from "../model/deep-research.ts";
+import { DeepResearchOutput, DeepResearchOutputMap, DeepResearchStatus } from "../model/deep-research.ts";
 import onCloseDialogue, { showDialogue } from "../lib/dialogFunctions.ts";
 import { DEEP_RESEARCH_DIALOGUE_ID } from "../components/dialogue/DeepResearchDialogue.tsx";
 

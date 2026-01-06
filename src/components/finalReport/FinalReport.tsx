@@ -12,7 +12,7 @@ import { getSession } from "../../lib/sessionFunctions.ts";
 import { showDialogue } from "../../lib/dialogFunctions.ts";
 import { EMAIL_DIALOGUE_ID } from "../dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
-import i18next, { use } from "i18next";
+import i18next from "i18next";
 import OntologyGraph from "../knowledge-graph/OntologyGraph.tsx";
 import { AppContext } from "../../context/AppContext.tsx";
 import { toast } from "../../../@/components/ui/use-toast.ts";
@@ -27,8 +27,7 @@ import { ReportButton } from "../buttons/ReportButton.tsx";
 import { useSuggestConsultant } from "../../hooks/useSuggestConsultant.ts";
 import SuggestedConsultants from "../consultants/SuggestedConsultants.tsx";
 import useOntology from "../../hooks/useOntology.ts";
-import { fetchDeepResearch, fetchOntology } from "../../lib/apiCalls.ts";
-import { DeepResearchOutput, DeepResearchOutputMap } from "../../model/deep-research.ts";
+import { fetchOntology } from "../../lib/apiCalls.ts";
 import AdviceList from "./AdviceList.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLButtonElement>) {
