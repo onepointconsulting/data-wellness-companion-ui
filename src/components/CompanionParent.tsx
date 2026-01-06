@@ -16,6 +16,7 @@ import useSeenIntro from "../hooks/useSeenIntro.ts";
 import useShowCompletionDialogue from "../hooks/useShowCompletionDialogue.ts";
 import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
 import { logoAdapter } from "../lib/logoAdapter.ts";
+import DeepResearchDialogue from "./dialogue/DeepResearchDialogue.tsx";
 
 const COMPLETION_POPUP = false;
 
@@ -80,6 +81,7 @@ export default function CompanionParent() {
           <EmailDialogue />
           <InfoDialogue />
           <ConfidenceDialogue />
+          <DeepResearchDialogue />
           <MainApp />
         </JoyrideContextProvider>
       )}

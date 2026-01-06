@@ -18,7 +18,7 @@ import {
 import { readDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
-import { DeepResearchStatus } from "../model/deep-research.ts";
+import { DeepResearchOutput, DeepResearchStatus } from "../model/deep-research.ts";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -80,6 +80,7 @@ export function useWebsocket() {
     setMessageUpperLimit,
     setDisplayedConfidenceLevelProceedWarning,
     setDeepResearchStatus,
+    setCompletedDeepResearchOutput,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
   const { setConnected, setMessages, setCurrentMessageHistory, setSending } =
@@ -231,6 +232,12 @@ export function useWebsocket() {
       setDeepResearchStatus(deepResearchStatus);
     }
 
+    function onDeepResearchComplete(value: string) {
+      console.log("onDeepResearchComplete", value);
+      const deepResearchOutput: DeepResearchOutput = JSON.parse(value);
+      setCompletedDeepResearchOutput(deepResearchOutput);
+    }
+
     socket.current.on(WEBSOCKET_SERVER_COMMAND.START_SESSION, onStartSession);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.CONNECT, onConnect);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.DISCONNECT, onDisconnect);
@@ -246,6 +253,7 @@ export function useWebsocket() {
     );
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
     socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE, onDeepResearchUpdate)
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE, onDeepResearchComplete)
 
     return () => {
       socket.current?.off(

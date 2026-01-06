@@ -10,14 +10,16 @@ export default function GenericDialogue({
   dialogueId,
   clazz,
   children,
+  contentClassName = "companion-dialogue-content",
 }: {
   dialogueId: string;
   clazz: string;
   children: React.ReactNode;
+  contentClassName?: string;
 }) {
   return (
     <dialog data-model={true} id={dialogueId} className={clazz}>
-      <div className="companion-dialogue-content">{children}</div>
+      <div className={contentClassName}>{children}</div>
     </dialog>
   );
 }

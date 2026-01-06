@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { DEFAULT_EXPECTED_NODES } from "./AppContext.tsx";
 import { ConsultantRating } from "../model/consultantRating.ts";
-import { DeepResearchStatus } from "../model/deep-research.ts";
+import { DeepResearchOutput, DeepResearchOutputMap, DeepResearchOutputs, DeepResearchStatus } from "../model/deep-research.ts";
+import onCloseDialogue, { showDialogue } from "../lib/dialogFunctions.ts";
+import { DEEP_RESEARCH_DIALOGUE_ID } from "../components/dialogue/DeepResearchDialogue.tsx";
 
 const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
 const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
@@ -39,8 +41,16 @@ interface AppStoreState {
   setConsultantRatings: (consultantRatings: ConsultantRating[]) => void;
   showConsultantRatings: boolean;
   setShowConsultantRatings: (showConsultantRatings: boolean) => void;
+  deepResearchStarted: boolean;
+  setDeepResearchStarted: (deepResearchStarted: boolean) => void;
   deepResearchStatus: DeepResearchStatus;
   setDeepResearchStatus: (deepResearchStatus: DeepResearchStatus) => void;
+  deepResearchOutputMap: DeepResearchOutputMap;
+  setDeepResearchOutputMap: (deepResearchOutputMap: DeepResearchOutputMap) => void;
+  completedDeepResearchOutput: DeepResearchOutput | null;
+  setCompletedDeepResearchOutput: (completedDeepResearchOutput: DeepResearchOutput | null) => void;
+  selectedDeepResearchOutput: DeepResearchOutput | null;
+  setSelectedDeepResearchOutput: (selectedDeepResearchOutput: DeepResearchOutput | null) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -108,9 +118,28 @@ export const useAppStore = create<AppStoreState>((set) => ({
   showConsultantRatings: false,
   setShowConsultantRatings: (showConsultantRatings: boolean) =>
     set((state) => ({ ...state, showConsultantRatings })),
-  deepResearchStatus: { status: "", advice: "" },
+  deepResearchStarted: false,
+  setDeepResearchStarted: (deepResearchStarted: boolean) =>
+    set((state) => ({ ...state, deepResearchStarted })),
+  deepResearchStatus: { status: "", advice: "", timestamp: "" },
   setDeepResearchStatus: (deepResearchStatus: DeepResearchStatus) =>
-    set((state) => ({ ...state, deepResearchStatus })),
+    set((state) => ({ ...state, deepResearchStatus, deepResearchStarted: true })),
+  deepResearchOutputMap: { },
+  setDeepResearchOutputMap: (deepResearchOutputMap: DeepResearchOutputMap) =>
+    set((state) => ({ ...state, deepResearchOutputMap: deepResearchOutputMap })),
+  completedDeepResearchOutput: null,
+  setCompletedDeepResearchOutput: (completedDeepResearchOutput: DeepResearchOutput | null) =>
+    set((state) => ({ ...state, completedDeepResearchOutput, deepResearchStarted: false })),
+  selectedDeepResearchOutput: null,
+  setSelectedDeepResearchOutput: (selectedDeepResearchOutput: DeepResearchOutput | null) =>
+    set((state) => {
+      if (!selectedDeepResearchOutput) {
+        onCloseDialogue(DEEP_RESEARCH_DIALOGUE_ID);
+      } else {
+        showDialogue(DEEP_RESEARCH_DIALOGUE_ID);
+      }
+      return { ...state, selectedDeepResearchOutput }
+    }),
 }));
 
 export function isDisplayReportGenerationMessage(
