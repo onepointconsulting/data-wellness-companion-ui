@@ -93,25 +93,55 @@ export default function DeepResearchDialogue() {
         </div>
         {selectedDeepResearchOutput?.citations &&
           selectedDeepResearchOutput.citations.length > 0 && (
-            <div className="mt-8 border-t pt-4">
+            <div className="mt-8 border-t pt-4 text-sm">
               <h3 className="font-bold mb-4">{t("Sources")}</h3>
-              <ul className="list-decimal pl-5 space-y-2">
-                {Array.from(
-                  new Map(
-                    selectedDeepResearchOutput.citations.map((c) => [c.url, c])
-                  ).values()
-                ).map((citation, index) => (
-                  <li key={index}>
-                    <a
-                      href={citation.url}
-                      target="_blank"
-                      className="text-blue-500 underline hover:text-blue-700 block text-sm"
-                    >
-                      {citation.title || citation.url}
-                    </a>
-                  </li>
+              <div className="space-y-4">
+                {Object.entries(
+                  selectedDeepResearchOutput.citations.reduce(
+                    (acc, c) => {
+                      const title = c.title || t("Source");
+                      if (!acc[title]) acc[title] = new Map();
+                      const snippet = c.url.includes("text=")
+                        ? decodeURIComponent(c.url.split("text=")[1]).replace(
+                            /,/g,
+                            " "
+                          )
+                        : c.text || "";
+                      if (snippet && !acc[title].has(snippet)) {
+                        acc[title].set(snippet, c.url);
+                      }
+                      return acc;
+                    },
+                    {} as Record<string, Map<string, string>>
+                  )
+                ).map(([title, snippets], groupIdx) => (
+                  <div key={groupIdx}>
+                    <p className="font-semibold text-gray-800 dark:text-gray-200">
+                      {title}
+                    </p>
+                    <ul className="list-decimal pl-8 space-y-1">
+                      {Array.from(snippets.entries()).map(
+                        ([text, url], idx) => (
+                          <li
+                            key={idx}
+                            className="text-gray-600 dark:text-gray-400"
+                          >
+                            {text} ...{" "}
+                            <a
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 underline hover:text-blue-700"
+                            >
+                              (link)
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
       </DialogueBody>
