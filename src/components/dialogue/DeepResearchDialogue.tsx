@@ -19,7 +19,7 @@ export function showDeepResearchDialogue(
   showDialogue(DEEP_RESEARCH_DIALOGUE_ID);
 }
 
-function DeepResearchTitle({ title }: { title: string }) {
+export function DeepResearchTitle({ title }: { title: string }) {
   return <h1 className="text-right mt-4 mb-3">{title}</h1>;
 }
 

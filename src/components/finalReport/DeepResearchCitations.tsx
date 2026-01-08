@@ -1,5 +1,6 @@
 import { Citation } from "../../model/deep-research";
 import { useTranslation } from "react-i18next";
+import { DeepResearchTitle } from "../dialogue/DeepResearchDialogue";
 
 interface Props {
   citations: Citation[] | undefined;
@@ -25,27 +26,25 @@ export default function DeepResearchCitations({ citations }: Props) {
       {} as Record<string, Map<string, string>>
     )
   );
+
   return (
-    <div className="mt-8 border-t pt-4 text-sm">
-      <h3 className="font-bold mb-4">{t("Sources")}</h3>
+    <div className="text-sm w-full">
+      <DeepResearchTitle title={t("Sources")} />
       <div className="space-y-4">
         {groupedCitations.map(([title, snippets], groupIdx) => (
           <div key={groupIdx}>
             <p className="font-semibold text-gray-800 dark:text-gray-200">
               {title}
             </p>
-            <ul className="list-decimal pl-8 space-y-1">
+            <ul className="list-none pl-8 space-y-1">
               {Array.from(snippets.entries()).map(([text, url], idx) => (
                 <li key={idx} className="text-gray-600 dark:text-gray-400">
-                  {text} ...{" "}
                   <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
-                  >
-                    (link)
-                  </a>
+                    className="text-blue-500 underline hover:text-blue-700 italic"
+                  >"{text}…"</a>
                 </li>
               ))}
             </ul>
