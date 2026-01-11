@@ -1,3 +1,4 @@
+
 import { AccordionText } from "../accordion/AccordionText.tsx";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -10,6 +11,7 @@ export default function MarkdownAccordion({
   title: string;
   items: string[];
   defaultOpen?: boolean;
+  handleDeepResearch?: boolean;
 }) {
   const allItems = items.map((item) => `- ${item}`).join("\n");
   return (

@@ -14,7 +14,6 @@ import { EMAIL_DIALOGUE_ID } from "../dialogue/EmailDialogue.tsx";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import OntologyGraph from "../knowledge-graph/OntologyGraph.tsx";
-import { Ontology } from "../../model/ontology.ts";
 import { AppContext } from "../../context/AppContext.tsx";
 import { toast } from "../../../@/components/ui/use-toast.ts";
 import Transcript from "./Transcript.tsx";
@@ -28,26 +27,12 @@ import { ReportButton } from "../buttons/ReportButton.tsx";
 import { useSuggestConsultant } from "../../hooks/useSuggestConsultant.ts";
 import SuggestedConsultants from "../consultants/SuggestedConsultants.tsx";
 import useOntology from "../../hooks/useOntology.ts";
+import { fetchOntology } from "../../lib/apiCalls.ts";
+import AdviceList from "./AdviceList.tsx";
 
 function showEmailDialogue(e: React.MouseEvent<HTMLButtonElement>) {
   e.preventDefault();
   showDialogue(EMAIL_DIALOGUE_ID);
-}
-
-async function fetchOntology(
-  sessionId: string,
-  reportUrl: string,
-): Promise<Ontology> {
-  const res = await fetch(`${reportUrl}/ontology/${sessionId}`);
-  if (!res.ok) {
-    console.error("Network response was not ok " + res.statusText);
-    return {
-      relationships: [],
-      betweenness_centrality: {},
-      connected_component_importance_dict: {},
-    };
-  }
-  return await res.json();
 }
 
 function extractReasoning(reportData: any): Confidence {
@@ -68,7 +53,7 @@ export default function FinalReport({ message }: { message: Message }) {
   const { setOntology } = useContext(AppContext);
   const { onOntologyOpenClick } = useOntology();
   const { ontologyOpen } = useAppStore(useShallow((state) => ({ ...state })));
-  const { reportUrl } = useContext(ChatContext);
+  const { reportUrl, socket } = useContext(ChatContext);
   const { processPopup } = useShowStartDialogue();
   const { fetchSuggestedConsultants } = useSuggestConsultant();
 
@@ -100,13 +85,14 @@ export default function FinalReport({ message }: { message: Message }) {
 
   return (
     <div className="final-report">
-      <MarkdownAccordion
+      <AdviceList
         title={recommendationsTitle}
         items={advices}
         defaultOpen={
           window.localStorage.getItem(`accordion_${recommendationsTitle}`) ===
           null
         }
+        socket={socket?.current}
       />
       <MarkdownAccordion title="What to avoid" items={whatToAvoid} />
       <MarkdownAccordion

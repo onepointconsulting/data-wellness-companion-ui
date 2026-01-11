@@ -7,6 +7,7 @@ import DialogueHeader from "./DialogueHeader.tsx";
 import MarkdownComponent from "../Markdown.tsx";
 import { ConfidenceImage } from "../buttons/ConfidenceHint.tsx";
 import { confidenceAdapter } from "../../lib/confidenceAdapter.ts";
+import DialogueBody from "./DialogueBody.tsx";
 
 export const CONFIDENCE_DIALOGUE_ID = "confidence-dialogue";
 
@@ -39,7 +40,7 @@ export default function ConfidenceDialogue() {
           {t("Confidence level")}
         </div>
       </DialogueHeader>
-      <div className="flex flex-col items-start px-2.5">
+      <DialogueBody>
         <div className="text-2xl font-bold pt-2 text-[#4a4a4a] dark:text-gray-100">
           {confidenceAdapter(t, confidence)}
         </div>
@@ -57,7 +58,7 @@ export default function ConfidenceDialogue() {
             className=""
           />
         </div>
-      </div>
+      </DialogueBody>
     </GenericDialogue>
   );
 }

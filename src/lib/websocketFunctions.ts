@@ -94,6 +94,19 @@ export function addMoreSuggestions(
   );
 }
 
+export function generateDeepResearch(
+  socket: Socket<any, any> | null,
+  advice: string,
+) {
+  safeEmit(
+    socket,
+    WEBSOCKET_COMMAND.GENERATE_DEEP_RESEARCH,
+    getSessionId(),
+    advice,
+    i18next?.language,
+  );
+}
+
 export function sendClarifyQuestion(
   socket: Socket<any, any> | null,
   question: string,
