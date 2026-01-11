@@ -8,7 +8,8 @@ dialog::backdrop {
 }
 
 .companion-dialogue-content,
-.email-dialogue-content {
+.email-dialogue-content,
+.deep-research-dialogue-content {
   @apply p-8;
 }
 
@@ -22,6 +23,22 @@ dialog::backdrop {
 .email-dialogue-content p {
   @apply text-xl dark:text-white;
   color: #4a4a4a;
+}
+
+.deep-research-dialogue-content p {
+  @apply text-base dark:text-white;
+}
+
+#root .deep-research-dialogue-content .markdown-body p {
+  @apply py-2 px-0
+}
+
+#root .deep-research-dialogue-content .markdown-body h2 {
+  @apply ml-0
+}
+
+.deep-research-dialogue {
+  @apply w-11/12 bg-white shadow-lg outline-0 rounded-lg dark:bg-[#1F1925] dark:text-white;
 }
 
 #root .companion-dialogue-content a:visited,
