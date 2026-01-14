@@ -6,6 +6,7 @@ export enum PageType {
   REPORTS = "reports",
   GLOBAL_CONFIG = "globalConfig",
   QUESTIONS = "questions",
+  PROMPTS = "prompts",
 }
 
 interface AdminState {
