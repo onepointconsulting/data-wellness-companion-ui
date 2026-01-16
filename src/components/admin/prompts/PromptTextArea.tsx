@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { updatePrompt } from "../../../lib/admin/apiClient";
 import { ChatContext } from "../../../context/ChatContext";
+import ActionStatus from "../ActionStatus";
+import { MessageType } from "../model";
 
 export default function PromptTextArea({
   id,
@@ -10,16 +12,34 @@ export default function PromptTextArea({
   initialPrompt: string;
 }) {
   const [text, setText] = useState<string>(initialPrompt);
+  const [status, setStatus] = useState<MessageType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const { reportUrl } = useContext(ChatContext);
 
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => {
+        setStatus(null);
+        setErrorMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   const handleUpdatePrompt = async () => {
     if (id !== undefined) {
+      if (!text.trim()) {
+        setStatus(MessageType.FAILURE);
+        setErrorMessage("Prompt cannot be empty");
+        return;
+      }
       const res = await updatePrompt(id, text, reportUrl);
       if (res) {
-        alert("Prompt updated in database successfully");
+        setStatus(MessageType.SUCCESS);
       } else {
-        alert("Failed to update prompt in database");
+        setStatus(MessageType.FAILURE);
+        setErrorMessage("Failed to update prompt");
       }
     }
   };
@@ -32,12 +52,26 @@ export default function PromptTextArea({
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button
-        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-3 w-28 self-end"
-        onClick={handleUpdatePrompt}
-      >
-        Update Prompt
-      </button>
+      <div className="flex justify-between items-start">
+        <div className="flex-1 mr-4">
+          {status && (
+            <ActionStatus
+              message={
+                status === MessageType.SUCCESS
+                  ? "Prompt updated successfully"
+                  : errorMessage
+              }
+              messageType={status}
+            />
+          )}
+        </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-3 w-28 shrink-0"
+          onClick={handleUpdatePrompt}
+        >
+          Update Prompt
+        </button>
+      </div>
     </div>
   );
 }
