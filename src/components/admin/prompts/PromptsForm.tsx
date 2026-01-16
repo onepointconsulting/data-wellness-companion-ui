@@ -3,6 +3,7 @@ import AdminContainer from "../AdminContainer";
 import { MessageType } from "../model";
 import PromptField from "./PromptField";
 import { ChatContext } from "../../../context/ChatContext";
+import { getPrompts } from "../../../lib/admin/apiClient";
 
 export type PromptNode = {
   id?: number;
@@ -53,21 +54,8 @@ export default function PromptsForm() {
   const { reportUrl } = useContext(ChatContext);
 
   useEffect(() => {
-    fetch(`${reportUrl}/prompts/en?add_ids=true`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res) => {
-        console.log("status:", res.status);
-        console.log("headers:", [...res.headers.entries()]);
-        const text = await res.text();
-        console.log("raw body:", text);
-        return JSON.parse(text);
-      })
+    getPrompts(reportUrl, "en")
       .then((data) => {
-        console.log("parsed:", data);
         setPrompts(data);
         setLoading(false);
       })
@@ -75,7 +63,7 @@ export default function PromptsForm() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [reportUrl]);
 
   console.log(prompts);
 
