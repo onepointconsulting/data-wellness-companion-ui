@@ -1,4 +1,4 @@
-import { MessageType } from "../../components/admin/model.ts";
+import { MessageType } from "../../components/admin/model";
 
 interface JwtTokenData {
   reportUrl: string;
@@ -89,4 +89,17 @@ export function handleError(error: Error, dispatch: (content: any) => void) {
     message: error.message,
     messageType: MessageType.FAILURE,
   });
+}
+
+export async function updatePrompt(id:number,
+  text:string,
+  reportUrl:string
+):Promise<boolean>{
+   const res=await fetch(`${reportUrl}/prompts/update/${id}`,{
+     method:"PUT",
+     body:text,
+   })
+   return res.ok;
+
+
 }
