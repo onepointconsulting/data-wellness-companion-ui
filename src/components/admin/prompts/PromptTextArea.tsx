@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { updatePrompt } from "../../../lib/admin/apiClient";
 import { ChatContext } from "../../../context/ChatContext";
 import ActionStatus from "../ActionStatus";
@@ -14,6 +15,7 @@ export default function PromptTextArea({
   const [text, setText] = useState<string>(initialPrompt);
   const [status, setStatus] = useState<MessageType | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [t] = useTranslation();
 
   const { reportUrl } = useContext(ChatContext);
 
@@ -31,15 +33,22 @@ export default function PromptTextArea({
     if (id !== undefined) {
       if (!text.trim()) {
         setStatus(MessageType.FAILURE);
-        setErrorMessage("Prompt cannot be empty");
+        setErrorMessage(t("Prompt cannot be empty"));
         return;
       }
-      const res = await updatePrompt(id, text, reportUrl);
-      if (res) {
-        setStatus(MessageType.SUCCESS);
-      } else {
+      try {
+        const res = await updatePrompt(id, text, reportUrl);
+        if (res) {
+          setStatus(MessageType.SUCCESS);
+        } else {
+          setStatus(MessageType.FAILURE);
+          setErrorMessage(t("Failed to update prompt"));
+        }
+      } catch (error) {
         setStatus(MessageType.FAILURE);
-        setErrorMessage("Failed to update prompt");
+        setErrorMessage(
+          error instanceof Error ? error.message : t("Failed to update prompt")
+        );
       }
     }
   };
@@ -52,13 +61,13 @@ export default function PromptTextArea({
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col justify-between items-start">
         <div className="flex-1 mr-4">
           {status && (
             <ActionStatus
               message={
                 status === MessageType.SUCCESS
-                  ? "Prompt updated successfully"
+                  ? t("Prompt updated successfully")
                   : errorMessage
               }
               messageType={status}
@@ -66,10 +75,10 @@ export default function PromptTextArea({
           )}
         </div>
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-3 w-28 shrink-0"
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-3 w-28 shrink-0 self-end"
           onClick={handleUpdatePrompt}
         >
-          Update Prompt
+          {t("Update Prompt")}
         </button>
       </div>
     </div>

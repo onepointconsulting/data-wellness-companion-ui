@@ -214,5 +214,9 @@
   "analyzing-4": "Generating insights...",
   "analyzing-5": "Reviewing the information...",
   "analyzing-6": "Evaluating your data...",
-  "analyzing-7": "Preparing the next step..."
+  "analyzing-7": "Preparing the next step...",
+  "Prompt updated successfully": "Prompt updated successfully",
+  "Prompt cannot be empty": "Prompt cannot be empty",
+  "Failed to update prompt": "Failed to update prompt",
+  "Update Prompt": "Update Prompt"
 }

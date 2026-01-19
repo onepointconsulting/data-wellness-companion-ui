@@ -1,4 +1,4 @@
-import { MessageType } from "./model.ts";
+import { MessageType } from "./model";
 
 export function messageTypeColor(messageType: MessageType | undefined) {
   return messageType === MessageType.FAILURE ? "bg-red-100" : "bg-green-100";
