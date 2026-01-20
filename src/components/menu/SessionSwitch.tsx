@@ -24,18 +24,19 @@ const isUlid = (session: Session) => {
 
 function timestampAdapter(session: Session) {
   const id = session.id;
-  return new Date(decodeTime(id))
+  const dateStr = new Date(decodeTime(id))
     .toISOString()
     .replace("T", " ")
     .replace(/:\d{2}\.\d{3}Z/, "");
+  return session.topic ? `${session.topic}` : dateStr;
 }
 
 function adaptSessionHistory(sessionHistory: Session[]): Session[] {
   const uniques: Session[] = Object.values(
     sessionHistory.reduce(
       (acc, session) => ({ ...acc, ...{ [session.id]: session } }),
-      {}
-    )
+      {},
+    ),
   );
 
   return uniques
@@ -53,7 +54,7 @@ export default function SessionSwitch() {
   const { selectedHistoricalSession, setSelectedHistoricalSession } =
     useContext(AppContext);
   const { setOntologyOpen } = useAppStore(
-    useShallow((state) => ({ setOntologyOpen: state.setOntologyOpen }))
+    useShallow((state) => ({ setOntologyOpen: state.setOntologyOpen })),
   );
   const { t } = useTranslation();
   const sessionHistory = getSessionHistory();
@@ -70,7 +71,7 @@ export default function SessionSwitch() {
   function onChange(e: ChangeEvent<HTMLSelectElement>) {
     if (!!e.target.value) {
       const session = sessionHistory.find(
-        (session) => session.id === e.target.value
+        (session) => session.id === e.target.value,
       );
       if (!!session) {
         setSelectedHistoricalSession(session.id);
