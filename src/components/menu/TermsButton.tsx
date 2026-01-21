@@ -1,5 +1,6 @@
 import MenuItemTemplate from "./MenuItemTemplate.tsx";
 import InfoImage from "./InfoImage.tsx";
+import MenuSeparator from "./MenuSeparator.tsx";
 
 /**
  * Simple contact us button used to open a contact us form.
@@ -7,11 +8,14 @@ import InfoImage from "./InfoImage.tsx";
  */
 export default function TermsButton() {
   return (
-    <MenuItemTemplate
-      title="Terms"
-      func={() => window.open(window.dataWellnessConfig.termsLink, "_blank")}
-    >
-      <InfoImage />
-    </MenuItemTemplate>
+    <>
+      <MenuItemTemplate
+        title="Terms"
+        func={() => window.open(window.dataWellnessConfig.termsLink, "_blank")}
+      >
+        <InfoImage />
+      </MenuItemTemplate>
+      <MenuSeparator />
+    </>
   );
 }
