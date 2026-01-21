@@ -8,7 +8,12 @@ export default function useSessionHistory(messages: Message[]) {
     if (currentSession) {
       const hasFinalReport = messages.some((message) => message.final_report);
       if (hasFinalReport) {
-        appendToSessionHistory(currentSession, hasFinalReport);
+        const topic =
+          messages.length > 0
+            ? messages[0].answer.substring(0, 50) +
+              (messages[0].answer.length > 50 ? "..." : "")
+            : "New Session";
+        appendToSessionHistory(currentSession, hasFinalReport, topic);
       }
     }
   }, [messages]);

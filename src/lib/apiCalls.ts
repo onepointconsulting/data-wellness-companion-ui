@@ -1,5 +1,6 @@
 import { DeepResearchOutputs } from "../model/deep-research";
 import { Ontology } from "../model/ontology";
+import { SessionCompletedDataList } from "../model/session";
 
 async function fetchOntology(
     sessionId: string,
@@ -38,4 +39,15 @@ async function fetchDeepResearch(
     }
 }
 
-export { fetchDeepResearch, fetchOntology };
+async function fetchSessionsCompleted(sessionIds: string[], reportUrl: string): Promise<SessionCompletedDataList> {
+    const res = await fetch(`${reportUrl}/session/completed?session_ids=${sessionIds.join(",")}`);
+    if (!res.ok) {
+        console.error("Network response was not ok " + res.statusText);
+        return {
+            sessions: []
+        };
+    }
+    return await res.json();
+}
+
+export { fetchDeepResearch, fetchOntology, fetchSessionsCompleted };

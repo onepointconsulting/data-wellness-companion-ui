@@ -6,6 +6,7 @@ export type Session = {
   timestamp: Date;
   finished?: boolean;
   language: string;
+  topic?: string
 };
 
 export type StartSession = {
@@ -14,4 +15,15 @@ export type StartSession = {
   setDisplayRegistrationMessage: (displayRegistrationMessage: boolean) => void;
   apiServer: string;
   chatType: ChatType;
+};
+
+export type SessionCompletedDataList = {
+  sessions: SessionCompletedData[];
+};
+
+export type SessionCompletedData = {
+  session_id: string;
+  created_at: Date;
+  start_answer: string;
+  end_advice: string;
 };

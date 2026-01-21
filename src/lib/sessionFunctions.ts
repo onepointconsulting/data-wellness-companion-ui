@@ -44,11 +44,12 @@ export function getSessionHistory(): Session[] {
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        return sessionHistoryObj.map((session: any) => ({
+        return sessionHistoryObj.reverse().slice(0, 10).map((session: any) => ({
           id: session.id,
           timestamp: new Date(session.timestamp),
           finished: session.finished,
           language: session.language ?? "en",
+          topic: session.topic,
         }));
       }
     } catch (e) {
@@ -65,22 +66,32 @@ function saveSessionHistory(sessionHistory: Session[]) {
 export function appendToSessionHistory(
   currentSession: Session,
   hasFinalReport: boolean,
+  topic?: string,
 ) {
   currentSession.finished = hasFinalReport;
+  if (topic) {
+    currentSession.topic = topic;
+  }
   const sessionHistory = localStorage.getItem(SESSION_HISTORY_KEY);
   if (sessionHistory) {
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        if (
-          !sessionHistoryObj
-            .map((session) => session.id)
-            .find((id) => id === currentSession.id)
-        ) {
-          // Only insert if it's not already in the history
+        const existingIndex = sessionHistoryObj.findIndex(
+          (session: any) => session.id === currentSession.id
+        );
+
+        if (existingIndex !== -1) {
+          // Update existing session
+          sessionHistoryObj[existingIndex] = {
+            ...sessionHistoryObj[existingIndex],
+            ...currentSession,
+          };
+        } else {
+          // Additional new session
           sessionHistoryObj.push(currentSession);
-          saveSessionHistory(sessionHistoryObj);
         }
+        saveSessionHistory(sessionHistoryObj);
       }
     } catch (e) {
       console.error("Error appending session to history", e);

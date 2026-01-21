@@ -91,7 +91,7 @@
 }
 
 #root .suggestion.active .suggestion-img path {
-  @apply fill-[#8F00FF];
+  @apply fill-[#FAFFFE];
 }
 
 /* #root .suggestion.active .suggestion-img a[href="Data silos"] path {

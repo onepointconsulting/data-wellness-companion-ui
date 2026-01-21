@@ -66,7 +66,10 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img src="res-ai/favicon.png" alt={t("navigation icon")} />
+            <img
+              src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/favicon.png`}
+              alt={t("navigation icon")}
+            />
           </div>
         )}
       </div>
@@ -75,8 +78,14 @@ function SingleNode({ i }: { i: number }) {
 }
 
 export default function NodeNavigation() {
-  const { currentMessage, isLast, isReport, sending, regenerating, displayRegistrationMessage } =
-    useContext(AppContext);
+  const {
+    currentMessage,
+    isLast,
+    isReport,
+    sending,
+    regenerating,
+    displayRegistrationMessage,
+  } = useContext(AppContext);
   const { expectedNodes } = useAppStore(
     useShallow((state) => ({ expectedNodes: state.expectedNodes }))
   );

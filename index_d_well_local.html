@@ -17,11 +17,11 @@
       content="https://d-well.onepointltd.ai/logo.svg"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Onepoint D-Well" />
+    <meta property="og:site_name" content="Onepoint Data Wellness" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="D-Well" />
+    <meta name="twitter:title" content="Data Wellness" />
     <meta
       name="twitter:description"
       content="Data Wellness Companion™, guides you through questions that help you gain deeper insights into your data. It is powered by Generative AI and the Onepoint Data & Analytics Body of Knowledge™"
@@ -31,12 +31,37 @@
       content="https://d-well.onepointltd.ai/logo.svg"
     />
 
+    <!-- Userback -->
     <script>
-      const server = "staging-d-well.onepointltd.ai";
-      const port = 443;
+      window.Userback = window.Userback || {};
+      Userback.access_token = "A-Nm2GxChdROOCxxAsfWLXEPDoe";
+      // identify your logged-in users (optional)
+      Userback.user_data = {
+        id: "responsible-ai", // example data
+        info: {
+          name: "Responsible AI", // example data
+          email: "responsible-ai@onepointltd.com", // example data
+        },
+      };
+      (function (d) {
+        var s = d.createElement("script");
+        s.async = true;
+        s.src = "https://static.userback.io/widget/v1.js";
+        (d.head || d.body).appendChild(s);
+      })(document);
+    </script>
+    <!-- End Userback -->
+
+    <script>
+      const server = "127.0.0.1";
+      const port = 8085;
       window.dataWellnessConfig = {
-        websocketUrl: `wss://${server}:${port}`,
-        reportUrl: `https://${server}:${port}`,
+        websocketUrl: `ws://${server}:${port}`,
+        reportUrl: `http://${server}:${port}`,
+        hideUsageInstructions: true,
+        hideConsultants: false,
+        imageFolder: "d-well",
+        // termsLink: "https://www.onepointltd.com/wp-content/uploads/2025/01/Terms-of-Use-for-Onepoint-D-Well-v2.0.pdf"
       };
     </script>
   </head>
