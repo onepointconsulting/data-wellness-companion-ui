@@ -8,6 +8,8 @@ const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
 interface AppStoreState {
   ontologyOpen: boolean;
   setOntologyOpen: (ontologyOpen: boolean) => void;
+  historySidebarOpen: boolean;
+  setHistorySidebarOpen: (historySidebarOpen: boolean) => void;
   generatingReport: boolean;
   setGeneratingReport: (generatingReport: boolean) => void;
   seenIntro: boolean;
@@ -44,6 +46,9 @@ export const useAppStore = create<AppStoreState>((set) => ({
   ontologyOpen: false,
   setOntologyOpen: (ontologyOpen: boolean) =>
     set((state) => ({ ...state, ontologyOpen })),
+  historySidebarOpen: false,
+  setHistorySidebarOpen: (historySidebarOpen: boolean) =>
+    set((state) => ({ ...state, historySidebarOpen })),
   generatingReport: false,
   setGeneratingReport: (generatingReport: boolean) =>
     set((state) => ({ ...state, generatingReport })),
