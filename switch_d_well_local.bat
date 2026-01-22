@@ -1,1 +1,0 @@
-copy index_d_well_local.html index.html
