@@ -1,25 +1,34 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { AppContext } from "../../context/AppContext";
 
 export function AccordionText({
   title,
   children,
   defaultOpen = false,
+  openOnHistoricalSession = false,
 }: {
   title: string;
   children: ReactNode;
   defaultOpen?: boolean;
+  openOnHistoricalSession?: boolean;
 }) {
+  
+  const { selectedHistoricalSession } = useContext(AppContext);
   const { t } = useTranslation();
   const [open, setOpen] = useState(defaultOpen);
 
   useEffect(() => {
+    if (selectedHistoricalSession && openOnHistoricalSession) {
+      setOpen(true);
+      return;
+    }
     const storageOpen = window.localStorage.getItem(`accordion_${title}`);
     if (storageOpen !== null) {
       const openState = storageOpen === "true";
       setOpen(openState);
     }
-  }, []);
+  }, [title, selectedHistoricalSession]);
 
   function onOpen() {
     const openState = !open;

@@ -10,6 +10,7 @@ import { AppContext } from "../context/AppContext.tsx";
 import JoyrideMain from "./joyride/JoyrideMain.tsx";
 import NavigationTab from "./NavigationTabs.tsx";
 import { logoAdapter } from "../lib/logoAdapter.ts";
+import HistorySidebar from "./history/HistorySidebar.tsx";
 
 export default function MainApp() {
   const [t] = useTranslation();
@@ -30,6 +31,7 @@ export default function MainApp() {
 
   return (
     <>
+      <HistorySidebar />
       <JoyrideMain />
       <div className="header">
         <div className="header-container">
@@ -50,9 +52,11 @@ export default function MainApp() {
               </NavigationTab>
             )}
           </div>
-          {!displayRegistrationMessage && <div>
-            <NodeNavigation />
-          </div>}
+          {!displayRegistrationMessage && (
+            <div>
+              <NodeNavigation />
+            </div>
+          )}
         </div>
       </div>
       <Toaster />

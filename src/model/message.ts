@@ -9,6 +9,14 @@ export type Suggestion = {
   svg_image: string | undefined;
 };
 
+export type RelevantDocument = {
+  id: number;
+  document_path: string;
+  document_name: string;
+  count: number;
+  document_extract: string;
+};
+
 export type Message = {
   question: string;
   answer: string;
@@ -17,6 +25,12 @@ export type Message = {
   clarification: string | undefined;
   confidence?: Confidence;
   question_id: string | undefined;
+  documents: RelevantDocuments[];
+};
+
+export type RelevantDocuments = {
+  questionnaire_status_id: number;
+  relevant_documents: RelevantDocument[];
 };
 
 export type RegenerateMessage = {

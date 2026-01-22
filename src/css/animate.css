@@ -35,11 +35,11 @@
   animation-duration: 0.5s;
 }
 
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.subtle-blink {
+  animation: subtle-blink-anim 1s ease-out;
+}
+
+@keyframes subtle-blink-anim {
+  0% { opacity: 0.05; }
+  100% { opacity: 1; }
 }

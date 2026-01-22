@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import GlobalConfigForm from "./global/GlobalConfigForm.tsx";
 import QuestionsForm from "./questions/QuestionsForm.tsx";
 import { QuestionsContextProvider } from "./questions/questionsReducer.tsx";
+import PromptsForm from "./prompts/PromptsForm.tsx";
 
 function displayPage(page: PageType) {
   switch (page) {
@@ -14,6 +15,8 @@ function displayPage(page: PageType) {
       return <JwtTokenForm />;
     case PageType.GLOBAL_CONFIG:
       return <GlobalConfigForm />;
+    case PageType.PROMPTS:
+      return <PromptsForm />;
     case PageType.QUESTIONS:
       return (
         <QuestionsContextProvider>

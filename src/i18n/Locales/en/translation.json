@@ -2,6 +2,7 @@
   "About": "About",
   "Add question": "Add new question",
   "Add one more step to current session": "Add one more step to current session",
+  "Advice": "Advice",
   "advice-generate-advice": "Generate advice now",
   "advice-proceed-with-questions": "Proceed with questions",
   "advice-you-may-want-to-consider": "You can generate advice now, but for better results add more steps.",
@@ -76,6 +77,7 @@
   "Global Configuration": "Global Configuration",
   "Heads up!": "Heads up!",
   "Hint": "Hint",
+  "History": "History",
   "How can you use the": "How can you use the {{toolName}}?",
   "Data Wellness Companion™ is an assistant which will ask you questions to help you reflect on your data": "The Responsible AI Companion™ is an assistant which will ask you questions to help you reflect on your Responsible AI concerns",
   "Data Wellness Companion™": "Responsible AI Companion™",
@@ -173,6 +175,7 @@
   "registration-message": "Please <anchor href=\"https://www.onepointltd.com/data-wellness/onepoint-d-well/\" target=\"_blank\" className=\"default-link\">register</a> to continue using the app.",
   "Reports": "Reports",
   "Restart": "Restart",
+  "Run Deep Research": "Run Deep Research",
   "Save": "Save",
   "Search": "Search",
   "Select language": "Select language",
@@ -214,5 +217,9 @@
   "analyzing-4": "Generating insights...",
   "analyzing-5": "Reviewing the information...",
   "analyzing-6": "Evaluating your data...",
-  "analyzing-7": "Preparing the next step..."
+  "analyzing-7": "Preparing the next step...",
+  "Prompt updated successfully": "Prompt updated successfully",
+  "Prompt cannot be empty": "Prompt cannot be empty",
+  "Failed to update prompt": "Failed to update prompt",
+  "Update Prompt": "Update Prompt"
 }

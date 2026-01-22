@@ -4,6 +4,7 @@ import { ConsultantRating } from "../model/consultantRating.ts";
 import { DeepResearchOutput, DeepResearchOutputMap, DeepResearchStatus } from "../model/deep-research.ts";
 import onCloseDialogue, { showDialogue } from "../lib/dialogFunctions.ts";
 import { DEEP_RESEARCH_DIALOGUE_ID } from "../components/dialogue/DeepResearchDialogue.tsx";
+import { SessionCompletedDataList } from "../model/session.ts";
 
 const DEFAULT_MESSAGE_LOWER_LIMIT = 6;
 const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
@@ -11,6 +12,8 @@ const DEFAULT_MESSAGE_UPPER_LIMIT = 10;
 interface AppStoreState {
   ontologyOpen: boolean;
   setOntologyOpen: (ontologyOpen: boolean) => void;
+  historySidebarOpen: boolean;
+  setHistorySidebarOpen: (historySidebarOpen: boolean) => void;
   generatingReport: boolean;
   setGeneratingReport: (generatingReport: boolean) => void;
   seenIntro: boolean;
@@ -51,12 +54,19 @@ interface AppStoreState {
   setCompletedDeepResearchOutput: (completedDeepResearchOutput: DeepResearchOutput | null) => void;
   selectedDeepResearchOutput: DeepResearchOutput | null;
   setSelectedDeepResearchOutput: (selectedDeepResearchOutput: DeepResearchOutput | null) => void;
+  loadingHistoricalSessions: boolean;
+  setLoadingHistoricalSessions: (loadingHistoricalSessions: boolean) => void;
+  sessionsCompleted: SessionCompletedDataList;
+  setSessionsCompleted: (sessionsCompleted: SessionCompletedDataList) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
   ontologyOpen: false,
   setOntologyOpen: (ontologyOpen: boolean) =>
     set((state) => ({ ...state, ontologyOpen })),
+  historySidebarOpen: false,
+  setHistorySidebarOpen: (historySidebarOpen: boolean) =>
+    set((state) => ({ ...state, historySidebarOpen })),
   generatingReport: false,
   setGeneratingReport: (generatingReport: boolean) =>
     set((state) => ({ ...state, generatingReport })),
@@ -140,6 +150,12 @@ export const useAppStore = create<AppStoreState>((set) => ({
       }
       return { ...state, selectedDeepResearchOutput }
     }),
+  loadingHistoricalSessions: false,
+  setLoadingHistoricalSessions: (loadingHistoricalSessions: boolean) =>
+    set((state) => ({ ...state, loadingHistoricalSessions })),
+  sessionsCompleted: { sessions: [] },
+  setSessionsCompleted: (sessionsCompleted: SessionCompletedDataList) =>
+    set((state) => ({ ...state, sessionsCompleted })),
 }));
 
 export function isDisplayReportGenerationMessage(

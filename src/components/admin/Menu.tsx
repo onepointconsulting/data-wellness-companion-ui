@@ -36,6 +36,12 @@ const menuItems: MenuItem[] = [
     link: "/admin/questions",
     page: PageType.QUESTIONS,
   },
+  {
+    key: "Prompts",
+    title: "Prompts",
+    link: "/admin/prompts",
+    page: PageType.PROMPTS,
+  },
 ];
 
 function Separator() {
