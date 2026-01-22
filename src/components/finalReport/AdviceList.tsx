@@ -45,7 +45,7 @@ function StatusUpdateMessage({
 }) {
   return (
     <div className="flex flex-row justify-end mt-0">
-      <span key={statusKey} className="text-sm subtle-blink">
+      <span key={statusKey} className="text-sm subtle-blink dark:text-gray-100">
         {message}
       </span>
     </div>
