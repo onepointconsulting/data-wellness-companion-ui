@@ -7,6 +7,7 @@ import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 import { useContext } from "react";
+import MenuSeparator from "./MenuSeparator.tsx";
 
 const finishedFilter = (session: Session) => session.finished;
 
@@ -41,7 +42,7 @@ export default function SessionSwitch() {
           <GoHistory className="w-full h-full text-[#4A4A4A] dark:text-gray-200" />
         </div>
       </MenuItemTemplate>
-      <hr className="my-4 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+      <MenuSeparator />
     </>
   );
 }

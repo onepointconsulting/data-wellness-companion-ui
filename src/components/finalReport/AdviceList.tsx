@@ -111,9 +111,9 @@ export function AdviceList({
         });
     }
   }, [sessionId, completedDeepResearchOutput, deepResearchStarted]);
-
+  
   return (
-    <AccordionText title={title} defaultOpen={defaultOpen}>
+    <AccordionText title={title} defaultOpen={defaultOpen} openOnHistoricalSession={true}>
       {items.map((item, index) => {
         const isCurrentItem = deepResearchStatus.advice === item;
         return (
