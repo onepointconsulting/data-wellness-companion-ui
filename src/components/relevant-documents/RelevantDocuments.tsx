@@ -19,7 +19,7 @@ export default function RelevantDocuments({ message }: { message: Message }) {
         <div className="mt-3 mb-3">
             <h2 className="text-lg font-bold !ml-0">{t("Relevant Documents")}</h2>
             <ul className="list-none">
-                {message.relevant_documents.documents.map((relevant_document) => (
+                {message.relevant_documents?.documents?.map((relevant_document) => (
                     <li key={relevant_document.id}>
                         {relevant_document.document_name}
                     </li>
