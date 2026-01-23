@@ -1,18 +1,30 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Message } from "../../model/message";
+import { useTranslation } from "react-i18next";
 
 
-export default function RelevantDocuments() {
+export default function RelevantDocuments({ message }: { message: Message }) {
     const {
         // contentVisible,
-        currentMessage,
-        messages,
         // sending,
         // isLast,
         // regenerating,
     } = useContext(AppContext);
-    const message: Message = messages[currentMessage];
-    if (!message.documents) return null;
-    return null
+    const [t] = useTranslation();
+    
+    if (!message.relevant_documents) return null;
+    
+    return (
+        <div className="mt-3 mb-3">
+            <h2 className="text-lg font-bold !ml-0">{t("Relevant Documents")}</h2>
+            <ul className="list-none">
+                {message.relevant_documents.documents.map((relevant_document) => (
+                    <li key={relevant_document.id}>
+                        {relevant_document.document_name}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
 }

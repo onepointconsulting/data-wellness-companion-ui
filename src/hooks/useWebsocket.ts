@@ -36,7 +36,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
         title: suggestion.title,
         svg_image: suggestion.svg_image,
       })),
-      documents: [] // TODO: Add relevant documents
+      relevant_documents: message.relevant_documents ?? []
     };
   });
 }

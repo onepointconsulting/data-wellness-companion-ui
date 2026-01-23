@@ -19,6 +19,7 @@ import {
 import { useShallow } from "zustand/react/shallow";
 import GiveMeReport from "./buttons/GiveMeReport.tsx";
 import { FADE_IN_TIME } from "../lib/animConstants.ts";
+import RelevantDocuments from "./relevant-documents/RelevantDocuments.tsx";
 
 const ANALYZING_MESSAGES = [
   "analyzing-1",
@@ -124,6 +125,7 @@ export default function MainPanel() {
           )}
           {displayConfidenceLevelWarning && <ConfidenceLevelWarning />}
         </div>
+        {displayChatRelatedElements && <RelevantDocuments message={message} />}
         {displayChatRelatedElements && <Disclaimer />}
       </>
     );
