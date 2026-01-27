@@ -89,7 +89,7 @@ function TokenResult({
     <>
       {state.generatedToken && (
         <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mt-4 overflow-hidden">
-          <textarea className="border-2 border-input w-full px-3 py-2">
+          <textarea className="border-2 border-input w-full px-3 py-2 dark:bg-gray-800">
             {state.generatedToken}
           </textarea>
           <div className="flex mt-2">
