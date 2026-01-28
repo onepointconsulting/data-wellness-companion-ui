@@ -20,5 +20,9 @@
   "Welcome": "Welcome",
   "Would you like to restart the companion?": "آیا می‌خواهید شروع کنید؟",
   "Interview Steps": "مراحل مصاحبه",
-  "ok": "خب"
+  "ok": "خب",
+  "Relevant Documents": "اسناد مرتبط",
+  "extracts-found": "تعداد {{count}} استخراج پیدا شد",
+  "view-all-extracts": "مشاهده تمام استخراج‌ها",
+  "show-less": "نمایش کمتر"
 }

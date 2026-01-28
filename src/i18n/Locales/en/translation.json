@@ -221,5 +221,9 @@
   "Prompt updated successfully": "Prompt updated successfully",
   "Prompt cannot be empty": "Prompt cannot be empty",
   "Failed to update prompt": "Failed to update prompt",
-  "Update Prompt": "Update Prompt"
+  "Update Prompt": "Update Prompt",
+  "Relevant Documents": "Relevant Documents",
+  "extracts-found": "{{count}} extracts found",
+  "view-all-extracts": "View all extracts",
+  "show-less": "Show less"
 }
