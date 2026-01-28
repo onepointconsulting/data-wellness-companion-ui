@@ -8,7 +8,6 @@ import Divider from "./Divider";
 import ExpandCollapseButton from "./ExpandCollapseButton";
 
 function ExtractContent({ content }: { content: string }) {
-
   const tryParseJSON = (str: string) => {
     const cleaned = str.replace(/^---json\n?/, "").trim();
     if (
@@ -92,6 +91,14 @@ function ExtractContent({ content }: { content: string }) {
           <ul className="ml-4 list-disc space-y-1" {...props} />
         ),
         li: ({ ...props }) => <li className="" {...props} />,
+        pre: ({ children }) => (
+          <pre className="whitespace-pre-wrap break-words overflow-visible">
+            {children}
+          </pre>
+        ),
+        code: (props) => (
+          <code className="whitespace-pre-wrap break-words" {...props} />
+        ),
       }}
     >
       {content}
@@ -157,7 +164,9 @@ function DocumentCard({ doc }: { doc: RelevantDocument }) {
           )}
           {visibleExtracts.map((extract, idx) => (
             <Fragment key={idx}>
-              {visibleExtracts.length > 1 && <Divider idx={idx} total={doc.document_extracts.length} />}
+              {visibleExtracts.length > 1 && (
+                <Divider idx={idx} total={doc.document_extracts.length} />
+              )}
               <div className="text-sm text-foreground/90 leading-relaxed py-1 break-words w-full overflow-hidden">
                 <ExtractContent
                   content={showAll ? extract : truncate(extract, truncateLimit)}
@@ -183,7 +192,7 @@ export default function RelevantDocuments({ message }: { message: Message }) {
 
   return (
     <div className="mt-10 mb-4 animate-fade-down animate-duration-500 font-['Manrope']">
-      <h2 className="text-lg font-bold !ml-0 mb-3 text-primary dark:text-white flex items-center gap-2">
+      <h2 className="text-lg font-bold !ml-0 mb-3 text-primary dark:text-white flex items-center gap-2 pl-5">
         <FileText className="w-5 h-5" />
         {t("Relevant Documents")}
       </h2>
