@@ -1,3 +1,4 @@
+import { GlobalConfigurationProperty } from "../../components/admin/global/globalConfigReducer";
 import { MessageType } from "../../components/admin/model";
 import { getAccessToken } from "../accessTokenPersistence";
 
@@ -73,7 +74,7 @@ export async function globalProperties(baseUrl: string) {
 
 export async function updateGlobalProperties(
   baseUrl: string,
-  globalProperties: object,
+  globalProperties: GlobalConfigurationProperty[],
 ) {
   return processPost(
     baseUrl,

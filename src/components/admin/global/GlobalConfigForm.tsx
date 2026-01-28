@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useContext, useEffect, useReducer } from "react";
 import {
+  GlobalConfigurationProperty,
   globalConfigurationReducer,
   initialGlobalConfigState,
 } from "./globalConfigReducer.ts";
@@ -17,8 +18,6 @@ import FormContainer from "../FormContainer.tsx";
 import { MessageType } from "../model.ts";
 import handleSubmission from "../../../lib/formSubmission.ts";
 
-const KEY_MESSAGE_LOWER_LIMIT = "MESSAGE_LOWER_LIMIT";
-const KEY_MESSAGE_UPPER_LIMIT = "MESSAGE_UPPER_LIMIT";
 
 export default function GlobalConfigForm() {
   const [t] = useTranslation();
@@ -33,38 +32,22 @@ export default function GlobalConfigForm() {
       .then((response) => handleJson(response))
       .then((json) => {
         const properties = json["properties"];
-        for (const property of properties) {
-          const configKey = property["config_key"];
-          const configValue = property["config_value"];
-          switch (configKey) {
-            case KEY_MESSAGE_LOWER_LIMIT:
-              dispatch({
-                type: "setMessageLowerLimit",
-                messageLowerLimit: configValue,
-              });
-              break;
-            case KEY_MESSAGE_UPPER_LIMIT:
-              dispatch({
-                type: "setMessageUpperLimit",
-                messageUpperLimit: configValue,
-              });
-              break;
-          }
-        }
+        // sort the properties by config_key
+        properties.sort(
+          (a: GlobalConfigurationProperty, b: GlobalConfigurationProperty) => a.config_key.localeCompare(b.config_key)
+        );
+        dispatch({ type: "setProperties", properties });
       })
       .catch((error) => handleError(error, dispatch));
   }, []);
 
   function isDisabled(): boolean {
-    return !state.messageLowerLimitValid || !state.messageUpperLimitValid;
+    return false
   }
 
   function onSubmit() {
     dispatch({ type: "processing" });
-    updateGlobalProperties(reportUrl, {
-      message_lower_limit: state.messageLowerLimit,
-      message_upper_limit: state.messageUpperLimit,
-    })
+    updateGlobalProperties(reportUrl, state.properties)
       .then((response) => handleJson(response))
       .then((json) => {
         dispatch({
@@ -75,7 +58,14 @@ export default function GlobalConfigForm() {
           messageType: MessageType.SUCCESS,
         });
       })
-      .catch((error) => handleError(error, dispatch));
+      .catch((error) => handleError(error, dispatch))
+      .finally(() => {
+        // scroll smoothly to the top of the page
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
   }
 
   return (
@@ -91,36 +81,24 @@ export default function GlobalConfigForm() {
         disabled={isDisabled()}
         hasReset={false}
       >
-        <Field label={t("Messages lower limit")}>
-          <input
-            type="number"
-            autoFocus={true}
-            className="admin-input"
-            placeholder={t("Messages lower limit")}
-            value={state.messageLowerLimit}
-            onChange={(e) =>
-              dispatch({
-                type: "setMessageLowerLimit",
-                messageLowerLimit: e.target.value,
-              })
-            }
-          />
-        </Field>
-        <Field label={t("Messages upper limit")}>
-          <input
-            type="number"
-            autoFocus={true}
-            className="admin-input"
-            placeholder={t("Messages upper limit")}
-            value={state.messageUpperLimit}
-            onChange={(e) =>
-              dispatch({
-                type: "setMessageUpperLimit",
-                messageUpperLimit: e.target.value,
-              })
-            }
-          />
-        </Field>
+        {state.properties.map((property) => {
+          return (
+            <Field label={property.config_key}>
+              <input
+                type="text"
+                className="admin-input"
+                value={property.config_value}
+                onChange={(e) =>
+                  dispatch({
+                    type: "setProperty",
+                    config_key: property.config_key,
+                    config_value: e.target.value,
+                  })
+                }
+              />
+            </Field>
+          )
+        })}
       </FormContainer>
     </AdminContainer>
   );
