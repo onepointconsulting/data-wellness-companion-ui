@@ -26,9 +26,7 @@ function ConsultantCard({
     >
       <div className="w-full">
         <img
-          src={
-            `${reportUrl}/consultant/image/${rating.email}`
-          }
+          src={`${reportUrl}/consultant/image/${rating.email}`}
           className="w-full grayscale hover:grayscale-0 transition duration-300 ease-in-out"
         />
       </div>

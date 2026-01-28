@@ -3,8 +3,8 @@ const bodyElement = window?.document?.querySelector("body");
 export function logoAdapter() {
   const imageFolder = window.dataWellnessConfig?.imageFolder || "res-ai";
   return bodyElement?.classList.contains("dark")
-  ? `${imageFolder}/logo-light.png`
-  : `${imageFolder}/logo-dark.png`
+    ? `${imageFolder}/logo-light.png`
+    : `${imageFolder}/logo-dark.png`;
 }
 
 // Create a new MutationObserver instance

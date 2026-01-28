@@ -48,7 +48,7 @@ export default function MainPanel() {
     displayConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const [currentAnalyzingMessage, setCurrentAnalyzingMessage] = useState(
-    ANALYZING_MESSAGES[0]
+    ANALYZING_MESSAGES[0],
   );
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function MainPanel() {
     currentMessage,
     expectedNodes,
     generatingReport,
-    regenerating
+    regenerating,
   );
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
@@ -84,7 +84,7 @@ export default function MainPanel() {
 
   function getSpinnerMessage(
     displayReportGenerationMessage: boolean,
-    regenerating: boolean
+    regenerating: boolean,
   ) {
     return displayReportGenerationMessage
       ? t("Generating report. This might take 2 to 3 minutes...")

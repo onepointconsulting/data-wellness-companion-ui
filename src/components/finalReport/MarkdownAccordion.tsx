@@ -1,4 +1,3 @@
-
 import { AccordionText } from "../accordion/AccordionText.tsx";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";

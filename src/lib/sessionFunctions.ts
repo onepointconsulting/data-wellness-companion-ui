@@ -44,13 +44,16 @@ export function getSessionHistory(): Session[] {
     try {
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
-        return sessionHistoryObj.reverse().slice(0, 10).map((session: any) => ({
-          id: session.id,
-          timestamp: new Date(session.timestamp),
-          finished: session.finished,
-          language: session.language ?? "en",
-          topic: session.topic,
-        }));
+        return sessionHistoryObj
+          .reverse()
+          .slice(0, 10)
+          .map((session: any) => ({
+            id: session.id,
+            timestamp: new Date(session.timestamp),
+            finished: session.finished,
+            language: session.language ?? "en",
+            topic: session.topic,
+          }));
       }
     } catch (e) {
       console.error("Error getting session history from local storage", e);
@@ -78,7 +81,7 @@ export function appendToSessionHistory(
       const sessionHistoryObj = JSON.parse(sessionHistory);
       if (Array.isArray(sessionHistoryObj)) {
         const existingIndex = sessionHistoryObj.findIndex(
-          (session: any) => session.id === currentSession.id
+          (session: any) => session.id === currentSession.id,
         );
 
         if (existingIndex !== -1) {

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FileText, ChevronRight, ChevronDown } from "lucide-react";
 import { Message, RelevantDocument } from "../../model/message";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Divider from "./Divider";
+import ExpandCollapseButton from "./ExpandCollapseButton";
 
 function ExtractContent({ content }: { content: string }) {
-  const { t } = useTranslation();
 
   const tryParseJSON = (str: string) => {
     const cleaned = str.replace(/^---json\n?/, "").trim();
@@ -109,8 +110,6 @@ function DocumentCard({ doc }: { doc: RelevantDocument }) {
     return text.substring(0, length).trim() + "...";
   };
 
-  console.log("doc is ", doc);
-
   const visibleExtracts = showAll
     ? doc.document_extracts
     : doc.document_extracts.slice(0, 1);
@@ -122,7 +121,7 @@ function DocumentCard({ doc }: { doc: RelevantDocument }) {
           setIsOpen(!isOpen);
           if (isOpen) setShowAll(false);
         }}
-        className={`p-3 rounded-xl border border-border transition-all duration-300 cursor-pointer group flex items-center justify-between shadow-sm hover:shadow-md ${isOpen ? "bg-accent/5 ring-1 ring-primary/10" : "bg-card"}`}
+        className={`p-3 rounded-xl border border-border transition-all duration-300 cursor-pointer group flex items-center justify-between shadow-sm hover:shadow-md overflow-hidden ${isOpen ? "bg-accent/5 ring-1 ring-primary/10" : "bg-card"}`}
       >
         <div className="flex items-center gap-3">
           <div
@@ -138,7 +137,7 @@ function DocumentCard({ doc }: { doc: RelevantDocument }) {
             </div>
             {doc.count > 0 && (
               <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
-                {t("extracts-found", { count: doc.count })}
+                {t("extracts-found", { count: doc.document_extracts.length })}
               </div>
             )}
           </div>
@@ -151,39 +150,21 @@ function DocumentCard({ doc }: { doc: RelevantDocument }) {
       </div>
       {isOpen && doc.document_extracts && doc.document_extracts.length > 0 && (
         <div className="ml-5 mt-1 flex flex-col gap-4 p-4 border-l-2 border-primary/20 bg-transparent animate-fade-down animate-duration-300 overflow-hidden">
-          {visibleExtracts.map((extract, idx) => (
-            <div
-              key={idx}
-              className="text-sm text-foreground/90 leading-relaxed py-1 break-words w-full overflow-hidden"
-            >
-              <ExtractContent
-                content={showAll ? extract : truncate(extract, truncateLimit)}
-              />
-            </div>
-          ))}
           {(doc.document_extracts.length > 1 ||
             (doc.document_extracts[0] &&
               doc.document_extracts[0].length > truncateLimit)) && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowAll(!showAll);
-              }}
-              className="text-xs font-bold text-primary hover:text-primary/80 transition-colors self-start mt-2 px-3 py-1.5 rounded-full bg-primary/5 hover:bg-primary/10 flex items-center gap-1.5"
-            >
-              {showAll ? (
-                <>
-                  <ChevronDown className="w-3.5 h-3.5 rotate-180" />
-                  {t("show-less")}
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-3.5 h-3.5" />
-                  {t("view-all-extracts")}
-                </>
-              )}
-            </button>
+            <ExpandCollapseButton showAll={showAll} setShowAll={setShowAll} />
           )}
+          {visibleExtracts.map((extract, idx) => (
+            <Fragment key={idx}>
+              {visibleExtracts.length > 1 && <Divider idx={idx} total={doc.document_extracts.length} />}
+              <div className="text-sm text-foreground/90 leading-relaxed py-1 break-words w-full overflow-hidden">
+                <ExtractContent
+                  content={showAll ? extract : truncate(extract, truncateLimit)}
+                />
+              </div>
+            </Fragment>
+          ))}
         </div>
       )}
     </div>
@@ -207,7 +188,7 @@ export default function RelevantDocuments({ message }: { message: Message }) {
         {t("Relevant Documents")}
       </h2>
       <div className="flex flex-col gap-2">
-        {message.relevant_documents.documents.map((doc) => (
+        {message.relevant_documents.documents.slice(0, 3).map((doc) => (
           <DocumentCard key={doc.id} doc={doc} />
         ))}
       </div>

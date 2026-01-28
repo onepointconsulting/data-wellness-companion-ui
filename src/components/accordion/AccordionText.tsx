@@ -13,7 +13,6 @@ export function AccordionText({
   defaultOpen?: boolean;
   openOnHistoricalSession?: boolean;
 }) {
-  
   const { selectedHistoricalSession } = useContext(AppContext);
   const { t } = useTranslation();
   const [open, setOpen] = useState(defaultOpen);

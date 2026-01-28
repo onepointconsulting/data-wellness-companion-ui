@@ -23,7 +23,12 @@ function getAccessTokenHeader(): Record<string, string> {
   return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 }
 
-async function processPost(reportUrl: string, method: string, data: object, includeCredentials: boolean = false) {
+async function processPost(
+  reportUrl: string,
+  method: string,
+  data: object,
+  includeCredentials: boolean = false,
+) {
   return fetch(`${reportUrl}/${method}`, {
     method: "POST",
     headers: {
@@ -62,7 +67,7 @@ export async function generateReport(reportData: ReportData) {
 
 export async function globalProperties(baseUrl: string) {
   return fetch(`${baseUrl}/protected/global_configuration`, {
-    headers: getAccessTokenHeader()
+    headers: getAccessTokenHeader(),
   });
 }
 
@@ -80,12 +85,17 @@ export async function updateGlobalProperties(
 
 export async function getQuestions(baseUrl: string, language: string) {
   return fetch(`${baseUrl}/protected/questions/${language}`, {
-    headers: getAccessTokenHeader()
+    headers: getAccessTokenHeader(),
   });
 }
 
 export async function updateQuestion(baseUrl: string, questionUpdate: object) {
-  return processPost(baseUrl, "protected/questions/update", questionUpdate, true); // Include credentials for protected routes
+  return processPost(
+    baseUrl,
+    "protected/questions/update",
+    questionUpdate,
+    true,
+  ); // Include credentials for protected routes
 }
 
 export function handleJson(response: Response) {
@@ -105,26 +115,30 @@ export function handleError(error: Error, dispatch: (content: any) => void) {
 }
 
 export async function getPrompts(reportUrl: string, language: string = "en") {
-  const response = await fetch(`${reportUrl}/protected/prompts/${language}?add_ids=true`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...getAccessTokenHeader(),
+  const response = await fetch(
+    `${reportUrl}/protected/prompts/${language}?add_ids=true`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...getAccessTokenHeader(),
+      },
+      credentials: "include", // Include credentials for protected routes
     },
-    credentials: "include", // Include credentials for protected routes
-  });
+  );
   return handleJson(response);
 }
 
-export async function updatePrompt(id:number,
-  text:string,
-  reportUrl:string
-):Promise<boolean>{
-   const res=await fetch(`${reportUrl}/protected/prompts/update/${id}`,{
-     method:"PUT",
-     credentials: "include", // Include credentials for protected routes
-     body:text,
-     headers: getAccessTokenHeader(),
-   })
-   return res.ok;
+export async function updatePrompt(
+  id: number,
+  text: string,
+  reportUrl: string,
+): Promise<boolean> {
+  const res = await fetch(`${reportUrl}/protected/prompts/update/${id}`, {
+    method: "PUT",
+    credentials: "include", // Include credentials for protected routes
+    body: text,
+    headers: getAccessTokenHeader(),
+  });
+  return res.ok;
 }

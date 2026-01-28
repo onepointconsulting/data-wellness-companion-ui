@@ -18,7 +18,10 @@ import {
 import { readDisplayedConfidenceLevelProceedWarning } from "../lib/confidenceStateFunctions.ts";
 import { useAppStore } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
-import { DeepResearchOutput, DeepResearchStatus } from "../model/deep-research.ts";
+import {
+  DeepResearchOutput,
+  DeepResearchStatus,
+} from "../model/deep-research.ts";
 
 function adaptServerMessages(serverMessages: ServerMessage): Message[] {
   return serverMessages.server_messages.map((message: any) => {
@@ -36,7 +39,7 @@ function adaptServerMessages(serverMessages: ServerMessage): Message[] {
         title: suggestion.title,
         svg_image: suggestion.svg_image,
       })),
-      relevant_documents: message.relevant_documents ?? null
+      relevant_documents: message.relevant_documents ?? null,
     };
   });
 }
@@ -253,8 +256,14 @@ export function useWebsocket() {
       onAddMoreSuggestions,
     );
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
-    socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE, onDeepResearchUpdate)
-    socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE, onDeepResearchComplete)
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE,
+      onDeepResearchUpdate,
+    );
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE,
+      onDeepResearchComplete,
+    );
 
     return () => {
       socket.current?.off(
@@ -280,7 +289,10 @@ export function useWebsocket() {
         onAddMoreSuggestions,
       );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
-      socket.current?.off(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE, onDeepResearchUpdate)
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE,
+        onDeepResearchUpdate,
+      );
     };
   }, []);
 }

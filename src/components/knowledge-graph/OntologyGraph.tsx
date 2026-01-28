@@ -33,7 +33,7 @@ function softmax(arr: { [key: string]: number }): { [key: string]: number } {
 function extractNodes(
   ontology: Ontology,
   nodeSearch: string,
-  importanceLevel: number
+  importanceLevel: number,
 ): Node[] {
   const lowerCaseNodeSearch = nodeSearch.toLowerCase();
   const { relationships, betweenness_centrality } = ontology;
@@ -60,7 +60,7 @@ function extractNodes(
       relationships
         .filter(searchFilter)
         .filter(importanceFilter)
-        .flatMap((r) => [r["source"], r["target"]])
+        .flatMap((r) => [r["source"], r["target"]]),
     ),
   ].map((node: string, index: number) => {
     const centrality = betweenness_centrality[node];
@@ -118,7 +118,7 @@ export default function OntologyGraph() {
   const networkRef = useRef<HTMLDivElement>(null);
   const [nodeSearch, setNodeSearch] = useState<string>("");
   const [importanceLevel, setImportanceLevel] = useState<number>(
-    DEFAULT_IMPORTANCE_LEVEL
+    DEFAULT_IMPORTANCE_LEVEL,
   );
   const [maxNodes, setMaxNodes] = useState<number>(5);
 
@@ -168,7 +168,7 @@ export default function OntologyGraph() {
     });
 
     const maxNodes = Object.values(
-      ontology.connected_component_importance_dict
+      ontology.connected_component_importance_dict,
     ).reduce((a, e) => Math.max(a, e), 1);
     setMaxNodes(maxNodes);
 

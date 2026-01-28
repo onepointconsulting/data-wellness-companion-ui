@@ -6,7 +6,10 @@ import {
 } from "@react-oauth/google";
 import { createContext, useEffect, useState } from "react";
 import { Props } from "./commonModel.ts";
-import { removeAccessToken, setAccessToken } from "../lib/accessTokenPersistence.ts";
+import {
+  removeAccessToken,
+  setAccessToken,
+} from "../lib/accessTokenPersistence.ts";
 
 interface UserState {
   user?: TokenResponse;
@@ -19,10 +22,10 @@ interface UserState {
 
 export const AuthenticationContext = createContext<UserState>({
   profile: null,
-  setUser: (_) => { },
-  setProfile: (_) => { },
-  logout: () => { },
-  login: (_?: OverridableTokenClientConfig) => { },
+  setUser: (_) => {},
+  setProfile: (_) => {},
+  logout: () => {},
+  login: (_?: OverridableTokenClientConfig) => {},
 });
 
 async function handleUserLogin(
@@ -30,7 +33,6 @@ async function handleUserLogin(
   setProfile: (profile: object) => void,
 ): Promise<void> {
   try {
-
     // Call backend login endpoint
     const loginResponse = await fetch(
       `${window.dataWellnessConfig.reportUrl}/admin/login`,

@@ -16,35 +16,49 @@ export default function HistorySidebar() {
   const { socket, reportUrl } = useContext(ChatContext);
   const { selectedHistoricalSession, setSelectedHistoricalSession } =
     useContext(AppContext);
-  const { setOntologyOpen, historySidebarOpen, setHistorySidebarOpen, 
-    sessionsCompleted, setSessionsCompleted, loadingHistoricalSessions, setLoadingHistoricalSessions } =
-    useAppStore(
-      useShallow((state) => ({
-        setOntologyOpen: state.setOntologyOpen,
-        historySidebarOpen: state.historySidebarOpen,
-        setHistorySidebarOpen: state.setHistorySidebarOpen,
-        sessionsCompleted: state.sessionsCompleted,
-        setSessionsCompleted: state.setSessionsCompleted,
-        loadingHistoricalSessions: state.loadingHistoricalSessions,
-        setLoadingHistoricalSessions: state.setLoadingHistoricalSessions,
-      })),
-    );
+  const {
+    setOntologyOpen,
+    historySidebarOpen,
+    setHistorySidebarOpen,
+    sessionsCompleted,
+    setSessionsCompleted,
+    loadingHistoricalSessions,
+    setLoadingHistoricalSessions,
+  } = useAppStore(
+    useShallow((state) => ({
+      setOntologyOpen: state.setOntologyOpen,
+      historySidebarOpen: state.historySidebarOpen,
+      setHistorySidebarOpen: state.setHistorySidebarOpen,
+      sessionsCompleted: state.sessionsCompleted,
+      setSessionsCompleted: state.setSessionsCompleted,
+      loadingHistoricalSessions: state.loadingHistoricalSessions,
+      setLoadingHistoricalSessions: state.setLoadingHistoricalSessions,
+    })),
+  );
 
   useEffect(() => {
     if (historySidebarOpen) {
       setLoadingHistoricalSessions(true);
-      fetchSessionsCompleted(getSessionHistory().map((session) => session.id), reportUrl)
-      .then((sessionsCompleted) => {
-        setSessionsCompleted(sessionsCompleted);
-      })
-      .catch((error) => {
-        console.error("Error fetching sessions completed: ", error);
-      })
-      .finally(() => {
-        setLoadingHistoricalSessions(false);
-      });
+      fetchSessionsCompleted(
+        getSessionHistory().map((session) => session.id),
+        reportUrl,
+      )
+        .then((sessionsCompleted) => {
+          setSessionsCompleted(sessionsCompleted);
+        })
+        .catch((error) => {
+          console.error("Error fetching sessions completed: ", error);
+        })
+        .finally(() => {
+          setLoadingHistoricalSessions(false);
+        });
     }
-  }, [historySidebarOpen, reportUrl, setSessionsCompleted, setLoadingHistoricalSessions]);
+  }, [
+    historySidebarOpen,
+    reportUrl,
+    setSessionsCompleted,
+    setLoadingHistoricalSessions,
+  ]);
 
   const handleSessionClick = (sessionId: string) => {
     if (getSessionId() !== sessionId) {
@@ -92,13 +106,15 @@ export default function HistorySidebar() {
 
           {/* List */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
-            {sessionsCompleted.sessions.length === 0 || loadingHistoricalSessions ? (
+            {sessionsCompleted.sessions.length === 0 ||
+            loadingHistoricalSessions ? (
               <p className="text-gray-500 text-center mt-10">
                 {t("No history available")}
               </p>
             ) : (
               sessionsCompleted.sessions.map((session) => {
-                const isSelected = selectedHistoricalSession === session.session_id;
+                const isSelected =
+                  selectedHistoricalSession === session.session_id;
                 return (
                   <HistoryEntry
                     key={session.session_id}

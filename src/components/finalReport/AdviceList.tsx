@@ -102,7 +102,7 @@ export function AdviceList({
               (a: DeepResearchOutputMap, e: DeepResearchOutput) => (
                 (a[e.advice] = e), a
               ),
-              {}
+              {},
             );
           setDeepResearchOutputMap(deepResearchOutputMap);
         })
@@ -111,9 +111,13 @@ export function AdviceList({
         });
     }
   }, [sessionId, completedDeepResearchOutput, deepResearchStarted]);
-  
+
   return (
-    <AccordionText title={title} defaultOpen={defaultOpen} openOnHistoricalSession={true}>
+    <AccordionText
+      title={title}
+      defaultOpen={defaultOpen}
+      openOnHistoricalSession={true}
+    >
       {items.map((item, index) => {
         const isCurrentItem = deepResearchStatus.advice === item;
         return (
@@ -176,7 +180,7 @@ export function AdviceList({
                   message={t("Generating deep research...", {
                     lastUpdated: deepResearchStatus.timestamp
                       ? new Date(
-                          deepResearchStatus.timestamp
+                          deepResearchStatus.timestamp,
                         ).toLocaleTimeString("en-GB")
                       : new Date().toLocaleTimeString("en-GB"),
                   })}

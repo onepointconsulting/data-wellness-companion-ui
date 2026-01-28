@@ -47,7 +47,7 @@ export default function PromptTextArea({
       } catch (error) {
         setStatus(MessageType.FAILURE);
         setErrorMessage(
-          error instanceof Error ? error.message : t("Failed to update prompt")
+          error instanceof Error ? error.message : t("Failed to update prompt"),
         );
       }
     }
