@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Divider from "./Divider";
 import ExpandCollapseButton from "./ExpandCollapseButton";
 import ExtractContent from "./ExtractContent";
+import ClipboardWithIcon from "./ClipboardWithIcon";
 import { RelevantDocument } from "../../model/message";
 
 export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
@@ -66,10 +67,17 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
               {visibleExtracts.length > 1 && (
                 <Divider idx={idx} total={doc.document_extracts.length} />
               )}
-              <div className="text-sm text-foreground/90 leading-relaxed py-1 break-words w-full overflow-hidden">
-                <ExtractContent
-                  content={showAll ? extract : truncate(extract, truncateLimit)}
-                />
+              <div className="relative group/extract flex items-start gap-4">
+                <div className="flex-1 text-sm text-foreground/90 leading-relaxed py-1 break-words overflow-hidden">
+                  <ExtractContent
+                    content={
+                      showAll ? extract : truncate(extract, truncateLimit)
+                    }
+                  />
+                </div>
+                <div className="shrink-0 mt-1">
+                  <ClipboardWithIcon valueToCopy={extract} />
+                </div>
               </div>
             </Fragment>
           ))}
