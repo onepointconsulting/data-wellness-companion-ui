@@ -104,7 +104,6 @@ export default function Suggestions({ message }: { message: Message }) {
     isSuggestionDeactivated,
     isLast,
     setRegenerating,
-    messages,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
 

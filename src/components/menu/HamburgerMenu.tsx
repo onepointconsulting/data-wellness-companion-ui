@@ -6,6 +6,7 @@ import TermsButton from "./TermsButton.tsx";
 import HamburgerWrapper from "./HamburgerWrapper.tsx";
 import InfoButton from "./InfoButton.tsx";
 import ChatModeButton from "./ChatModeButton.tsx";
+import MenuSeparator from "./MenuSeparator.tsx";
 /**
  * The Hamburger menu component.
  * @constructor
@@ -14,18 +15,18 @@ export default function HamburgerMenu() {
   return (
     <HamburgerWrapper>
       <StartButton />
-      <hr className="my-4 md:my-2 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+      <MenuSeparator />
       <InfoButton />
-      <hr className="my-4 md:my-2 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+      <MenuSeparator />
 
       <ContactUsButton />
-      <hr className="my-4 md:my-2 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+      <MenuSeparator />
 
       {window.dataWellnessConfig.termsLink && <TermsButton />}
 
       <SessionSwitch />
       <DarkModeButton />
-      <hr className="my-4 md:my-2 h-px w-full border-0 bg-gray-300 dark:bg-gray-100" />
+      <MenuSeparator />
 
       <ChatModeButton />
     </HamburgerWrapper>
