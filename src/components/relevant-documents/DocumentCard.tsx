@@ -75,7 +75,7 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
                     }
                   />
                 </div>
-                <div className="shrink-0 mt-1 absolute top-0 right-0">
+                <div className="shrink-0 mt-1 absolute top-0 right-3">
                   <ClipboardWithIcon valueToCopy={extract} />
                 </div>
               </div>
