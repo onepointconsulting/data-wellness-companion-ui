@@ -15,8 +15,8 @@ export default function RelevantDocuments({ message }: { message: Message }) {
     return null;
 
   return (
-    <div className="mt-10 mb-4 animate-fade-down animate-duration-500 font-['Manrope']">
-      <h2 className="text-lg font-bold !ml-0 mb-3 text-primary dark:text-white flex items-center gap-2 pl-5">
+    <div className="mt-6 md:mt-10 mb-4 md:mx-0 animate-fade-down animate-duration-500 font-['Manrope']">
+      <h2 className="text-lg font-bold !ml-0 mb-3 text-primary dark:text-white flex items-center gap-2 px-1 md:px-0">
         <FileText className="w-5 h-5" />
         {t("Relevant Documents")}
       </h2>

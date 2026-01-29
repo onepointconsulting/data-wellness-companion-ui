@@ -31,7 +31,7 @@ export default function ReportForm() {
     generateReport(reportData)
       .then((response: Response) => handleJson(response))
       .then((data) => {
-        console.log("Success:", data); // Handle the response data
+        // console.log("Success:", data); // Handle the response data
         dispatch({ type: "sent" });
         dispatch({
           type: "setMessage",

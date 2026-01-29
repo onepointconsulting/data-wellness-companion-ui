@@ -23,40 +23,40 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
     : doc.document_extracts.slice(0, 1);
 
   return (
-    <div className="flex flex-col gap-1 mb-2 font-['Manrope']">
+    <div className="flex flex-col gap-1 mb-2  font-['Manrope']">
       <div
         onClick={() => {
           setIsOpen(!isOpen);
           if (isOpen) setShowAll(false);
         }}
-        className={`p-3 rounded-xl border border-border transition-all duration-300 cursor-pointer group flex items-center justify-between shadow-sm hover:shadow-md overflow-hidden ${isOpen ? "bg-accent/5 ring-1 ring-primary/10" : "bg-card"}`}
+        className={`p-3 rounded-xl border border-border transition-all duration-300 cursor-pointer group flex items-center justify-between shadow-sm hover:shadow-md ${isOpen ? "bg-accent/5 ring-1 ring-primary/10" : "bg-card"}`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <div
-            className={`p-2 rounded-lg transition-colors ${isOpen ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}
+            className={`p-2 rounded-lg shrink-0 transition-colors ${isOpen ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}
           >
             <FileText className="w-4 h-4" />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0 flex-1">
             <div
-              className={`font-bold text-sm transition-colors ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}
+              className={`font-bold text-sm transition-colors truncate ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}
             >
               {doc.document_name}
             </div>
-            <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+            <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider truncate">
               {doc.document_extracts.length > 0 &&
                 t("extracts-found", { count: doc.document_extracts.length })}
             </div>
           </div>
         </div>
         {isOpen ? (
-          <ChevronDown className="w-4 h-4 text-primary" />
+          <ChevronDown className="w-4 h-4 text-primary shrink-0" />
         ) : (
-          <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-200" />
+          <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-200 shrink-0" />
         )}
       </div>
       {isOpen && doc.document_extracts && doc.document_extracts.length > 0 && (
-        <div className="ml-5 mt-1 flex flex-col gap-4 p-4 border-l-2 border-primary/20 bg-transparent animate-fade-down animate-duration-300 overflow-hidden">
+        <div className="ml-1 sm:ml-5 mt-1 flex flex-col gap-4 pl-3 pr-0 py-2 border-l-2 border-primary/20 bg-transparent animate-fade-down animate-duration-300 overflow-hidden">
           {(doc.document_extracts.length > 1 ||
             (doc.document_extracts[0] &&
               doc.document_extracts[0].length > truncateLimit)) && (
@@ -67,15 +67,15 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
               {visibleExtracts.length > 1 && (
                 <Divider idx={idx} total={doc.document_extracts.length} />
               )}
-              <div className="relative group/extract flex items-start gap-4">
-                <div className="flex-1 text-sm text-foreground/90 leading-relaxed py-1 break-words overflow-hidden">
+              <div className="relative group/extract">
+                <div className="flex-1 text-sm text-foreground/90 leading-relaxed py-1 break-words pr-10">
                   <ExtractContent
                     content={
                       showAll ? extract : truncate(extract, truncateLimit)
                     }
                   />
                 </div>
-                <div className="shrink-0 mt-1">
+                <div className="shrink-0 mt-1 absolute top-0 right-3">
                   <ClipboardWithIcon valueToCopy={extract} />
                 </div>
               </div>
