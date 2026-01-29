@@ -149,15 +149,6 @@ export default function Suggestions({ message }: { message: Message }) {
 
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
-  console.log(
-    "currentMessage > 0 && isLast && !sending messages.length currentMessage",
-    currentMessage > 0,
-    isLast,
-    !sending,
-    messages.length,
-    currentMessage,
-  );
-
   return (
     <>
       {isSuggestionDeactivated && !sending && (
