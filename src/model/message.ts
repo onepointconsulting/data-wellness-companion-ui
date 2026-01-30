@@ -29,6 +29,7 @@ export type RelevantDocument = {
   id: number;
   document_path: string;
   document_name: string;
+  download_url: string;
   count: number;
   document_extracts: string[];
 };

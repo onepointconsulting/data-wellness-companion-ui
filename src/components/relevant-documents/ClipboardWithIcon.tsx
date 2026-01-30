@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
+import RelevantButton from "./RelevantButton";
 
-interface ClipboardWithIconProps {
-  valueToCopy: string;
-}
 
 export default function ClipboardWithIcon({
   valueToCopy,
-}: ClipboardWithIconProps) {
+}: {
+  valueToCopy: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e: React.MouseEvent) => {
@@ -19,16 +19,13 @@ export default function ClipboardWithIcon({
 
   return (
     <div className="relative inline-block group/clipboard">
-      <button
-        onClick={handleCopy}
-        className="flex items-center justify-center w-8 h-8 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-[#8F00FF] dark:bg-gray-800 dark:text-[#fafffe] dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 focus:outline-none transition-all duration-200"
-      >
+      <RelevantButton onClick={handleCopy}>
         {copied ? (
           <Check className="w-4 h-4 text-[#8F00FF] dark:text-[#fafffe]" />
         ) : (
           <Copy className="w-4 h-4" />
         )}
-      </button>
+      </RelevantButton>
 
       {/* Tooltip */}
       <div
