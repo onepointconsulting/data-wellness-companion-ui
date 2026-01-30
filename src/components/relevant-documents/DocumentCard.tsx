@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, FileText } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Divider from "./Divider";
@@ -6,6 +6,11 @@ import ExpandCollapseButton from "./ExpandCollapseButton";
 import ExtractContent from "./ExtractContent";
 import ClipboardWithIcon from "./ClipboardWithIcon";
 import { RelevantDocument } from "../../model/message";
+import DownloadIcon from "./DownloadIcon";
+
+function removeExtension(filename: string) {
+  return filename.replace(/\.[^.]+$/, "");
+}
 
 export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,15 +38,15 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
       >
         <div className="flex items-center gap-3 min-w-0 flex-1">
           <div
-            className={`p-2 rounded-lg shrink-0 transition-colors ${isOpen ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}
+            className={`p-0 bg-transparent shrink-0 transition-colors ${isOpen ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}
           >
-            <FileText className="w-4 h-4" />
+            <DownloadIcon onClick={(e) => {e.stopPropagation(); window.open(doc.download_url, "_blank")}} />
           </div>
           <div className="flex flex-col min-w-0 flex-1">
             <div
               className={`font-bold text-sm transition-colors truncate ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}
             >
-              {doc.document_name}
+              {removeExtension(doc.document_name)}
             </div>
             <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider truncate">
               {doc.document_extracts.length > 0 &&
@@ -76,7 +81,9 @@ export default function DocumentCard({ doc }: { doc: RelevantDocument }) {
                   />
                 </div>
                 <div className="shrink-0 mt-1 absolute top-0 right-3">
-                  <ClipboardWithIcon valueToCopy={extract} />
+                  <div className="flex items-center gap-2">
+                    <ClipboardWithIcon valueToCopy={extract} />
+                  </div>
                 </div>
               </div>
             </Fragment>
