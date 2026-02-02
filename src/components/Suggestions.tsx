@@ -76,7 +76,7 @@ export function SuggestionTemplate({
           )}
           {hasTitle && (
             <div className="suggestion-title">
-              <b>{suggestion.title}</b>{" "}
+              <p>{suggestion.title}</p>
             </div>
           )}
         </div>

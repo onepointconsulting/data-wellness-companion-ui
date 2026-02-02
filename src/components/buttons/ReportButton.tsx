@@ -7,7 +7,7 @@ export function ReportButton({
 }) {
   return (
     <button
-      className="inline-flex items-center justify-center p-0 m-0 hover:opacity-80 transition-opacity"
+      className="inline-flex items-center justify-center p-0 m-0 hover:scale-105"
       onClick={click}
     >
       {children}

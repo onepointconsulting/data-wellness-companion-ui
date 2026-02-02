@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
-import ConfidenceHint from "./buttons/ConfidenceHint.tsx";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.ts";
 import {
@@ -10,6 +9,9 @@ import {
 } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
+import { FaHourglassHalf } from "react-icons/fa";
+import { ConfidenceImage } from "./buttons/ConfidenceHint.tsx";
+import { showConfidenceDialogue } from "./dialogue/ConfidenceDialogue.tsx";
 
 function selectLastNodeCss(
   covered: boolean,
@@ -40,8 +42,13 @@ function selectLastNodeCss(
  * @constructor
  */
 function SingleNode({ i }: { i: number }) {
-  const { messages, currentMessage, setCurrentMessageHistory } =
-    useContext(AppContext);
+  const {
+    messages,
+    currentMessage,
+    setCurrentMessageHistory,
+    confidence,
+    updatingConfidence,
+  } = useContext(AppContext);
   const { expectedNodes, messageLowerLimit } = useAppStore(
     useShallow((state) => ({ ...state })),
   );
@@ -66,10 +73,13 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            <img
-              src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/favicon.png`}
-              alt={t("navigation icon")}
-            />
+            {updatingConfidence ? (
+              <FaHourglassHalf className="!w-6 !h-6 fill-gray-400" />
+            ) : (
+              <a href="#" onClick={showConfidenceDialogue}>
+                <ConfidenceImage rating={confidence?.rating ?? "medium"} />
+              </a>
+            )}
           </div>
         )}
       </div>
@@ -119,8 +129,8 @@ export default function NodeNavigation() {
   }
 
   return (
-    <div className="min-w-12" ref={navbarRef}>
-      <ConfidenceHint />
+    <div className="min-w-12 ml-2 md:ml-8" ref={navbarRef}>
+      {/* <ConfidenceHint /> */}
       <div className="node-container my-2">
         {!!expectedNodes &&
           expectedNodes > 0 &&

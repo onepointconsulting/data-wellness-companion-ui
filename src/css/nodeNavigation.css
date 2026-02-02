@@ -3,7 +3,7 @@
 }
 
 .node {
-  @apply relative bg-[#E6E5E6] w-[16px] mb-[3px];
+  @apply relative bg-[#E6E5E6] w-[8px] mb-[3px];
 }
 
 .node.active {
@@ -31,11 +31,11 @@
 }
 
 .navigation-icon {
-  @apply absolute top-[-22px] left-[-12px];
+  @apply absolute top-[-15px] left-[-20px] w-12 flex justify-center items-center;
 }
 
-.navigation-icon > img {
-  @apply w-10 h-10 max-w-none;
+.navigation-icon img {
+  @apply w-8 h-8 max-w-none;
 }
 
 .node-extra-icon-container {

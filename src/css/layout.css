@@ -46,7 +46,7 @@
 }
 
 #root .suggestion {
-  @apply flex flex-col items-start justify-between p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
+  @apply flex flex-col items-start justify-start  p-4 text-lg md:text-xl cursor-pointer text-[#07000d] dark:text-[#fafffe] 
     border border-[#636565] rounded-sm dark:hover:border-[#fafffe] hover:scale-105 transition duration-300 ease-in-out
     min-w-0 w-full overflow-hidden whitespace-normal;
 }
@@ -99,11 +99,11 @@
 } */
 
 #root .suggestion .suggestion-title {
-  @apply w-full pb-2 pl-2 dark:text-gray-100;
+  @apply w-full pb-2 pl-2 text-[#1C0032] dark:text-[#fafffe] font-normal;
 }
 
 #root .suggestion .suggestion-text {
-  @apply flex items-start justify-between w-full px-2 text-base no-underline md:text-lg dark:text-gray-100;
+  @apply flex items-start justify-between w-full px-2 text-base leading-6 no-underline dark:text-gray-100 font-normal;
 }
 
 #root .chat-container {

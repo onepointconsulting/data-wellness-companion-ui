@@ -23,19 +23,12 @@ function chooseImage(rating: string) {
   return IMAGE_MAP.get(rating) ?? "sad.svg";
 }
 
-export function ConfidenceImage({
-  rating,
-  className,
-}: {
-  rating: string;
-  className?: string;
-}) {
+export function ConfidenceImage({ rating }: { rating: string }) {
   const [t] = useTranslation();
   return (
     <img
       src={`confidence-img/${chooseImage(rating)}`}
       alt={t("recommendations-confidence-degree")}
-      className={`w-12 h-12 ${className ?? ""}`}
     />
   );
 }
