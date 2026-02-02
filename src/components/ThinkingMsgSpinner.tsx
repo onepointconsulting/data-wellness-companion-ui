@@ -7,11 +7,11 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
   const messages = [
     "Please wait",
     "Connecting to Responsible AI Engine",
-    "Analyzing your responses",
+    "Analysing your responses",
     "Consulting Knowledge Graph",
     "Identifying key topics",
     "Formulating recommendations",
-    "Generating your personalized report",
+    "Generating your personalised report",
     "Almost ready",
   ];
 
@@ -55,7 +55,7 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
       <div className="relative flex items-center justify-center">
         {/* <div className="absolute h-20 w-20 rounded-full border-4 border-gray-300 border-t-[#9A19FF] animate-spin" /> */}
         <img
-          src="/D-Well_Icons_one_frame.gif"
+          src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/loader.gif`}
           alt={t("Please wait")}
           className={`${className} relative z-10`}
         />
