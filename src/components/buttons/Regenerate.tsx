@@ -37,17 +37,17 @@ export default function Regenerate() {
   }
 
   return (
-    <div className="flex items-start justify-start my-4">
+    <span className="ml-1 inline-block align-middle">
       {sending && false && (
-        <div className="question-mark-icon">
+        <span className="question-mark-icon">
           <FaHourglassHalf className="hour-glass" />
-        </div>
+        </span>
       )}
       {!sending && (
-        <ReportButton click={onRegenerate} title={t("Regenerate")}>
-          <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100" />
+        <ReportButton click={onRegenerate}>
+          <MdRestartAlt className="w-6 h-6 !fill-[#4a4a4a] dark:!fill-gray-100 align-middle" />
         </ReportButton>
       )}
-    </div>
+    </span>
   );
 }

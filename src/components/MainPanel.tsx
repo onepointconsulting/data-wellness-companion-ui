@@ -7,7 +7,6 @@ import ChatInput from "./ChatInput.tsx";
 import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./finalReport/FinalReport.tsx";
-import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
@@ -117,7 +116,6 @@ export default function MainPanel() {
           )}
           {displayChatRelatedElements && (
             <>
-              <ClarificationArea />
               {isLast && <ChatInput />}
               <GiveMeReport />
               <Suggestions message={message} />

@@ -174,7 +174,7 @@ export default function Suggestions({ message }: { message: Message }) {
         <div className="flex flex-row justify-start -mt-3 mb-2">
           <ReportButton
             click={handleGenerateMoreAnswers}
-            title={t("Generate more answers")}
+            // title={t("Generate more answers")}
           >
             <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8" />
           </ReportButton>

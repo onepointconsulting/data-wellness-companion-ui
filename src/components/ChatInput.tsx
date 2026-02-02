@@ -128,7 +128,7 @@ export default function ChatInput() {
         )}
         {currentMessage > 0 && !sending && (
           <div
-            className="w-full my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3"
+            className="w-full my-4 text-[#4d4d4d] dark:text-gray-100 gap-4 p-3"
             dangerouslySetInnerHTML={{ __html: t("placeholder-normal") }}
           />
         )}

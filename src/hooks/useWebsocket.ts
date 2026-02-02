@@ -87,11 +87,18 @@ export function useWebsocket() {
     setCompletedDeepResearchOutput,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
-  const { setConnected, setMessages, setCurrentMessageHistory, setSending } =
-    useContext(AppContext);
+  const {
+    setConnected,
+    setMessages,
+    setCurrentMessageHistory,
+    setSending,
+    currentMessage,
+  } = useContext(AppContext);
 
   useEffect(() => {
-    socket.current = io(websocketUrl);
+    socket.current = io(websocketUrl, {
+      transports: ["websocket"],
+    });
 
     const onConnect = () => {
       setConnected(true);
@@ -106,7 +113,6 @@ export function useWebsocket() {
     };
 
     const onDisconnect = () => {
-      console.info("disconnected");
       setConnected(false);
     };
 
@@ -159,7 +165,6 @@ export function useWebsocket() {
     ) {
       const serverMessages = JSON.parse(value);
       if (serverMessages["error"]) {
-        console.error("Failed to regenerate.");
         const errorMessage = serverMessages["error"];
         toast({
           title: t("Error"),
@@ -183,7 +188,6 @@ export function useWebsocket() {
 
     function onAddMoreSuggestions(value: string) {
       baseRegenerateMessage(value, (serverMessages: any) => {
-        console.log("onAddMoreSuggestions", serverMessages);
         setMessages((previousMessages) => {
           const newMessages = [...previousMessages];
           const lastMessage = newMessages.slice(-1)[0];
@@ -231,15 +235,27 @@ export function useWebsocket() {
     }
 
     function onDeepResearchUpdate(value: string) {
-      console.log("onDeepResearchUpdate", value);
       const deepResearchStatus: DeepResearchStatus = JSON.parse(value);
       setDeepResearchStatus(deepResearchStatus);
     }
 
     function onDeepResearchComplete(value: string) {
-      console.log("onDeepResearchComplete", value);
       const deepResearchOutput: DeepResearchOutput = JSON.parse(value);
       setCompletedDeepResearchOutput(deepResearchOutput);
+    }
+
+    function onClarificationToken(token: string) {
+      setMessages((prevMessages) => {
+        if (prevMessages.length === 0) return prevMessages;
+        const newMessages = [...prevMessages];
+        const activeMessage = newMessages[currentMessage];
+        if (activeMessage.clarification === undefined) {
+          activeMessage.clarification = token ?? "";
+        } else {
+          activeMessage.clarification += token;
+        }
+        return newMessages;
+      });
     }
 
     socket.current.on(WEBSOCKET_SERVER_COMMAND.START_SESSION, onStartSession);
@@ -263,6 +279,10 @@ export function useWebsocket() {
     socket.current.on(
       WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE,
       onDeepResearchComplete,
+    );
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
+      onClarificationToken,
     );
 
     return () => {
@@ -293,6 +313,10 @@ export function useWebsocket() {
         WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE,
         onDeepResearchUpdate,
       );
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
+        onClarificationToken,
+      );
     };
-  }, []);
+  }, [currentMessage]);
 }
