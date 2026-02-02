@@ -42,7 +42,6 @@ export default function SessionSwitch() {
           <GoHistory className="w-full h-full text-[#4A4A4A] dark:text-gray-200" />
         </div>
       </MenuItemTemplate>
-      <MenuSeparator />
     </>
   );
 }
