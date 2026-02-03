@@ -5,7 +5,7 @@ export function ReportButton({
   children,
 }: {
   click: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  title: string;
+  title?: string;
   marginTop?: number;
   children: React.ReactNode;
 }) {

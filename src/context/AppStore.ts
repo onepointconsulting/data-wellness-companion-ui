@@ -68,6 +68,8 @@ interface AppStoreState {
   setLoadingHistoricalSessions: (loadingHistoricalSessions: boolean) => void;
   sessionsCompleted: SessionCompletedDataList;
   setSessionsCompleted: (sessionsCompleted: SessionCompletedDataList) => void;
+  deepResearchActive: boolean;
+  setDeepResearchActive: (deepResearchActive: boolean) => void;
 }
 
 export const useAppStore = create<AppStoreState>((set) => ({
@@ -181,6 +183,9 @@ export const useAppStore = create<AppStoreState>((set) => ({
   sessionsCompleted: { sessions: [] },
   setSessionsCompleted: (sessionsCompleted: SessionCompletedDataList) =>
     set((state) => ({ ...state, sessionsCompleted })),
+  deepResearchActive: false,
+  setDeepResearchActive: (deepResearchActive: boolean) =>
+    set((state) => ({ ...state, deepResearchActive })),
 }));
 
 export function isDisplayReportGenerationMessage(

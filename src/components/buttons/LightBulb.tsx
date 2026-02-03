@@ -14,6 +14,8 @@ import { useAppStore } from "../../context/AppStore.ts";
  */
 export default function LightBulb() {
   const {
+    showClarification,
+    setShowClarification,
     isLast,
     currentMessage,
     messages,
@@ -26,38 +28,43 @@ export default function LightBulb() {
     useShallow((state) => ({ expectedNodes: state.expectedNodes })),
   );
   const message: Message = messages[currentMessage];
-  const missesClarification = !message?.clarification;
 
   useEffect(() => {
     setClarificationClicked(false);
   }, [currentMessage, messages]);
 
   function onClarify() {
-    const question = message.question;
-    setClarificationClicked(true);
-    sendClarifyQuestion(socket.current, question);
+    if (!message?.clarification) {
+      setClarificationClicked(true);
+      setShowClarification(true);
+      sendClarifyQuestion(socket.current, message.question);
+    } else {
+      setShowClarification(!showClarification);
+    }
   }
 
   const isRecommendation = expectedNodes === currentMessage + 1;
+  const isLoading = clarificationClicked && !message?.clarification;
 
   return (
     <>
-      {missesClarification &&
-        isLast &&
-        currentMessage > 0 &&
-        !sending &&
-        !clarificationClicked &&
-        !isRecommendation && (
-          <div className="question-mark-icon relative top-0.5">
-            <button onClick={onClarify}>
-              <IoIosInformationCircleOutline className="question-mark-icon-svg" />
+      {isLast && currentMessage > 0 && !sending && !isRecommendation && (
+        <span className="question-mark-icon ml-1">
+          {isLoading ? (
+            <span className="question-mark-icon">
+              <FaHourglassHalf className="hour-glass align-middle" />
+            </span>
+          ) : (
+            <button
+              className="p-0 m-0 border-none bg-transparent cursor-pointer align-middle"
+              onClick={onClarify}
+            >
+              <IoIosInformationCircleOutline
+                className={`question-mark-icon-svg ${showClarification && message?.clarification ? "!fill-[#4a4a4a]" : ""}`}
+              />
             </button>
-          </div>
-        )}
-      {missesClarification && clarificationClicked && isLast && (
-        <div className="question-mark-icon">
-          <FaHourglassHalf className="hour-glass" />
-        </div>
+          )}
+        </span>
       )}
     </>
   );

@@ -21,7 +21,7 @@ export default function MainApp() {
   const imageNodeFunc = () => {
     return (
       <img
-        className="w-40 lg:w-60 md:w-52"
+        className="w-32 lg:w-44"
         id="logoImage"
         src={logoAdapter()}
         alt={imageAlt}

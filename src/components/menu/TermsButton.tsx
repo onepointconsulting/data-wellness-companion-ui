@@ -1,6 +1,5 @@
 import MenuItemTemplate from "./MenuItemTemplate.tsx";
 import InfoImage from "./InfoImage.tsx";
-import MenuSeparator from "./MenuSeparator.tsx";
 
 /**
  * Simple contact us button used to open a contact us form.
@@ -15,7 +14,6 @@ export default function TermsButton() {
       >
         <InfoImage />
       </MenuItemTemplate>
-      <MenuSeparator />
     </>
   );
 }

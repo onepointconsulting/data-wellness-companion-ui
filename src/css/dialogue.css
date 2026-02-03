@@ -21,8 +21,8 @@ dialog::backdrop {
 
 .companion-dialogue-content p,
 .email-dialogue-content p {
-  @apply text-xl dark:text-white;
-  color: #4a4a4a;
+  @apply dark:text-white;
+  color: #000000;
 }
 
 .deep-research-dialogue-content p {

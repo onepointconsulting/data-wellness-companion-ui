@@ -7,6 +7,17 @@ export function logoAdapter() {
     : `${imageFolder}/logo-dark.png`;
 }
 
+export function updateFavicon() {
+  const imageFolder = window.dataWellnessConfig?.imageFolder || "res-ai";
+  const favicon = document.getElementById("favicon") as HTMLLinkElement;
+  if (favicon) {
+    favicon.href = `/${imageFolder}/favicon.png`;
+  }
+}
+
+// Initialize branding
+updateFavicon();
+
 // Create a new MutationObserver instance
 const observer = new MutationObserver((mutationsList) => {
   for (const mutation of mutationsList) {
