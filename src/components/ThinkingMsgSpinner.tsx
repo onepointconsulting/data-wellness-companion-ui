@@ -79,19 +79,6 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
           <span className="text-base  font-medium text-gray-800 dark:text-gray-100">
             {t(messages[index])}
           </span>
-
-          {/* Dots */}
-          <span className="inline-flex items-center justify-center gap-1 mt-1 ">
-            <span className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce" />
-            <span
-              className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce"
-              style={{ animationDelay: "150ms" }}
-            />
-            <span
-              className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce"
-              style={{ animationDelay: "300ms" }}
-            />
-          </span>
         </div>
       </div>
 
