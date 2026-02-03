@@ -55,4 +55,16 @@ async function fetchSessionsCompleted(
   return await res.json();
 }
 
-export { fetchDeepResearch, fetchOntology, fetchSessionsCompleted };
+async function fetchDeepResearchActive(
+  reportUrl: string,
+): Promise<boolean> {
+  const res = await fetch(`${reportUrl}/deep_research/active`);
+  if (!res.ok) {
+    console.error("Network response was not ok " + res.statusText);
+    return false;
+  }
+  const data = await res.json() as { active: boolean };
+  return data.active;
+}
+
+export { fetchDeepResearch, fetchOntology, fetchSessionsCompleted, fetchDeepResearchActive };

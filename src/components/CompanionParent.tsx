@@ -15,6 +15,7 @@ import { useShallow } from "zustand/react/shallow";
 import useSeenIntro from "../hooks/useSeenIntro.ts";
 import useShowCompletionDialogue from "../hooks/useShowCompletionDialogue.ts";
 import useGiveMeReportNow from "../hooks/useGiveMeReportNow.ts";
+import useDeepResearchActive from "../hooks/useDeepResearchActive.ts";
 import { logoAdapter } from "../lib/logoAdapter.ts";
 import DeepResearchDialogue from "./dialogue/DeepResearchDialogue.tsx";
 
@@ -46,6 +47,8 @@ export default function CompanionParent() {
   useConfidence();
 
   useShowCompletionDialogue();
+
+  useDeepResearchActive();
 
   const { giveMeReportNow } = useGiveMeReportNow();
 

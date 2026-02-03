@@ -51,31 +51,27 @@ function StatusUpdateMessage({
     </div>
   );
 }
-export function AdviceList({
-  title,
-  items,
-  defaultOpen = false,
-  handleDeepResearch = true,
-  socket,
+
+function DeepResearchWidgets({
+  handleDeepResearch = true, socket, item, isCurrentItem
 }: {
-  title: string;
-  items: string[];
-  defaultOpen?: boolean;
   handleDeepResearch?: boolean;
   socket?: Socket<any, any> | null;
+  item: string;
+  isCurrentItem: boolean;
 }) {
+
   const { t } = useTranslation();
-  const sessionId = getSession()?.id;
-  const { reportUrl } = useContext(ChatContext);
+
   const {
     deepResearchStatus,
     deepResearchOutputMap,
     deepResearchStarted,
-    completedDeepResearchOutput,
     setDeepResearchStarted,
     setSelectedDeepResearchOutput,
-    setDeepResearchOutputMap,
+    deepResearchActive,
   } = useAppStore(useShallow((state) => ({ ...state })));
+
   const [statusUpdateKey, setStatusUpdateKey] = useState(0);
   const previousStatusStringRef = useRef<string>("");
 
@@ -92,6 +88,83 @@ export function AdviceList({
     deepResearchStatus.advice,
     deepResearchStatus.timestamp,
   ]);
+
+  if (!deepResearchActive) {
+    return null;
+  }
+
+  return (
+    <>
+      {handleDeepResearch &&
+        socket &&
+        !deepResearchStarted &&
+        !isCurrentItem &&
+        !deepResearchOutputMap[item] && (
+          <AdviceButton
+            onClick={() => {
+              generateDeepResearch(socket, item);
+              setDeepResearchStarted(true);
+            }}
+            label="Run Deep Research"
+          />
+        )}
+      {deepResearchOutputMap[item] && (
+        <AdviceButton
+          onClick={() => {
+            setSelectedDeepResearchOutput(deepResearchOutputMap[item]);
+          }}
+          label="View Deep Research"
+        />
+      )}
+      {!isCurrentItem &&
+        deepResearchStarted &&
+        !deepResearchOutputMap[item] && (
+          <div className="flex flex-row justify-end mt-0">
+            <span className="text-sm text-gray-500">
+              {t("Please wait...")}
+            </span>
+          </div>
+        )}
+      {isCurrentItem &&
+        ["queued", "in_progress"].includes(deepResearchStatus.status) && (
+          <StatusUpdateMessage
+            statusKey={`status-${statusUpdateKey}`}
+            message={t("Generating deep research...", {
+              lastUpdated: deepResearchStatus.timestamp
+                ? new Date(
+                  deepResearchStatus.timestamp,
+                ).toLocaleTimeString("en-GB")
+                : new Date().toLocaleTimeString("en-GB"),
+            })}
+          />
+        )}
+    </>
+  )
+}
+
+
+export function AdviceList({
+  title,
+  items,
+  defaultOpen = false,
+  handleDeepResearch = true,
+  socket,
+}: {
+  title: string;
+  items: string[];
+  defaultOpen?: boolean;
+  handleDeepResearch?: boolean;
+  socket?: Socket<any, any> | null;
+}) {
+
+  const sessionId = getSession()?.id;
+  const { reportUrl } = useContext(ChatContext);
+  const {
+    deepResearchStatus,
+    deepResearchStarted,
+    completedDeepResearchOutput,
+    setDeepResearchOutputMap,
+  } = useAppStore(useShallow((state) => ({ ...state })));
 
   useEffect(() => {
     if (sessionId) {
@@ -143,49 +216,12 @@ export function AdviceList({
             >
               {`- ${item}`}
             </Markdown>
-            {handleDeepResearch &&
-              socket &&
-              !deepResearchStarted &&
-              !isCurrentItem &&
-              !deepResearchOutputMap[item] && (
-                <AdviceButton
-                  onClick={() => {
-                    generateDeepResearch(socket, item);
-                    setDeepResearchStarted(true);
-                  }}
-                  label="Run Deep Research"
-                />
-              )}
-            {deepResearchOutputMap[item] && (
-              <AdviceButton
-                onClick={() => {
-                  setSelectedDeepResearchOutput(deepResearchOutputMap[item]);
-                }}
-                label="View Deep Research"
-              />
-            )}
-            {!isCurrentItem &&
-              deepResearchStarted &&
-              !deepResearchOutputMap[item] && (
-                <div className="flex flex-row justify-end mt-0">
-                  <span className="text-sm text-gray-500">
-                    {t("Please wait...")}
-                  </span>
-                </div>
-              )}
-            {isCurrentItem &&
-              ["queued", "in_progress"].includes(deepResearchStatus.status) && (
-                <StatusUpdateMessage
-                  statusKey={`status-${statusUpdateKey}`}
-                  message={t("Generating deep research...", {
-                    lastUpdated: deepResearchStatus.timestamp
-                      ? new Date(
-                          deepResearchStatus.timestamp,
-                        ).toLocaleTimeString("en-GB")
-                      : new Date().toLocaleTimeString("en-GB"),
-                  })}
-                />
-              )}
+            <DeepResearchWidgets
+              handleDeepResearch={handleDeepResearch}
+              socket={socket}
+              item={item}
+              isCurrentItem={isCurrentItem}
+            />
           </Fragment>
         );
       })}
