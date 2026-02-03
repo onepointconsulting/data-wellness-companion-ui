@@ -172,12 +172,12 @@ export default function Suggestions({ message }: { message: Message }) {
       </div>
       {currentMessage > 0 && isLast && !sending && (
         <div className="flex flex-row justify-start -mt-3 mb-2">
-          <ReportButton
-            click={handleGenerateMoreAnswers}
-            // title={t("Generate more answers")}
+          <button
+            onClick={handleGenerateMoreAnswers}
+            className="text-base flex flex-row items-center justify-center rounded-md transition-all duration-300 ease-in-out hover:scale-110 group"
           >
-            <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8" />
-          </ReportButton>
+            <MdRestartAlt className="fill-[#8F00FF] dark:fill-gray-100 h-8 w-8 transition-colors duration-300 group-hover:fill-[#8F00FF]" />
+          </button>
         </div>
       )}
     </>

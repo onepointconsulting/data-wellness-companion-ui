@@ -43,12 +43,12 @@ export default function RestartDialogue() {
     <dialog
       data-model={true}
       id={RESTART_DIALOGUE_ID}
-      className="companion-dialogue w-11/12 md:w-1/2 bg-[#fafffe] shadow-lg max-w-3xl outline-0 rounded-lg dark:bg-[#1F1925] dark:text-[#fafffe]"
+      className="companion-dialogue w-11/12 md:w-1/2 bg-[#fafffe] shadow-lg max-w-xl outline-0 rounded-lg dark:bg-[#1F1925] dark:text-[#fafffe]"
     >
       <DialogueHeader onClose={onClose}>
         <svg
-          width="54"
-          height="54"
+          width="50"
+          height="50"
           viewBox="0 0 54 54"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +63,11 @@ export default function RestartDialogue() {
           />
         </svg>
       </DialogueHeader>
-      <div className="companion-dialogue-content px-8 pt-4 pb-6">
+      <div className="companion-dialogue-content px-8 pt-3 pb-6">
         <section className="mt-4">
-          <p>{t("Would you like to restart the companion?")}</p>
+          <p className="text-lg md:text-xl dark:text-[#fafffe]">
+            {t("Would you like to restart the companion?")}
+          </p>
         </section>
       </div>
 
