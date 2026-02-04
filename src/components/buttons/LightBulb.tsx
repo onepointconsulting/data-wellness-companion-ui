@@ -7,6 +7,7 @@ import { FaHourglassHalf } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { useShallow } from "zustand/react/shallow";
 import { useAppStore } from "../../context/AppStore.ts";
+import { useTranslation } from "react-i18next";
 
 /**
  * The light bulb icon that can be used to get a clarification.
@@ -28,6 +29,7 @@ export default function LightBulb() {
     useShallow((state) => ({ expectedNodes: state.expectedNodes })),
   );
   const message: Message = messages[currentMessage];
+  const { t } = useTranslation();
 
   useEffect(() => {
     setClarificationClicked(false);
@@ -56,8 +58,9 @@ export default function LightBulb() {
             </span>
           ) : (
             <button
-              className="p-0 m-0 border-none bg-transparent cursor-pointer align-middle"
+              className="p-0 ml-2 border-none bg-transparent cursor-pointer align-middle"
               onClick={onClarify}
+              title={t("Rationale")}
             >
               <IoIosInformationCircleOutline
                 className={`question-mark-icon-svg ${showClarification && message?.clarification ? "!fill-[#4a4a4a]" : ""}`}

@@ -4,6 +4,7 @@ import { ChatContext } from "../../context/ChatContext.tsx";
 import { FaHourglassHalf } from "react-icons/fa";
 import { sendRegenerateMessage } from "../../lib/websocketFunctions.ts";
 import { MdRestartAlt } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 export default function Regenerate() {
   const {
@@ -15,6 +16,7 @@ export default function Regenerate() {
     setRegenerating,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
+  const { t } = useTranslation();
 
   function onRegenerate() {
     setSending((_) => {
@@ -42,9 +44,10 @@ export default function Regenerate() {
       {!sending && (
         <button
           onClick={onRegenerate}
-          className="text-base flex flex-row items-center justify-center rounded-md transition-all duration-300 ease-in-out hover:scale-110 group"
+          className="text-base flex flex-row items-center justify-center rounded-md transition-all duration-300 ease-in-out hover:scale-110"
+          title={t("Regenerate question")}
         >
-          <MdRestartAlt className="w-6 h-6 fill-[#4a4a4a] dark:fill-gray-100 align-middle transition-colors duration-300 group-hover:fill-[#8F00FF]" />
+          <MdRestartAlt className="w-6 h-6 !fill-[#8F00FF] dark:!fill-[#fafffe] align-middle" />
         </button>
       )}
     </span>
