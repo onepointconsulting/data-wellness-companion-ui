@@ -6,6 +6,8 @@ import { useJoyrideStore } from "../context/JoyrideStore.ts";
 import Regenerate from "./buttons/Regenerate.tsx";
 import { AppContext } from "../context/AppContext.tsx";
 import MarkdownComponent from "./Markdown.tsx";
+import { ChatContext } from "../context/ChatContext.tsx";
+import { WEBSOCKET_SERVER_COMMAND } from "../model/websocketCommands.ts";
 
 const STEP_MILLI_SECONDS = 25;
 
@@ -30,7 +32,8 @@ export default function Question({
   messagesLength: number;
 }) {
   const { questionRef } = useContext(JoyrideContext);
-  const { showClarification } = useContext(AppContext);
+  const { showClarification, messages, setMessages } = useContext(AppContext);
+  const { socket } = useContext(ChatContext);
   const setInitQuestionRef = useJoyrideStore(
     (state) => state.setInitQuestionRef,
   );
@@ -47,6 +50,32 @@ export default function Question({
       setMessageText(message.question);
     }
   }, [message, currentMessage]);
+
+  function onClarificationToken(token: string) {
+    if (messages.length > 0) {
+      const activeMessage = messages[currentMessage];
+      if (activeMessage.clarification === undefined) {
+        activeMessage.clarification = token ?? "";
+      } else {
+        activeMessage.clarification += token;
+      }
+      setMessages([...messages]);
+    }
+  }
+
+  useEffect(() => {
+    if (socket.current === null) return;
+    socket.current.on(
+      WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
+      onClarificationToken,
+    );
+    return () => {
+      socket.current?.off(
+        WEBSOCKET_SERVER_COMMAND.CLARIFICATION_TOKEN,
+        onClarificationToken,
+      );
+    };
+  }, [currentMessage]);
 
   return (
     <>
