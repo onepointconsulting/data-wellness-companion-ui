@@ -6,7 +6,7 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
 
   const messages = [
     "Please wait",
-    "Connecting to Responsible AI Engine",
+    "Connecting to Onepoint AI Engine",
     "Analysing your responses",
     "Consulting Knowledge Graph",
     "Identifying key topics",

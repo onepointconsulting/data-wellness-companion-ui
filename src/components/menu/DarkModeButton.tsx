@@ -28,7 +28,7 @@ export default function DarkModeButton() {
       </div>
 
       <div className="pl-2 text-left flex-grow">
-        <div className="font-medium">
+        <div className="font-normal">
           {dark ? t("Dark mode") : t("Light mode")}
         </div>
       </div>

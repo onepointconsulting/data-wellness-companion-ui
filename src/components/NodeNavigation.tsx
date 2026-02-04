@@ -129,7 +129,7 @@ export default function NodeNavigation() {
   }
 
   return (
-    <div className="min-w-12 ml-2 md:ml-8" ref={navbarRef}>
+    <div className="min-w-6 ml-2 md:ml-8" ref={navbarRef}>
       {/* <ConfidenceHint /> */}
       <div className="node-container my-2">
         {!!expectedNodes &&
