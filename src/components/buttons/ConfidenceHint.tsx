@@ -29,7 +29,6 @@ export function ConfidenceImage({ rating }: { rating: string }) {
     <img
       src={`confidence-img/${chooseImage(rating)}`}
       alt={t("recommendations-confidence-degree")}
-      className="w-24 h-24"
     />
   );
 }

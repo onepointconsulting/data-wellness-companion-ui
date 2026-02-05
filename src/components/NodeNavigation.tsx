@@ -52,7 +52,6 @@ function SingleNode({ i }: { i: number }) {
     useShallow((state) => ({ ...state })),
   );
   const isFinalMessage = currentMessage === expectedNodes - 1;
-
   const length = messages.length;
   const covered = length > i;
 

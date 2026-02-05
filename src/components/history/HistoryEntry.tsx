@@ -34,7 +34,7 @@ function HistoryEntry({
       className={`p-3 rounded-lg cursor-pointer border transition-all duration-200 
             ${
               isSelected
-                ? "bg-blue-50 border-blue-200 dark:bg-blue-900/30 dark:border-blue-800 shadow-sm ring-1 ring-blue-300"
+                ? "bg-[#F3E5FF] border-[#8F00FF] dark:bg-[#8F00FF]/10 dark:border-[#8F00FF] shadow-sm ring-1 ring-[#8F00FF]/20"
                 : "bg-gray-50 border-gray-100 hover:border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:border-gray-600 hover:shadow-sm"
             }
           `}
@@ -43,7 +43,7 @@ function HistoryEntry({
         {session.created_at && timestampAdapter(new Date(session.created_at))}
       </div>
       <div
-        className={`text-sm font-medium ${isSelected ? "text-blue-700 dark:text-blue-300" : "text-gray-700 dark:text-gray-200"}`}
+        className={`text-sm font-medium ${isSelected ? "text-[#8F00FF] dark:text-[#8F00FF]" : "text-gray-700 dark:text-gray-200"}`}
         title={session.end_advice || ""}
       >
         {session.start_answer || t("New Session")}
