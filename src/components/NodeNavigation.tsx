@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
-import { useTranslation } from "react-i18next";
 import { JoyrideContext } from "../context/JoyrideContext.tsx";
 import { useJoyrideStore } from "../context/JoyrideStore.ts";
 import {
@@ -53,8 +52,6 @@ function SingleNode({ i }: { i: number }) {
     useShallow((state) => ({ ...state })),
   );
   const isFinalMessage = currentMessage === expectedNodes - 1;
-  const [t] = useTranslation();
-
   const length = messages.length;
   const covered = length > i;
 
