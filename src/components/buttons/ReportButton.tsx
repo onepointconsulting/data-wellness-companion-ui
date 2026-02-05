@@ -11,7 +11,7 @@ export function ReportButton({
 }) {
   return (
     <button
-      className={`pt-${marginTop} btn text-[#07000d] dark:text-[#fafffe] group`}
+      className={`mt-${marginTop} btn text-[#07000d] dark:text-[#fafffe] group`}
       onClick={click}
     >
       <span title={title}>{children}</span>
