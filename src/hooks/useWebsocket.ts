@@ -87,8 +87,12 @@ export function useWebsocket() {
     setCompletedDeepResearchOutput,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const { socket, websocketUrl, reportUrl } = useContext(ChatContext);
-  const { setConnected, setMessages, setCurrentMessageHistory, setSending } =
-    useContext(AppContext);
+  const {
+    setConnected,
+    setMessages,
+    setCurrentMessageHistory,
+    setSending,
+  } = useContext(AppContext);
 
   useEffect(() => {
     socket.current = io(websocketUrl);
@@ -256,14 +260,8 @@ export function useWebsocket() {
       onAddMoreSuggestions,
     );
     socket.current.on(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
-    socket.current.on(
-      WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE,
-      onDeepResearchUpdate,
-    );
-    socket.current.on(
-      WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE,
-      onDeepResearchComplete,
-    );
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE, onDeepResearchUpdate)
+    socket.current.on(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_COMPLETE, onDeepResearchComplete)
 
     return () => {
       socket.current?.off(
@@ -289,10 +287,7 @@ export function useWebsocket() {
         onAddMoreSuggestions,
       );
       socket.current?.off(WEBSOCKET_SERVER_COMMAND.ERROR, onErrorMessage);
-      socket.current?.off(
-        WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE,
-        onDeepResearchUpdate,
-      );
+      socket.current?.off(WEBSOCKET_SERVER_COMMAND.DEEP_RESEARCH_UPDATE, onDeepResearchUpdate)
     };
-  }, []);
+  }, [])
 }

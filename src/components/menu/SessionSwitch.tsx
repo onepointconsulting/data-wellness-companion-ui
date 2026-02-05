@@ -7,6 +7,7 @@ import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { HamburgerMenuContext } from "../../context/HamburgerMenuContext.tsx";
 import { useContext } from "react";
+
 const finishedFilter = (session: Session) => session.finished;
 
 /**
