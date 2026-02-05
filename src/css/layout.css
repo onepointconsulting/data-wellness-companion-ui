@@ -29,7 +29,10 @@
 }
 
 #root .chat-input {
-  @apply max-w-[1280px] mx-auto;
+  @apply max-w-[1280px] mx-auto  border-[#E8CCFF] shadow-[1px_1px_9px_#E8CCFF45];
+}
+#root .chat-input button{
+  @apply items-center
 }
 
 #root .question {

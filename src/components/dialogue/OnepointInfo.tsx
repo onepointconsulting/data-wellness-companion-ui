@@ -13,9 +13,11 @@ export default function OnepointInfo() {
       </a>{" "}
       {t("assistant-explanation")}
       <br />
-      {t(
-        "It will go through a series of questions and then will provide you with a report with recommendations at the end.",
-      )}
+      <p className="pt-2">
+        {t(
+          "It will go through a series of questions and then will provide you with a report with recommendations at the end.",
+        )}
+      </p>
     </p>
   );
 }

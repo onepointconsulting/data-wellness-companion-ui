@@ -10,7 +10,10 @@ export function ReportButton({
   children: React.ReactNode;
 }) {
   return (
-    <button className={`pt-${marginTop} btn `} onClick={click}>
+    <button
+      className={`pt-${marginTop} btn text-[#07000d] dark:text-[#fafffe] group`}
+      onClick={click}
+    >
       <span title={title}>{children}</span>
       <span className="hidden md:block">{title}</span>
     </button>
