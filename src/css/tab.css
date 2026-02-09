@@ -1,5 +1,5 @@
 .tab-main {
-  @apply flex flex-col md:flex-wrap md:flex-row w-full justify-start items-center pt-10  text-lg;
+  @apply flex flex-row md:flex-wrap md:flex-row w-full justify-start items-center pt-10 text-lg;
 }
 
 .tab-item-active {

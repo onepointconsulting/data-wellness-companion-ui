@@ -83,7 +83,7 @@ export default function HistorySidebar() {
 
       {/* Sidebar Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-[#1f1925] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
           historySidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
