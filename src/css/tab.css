@@ -1,11 +1,11 @@
 .tab-main {
-  @apply flex flex-wrap justify-start pt-10 text-lg;
+  @apply flex flex-row md:flex-wrap md:flex-row w-full justify-start items-center pt-10 text-lg;
 }
 
 .tab-item-active {
-  @apply border-b-[3px] border-[#8F00FF] text-[#8F00FF] dark:border-[#efefef] bg-white dark:bg-slate-700 dark:text-[white] px-7 py-5;
+  @apply border-b-[3px] border-[#8F00FF] text-[#8F00FF] dark:border-[#efefef] bg-background dark:bg-background dark:text-[white] px-7 py-5;
 }
 
 .tab-item-inactive {
-  @apply bg-white border-b-[3px] border-[#b9b9b9] dark:bg-slate-700 px-7 py-5 cursor-pointer text-[#7d7d7d] dark:text-gray-200;
+  @apply bg-background border-b-[3px] border-[#b9b9b9] dark:bg-background px-7 py-5 cursor-pointer text-[#7d7d7d] dark:text-gray-200;
 }

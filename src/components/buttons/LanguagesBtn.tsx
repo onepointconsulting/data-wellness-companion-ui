@@ -20,7 +20,7 @@ function LanguageDropDown({
   const { socket, reportUrl } = useContext(ChatContext);
   const { setDisplayRegistrationMessage } = useContext(AppContext);
   const { setDisplayConfidenceLevelProceedWarning } = useAppStore(
-    useShallow((state) => ({ ...state }))
+    useShallow((state) => ({ ...state })),
   );
 
   const onClickLanguageChange = (e: any) => {
@@ -28,7 +28,7 @@ function LanguageDropDown({
       toast({
         title: t("You are disconnected."),
         description: t(
-          "The Data Wellness Companion needs to be connected to change the language."
+          "The Data Wellness Companion needs to be connected to change the language.",
         ),
       });
     } else {
@@ -41,7 +41,7 @@ function LanguageDropDown({
         setDisplayRegistrationMessage,
         setChatText,
         reportUrl,
-        setDisplayConfidenceLevelProceedWarning
+        setDisplayConfidenceLevelProceedWarning,
       );
     }
   };

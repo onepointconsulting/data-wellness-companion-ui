@@ -22,11 +22,6 @@ export default function GiveMeReport() {
 
   const { handleGiveMeReportNow } = useGenerationReportNow();
 
-  console.info(
-    "displayedConfidenceLevelProceedWarning",
-    displayedConfidenceLevelProceedWarning,
-  );
-
   if (!messages) {
     return null;
   }
@@ -38,8 +33,6 @@ export default function GiveMeReport() {
   }
 
   const overLimit = messagesOverLowerLimit(messages, messageLowerLimit - 2);
-
-  console.info("overLimit", overLimit);
 
   if (!overLimit) {
     return null;

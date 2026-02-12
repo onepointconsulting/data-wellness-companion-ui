@@ -7,7 +7,6 @@ import ChatInput from "./ChatInput.tsx";
 import QuestionAnswer from "./QuestionAnswer.tsx";
 import Spinner from "./Spinner.tsx";
 import FinalReport from "./finalReport/FinalReport.tsx";
-import ClarificationArea from "./ClarificationArea.tsx";
 import SpinnerArea from "./SpinnerArea.tsx";
 import Disclaimer from "./Disclaimer.tsx";
 import ConfidenceLevelWarning from "./ConfidenceLevelWarning.tsx";
@@ -19,6 +18,7 @@ import {
 import { useShallow } from "zustand/react/shallow";
 import GiveMeReport from "./buttons/GiveMeReport.tsx";
 import { FADE_IN_TIME } from "../lib/animConstants.ts";
+import RelevantDocuments from "./relevant-documents/RelevantDocuments.tsx";
 
 const ANALYZING_MESSAGES = [
   "analyzing-1",
@@ -47,7 +47,7 @@ export default function MainPanel() {
     displayConfidenceLevelProceedWarning,
   } = useAppStore(useShallow((state) => ({ ...state })));
   const [currentAnalyzingMessage, setCurrentAnalyzingMessage] = useState(
-    ANALYZING_MESSAGES[0]
+    ANALYZING_MESSAGES[0],
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function MainPanel() {
     currentMessage,
     expectedNodes,
     generatingReport,
-    regenerating
+    regenerating,
   );
   const displayChatAreaElements = !sending || !displayReportGenerationMessage;
   const displayConfidenceLevelWarning =
@@ -83,7 +83,7 @@ export default function MainPanel() {
 
   function getSpinnerMessage(
     displayReportGenerationMessage: boolean,
-    regenerating: boolean
+    regenerating: boolean,
   ) {
     return displayReportGenerationMessage
       ? t("Generating report. This might take 2 to 3 minutes...")
@@ -116,7 +116,6 @@ export default function MainPanel() {
           )}
           {displayChatRelatedElements && (
             <>
-              <ClarificationArea />
               {isLast && <ChatInput />}
               <GiveMeReport />
               <Suggestions message={message} />
@@ -124,6 +123,7 @@ export default function MainPanel() {
           )}
           {displayConfidenceLevelWarning && <ConfidenceLevelWarning />}
         </div>
+        {displayChatRelatedElements && <RelevantDocuments message={message} />}
         {displayChatRelatedElements && <Disclaimer />}
       </>
     );

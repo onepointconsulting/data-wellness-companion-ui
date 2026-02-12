@@ -77,7 +77,7 @@ export default function IntroDialogue() {
                 suggestions: [],
                 clarification: "",
                 question_id: undefined,
-                documents: [],
+                relevant_documents: null,
               }}
               handleSuggestion={() => {}}
             />

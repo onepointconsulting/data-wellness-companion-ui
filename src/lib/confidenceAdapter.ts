@@ -13,10 +13,5 @@ export function messagesOverLowerLimit(
   messages: Message[],
   messageLowerLimit: number,
 ) {
-  console.info(
-    "messages.length, messageLowerLimit",
-    messages.length,
-    messageLowerLimit,
-  );
   return messages.length >= messageLowerLimit - 1;
 }

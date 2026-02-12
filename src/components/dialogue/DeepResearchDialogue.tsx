@@ -12,7 +12,7 @@ import DeepResearchCitations from "../finalReport/DeepResearchCitations";
 export const DEEP_RESEARCH_DIALOGUE_ID = "deep-research-dialogue";
 
 export function showDeepResearchDialogue(
-  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
 ) {
   event.preventDefault();
   onCloseDialogue(DEEP_RESEARCH_DIALOGUE_ID);

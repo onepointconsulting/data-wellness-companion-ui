@@ -1,10 +1,6 @@
 import { Message } from "../../model/message.ts";
 import { BsFileEarmarkPdf } from "react-icons/bs";
-import {
-  MdOutlineAlternateEmail,
-  MdOutlineReplay,
-  MdOutlinePersonSearch,
-} from "react-icons/md";
+import { MdOutlineAlternateEmail, MdOutlinePersonSearch } from "react-icons/md";
 import { PiGraphLight } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "../../context/ChatContext.tsx";
@@ -22,7 +18,6 @@ import ReportConfidenceLevel from "./ReportConfidenceLevel.tsx";
 import MarkdownAccordion from "./MarkdownAccordion.tsx";
 import { useAppStore } from "../../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
-import useShowStartDialogue from "../../hooks/useShowStartdialogue.ts";
 import { ReportButton } from "../buttons/ReportButton.tsx";
 import { useSuggestConsultant } from "../../hooks/useSuggestConsultant.ts";
 import SuggestedConsultants from "../consultants/SuggestedConsultants.tsx";
@@ -54,7 +49,6 @@ export default function FinalReport({ message }: { message: Message }) {
   const { onOntologyOpenClick } = useOntology();
   const { ontologyOpen } = useAppStore(useShallow((state) => ({ ...state })));
   const { reportUrl, socket } = useContext(ChatContext);
-  const { processPopup } = useShowStartDialogue();
   const { fetchSuggestedConsultants } = useSuggestConsultant();
 
   const sessionId = getSession()?.id;
@@ -103,7 +97,7 @@ export default function FinalReport({ message }: { message: Message }) {
       <Transcript />
       {sessionId && (
         <div className="final-report-download">
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center tab-main items-center w-full">
             <ReportButton
               click={onOntologyOpenClick}
               title={t("Knowledge graph")}
@@ -130,12 +124,12 @@ export default function FinalReport({ message }: { message: Message }) {
                 <MdOutlinePersonSearch />
               </ReportButton>
             )}
-            <ReportButton
+            {/* <ReportButton
               click={processPopup()}
               title={t("Explore another area of interest")}
             >
               <MdOutlineReplay />
-            </ReportButton>
+            </ReportButton> */}
           </div>
         </div>
       )}

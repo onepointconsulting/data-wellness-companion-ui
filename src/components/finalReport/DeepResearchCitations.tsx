@@ -23,8 +23,8 @@ export default function DeepResearchCitations({ citations }: Props) {
         }
         return acc;
       },
-      {} as Record<string, Map<string, string>>
-    )
+      {} as Record<string, Map<string, string>>,
+    ),
   );
 
   return (
@@ -44,7 +44,9 @@ export default function DeepResearchCitations({ citations }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 underline hover:text-blue-700 italic"
-                  >"{text}…"</a>
+                  >
+                    "{text}…"
+                  </a>
                 </li>
               ))}
             </ul>

@@ -1,72 +1,64 @@
 import FormProperties from "../model/formProperties.ts";
 import { MessageType } from "../model.ts";
 
+
+export interface GlobalConfigurationProperty {
+  config_key: string;
+  config_value: string;
+}
+
 export interface GlobalConfigState extends FormProperties {
-  messageLowerLimit: number;
-  messageLowerLimitValid: boolean;
-  messageUpperLimit: number;
-  messageUpperLimitValid: boolean;
-  processing: boolean;
+  properties: GlobalConfigurationProperty[];
 }
 
 export const initialGlobalConfigState: GlobalConfigState = {
-  messageLowerLimit: 8,
-  messageLowerLimitValid: true,
-  messageUpperLimit: 14,
-  messageUpperLimitValid: true,
+  properties: [],
   processing: false,
   message: "",
   messageType: undefined,
 };
 
-function isNumber(value: string) {
-  return !isNaN(Number(value));
-}
-
 export type GlobalConfigAction =
   | { type: "processing" }
-  | { type: "setMessageLowerLimit"; messageLowerLimit: string }
-  | { type: "setMessageUpperLimit"; messageUpperLimit: string }
+  | { type: "setProperty"; config_key: string; config_value: string }
+  | { type: "setProperties"; properties: GlobalConfigurationProperty[] }
   | { type: "setMessage"; message: string; messageType: MessageType };
-
-const MINIMUM_STEPS = 4;
 
 export function globalConfigurationReducer(
   state: GlobalConfigState,
   action: GlobalConfigAction,
-) {
-  const { type } = action;
-  switch (type) {
+): GlobalConfigState {
+  switch (action.type) {
     case "processing":
       return { ...state, processing: true };
-    case "setMessageLowerLimit": {
-      const lowerLimit = action.messageLowerLimit;
-      const lowerLimitNumber = parseInt(lowerLimit);
+    case "setProperties": {
+      const { properties } = action;
+      return { ...state, properties };
+    }
+    case "setProperty": {
+      const { config_key, config_value } = action;
+      // update the property in the state
+      const newProperties = state.properties.map((property) => {
+        if (property.config_key === config_key) {
+          return { ...property, config_value };
+        }
+        return property;
+      });
       return {
         ...state,
-        messageLowerLimit: lowerLimitNumber,
-        messageLowerLimitValid:
-          isNumber(action.messageLowerLimit) &&
-          lowerLimitNumber > MINIMUM_STEPS &&
-          lowerLimitNumber < state.messageUpperLimit,
+        properties: newProperties,
       };
     }
-    case "setMessageUpperLimit": {
-      const upperLimit = action.messageUpperLimit;
+    case "setMessage": {
+      const { message, messageType } = action;
       return {
         ...state,
-        messageUpperLimit: parseInt(upperLimit),
-        messageUpperLimitValid:
-          isNumber(action.messageUpperLimit) &&
-          parseInt(upperLimit) > state.messageLowerLimit,
-      };
-    }
-    case "setMessage":
-      return {
-        ...state,
-        message: action.message,
-        messageType: action.messageType,
         processing: false,
+        message,
+        messageType,
       };
+    }
+    default:
+      return state;
   }
 }

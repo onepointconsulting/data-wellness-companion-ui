@@ -65,8 +65,6 @@ export default function PromptsForm() {
       });
   }, [reportUrl]);
 
-  console.log(prompts);
-
   return (
     <AdminContainer
       title="Prompts"

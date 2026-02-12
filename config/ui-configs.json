@@ -1,0 +1,44 @@
+{
+    "d-well": {
+        "title": "Data Wellness Companion™",
+        "description": "Data Wellness Companion™, guides you through questions that help you gain deeper insights into your data. It is powered by Generative AI and the Onepoint Data & Analytics Body of Knowledge™",
+        "imageFolder": "d-well",
+        "favicon": "/d-well/favicon.png",
+        "logo": "https://d-well.onepointltd.ai/d-well/logo.svg",
+        "url": "https://d-well.onepointltd.ai/",
+        "termsLink": "https://www.onepointltd.com/wp-content/uploads/2025/01/Terms-of-Use-for-Onepoint-D-Well-v2.0.pdf",
+        "production": {
+            "server": "d-well.onepointltd.ai",
+            "port": 443,
+            "httpProtocol": "https",
+            "websocketProtocol": "wss"
+        },
+        "development": {
+            "server": "127.0.0.1",
+            "port": 8085,
+            "httpProtocol": "http",
+            "websocketProtocol": "ws"
+        }
+    },
+    "res-ai": {
+        "title": "Responsible AI Companion™",
+        "description": "Responsible AI Companion™, guides you through questions that help you gain deeper insights into your data. It is powered by Generative AI and the Onepoint Data & Analytics Body of Knowledge™",
+        "imageFolder": "res-ai",
+        "favicon": "/res-ai/favicon.png",
+        "logo": "https://res-ai.onepointltd.ai/res-ai/logo.svg",
+        "url": "https://res-ai.onepointltd.ai/",
+        "termsLink": "https://www.onepointltd.com/wp-content/uploads/2025/01/Terms-of-Use-for-Onepoint-Responsible-AI-v2.0.pdf",
+        "production": {
+            "server": "responsible-ai.onepointltd.ai",
+            "port": 443,
+            "httpProtocol": "https",
+            "websocketProtocol": "wss"
+        },
+        "development": {
+            "server": "127.0.0.1",
+            "port": 8085,
+            "httpProtocol": "http",
+            "websocketProtocol": "ws"
+        }
+    }
+}

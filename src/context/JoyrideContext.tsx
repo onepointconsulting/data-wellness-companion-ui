@@ -2,9 +2,9 @@ import { createContext, RefObject, useRef } from "react";
 import { Props } from "./commonModel.ts";
 
 export type JoyrideState = {
-  questionRef: RefObject<HTMLDivElement> | null;
-  hamburgerMenu: RefObject<HTMLDivElement> | null;
-  navbarRef: RefObject<HTMLDivElement> | null;
+  questionRef: RefObject<HTMLDivElement | null> | null;
+  hamburgerMenu: RefObject<HTMLDivElement | null> | null;
+  navbarRef: RefObject<HTMLDivElement | null> | null;
 };
 
 export const JoyrideContext = createContext<JoyrideState>({
@@ -14,9 +14,9 @@ export const JoyrideContext = createContext<JoyrideState>({
 });
 
 export default function JoyrideContextProvider({ children }: Props) {
-  const hamburgerMenu: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const questionRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const navbarRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const hamburgerMenu = useRef<HTMLDivElement>(null);
+  const questionRef = useRef<HTMLDivElement>(null);
+  const navbarRef = useRef<HTMLDivElement>(null);
 
   return (
     <JoyrideContext.Provider

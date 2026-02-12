@@ -21,12 +21,12 @@ function VoiceButton() {
   const { onToggleVoice, voiceOn, voiceListening } = useSpeechRecognition();
   return (
     <button
-      className={`voice-button disabled:opacity-10 mr-2 ${voiceListening ? "animate-pulse" : ""}`}
+      className={`voice-button disabled:opacity-10 mr-4 ${voiceListening ? "animate-pulse" : ""}`}
       onClick={onToggleVoice}
       disabled={sending || !connected}
     >
       <MdMicNone
-        className={`h-10 w-10 fill-[#4a4a4a] ${voiceOn ? "fill-green-700" : ""}`}
+        className={`h-10 w-10 fill-[#B04CFF] ${voiceOn ? "fill-[#8f00ff]" : ""}`}
       />
     </button>
   );
@@ -112,7 +112,7 @@ export default function ChatInput() {
     <>
       <div className="chat-container">
         {currentMessage === 0 && !sending && (
-          <div className="flex flex-row flex-wrap my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3 chat-description">
+          <div className="flex flex-row flex-wrap mb-12 text-[#4d4d4d] dark:text-gray-100 gap-4 chat-description">
             {Array.from({ length: 3 }, (_, i) => i).map((i) => {
               return (
                 <div
@@ -128,7 +128,7 @@ export default function ChatInput() {
         )}
         {currentMessage > 0 && !sending && (
           <div
-            className="w-full my-4 border border-solid border-[#dbdbdb] text-[#4d4d4d] dark:text-gray-100 gap-4 p-3"
+            className="w-full mb-12 text-[#4d4d4d] dark:text-gray-100 gap-4"
             dangerouslySetInnerHTML={{ __html: t("placeholder-normal") }}
           />
         )}

@@ -31,6 +31,7 @@
   "disclaimer": "KI-generierte Inhalte können unvollständig oder irreführend sein. Führen Sie die Validierung bei Ihrem(n) Domain-Spezialist(en) durch oder vereinbaren Sie <anchor id='free-consultation' href='https://www.onepointltd.com/data-wellness/onepoint-d-well/'>eine kostenlose Beratung</a> mit einem Onepoint Data Wellness-Experten.",
   "disconnected": "getrennt",
   "Diverging": "Divergierend",
+  "Download": "Herunterladen",
   "Download PDF": "PDF herunterladen",
   "Email sent. Thank you!": "E-Mail gesendet. Danke!",
   "Email": "E-Mail",
@@ -193,5 +194,9 @@
   "You are disconnected.": "Keine Verbindung.",
   "Your name:": "Ihr Name:",
   "Add suggestion": "Vorschlag hinzufügen",
-  "Remove suggestion": "Vorschlag entfernen"
+  "Remove suggestion": "Vorschlag entfernen",
+  "Relevant Documents": "Relevante Dokumente",
+  "extracts-found": "{{count}} Auszüge gefunden",
+  "view-all-extracts": "Alle Auszüge anzeigen",
+  "show-less": "Weniger anzeigen"
 }

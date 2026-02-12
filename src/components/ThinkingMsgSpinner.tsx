@@ -6,12 +6,12 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
 
   const messages = [
     "Please wait",
-    "Connecting to Responsible AI Engine",
-    "Analyzing your responses",
+    "Connecting to Onepoint AI Engine",
+    "Analysing your responses",
     "Consulting Knowledge Graph",
     "Identifying key topics",
     "Formulating recommendations",
-    "Generating your personalized report",
+    "Generating your personalised report",
     "Almost ready",
   ];
 
@@ -55,7 +55,7 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
       <div className="relative flex items-center justify-center">
         {/* <div className="absolute h-20 w-20 rounded-full border-4 border-gray-300 border-t-[#9A19FF] animate-spin" /> */}
         <img
-          src="/D-Well_Icons_one_frame.gif"
+          src={`/${window.dataWellnessConfig?.imageFolder || "res-ai"}/loader.gif`}
           alt={t("Please wait")}
           className={`${className} relative z-10`}
         />
@@ -78,19 +78,6 @@ const ThinkingMsgSpinner = ({ className = `h-20 w-20` }) => {
         >
           <span className="text-base  font-medium text-gray-800 dark:text-gray-100">
             {t(messages[index])}
-          </span>
-
-          {/* Dots */}
-          <span className="inline-flex items-center justify-center gap-1 mt-1 ">
-            <span className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce" />
-            <span
-              className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce"
-              style={{ animationDelay: "150ms" }}
-            />
-            <span
-              className="w-1.5 h-1.5 bg-[#9A19FF] rounded-full animate-bounce"
-              style={{ animationDelay: "300ms" }}
-            />
           </span>
         </div>
       </div>

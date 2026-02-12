@@ -1,1 +1,0 @@
-copy index_responsible_ai.html index.html

@@ -76,7 +76,7 @@ export function SuggestionTemplate({
           )}
           {hasTitle && (
             <div className="suggestion-title">
-              <b>{suggestion.title}</b>{" "}
+              <p>{suggestion.title}</p>
             </div>
           )}
         </div>
@@ -104,7 +104,6 @@ export default function Suggestions({ message }: { message: Message }) {
     isSuggestionDeactivated,
     isLast,
     setRegenerating,
-    messages,
   } = useContext(AppContext);
   const { socket } = useContext(ChatContext);
 
@@ -149,15 +148,6 @@ export default function Suggestions({ message }: { message: Message }) {
 
   if (!message.suggestions || message.suggestions.length === 0) return null;
 
-  console.log(
-    "currentMessage > 0 && isLast && !sending messages.length currentMessage",
-    currentMessage > 0,
-    isLast,
-    !sending,
-    messages.length,
-    currentMessage,
-  );
-
   return (
     <>
       {isSuggestionDeactivated && !sending && (
@@ -184,9 +174,9 @@ export default function Suggestions({ message }: { message: Message }) {
         <div className="flex flex-row justify-start -mt-3 mb-2">
           <ReportButton
             click={handleGenerateMoreAnswers}
-            title={t("Generate more answers")}
+            title={t("Regenerate Response")}
           >
-            <MdRestartAlt className="!fill-[#4a4a4a] dark:!fill-gray-100 h-8 w-8" />
+            <MdRestartAlt className="!fill-[#07000d] dark:!fill-[#fafffe] h-8 w-8 transition-colors duration-300" />
           </ReportButton>
         </div>
       )}

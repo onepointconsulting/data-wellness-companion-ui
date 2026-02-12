@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="favicon" rel="icon" type="image/png" href="{{ favicon }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ title }}" />
+    <meta
+      property="og:description"
+      content="{{ description }}"
+    />
+    <meta property="og:url" content="{{ url }}" />
+    <meta
+      property="og:image"
+      content="{{ logo }}"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ title }}" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta
+      name="twitter:description"
+      content="{{ description }}"
+    />
+    <meta
+      name="twitter:image"
+      content="{{ logo }}"
+    />
+
+    <!-- Userback -->
+    <script>
+      window.Userback = window.Userback || {};
+      Userback.access_token = "P-LXR216BejPFprfC6s5qemPjJI";
+      // identify your logged-in users (optional)
+      Userback.user_data = {
+        id: "{{ imageFolder }}", // example data
+        info: {
+          name: "{{ title }}", // example data
+          email: "{{ imageFolder }}@onepointltd.com", // example data
+        },
+      };
+      (function (d) {
+        var s = d.createElement("script");
+        s.async = true;
+        s.src = "https://static.userback.io/widget/v1.js";
+        (d.head || d.body).appendChild(s);
+      })(document);
+    </script>
+    <!-- End Userback -->
+
+    <script>
+      const server = "{{ server }}";
+      const port = {{ port }};
+      window.dataWellnessConfig = {
+        websocketUrl: `{{ websocketProtocol }}://${server}:${port}`,
+        reportUrl: `{{ httpProtocol }}://${server}:${port}`,
+        hideUsageInstructions: true,
+        hideConsultants: false,
+        imageFolder: "{{ imageFolder }}",
+        termsLink: "{{ termsLink }}"
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

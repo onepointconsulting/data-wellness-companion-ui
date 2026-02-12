@@ -6,7 +6,7 @@ export type Session = {
   timestamp: Date;
   finished?: boolean;
   language: string;
-  topic?: string
+  topic?: string;
 };
 
 export type StartSession = {

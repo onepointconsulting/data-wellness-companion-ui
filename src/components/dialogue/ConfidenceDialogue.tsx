@@ -46,10 +46,7 @@ export default function ConfidenceDialogue() {
         </div>
         <div className="py-4 mx-auto text-base">
           {confidence?.rating && (
-            <ConfidenceImage
-              rating={confidence?.rating}
-              className="w-24 h-24"
-            />
+            <ConfidenceImage rating={confidence?.rating} />
           )}
         </div>
         <div className="pt-2 text-base">
