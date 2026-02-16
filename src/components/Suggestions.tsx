@@ -2,8 +2,6 @@ import { Message, Suggestion } from "../model/message.ts";
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.tsx";
 import { useTranslation } from "react-i18next";
-import { ReportButton } from "./buttons/ReportButton.tsx";
-import { MdRestartAlt } from "react-icons/md";
 import { addMoreSuggestions } from "../lib/websocketFunctions.ts";
 import { ChatContext } from "../context/ChatContext.tsx";
 

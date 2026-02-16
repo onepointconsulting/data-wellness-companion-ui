@@ -8,9 +8,9 @@ import {
 } from "../context/AppStore.ts";
 import { useShallow } from "zustand/react/shallow";
 import { messagesOverLowerLimit } from "../lib/confidenceAdapter.ts";
-import { FaHourglassHalf } from "react-icons/fa";
 import { ConfidenceImage } from "./buttons/ConfidenceHint.tsx";
 import { showConfidenceDialogue } from "./dialogue/ConfidenceDialogue.tsx";
+import { t } from "i18next";
 
 function selectLastNodeCss(
   covered: boolean,
@@ -71,7 +71,10 @@ function SingleNode({ i }: { i: number }) {
         {currentMessage === i && (
           <div className="navigation-icon">
             {updatingConfidence ? (
-              <FaHourglassHalf className="!w-6 !h-6 fill-gray-400" />
+              <img
+                src={`confidence-img/thinking.svg`}
+                alt={t("recommendations-confidence-degree")}
+              />
             ) : (
               <a href="#" onClick={showConfidenceDialogue}>
                 <ConfidenceImage rating={confidence?.rating ?? "medium"} />
