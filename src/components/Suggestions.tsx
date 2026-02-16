@@ -171,13 +171,41 @@ export default function Suggestions({ message }: { message: Message }) {
         })}
       </div>
       {currentMessage > 0 && isLast && !sending && (
-        <div className="flex flex-row justify-start -mt-3 mb-2">
-          <ReportButton
-            click={handleGenerateMoreAnswers}
+        <div className="pb-8">
+          <button
+            onClick={handleGenerateMoreAnswers}
             title={t("Regenerate Response")}
+            className="text-left cursor-pointer rounded-md hover:scale-101 text-[#07000d] dark:text-[#fafffe] transition duration-300 hover:underline ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex flex-row items-center gap-2"
           >
-            <MdRestartAlt className="!fill-[#07000d] dark:!fill-[#fafffe] h-8 w-8 transition-colors duration-300" />
-          </ReportButton>
+            <svg
+              version="1.1"
+              id="fi_512142"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 426.667 426.667"
+              xmlSpace="preserve"
+              className="!fill-[#07000d] dark:!fill-[#fafffe] h-6 w-6 transition-colors duration-300"
+            >
+              <g>
+                <g>
+                  <circle cx="42.667" cy="213.333" r="42.667"></circle>
+                </g>
+              </g>
+              <g>
+                <g>
+                  <circle cx="213.333" cy="213.333" r="42.667"></circle>
+                </g>
+              </g>
+              <g>
+                <g>
+                  <circle cx="384" cy="213.333" r="42.667"></circle>
+                </g>
+              </g>
+            </svg>
+            {t("Regenerate Response")}
+          </button>
         </div>
       )}
     </>

@@ -28,13 +28,6 @@
   @apply max-w-[1280px] mx-auto py-6;
 }
 
-#root .chat-input {
-  @apply max-w-[1280px] mx-auto  border-[#E8CCFF] shadow-[1px_1px_9px_#E8CCFF45];
-}
-#root .chat-input button{
-  @apply items-center
-}
-
 #root .question {
   @apply text-2xl md:text-3xl flex flex-row px-0 text-[#07000d];
 }
@@ -114,9 +107,8 @@
 }
 
 #root .chat-input {
-  @apply w-full px-4 flex flex-row items-center justify-start
-    rounded-lg bg-[#fafffe] border-[1px] border-[#4a4a4a] dark:border-[#a4a4a4] focus-within:outline 
-    focus-within:outline-1 focus-within:outline-[#8F00FF] focus-visible:border-none my-5 lg:my-4 dark:bg-[#1F1925];
+  @apply w-full px-4 max-w-[1280px] mx-auto flex flex-row items-center justify-start
+    rounded-lg bg-[#fafffe] border-2 border-[#E8CCFF] shadow-[1px_1px_9px_#E8CCFF45] dark:border-[#a4a4a4] my-5 lg:my-4 dark:bg-[#1F1925];
 }
 
 #root .chat-input textarea.chat-textarea {
@@ -126,7 +118,7 @@
 }
 
 #root .chat-input button {
-  @apply flex w-8 h-8 cursor-pointer;
+  @apply flex w-8 h-8 cursor-pointer items-center;
 }
 
 #root .chat-input button svg.send-button path {
