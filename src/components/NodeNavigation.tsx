@@ -47,6 +47,7 @@ function SingleNode({ i }: { i: number }) {
     setCurrentMessageHistory,
     confidence,
     updatingConfidence,
+    sending,
   } = useContext(AppContext);
   const { expectedNodes, messageLowerLimit } = useAppStore(
     useShallow((state) => ({ ...state })),
@@ -70,7 +71,7 @@ function SingleNode({ i }: { i: number }) {
       >
         {currentMessage === i && (
           <div className="navigation-icon">
-            {updatingConfidence ? (
+            {updatingConfidence || sending ? (
               <img
                 src={`confidence-img/thinking.svg`}
                 alt={t("recommendations-confidence-degree")}
