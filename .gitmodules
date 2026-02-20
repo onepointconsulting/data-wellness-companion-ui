@@ -1,0 +1,3 @@
+[submodule "onepointltd-components"]
+	path = onepointltd-components
+	url = https://github.com/OnepointConsultingLtd/onepointltd-components.git

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { ReportButton } from "./ReportButton.tsx";
+// import { ReportButton } from "./ReportButton.tsx";
+import { ReportButton } from 'onepointltd-components';
 
 export default function DecisionButtons({
   label,
